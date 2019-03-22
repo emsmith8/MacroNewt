@@ -18,5 +18,7 @@ namespace FiTrack.Models
 
         public List<Food> FoodComponents { get; set; }
 
+        public int Calories { get; set; }
+
     }
 }

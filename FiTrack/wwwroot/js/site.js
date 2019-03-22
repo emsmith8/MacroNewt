@@ -6,8 +6,8 @@ $(document).ready(function () {
         localStorage.removeItem(selectedRemove);
         getSelectedList();
         getCurrentFoods();
-    })
-
+    });
+    
 });
 
 

@@ -53,10 +53,15 @@
                 <ul id="selectedFoods"></ul>
             </div>
             <button id="removeSelection">Remove Food</button>
-            <input type="button" onclick="getAllSelections()" value="Create Meal" />
 
+            <form asp-controller="Meals" asp-action="Index">
+                <input type="submit" value="Create Meal" />
+            </form>
+
+            
+            
         </div>
-
+        
     </div>
 
 </body>

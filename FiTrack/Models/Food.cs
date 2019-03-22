@@ -8,11 +8,8 @@ namespace FiTrack.Models
 {
     public class Food
     {
-        public int offset { get; set; }
-        public string group { get; set; }
+        public int Id { get; set; }
         public string name { get; set; }
         public string ndbno { get; set; }
-        public string ds { get; set; }
-        public string manu { get; set; }
     }
 }
