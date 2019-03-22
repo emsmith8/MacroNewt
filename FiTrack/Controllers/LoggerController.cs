@@ -16,15 +16,12 @@ namespace FiTrack.Controllers
     {
 
         private const string URL = "https://api.nal.usda.gov/ndb/search/"; 
-
-        //&fg=Dairy+and+Egg+Products
-
+        
         public IActionResult Index()
         {
             return View();
         }
-
-        //public IActionResult SearchFoods(String foodName)
+        
         public ActionResult SearchFoods(String foodName)
         {
             HttpClient client = new HttpClient();
@@ -44,10 +41,6 @@ namespace FiTrack.Controllers
                 JObject joResponse = JObject.Parse(dataObjects);
                 JObject ojObject = (JObject)joResponse["list"];
                 JArray array = (JArray)ojObject["item"];
-                //          Debug.WriteLine("The tostringed jarray is " + array.ToString());
-                //               var dataObjects = response.Content.ReadAsStringAsync().Result;
-                //            var dataObjects = response.Content.ReadAsStringAsync().Result;
-                //              Debug.WriteLine("Your food results are " + dataObjects);
                 
                 foodThingy = JsonConvert.DeserializeObject<List<Food>>(array.ToString());
 
@@ -58,16 +51,6 @@ namespace FiTrack.Controllers
 
                 ViewData["foodThingys"] = foodThingy;
 
-        //        Debug.WriteLine("The foodThingy tostring is " + foodThingy[0].name);
-
-                //               JObject joResponse = JObject.Parse(dataObjects);
-                //               JObject ojObject = (JObject)joResponse["list"];
-                //               JArray array = (JArray)ojObject["item"];
-                //               Debug.WriteLine("The array[3] thingy is " + array[3].ToString());
-                //               int ndb = Convert.ToInt32(array[3].ToString());
-
-                //               Debug.WriteLine("The NDB is " + ndb);
-
             } else
             {
                 Debug.WriteLine("Something went wrong with the request I guess");
@@ -77,12 +60,6 @@ namespace FiTrack.Controllers
 
             return View();
         }
-
-        /*
-                public ActionResult storeFoods()
-                {
-
-                }
-          */
+        
     }
 }
