@@ -1,0 +1,75 @@
+﻿@model IEnumerable<FiTrack.Models.Food>
+
+<h2>Logger</h2>
+
+</br>
+
+<html>
+<head>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <script>
+        for (var i = 0, len = localStorage.length; i < len; ++i) {
+            alert("The local contains " + localStorage.getItem(localStorage.key(i)));
+        }
+    </script>
+
+    <!-- The Modal -->
+    <div id="removeModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" id="modal-content">
+            <div id="currentFoods" class="foodRadios">
+                <!--<button id="confirmRemove" class="removeButton">Remove</button>-->
+            </div>
+            <button id="confirmRemove" class="removeButton">Remove</button>
+            <span class="close">&times;</span>
+        </div>
+    </div>
+
+
+    <form asp-controller="Logger" asp-action="SearchFoods">
+        <p>
+            Search for food: <input type="text" name="foodName" />
+            <input type="submit" value="Search" />
+        </p>
+    </form>
+
+    <div class="container">
+
+
+        <div class="fixed">
+
+            <p>Select a food to add it to your meal</p>
+
+            
+            @foreach (var v in ViewData["foodThingys"] as IList<Food>)
+            {
+                <div>
+                    
+                    <label class="queryLabels" for="@v.name">
+                        <input type="radio" id="@v.name" name="foods" value="@v.name" data-val="@v.ndbno" />
+                    @v.name | @v.ndbno</label>
+                </div>
+            }
+
+            <input type="button" onclick="getFoodSelection()" value="Add food">
+
+        </div>
+        <div class="flex-item">
+            <div id="userList">
+                <ul id="selectedFoods"></ul>
+            </div>
+
+            <button id="removeSelection">Remove Food</button>
+            <input type="button" onclick="getAllSelections()" value="Create Meal" />
+
+        </div>
+
+    </div>
+
+</body>
+</html>
