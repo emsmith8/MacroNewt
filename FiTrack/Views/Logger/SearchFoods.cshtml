@@ -54,8 +54,8 @@
             </div>
             <button id="removeSelection">Remove Food</button>
 
-            <form asp-controller="Meals" asp-action="Index">
-                <input type="submit" value="Create Meal" />
+            <form onsubmit="grabList()" asp-controller="Meals" asp-action="Index">
+                <input type="submit" class="createMl" value="Create Meal" />
             </form>
 
             

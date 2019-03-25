@@ -7,8 +7,70 @@ $(document).ready(function () {
         getSelectedList();
         getCurrentFoods();
     });
-    
+
+/*
+    $("input.createMl").click(function () {
+       
+        var cList = [];
+        for (var i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            cList.push(key);
+            
+        }
+
+        for (var i = 0; i < cList.length; i++) {
+            alert("The cList contains " + cList[i]);
+        }
+
+        JSONstring = JSON.stringify(cList);
+
+        $.post("/Meals/SaveEntry", { jsonData: JSONstring });
+
+    });
+*/
+    /*
+    $("input.createMl").click(function () {
+        var cList = {};
+        for (var i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            cList.i.push(key);
+        }
+    });
+    */
 });
+
+function grabList() {
+    var cList = [];
+    for (var i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        cList.push(key);
+
+    }
+
+    for (var i = 0; i < cList.length; i++) {
+        alert("The cList contains " + cList[i]);
+    }
+
+    JSONstring = JSON.stringify(cList);
+
+    $.post("/Meals/SaveEntry", { jsonData: JSONstring });
+    
+    
+
+}
+
+//var createButton = document.getElementsByClassName("createMl");
+//var cList;
+
+/*
+createButton.onclick = function () {
+    for (var i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        cList.push(key);
+    }
+    localStorage.setItem("cList", JSON.stringify(cList));
+}
+*/
 
 
 function getSelectedList() {
@@ -89,3 +151,5 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
+

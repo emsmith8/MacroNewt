@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FiTrack.Models;
+using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace FiTrack.Controllers
 {
@@ -19,21 +21,64 @@ namespace FiTrack.Controllers
         }
 
 
+        /*--------- Might not actually need or use ---------- */
 
         public IActionResult LogMeal()
         {
             return View();
         }
 
+        string[] theGoodStuff;
+
+        public void SaveEntry(string jsonData)
+        {
+            theGoodStuff = JsonConvert.DeserializeObject<string[]>(jsonData);
+            foreach (var y in theGoodStuff)
+            {
+                Debug.WriteLine("THe goodStuff contains -----------------" + y);
+            }
+
+            
+            
+        }
+        
+/*
+        public async Task<IActionResult> Index(string jsonData)
+        {
+            theGoodStuff = JsonConvert.DeserializeObject<string[]>(jsonData);
+            foreach (var y in theGoodStuff)
+            {
+                Debug.WriteLine("THe goodStuff contains -----------------" + y);
+            }
+
+            foreach (var y in theGoodStuff)
+            {
+                Debug.WriteLine("WE ARE HERE IN THE INDEX AND HOPEFULLY THEGOODSTUFF INCLUDES " + y);
+            }
 
 
 
+
+            return View(await _context.Meal.ToListAsync());
+        }
+*/
 
         // GET: Meals
         public async Task<IActionResult> Index()
         {
+            Debug.WriteLine("Ok well i'm here at least");
+
+            foreach (var y in theGoodStuff)
+            {
+                Debug.WriteLine("WE ARE HERE IN THE INDEX AND HOPEFULLY THEGOODSTUFF INCLUDES " + y);
+            }
+
+
+
+
             return View(await _context.Meal.ToListAsync());
         }
+        
 
         // GET: Meals/Details/5
         public async Task<IActionResult> Details(int? id)
