@@ -28,17 +28,17 @@ namespace FiTrack.Controllers
             return View();
         }
 
-        string[] theGoodStuff;
+       // string[] theGoodStuff;
 
-        public void SaveEntry(string jsonData)
+        public IActionResult SaveEntry(string jsonData)
         {
-            theGoodStuff = JsonConvert.DeserializeObject<string[]>(jsonData);
+            string[] theGoodStuff = JsonConvert.DeserializeObject<string[]>(jsonData);
             foreach (var y in theGoodStuff)
             {
                 Debug.WriteLine("THe goodStuff contains -----------------" + y);
             }
 
-            
+            return RedirectToAction(nameof(Index(theGoodStuff)));
             
         }
         
@@ -64,11 +64,11 @@ namespace FiTrack.Controllers
 */
 
         // GET: Meals
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string[] foods)
         {
             Debug.WriteLine("Ok well i'm here at least");
 
-            foreach (var y in theGoodStuff)
+            foreach (var y in foods)
             {
                 Debug.WriteLine("WE ARE HERE IN THE INDEX AND HOPEFULLY THEGOODSTUFF INCLUDES " + y);
             }

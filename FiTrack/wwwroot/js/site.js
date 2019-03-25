@@ -8,6 +8,26 @@ $(document).ready(function () {
         getCurrentFoods();
     });
 
+    $("#createBlah").click(function () {
+
+        alert("I got hereasaflkjsd;fkajskdf");
+        var cList = [];
+        for (var i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            cList.push(key);
+
+        }
+
+        for (var i = 0; i < cList.length; i++) {
+            alert("The cList contains " + cList[i]);
+        }
+
+        JSONstring = JSON.stringify(cList);
+
+        $.post("/Meals/SaveEntry", { jsonData: JSONstring });
+
+    });
+
 /*
     $("input.createMl").click(function () {
        
@@ -39,7 +59,9 @@ $(document).ready(function () {
     */
 });
 
+/*
 function grabList() {
+    alert("I got hereasaflkjsd;fkajskdf");
     var cList = [];
     for (var i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
@@ -58,6 +80,9 @@ function grabList() {
     
 
 }
+
+*/
+
 
 //var createButton = document.getElementsByClassName("createMl");
 //var cList;
