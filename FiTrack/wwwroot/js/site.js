@@ -4,69 +4,48 @@ $(document).ready(function () {
     $("#confirmRemove").click(function () {
         var selectedRemove = document.querySelector('input[name="currentFoods"]:checked').getAttribute("id");
         localStorage.removeItem(selectedRemove);
+
+        var cList = [];
+        for (var i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            cList.push(localStorage.getItem(key));
+        }
+        var JSONstring = JSON.parse(JSON.stringify(cList));
+
+        $("#theJSONstuff").val('[' + JSONstring + ']');
+
         getSelectedList();
         getCurrentFoods();
     });
 
-    
     $("#gfs").click(function () {
 
         var cList = [];
         for (var i = 0; i < localStorage.length; i++) {
             let key = localStorage.key(i);
-
-   //         key = key + " " + localStorage.getItem(key);
-
-   //         cList.push(key);
-            
             cList.push(localStorage.getItem(key));
-            alert("The cList thingy is " + cList[i]);
         }
-
         var JSONstring = JSON.parse(JSON.stringify(cList));
 
         $("#theJSONstuff").val('[' + JSONstring + ']');
 
-        alert("The JSONstring is " + JSONstring);
- //       return JSONstring;
-
-   //     $.post("/Meals/FoodListViewModel", { jsonData: JSONstring });
-
     });
     
-
 });
 
-/*
-function getJSONData() {
-    var cList = [];
-    for (var i = 0; i < localStorage.length; i++) {
-        let key = localStorage.key(i);
-
-        key = key + " " + localStorage.getItem(key);
-
-        cList.push(key);
-    }
-
-
-
-    JSONstring = JSON.stringify(cList);
-
-    return JSONstring;
-}
-*/
 
 function getSelectedList() {
     const el = document.getElementById('selectedFoods');
     while (el.firstChild) el.removeChild(el.firstChild);
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
-
         var sList = document.getElementById('selectedFoods');
         var entry = document.createElement('li');
+        
         entry.setAttribute('data-ndb', key);
         entry.setAttribute('id', key);
-        entry.appendChild(document.createTextNode(localStorage.getItem(key)));
+        entry.appendChild(document.createTextNode(localStorage.key(i)));
+
         sList.appendChild(entry);
     }
 }
@@ -84,7 +63,7 @@ function getCurrentFoods() {
         rElem.setAttribute("name", "currentFoods");
         var rLabel = document.createElement('label');
         rLabel.appendChild(rElem);
-        rLabel.append(localStorage.getItem(key));
+        rLabel.append(localStorage.key(i));
         fList.appendChild(rLabel);
     }
 }
@@ -96,8 +75,7 @@ function getCurrentFoods() {
 
         var formattedSelection = '{"Name":"' + selection + '","Ndbno":"' + selectionData + '"}';
 
-        localStorage.setItem(selectionData, formattedSelection);
-   //     localStorage.setItem(selectionData,selection);
+        localStorage.setItem(selection, formattedSelection);
 
         getSelectedList();
         getCurrentFoods();

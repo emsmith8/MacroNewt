@@ -28,41 +28,16 @@ namespace FiTrack.Models.LogicModels
         public List<QueryViewModel> StoreResults(String APIData)
         {
 
-            List<Food> foodThingy = new List<Food>();
+            var blahBlah = new List<QueryViewModel>();
 
             JObject joResponse = JObject.Parse(APIData);
             JObject ojObject = (JObject)joResponse["list"];
             JArray array = (JArray)ojObject["item"];
 
-            foodThingy = JsonConvert.DeserializeObject<List<Food>>(array.ToString());
-
-
-            var blahBlah = new List<QueryViewModel>();
-            
-            foreach (var thingy in foodThingy)
-            {
-                blahBlah.Add(new QueryViewModel { Name = thingy.name, Ndbno = thingy.ndbno });
-            }
-            
-
-/*
-            int count = 0;
-
-            foreach (var thingy in foodThingy)
-            {
-                Debug.WriteLine(count + " The name of this food is " + thingy.name + " and the ndbno is " + thingy.ndbno);
-                count++;
-            }
-
-*/
-
+            blahBlah = JsonConvert.DeserializeObject<List<QueryViewModel>>(array.ToString());
+  
             return blahBlah;
-
-    //        ViewData["foodThingys"] = foodThingy;
-
-
-
-
+            
         }
 
 
