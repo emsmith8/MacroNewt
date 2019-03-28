@@ -33,6 +33,13 @@ namespace FiTrack
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddHttpClient("UsdaAPI", client =>
+            {
+                client.BaseAddress = new Uri("https://api.nal.usda.gov/ndb/search/");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                
+            });
+            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FiTrack.Migrations
 {
     [DbContext(typeof(FiTrackContext))]
-    [Migration("20190322191919_Initial")]
+    [Migration("20190326011613_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,8 +49,6 @@ namespace FiTrack.Migrations
                     b.Property<int>("Calories");
 
                     b.Property<DateTime>("MealDate");
-
-                    b.Property<DateTime>("MealTime");
 
                     b.Property<string>("Title");
 

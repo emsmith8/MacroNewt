@@ -16,7 +16,6 @@ namespace FiTrack.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: true),
                     MealDate = table.Column<DateTime>(nullable: false),
-                    MealTime = table.Column<DateTime>(nullable: false),
                     Calories = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

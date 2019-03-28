@@ -9,57 +9,57 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using FiTrack.Models;
+using FiTrack.Models.LogicModels;
 
 namespace FiTrack.Controllers
 {
     public class LoggerController : Controller
     {
 
-        private const string URL = "https://api.nal.usda.gov/ndb/search/"; 
-        
+        /* how to reuse single client and dispose of when done?? */
+
+
+        private IHttpClientFactory _httpClientFactory;
+
+        HttpClient client;
+
+
+        public LoggerController(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+
+            client = _httpClientFactory.CreateClient("UsdaAPI");
+
+        }
+
+
         public IActionResult Index()
         {
             return View();
         }
-        
+
+
         public ActionResult SearchFoods(String foodName)
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
+            SearchHandler handler = new SearchHandler();
 
-            List<Food> foodThingy = new List<Food>();
+            HttpResponseMessage response = client.GetAsync(handler.CombineSearchTerms(foodName)).Result;
 
-            client.DefaultRequestHeaders.Accept.Add(
-                new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-            string urlParameters = "?format=json&q=" + foodName + "&ds=Standard+Reference&sort=n&max=25&offset=0&api_key=5jOuzAkdWfOOH2x5yPgd2oWsyzGVkyrrkElAMSsl";
-
-            HttpResponseMessage response = client.GetAsync(urlParameters).Result;
             if (response.IsSuccessStatusCode)
             {
                 var dataObjects = response.Content.ReadAsStringAsync().Result;
-                JObject joResponse = JObject.Parse(dataObjects);
-                JObject ojObject = (JObject)joResponse["list"];
-                JArray array = (JArray)ojObject["item"];
+
+                return View(handler.StoreResults(dataObjects));
                 
-                foodThingy = JsonConvert.DeserializeObject<List<Food>>(array.ToString());
-
-                foreach(var thingy in foodThingy)
-                {
-                    Debug.WriteLine("The name of this food is " + thingy.name + " and the ndbno is " + thingy.ndbno);
-                }
-
-                ViewData["foodThingys"] = foodThingy;
-
-            } else
+            }
+            else
             {
                 Debug.WriteLine("Something went wrong with the request I guess");
+                return View();
             }
 
-            client.Dispose();
-
-            return View();
+            
         }
-        
+  
     }
 }

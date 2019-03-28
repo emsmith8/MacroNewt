@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\ViewModels\FoodListViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Meals\FoodListViewModel.cshtml" />
     <Content Remove="wwwroot\js\site.js" />
   </ItemGroup>
 

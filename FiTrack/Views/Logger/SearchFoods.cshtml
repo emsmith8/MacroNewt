@@ -1,8 +1,9 @@
-﻿@model IEnumerable<FiTrack.Models.Food>
+﻿@model IEnumerable<FiTrack.Models.ViewModels.QueryViewModel>;
+
 
 <h2>Logger</h2>
 
-</br>
+<br>
 
 <html>
 <head>
@@ -36,16 +37,19 @@
 
             <p>Select a food to add it to your meal</p>
 
-            @foreach (var v in ViewData["foodThingys"] as IList<Food>)
+            <input type="button" id="gfs" onclick="getFoodSelection()" value="Add food">
+
+            @foreach (var item in Model)
             {
                 <div>
-                    <label class="queryLabels" for="@v.name">
-                        <input type="radio" id="@v.name" name="foods" value="@v.name" data-val="@v.ndbno" />
-                    @v.name | @v.ndbno</label>
+                    <label class="queryLabels" for="@item.Name">
+                        <input type="radio" id="@item.Name" name="foods" value="@item.Name" data-val="@item.Ndbno" />
+                        @item.Name | @item.Ndbno
+                    </label>
                 </div>
             }
 
-            <input type="button" onclick="getFoodSelection()" value="Add food">
+
 
         </div>
         <div class="flex-item">
@@ -54,12 +58,11 @@
             </div>
             <button id="removeSelection">Remove Food</button>
 
-            <input type="button" id="createBlah" value="Create blah" />
-<!--
-            <form onsubmit="grabList()" asp-controller="Meals" asp-action="Index">
-                <input type="submit" class="createMl" value="Create Meal" />
+            <form method="post" id="wtHECK" asp-controller="Meals" asp-action="FoodViewModel" >
+                <input type="submit" id="jsonData" value="stupid" />
+                <input type="hidden" name="theJSONstuff" value="blank" id="theJSONstuff" />
             </form>
-    -->
+
             
             
         </div>

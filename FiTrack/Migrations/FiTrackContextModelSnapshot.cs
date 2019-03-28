@@ -48,8 +48,6 @@ namespace FiTrack.Migrations
 
                     b.Property<DateTime>("MealDate");
 
-                    b.Property<DateTime>("MealTime");
-
                     b.Property<string>("Title");
 
                     b.HasKey("Id");

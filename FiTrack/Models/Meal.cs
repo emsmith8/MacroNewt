@@ -13,8 +13,6 @@ namespace FiTrack.Models
 
         [DataType(DataType.Date)]
         public DateTime MealDate { get; set; }
-        [DataType(DataType.Time)]
-        public DateTime MealTime { get; set; }
 
         public List<Food> FoodComponents { get; set; }
 

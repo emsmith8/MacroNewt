@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using FiTrack.Models;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using System.Net.Http;
+using FiTrack.Models.ViewModels;
+using Newtonsoft.Json.Linq;
 
 namespace FiTrack.Controllers
 {
@@ -21,57 +24,97 @@ namespace FiTrack.Controllers
         }
 
 
-        /*--------- Might not actually need or use ---------- */
 
-        public IActionResult LogMeal()
+   //leave here     private const string URL = "https://api.nal.usda.gov/ndb/search/";
+
+
+        
+
+        public IActionResult FoodViewModel()
         {
-            return View();
-        }
 
-       // string[] theGoodStuff;
 
-        public IActionResult SaveEntry(string jsonData)
-        {
-            string[] theGoodStuff = JsonConvert.DeserializeObject<string[]>(jsonData);
-            foreach (var y in theGoodStuff)
+            List<Food> foodComps = new List<Food>();
+
+            var blahBlah2 = new List<FoodViewModel>();
+
+
+
+         //   String theINPUT = Request.Form["theJSONstuff"];
+         //   Debug.WriteLine("ThE INPUT IS " + theINPUT);
+
+            //       string[] theGoodStuff = JsonConvert.DeserializeObject<string[]>(jsonData);
+
+                   
+
+         //   JObject joB = JObject.Parse(Request.Form["theJSONstuff"]);
+        //    JArray array = (JArray)joB[""];
+            blahBlah2 = JsonConvert.DeserializeObject<List<FoodViewModel>>(Request.Form["theJSONstuff"]);
+
+            //      JArray array = (JArray)joB[""];
+      //      foodComps = JsonConvert.DeserializeObject<List<Food>>(Request.Form["theJSONstuff"]);
+
+            //      foodComps = JsonConvert.DeserializeObject<List<Food>>(joB);
+
+            //           foodComps = JsonConvert.DeserializeObject<List<Food>>(theGoodStuff);
+
+            
+
+            //      Debug.WriteLine("foodCOMPPSSSSSSSSSSSSSSSSSSSSSS IS " + foodComps);
+
+            foreach (var v in blahBlah2)
             {
-                Debug.WriteLine("THe goodStuff contains -----------------" + y);
+       //         blahBlah2.Add(new FoodViewModel { Name = v.Name, Ndbno = v.Ndbno });
+                Debug.WriteLine("blahBlah2 contains " + v.Name + " and it contains " + v.Ndbno);
             }
 
-            return RedirectToAction(nameof(Index(theGoodStuff)));
+     //       var foodsModel = new FoodListViewModel();
+    //        foodsModel.Foods = new List<FoodViewModel>();
+
+   //         for (var i = 0; i < theBetterStuff.Length; i++)
+     //       foreach (var y in theGoodStuff)
+   //         {
+   /*             var spaceIndex = theGoodStuff[i].IndexOf(" ");
+                string ndbString = theGoodStuff[i].Substring(0, spaceIndex);
+                string nameString = theGoodStuff[i].Substring(spaceIndex + 1);
+                Debug.WriteLine("THe goodStufffffff contains an ndbString of " + ndbString + " and a name of " + nameString);
+
+                
+                var foodItemModel = new FoodViewModel()
+                {
+                    Name = nameString,
+                    Ndbno = ndbString
+                };
+
+    */
+
+       //        foodsModel.Foods.Add(foodItemModel);
+
+        //        Debug.WriteLine("The foodsModel has a new thingy " + foodsModel.Foods[i].Name);
+
+
+     //       }
+
             
+
+            return View(blahBlah2);
         }
         
-/*
-        public async Task<IActionResult> Index(string jsonData)
-        {
-            theGoodStuff = JsonConvert.DeserializeObject<string[]>(jsonData);
-            foreach (var y in theGoodStuff)
-            {
-                Debug.WriteLine("THe goodStuff contains -----------------" + y);
-            }
 
-            foreach (var y in theGoodStuff)
-            {
-                Debug.WriteLine("WE ARE HERE IN THE INDEX AND HOPEFULLY THEGOODSTUFF INCLUDES " + y);
-            }
-
-
-
-
-            return View(await _context.Meal.ToListAsync());
-        }
-*/
 
         // GET: Meals
-        public async Task<IActionResult> Index(string[] foods)
+        public async Task<IActionResult> Index(string jsonData)
         {
-            Debug.WriteLine("Ok well i'm here at least");
 
-            foreach (var y in foods)
-            {
-                Debug.WriteLine("WE ARE HERE IN THE INDEX AND HOPEFULLY THEGOODSTUFF INCLUDES " + y);
-            }
+   //         string[] theGoodStuff = JsonConvert.DeserializeObject<string[]>(jsonData);
+   //         foreach (var y in theGoodStuff)
+   //         {
+   //             Debug.WriteLine("THe goodStufffffff contains -----------------" + y);
+   //         }
+
+            
+
+
 
 
 
@@ -109,7 +152,7 @@ namespace FiTrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,MealDate,MealTime,Calories")] Meal meal)
+        public async Task<IActionResult> Create([Bind("Id,Title,MealDate,Calories")] Meal meal)
         {
             if (ModelState.IsValid)
             {
@@ -141,7 +184,7 @@ namespace FiTrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,MealDate,MealTime,Calories")] Meal meal)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,MealDate,Calories")] Meal meal)
         {
             if (id != meal.Id)
             {

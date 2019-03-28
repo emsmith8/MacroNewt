@@ -8,95 +8,53 @@ $(document).ready(function () {
         getCurrentFoods();
     });
 
-    $("#createBlah").click(function () {
+    
+    $("#gfs").click(function () {
 
-        alert("I got hereasaflkjsd;fkajskdf");
         var cList = [];
         for (var i = 0; i < localStorage.length; i++) {
             let key = localStorage.key(i);
-            cList.push(key);
 
-        }
+   //         key = key + " " + localStorage.getItem(key);
 
-        for (var i = 0; i < cList.length; i++) {
-            alert("The cList contains " + cList[i]);
-        }
-
-        JSONstring = JSON.stringify(cList);
-
-        $.post("/Meals/SaveEntry", { jsonData: JSONstring });
-
-    });
-
-/*
-    $("input.createMl").click(function () {
-       
-        var cList = [];
-        for (var i = 0; i < localStorage.length; i++) {
-            let key = localStorage.key(i);
-            cList.push(key);
+   //         cList.push(key);
             
+            cList.push(localStorage.getItem(key));
+            alert("The cList thingy is " + cList[i]);
         }
 
-        for (var i = 0; i < cList.length; i++) {
-            alert("The cList contains " + cList[i]);
-        }
+        var JSONstring = JSON.parse(JSON.stringify(cList));
 
-        JSONstring = JSON.stringify(cList);
+        $("#theJSONstuff").val('[' + JSONstring + ']');
 
-        $.post("/Meals/SaveEntry", { jsonData: JSONstring });
+        alert("The JSONstring is " + JSONstring);
+ //       return JSONstring;
+
+   //     $.post("/Meals/FoodListViewModel", { jsonData: JSONstring });
 
     });
-*/
-    /*
-    $("input.createMl").click(function () {
-        var cList = {};
-        for (var i = 0; i < localStorage.length; i++) {
-            let key = localStorage.key(i);
-            cList.i.push(key);
-        }
-    });
-    */
+    
+
 });
 
 /*
-function grabList() {
-    alert("I got hereasaflkjsd;fkajskdf");
+function getJSONData() {
     var cList = [];
     for (var i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
+
+        key = key + " " + localStorage.getItem(key);
+
         cList.push(key);
-
     }
 
-    for (var i = 0; i < cList.length; i++) {
-        alert("The cList contains " + cList[i]);
-    }
+
 
     JSONstring = JSON.stringify(cList);
 
-    $.post("/Meals/SaveEntry", { jsonData: JSONstring });
-    
-    
-
-}
-
-*/
-
-
-//var createButton = document.getElementsByClassName("createMl");
-//var cList;
-
-/*
-createButton.onclick = function () {
-    for (var i = 0; i < localStorage.length; i++) {
-        let key = localStorage.key(i);
-        cList.push(key);
-    }
-    localStorage.setItem("cList", JSON.stringify(cList));
+    return JSONstring;
 }
 */
-
 
 function getSelectedList() {
     const el = document.getElementById('selectedFoods');
@@ -135,8 +93,11 @@ function getCurrentFoods() {
     function getFoodSelection() {
         var selection = document.querySelector('input[name="foods"]:checked').value;
         var selectionData = document.querySelector('input[name="foods"]:checked').getAttribute("data-val");
-        
-        localStorage.setItem(selectionData, selection);
+
+        var formattedSelection = '{"Name":"' + selection + '","Ndbno":"' + selectionData + '"}';
+
+        localStorage.setItem(selectionData, formattedSelection);
+   //     localStorage.setItem(selectionData,selection);
 
         getSelectedList();
         getCurrentFoods();
