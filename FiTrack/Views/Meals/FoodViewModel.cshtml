@@ -1,10 +1,10 @@
-﻿@model IEnumerable<FiTrack.Models.ViewModels.FoodViewModel>;
+﻿@model FiTrack.Models.ViewModels.FoodViewModel;
 
 <h1>Food viewModel page yay</h1>
 
 <ul>
 
-    @foreach (var fItem in Model)
+    @foreach (var fItem in Model.Foods)
     {
         <li>
             <label class="compLabels" for="@fItem.Name" id="@fItem.Name" name="foodComps" value="@fItem.Name" data-val="@fItem.Ndbno">
