@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using FiTrack.Models.ViewModels;
 using Newtonsoft.Json.Linq;
+using FiTrack.Models.Type;
 
 namespace FiTrack.Controllers
 {
@@ -25,15 +26,19 @@ namespace FiTrack.Controllers
         
    //leave here     private const string URL = "https://api.nal.usda.gov/ndb/search/";
    
-
-        public IActionResult FoodViewModel()
+        [HttpPost]
+        public IActionResult FoodViewModel(string _formData)
         {
-
-            var blahBlah2 = new List<FoodViewModel>();
+            List<FoodListItem> foodItems = JsonConvert.DeserializeObject<List<FoodListItem>>(_formData);
+            FoodViewModel vm = new FoodViewModel(){
+                Foods = foodItems    
+            };
             
-            blahBlah2 = JsonConvert.DeserializeObject<List<FoodViewModel>>(Request.Form["theJSONstuff"]);
+            //var blahBlah2 = new List<FoodViewModel>();
             
-            return View(blahBlah2);
+            //blahBlah2 = JsonConvert.DeserializeObject<List<FoodViewModel>>(Request.Form["theJSONstuff"]);
+            
+            return View(vm);
         }
         
 

@@ -74,7 +74,11 @@ function getCurrentFoods() {
         var selectionData = document.querySelector('input[name="foods"]:checked').getAttribute("data-val");
 
         var formattedSelection = '{"Name":"' + selection + '","Ndbno":"' + selectionData + '"}';
-
+        var foodObject = {
+            "Name" : selection,
+            "Ndbno" : selectionData
+        };
+        
         localStorage.setItem(selection, formattedSelection);
 
         getSelectedList();

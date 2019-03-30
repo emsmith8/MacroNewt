@@ -32,7 +32,7 @@ namespace FiTrack
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            
             services.AddHttpClient("UsdaAPI", client =>
             {
                 client.BaseAddress = new Uri("https://api.nal.usda.gov/ndb/search/");

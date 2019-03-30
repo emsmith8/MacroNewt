@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FiTrack.Migrations
 {
     [DbContext(typeof(FiTrackContext))]
-    [Migration("20190326011613_Initial")]
-    partial class Initial
+    [Migration("20190330172119_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
