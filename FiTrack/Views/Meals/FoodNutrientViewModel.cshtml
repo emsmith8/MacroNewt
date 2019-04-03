@@ -1,4 +1,5 @@
-﻿@model FiTrack.Models.ViewModels.FoodViewModel;
+﻿
+@model FiTrack.Models.ViewModels.FoodNutrientViewModel;
 
 <h1>Please fill out the following meal details</h1>
 
@@ -16,8 +17,8 @@
         {
             <tr>
                 <td style="padding-right: 20px">
-                    <label class="compLabels" for="@fItem.Name" id="@fItem.Name" name="foodComps" value="@fItem.Name" data-val="@fItem.Ndbno">
-                        @fItem.Name  || @fItem.Ndbno
+                    <label class="compLabels" for="@fItem.Name">
+                        @fItem.Name  || @fItem.Value @fItem.Unit || @fItem.Measures.ToString()
                     </label>
                 </td>
                 <td>
@@ -30,7 +31,7 @@
         }
 
     </table>
-    
+
     <br />
     <br />
 
@@ -39,3 +40,4 @@
     <input type="submit" value="Submit Meal">
 
 </form>
+

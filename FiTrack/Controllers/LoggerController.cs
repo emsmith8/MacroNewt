@@ -18,7 +18,7 @@ namespace FiTrack.Controllers
 
         /* how to reuse single client and dispose of when done?? */
 
-
+/*
         private IHttpClientFactory _httpClientFactory;
 
         HttpClient client;
@@ -31,7 +31,7 @@ namespace FiTrack.Controllers
             client = _httpClientFactory.CreateClient("UsdaAPI");
 
         }
-
+*/
 
         public IActionResult Index()
         {
@@ -43,13 +43,15 @@ namespace FiTrack.Controllers
         {
             SearchHandler handler = new SearchHandler();
 
-            HttpResponseMessage response = client.GetAsync(handler.CombineSearchTerms(foodName)).Result;
+            var client = HttpClientAccessor.HttpClient;
+
+            HttpResponseMessage response = client.GetAsync(handler.OrganizeSearchQ(foodName)).Result;
 
             if (response.IsSuccessStatusCode)
             {
                 var dataObjects = response.Content.ReadAsStringAsync().Result;
 
-                return View(handler.StoreResults(dataObjects));
+                return View(handler.StoreSearchReturns(dataObjects));
                 
             }
             else

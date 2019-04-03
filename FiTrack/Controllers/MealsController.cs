@@ -12,6 +12,7 @@ using System.Net.Http;
 using FiTrack.Models.ViewModels;
 using Newtonsoft.Json.Linq;
 using FiTrack.Models.Type;
+using FiTrack.Models.LogicModels;
 
 namespace FiTrack.Controllers
 {
@@ -23,22 +24,52 @@ namespace FiTrack.Controllers
         {
             _context = context;
         }
-        
-   //leave here     private const string URL = "https://api.nal.usda.gov/ndb/search/";
    
+
         [HttpPost]
-        public IActionResult FoodViewModel(string _formData)
+        public IActionResult FoodNutrientViewModel(string formData)
         {
-            List<FoodListItem> foodItems = JsonConvert.DeserializeObject<List<FoodListItem>>(_formData);
-            FoodViewModel vm = new FoodViewModel(){
-                Foods = foodItems    
-            };
-            
-            //var blahBlah2 = new List<FoodViewModel>();
-            
-            //blahBlah2 = JsonConvert.DeserializeObject<List<FoodViewModel>>(Request.Form["theJSONstuff"]);
-            
-            return View(vm);
+            List<FoodListItem> foodItems = JsonConvert.DeserializeObject<List<FoodListItem>>(formData);
+
+            SearchHandler handler = new SearchHandler();
+
+            var client = HttpClientAccessor.HttpClient;
+
+            string dataObjects = "";
+   //         List<String> dataObjects = new List<String>();
+
+            foreach (FoodListItem f in foodItems)
+            {
+                HttpResponseMessage response = client.GetAsync(handler.OrganizeReportQ(f.Ndbno)).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    dataObjects = dataObjects + response.Content.ReadAsStringAsync().Result;
+     //               dataObjects.Add(response.Content.ReadAsStringAsync().Result);
+
+                            return View(handler.StoreReportReturns(dataObjects, foodItems));
+
+                }
+                else
+                {
+                    Debug.WriteLine("Something went wrong with the request I guess");
+                    return View();
+                }
+
+
+
+                
+
+            }
+            return View(handler.StoreReportReturns(dataObjects, foodItems));
+            /*
+                        FoodViewModel vm = new FoodViewModel(){
+                            Foods = foodItems
+                        };
+
+                        return View(vm);
+              */
         }
         
 

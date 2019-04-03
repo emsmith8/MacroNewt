@@ -6,38 +6,72 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using FiTrack.Models.ViewModels;
+using FiTrack.Models.Type;
+using System.Net.Http;
 
 namespace FiTrack.Models.LogicModels
 {
     public class SearchHandler
     {
 
-
-        /* Ideally will make this accept different API query types */
-
-        public string CombineSearchTerms(string foodName)
+        public string OrganizeSearchQ(string foodName)
         {
-            string urlParameters = "?format=json&q=" + foodName + "&ds=Standard+Reference&sort=n&max=1500&offset=0&api_key=5jOuzAkdWfOOH2x5yPgd2oWsyzGVkyrrkElAMSsl";
-
+            string urlParameters = "search/?format=json&q=" + foodName + "&ds=Standard+Reference&sort=n&max=1500&offset=0&api_key=5jOuzAkdWfOOH2x5yPgd2oWsyzGVkyrrkElAMSsl";
 
             return urlParameters;
         }
 
 
-
-        public List<QueryViewModel> StoreResults(String APIData)
+        public string OrganizeReportQ(string foodNdbno)
         {
+            string urlParameters = "reports/?format=json&ndbno=" + foodNdbno + "&type=b&api_key=5jOuzAkdWfOOH2x5yPgd2oWsyzGVkyrrkElAMSsl";
+            
+            return urlParameters;
+        }
 
-            var blahBlah = new List<QueryViewModel>();
 
+        public FoodViewModel StoreSearchReturns(String APIData)
+        {
             JObject joResponse = JObject.Parse(APIData);
             JObject ojObject = (JObject)joResponse["list"];
             JArray array = (JArray)ojObject["item"];
-
-            blahBlah = JsonConvert.DeserializeObject<List<QueryViewModel>>(array.ToString());
-  
-            return blahBlah;
             
+            List<FoodListItem> availableFoods = JsonConvert.DeserializeObject<List<FoodListItem>>(array.ToString());
+
+            FoodViewModel fvm = new FoodViewModel()
+            {
+                Foods = availableFoods
+            };
+
+            return fvm;
+        }
+
+
+        public FoodNutrientViewModel StoreReportReturns(String APIData, List<FoodListItem> foodList)
+        {
+ /*           foreach (String x in APIData)
+            {
+                JObject joResponse = JObject.Parse(x);
+
+                JObject ojObject = (JObject)joResponse["report"];
+                JArray array = (JArray)ojObject["food"]["nutrients"];
+            }
+   */         JObject joResponse = JObject.Parse(APIData);
+
+            JObject ojObject = (JObject)joResponse["report"];
+            JArray array = (JArray)ojObject["food"]["nutrients"];
+
+
+            List<FoodNutrientsItem> foodNutrients = JsonConvert.DeserializeObject<List<FoodNutrientsItem>>(array.ToString());
+            //       List<FoodNutrientsItem> foodNutrients = JsonConvert.DeserializeObject<List<FoodNutrientsItem>>(array.ToString());
+
+            FoodNutrientViewModel fnvm = new FoodNutrientViewModel()
+            {
+                Foods = foodNutrients
+            };
+            
+
+            return fnvm;
         }
 
 

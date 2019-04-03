@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FiTrack.Models.ViewModels.QueryViewModel>;
+﻿@model FiTrack.Models.ViewModels.FoodViewModel;
 
 
 <h2>Logger</h2>
@@ -32,7 +32,7 @@
 
             <input type="button" id="gfs" onclick="getFoodSelection()" value="Add food">
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.Foods)
             {
                 <div>
                     <label class="queryLabels" for="@item.Name">
@@ -51,9 +51,9 @@
             </div>
             <button id="removeSelection">Remove Food</button>
 
-            <form method="post" id="wtHECK" asp-controller="Meals" asp-action="FoodViewModel" >
+            <form method="post" id="wtHECK" asp-controller="Meals" asp-action="FoodNutrientViewModel" >
                 <input type="submit" id="jsonData" value="stupid" />
-                <input type="hidden" name="_formData" value="blank" id="theJSONstuff" />
+                <input type="hidden" name="formData" value="blank" id="theJSONstuff" />
             </form>
 
             

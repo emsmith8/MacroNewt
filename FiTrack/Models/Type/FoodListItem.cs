@@ -1,4 +1,6 @@
-﻿namespace FiTrack.Models.Type
+﻿using System.Diagnostics;
+
+namespace FiTrack.Models.Type
 {
     public class FoodListItem
     {
@@ -9,10 +11,10 @@
         {
         }
 
-        public FoodListItem(Food _food)
+        public FoodListItem(Food food)
         {
-            Name = _food.Name;
-            Ndbno = _food.ndbno;
+            Name = food.Name;
+            Ndbno = food.Ndbno;
         }
     }
 }

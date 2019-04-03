@@ -15,9 +15,9 @@ namespace FiTrack.Models.ViewModels
             Foods = new List<FoodListItem>();
         }
 
-        public FoodViewModel(ICollection<Food> _foods)
+        public FoodViewModel(ICollection<Food> foods)
         {
-            Foods = _foods.ToList().ConvertAll(x => new FoodListItem(x));
+            Foods = foods.ToList().ConvertAll(x => new FoodListItem(x));
         }
     }
 }
