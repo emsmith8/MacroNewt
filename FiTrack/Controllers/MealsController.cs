@@ -27,7 +27,7 @@ namespace FiTrack.Controllers
    
 
         [HttpPost]
-        public IActionResult FoodNutrientViewModel(string formData)
+        public IActionResult FoodViewModel(string formData)
         {
             List<FoodListItem> foodItems = JsonConvert.DeserializeObject<List<FoodListItem>>(formData);
 
@@ -45,10 +45,13 @@ namespace FiTrack.Controllers
                 if (response.IsSuccessStatusCode)
                 {
 
-                    dataObjects = dataObjects + response.Content.ReadAsStringAsync().Result;
+                    dataObjects = response.Content.ReadAsStringAsync().Result;
+
+                    foodItems = handler.AddNutrientValue(dataObjects, foodItems);
+
      //               dataObjects.Add(response.Content.ReadAsStringAsync().Result);
 
-                            return View(handler.StoreReportReturns(dataObjects, foodItems));
+    //                        return View(handler.StoreReportReturns(dataObjects, foodItems));
 
                 }
                 else
@@ -57,12 +60,22 @@ namespace FiTrack.Controllers
                     return View();
                 }
 
-
-
                 
-
             }
-            return View(handler.StoreReportReturns(dataObjects, foodItems));
+
+            foreach (FoodListItem fli in foodItems)
+            {
+                Debug.WriteLine("TALIWEJR;ASDJF;LAKSFJ " + fli.Value);
+            }
+
+            FoodViewModel vm = new FoodViewModel()
+            {
+                Foods = foodItems
+            };
+
+            return View(vm);
+
+ //           return View(handler.StoreReportReturns(dataObjects, foodItems));
             /*
                         FoodViewModel vm = new FoodViewModel(){
                             Foods = foodItems

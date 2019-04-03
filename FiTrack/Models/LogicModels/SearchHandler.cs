@@ -46,24 +46,71 @@ namespace FiTrack.Models.LogicModels
             return fvm;
         }
 
+        public List<FoodListItem> AddNutrientValue(String APIData, List<FoodListItem> foodList)
+        {
+            JObject joResponse = JObject.Parse(APIData);
 
+            JObject ojObject = (JObject)joResponse["report"];
+
+            JValue targetFood = (JValue)ojObject["food"]["ndbno"];
+
+            JArray array = (JArray)ojObject["food"]["nutrients"];
+
+            String nutValue = "";
+            String nutUnit = "";
+
+            foreach (FoodListItem fli in foodList)
+            {
+                if (fli.Ndbno == targetFood.ToString())
+                {
+
+                    foreach (var item in array.Children())
+                    {
+                        //          JValue targetNutrient = (JValue)item["name"];
+                        JValue targetNutrient = (JValue)item["name"];
+
+                        Debug.WriteLine("The targetNutrient is " + targetNutrient.ToString());
+
+                        if (targetNutrient.ToString() == "Energy")
+                        {
+                            nutValue = item["value"].ToString();
+                            nutUnit = item["unit"].ToString();
+                            Debug.WriteLine("The value is " + nutValue + " and the unit is " + nutUnit);
+                        }
+                    }
+
+                    fli.Value = nutValue;
+                    fli.Unit = nutUnit;
+                }
+                
+                
+            }
+
+            return foodList;
+        }
+/*
         public FoodNutrientViewModel StoreReportReturns(String APIData, List<FoodListItem> foodList)
         {
- /*           foreach (String x in APIData)
-            {
-                JObject joResponse = JObject.Parse(x);
-
-                JObject ojObject = (JObject)joResponse["report"];
-                JArray array = (JArray)ojObject["food"]["nutrients"];
-            }
-   */         JObject joResponse = JObject.Parse(APIData);
+            JObject joResponse = JObject.Parse(APIData);
 
             JObject ojObject = (JObject)joResponse["report"];
             JArray array = (JArray)ojObject["food"]["nutrients"];
 
+            foreach (FoodListItem fli in foodList)
+            {
+                var itemProperties = array.Children<JProperty>();
+                var itemElement = itemProperties.FirstOrDefault(x => x.Name == "Engery");
+                foreach (var item in array.Children())
+                {
+                    var itemProperties = item.Children<JProperty>();
+                    var myElement = itemProperties.FirstOrDefault(x => x.Name == "Engery");
+                }
+            }
 
             List<FoodNutrientsItem> foodNutrients = JsonConvert.DeserializeObject<List<FoodNutrientsItem>>(array.ToString());
             //       List<FoodNutrientsItem> foodNutrients = JsonConvert.DeserializeObject<List<FoodNutrientsItem>>(array.ToString());
+
+            
 
             FoodNutrientViewModel fnvm = new FoodNutrientViewModel()
             {
@@ -73,7 +120,7 @@ namespace FiTrack.Models.LogicModels
 
             return fnvm;
         }
-
+*/
 
     }
 }

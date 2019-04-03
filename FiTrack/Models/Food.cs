@@ -28,5 +28,5 @@ namespace FiTrack.Models
         public string Qty { get; set; }
         public string Value { get; set; }
     }
-
+    
 }

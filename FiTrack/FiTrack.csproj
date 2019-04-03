@@ -6,12 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Type\FoodNutrientsItem.cs" />
     <Compile Remove="Models\ViewModels\FoodListViewModel.cs" />
+    <Compile Remove="Models\ViewModels\FoodNutrientViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Views\Meals\FoodListViewModel.cshtml" />
-    <Content Remove="Views\Meals\FoodViewModel.cshtml" />
+    <Content Remove="Views\Meals\FoodNutrientViewModel.cshtml" />
   </ItemGroup>
 
 

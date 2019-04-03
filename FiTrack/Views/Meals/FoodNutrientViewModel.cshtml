@@ -1,5 +1,5 @@
 ﻿
-@model FiTrack.Models.ViewModels.FoodNutrientViewModel;
+
 
 <h1>Please fill out the following meal details</h1>
 
@@ -13,13 +13,12 @@
             <th>Portion</th>
         </tr>
 
-        @foreach (var fItem in Model.Foods)
+        
         {
             <tr>
                 <td style="padding-right: 20px">
-                    <label class="compLabels" for="@fItem.Name">
-                        @fItem.Name  || @fItem.Value @fItem.Unit || @fItem.Measures.ToString()
-                    </label>
+                    
+                    
                 </td>
                 <td>
                     <select>

@@ -6,6 +6,8 @@ namespace FiTrack.Models.Type
     {
         public string Name { get; set; }
         public string Ndbno { get; set; }
+        public string Value { get; set; }
+        public string Unit { get; set; }
 
         public FoodListItem()
         {
@@ -15,6 +17,8 @@ namespace FiTrack.Models.Type
         {
             Name = food.Name;
             Ndbno = food.Ndbno;
+            Value = food.Value;
+            Unit = food.Unit;
         }
     }
 }
