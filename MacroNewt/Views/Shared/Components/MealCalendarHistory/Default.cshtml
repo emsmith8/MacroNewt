@@ -24,12 +24,13 @@
         
 
         var calendar = new FullCalendar.Calendar(calendarTarget, {
-            plugins: ['dayGrid', 'timeGrid', 'interaction'],
+            plugins: ['dayGrid', 'timeGrid', 'interaction', 'bootstrap'],
             header: {
                 left: 'prev,next today',
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
+            themeSystem: 'bootstrap',
             navLinks: true,
             timeZone: 'UTC',
             eventLimit: true,
