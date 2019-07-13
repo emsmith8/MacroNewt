@@ -1,0 +1,63 @@
+﻿@model MacroNewt.Areas.Identity.Data.MacroNewtUser
+
+<div id="visContainer" style="margin:5px;">
+
+    <h5>
+        <span class="top-line"></span>
+        <span class="text">User Details</span>
+    </h5>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8" style="margin:auto; padding:0px;">
+            <div class="existingUserDetails">
+                <div class="Box-header d-flex justify-content-between">
+                    <div>
+                        <p class="summaryHeader">User info</p>
+                    </div>
+                    <div>
+                        <a style="float:right;" asp-action="ManageUsers" asp-controller="Admin" class="btn btn-sm btn-myGreen">Back</a>
+                    </div>
+                </div>
+
+                <div style="padding:10px;">
+                    <div class="row">
+                        <div class="col-12" style="padding-bottom:10px;">
+                            <div class="form-group">
+                                <label asp-for="@Model.Name"></label>
+                                <p class="form-control grayReadonly">@Html.DisplayFor(model => Model.Name)</p>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.ProfileName"></label>
+                                <p class="form-control grayReadonly">@Html.DisplayFor(model => Model.ProfileName)</p>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.Email"></label>
+                                <p class="form-control grayReadonly">@Html.DisplayFor(model => Model.Email)</p>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.Id"></label>
+                                <p class="form-control grayReadonly">@Html.DisplayFor(model => Model.Id)</p>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.DOB"></label>
+                                <p class="form-control grayReadonly">@Html.DisplayFor(model => Model.DOB)</p>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.Gender"></label>
+                                <p class="form-control grayReadonly">@Html.DisplayFor(model => Model.Gender)</p>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.Weight"></label>
+                                <p class="form-control grayReadonly">@Html.DisplayFor(model => Model.Weight)</p>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.DailyTargetCalories"></label>
+                                <p class="form-control grayReadonly">@Html.DisplayFor(model => Model.DailyTargetCalories)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,346 @@
+﻿@model Food
+@{
+    Measure selectedMeasure = Model.SelectedMeasure();
+}
+<div class="modal fade" id="exploreNutritionModal" role="dialog">
+    <div class="modal-dialog vertical-align-center">
+        <div class="modal-content">
+
+            @Html.HiddenFor(p => p.Ndbno, new { id = "foodNdbnoField" })
+            @Html.HiddenFor(m => m.PortionIndex, new { id = "foodSelectedLabelField" })
+
+            @if (selectedMeasure != null)
+            {
+                <section class="performance-facts">
+                    <header class="performance-facts__header">
+                        <button type="button" class="close" data-dismiss="modal" data-target="#exploreNutritionModal">
+                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                        <h1 class="performance-facts__title">Nutrition Facts</h1>
+                        <div class="d-flex justify-content-between">
+                            <p>
+                                Serving Size @($"{String.Format("{0:0.##}", (Model.NumberOfServings * Convert.ToDecimal(selectedMeasure.Qty)))} {selectedMeasure.Label} " +
+                                  $" ({String.Format("{0:0.##}", (Model.NumberOfServings * Convert.ToDecimal(selectedMeasure.Eqv)))}{selectedMeasure.Eunit})")
+                            </p>
+                            <p>
+                                <select id="explorePortionSelectBox" style="max-width:100px;">
+                                    @for (int i = 0; i < Model.Nutrients[0].Measures.Count; i++)
+                                    {
+                                        <option value="i">@Model.Nutrients[0].Measures[i].Qty @Model.Nutrients[0].Measures[i].Label</option>
+                                    }
+                                </select>
+                            </p>
+                        </div>
+                    </header>
+                    <table class="performance-facts__table">
+                        <thead>
+                            <tr>
+                                <th colspan="3" class="small-info">
+                                    Amount Per Serving
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th colspan="2">
+                                    <b>Calories</b>
+                                    @(String.Format("{0:0}", Model.GetCalories("regular")))
+                                </th>
+                                <td>
+                                    Calories from Fat
+                                    @(String.Format("{0:0}", (Model.Nutrients.Where(x => x.NId == "204")?.FirstOrDefault()?.Measures
+                                                        .Where(x => x.Label == Model.SelectedPortionLabel).FirstOrDefault().Value ?? 0) * Model.NumberOfServings * 9))
+                                </td>
+                            </tr>
+                            <tr class="thick-row">
+                                <td colspan="3" class="small-info">
+                                    <b>% Daily Value*</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    <b>Total Fat</b>
+                                    @if (Model.Nutrients.Exists(x => x.NId == "204"))
+                                    {
+                                        @Model.GetNutrientDisplayValue("204", "regular")
+                                    }
+                                    else
+                                    {
+                                        <text>N/A</text>
+                                    }
+                                </th>
+                                <td>
+                                    <b>@($"{Math.Round((Model.GetNutrientValue("204", "regular") / .65), 0)}%")</b>
+                                </td>
+                            </tr>
+                            @if (Model.Nutrients.Exists(x => x.NId == "606"))
+                            {
+                                <tr>
+                                    <td class="blank-cell"></td>
+                                    <th>
+                                        Saturated Fat
+                                        @Model.GetNutrientDisplayValue("606", "regular")
+                                    </th>
+                                    <td>
+                                        <b>@($"{Math.Round((Model.GetNutrientValue("606", "regular") / .20), 0)}%")</b>
+                                    </td>
+                                </tr>
+                            }
+                            @if (Model.Nutrients.Exists(x => x.NId == "605"))
+                            {
+                                <tr>
+                                    <td class="blank-cell"></td>
+                                    <th>
+                                        Trans Fat
+                                        @Model.GetNutrientDisplayValue("605", "regular")
+                                    </th>
+                                    <td></td>
+                                </tr>
+                            }
+                            @if (Model.Nutrients.Exists(x => x.NId == "646"))
+                            {
+                                <tr>
+                                    <td class="blank-cell"></td>
+                                    <th>
+                                        Polyunsaturated Fat
+                                        @Model.GetNutrientDisplayValue("646", "regular")
+                                    </th>
+                                    <td>
+                                        <b></b>
+                                    </td>
+                                </tr>
+                            }
+                            @if (Model.Nutrients.Exists(x => x.NId == "645"))
+                            {
+                                <tr>
+                                    <td class="blank-cell"></td>
+                                    <th>
+                                        Monounsaturated Fat
+                                        @Model.GetNutrientDisplayValue("645", "regular")
+                                    </th>
+                                    <td></td>
+                                </tr>
+                            }
+                            <tr>
+                                <th colspan="2">
+                                    <b>Cholesterol</b>
+                                    @if (Model.Nutrients.Exists(x => x.NId == "601"))
+                                    {
+                                        @Model.GetNutrientDisplayValue("601", "regular")
+                                    }
+                                    else
+                                    {
+                                        <text>N/A</text>
+                                    }
+                                </th>
+                                <td>
+                                    <b>@($"{Math.Round((Model.GetNutrientValue("601", "regular") / 3.0), 0)}%")</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    <b>Sodium</b>
+                                    @if (Model.Nutrients.Exists(x => x.NId == "307"))
+                                    {
+                                        @Model.GetNutrientDisplayValue("307", "regular")
+                                    }
+                                    else
+                                    {
+                                        <text>N/A</text>
+                                    }
+                                </th>
+                                <td>
+                                    <b>@($"{Math.Round((Model.GetNutrientValue("307", "regular") / 24.0), 0)}%")</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    <b>Total Carbohydrate</b>
+                                    @if (Model.Nutrients.Exists(x => x.NId == "205"))
+                                    {
+                                        @Model.GetNutrientDisplayValue("205", "regular")
+                                    }
+                                    else
+                                    {
+                                        <text>N/A</text>
+                                    }
+                                </th>
+                                <td>
+                                    <b>@($"{Math.Round((Model.GetNutrientValue("205", "regular") / 3.0), 0)}%")</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="blank-cell"></td>
+                                <th>
+                                    Dietary Fiber
+                                    @if (Model.Nutrients.Exists(x => x.NId == "291"))
+                                    {
+                                        @Model.GetNutrientDisplayValue("291", "regular")
+                                    }
+                                    else
+                                    {
+                                        <text>N/A</text>
+                                    }
+                                </th>
+                                <td>
+                                    <b>@($"{Math.Round((Model.GetNutrientValue("291", "regular") / .25), 0)}%")</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="blank-cell"></td>
+                                <th>
+                                    Sugars
+                                    @if (Model.Nutrients.Exists(x => x.NId == "269"))
+                                    {
+                                        @Model.GetNutrientDisplayValue("269", "regular")
+                                    }
+                                    else
+                                    {
+                                        <text>N/A</text>
+                                    }
+                                </th>
+                                <td></td>
+                            </tr>
+                            <tr class="thick-end">
+                                <th colspan="2">
+                                    <b>Protein</b>
+                                    @if (Model.Nutrients.Exists(x => x.NId == "203"))
+                                    {
+                                        @Model.GetNutrientDisplayValue("203", "regular")
+                                    }
+                                    else
+                                    {
+                                        <text>N/A</text>
+                                    }
+                                </th>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="performance-facts__table--grid">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Vitamin A
+                                    @($"{Math.Round((Model.GetNutrientValue("320", "regular") / 9.0), 0)}%")
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.Raw(((char)8226).ToString())
+                                </td>
+                                <td style="text-align:right">
+                                    Vitamin C
+                                    @($"{Math.Round((Model.GetNutrientValue("401", "regular") / .90), 0)}%")
+                                </td>
+                            </tr>
+                            <tr class="thin-end">
+                                <td>
+                                    Calcium
+                                    @($"{Math.Round((Model.GetNutrientValue("301", "regular") / 13.0), 0)}%")
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.Raw(((char)8226).ToString())
+                                </td>
+                                <td style="text-align:right">
+                                    Iron
+                                    @($"{Math.Round((Model.GetNutrientValue("303", "regular") / .18), 0)}%")
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="small-info">* Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs:</p>
+
+                    <table class="performance-facts__table--small small-info">
+                        <thead>
+                            <tr>
+                                <td colspan="2"></td>
+                                <th>Calories:</th>
+                                <th>2,000</th>
+                                <th>2,500</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th colspan="2">Total Fat</th>
+                                <td>Less than</td>
+                                <td>65g</td>
+                                <td>80g</td>
+                            </tr>
+                            <tr>
+                                <td class="blank-cell"></td>
+                                <th>Saturated Fat</th>
+                                <td>Less than</td>
+                                <td>20g</td>
+                                <td>25g</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">Cholesterol</th>
+                                <td>Less than</td>
+                                <td>300mg</td>
+                                <td>300 mg</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">Sodium</th>
+                                <td>Less than</td>
+                                <td>2,400mg</td>
+                                <td>2,400mg</td>
+                            </tr>
+                            <tr>
+                                <th colspan="3">Total Carbohydrate</th>
+                                <td>300g</td>
+                                <td>375g</td>
+                            </tr>
+                            <tr>
+                                <td class="blank-cell"></td>
+                                <th colspan="2">Dietary Fiber</th>
+                                <td>25g</td>
+                                <td>30g</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="small-info">
+                        Calories per gram:
+                    </p>
+                    <p class="small-info text-center">
+                        Fat 9
+                        &bull;
+                        Carbohydrate 4
+                        &bull;
+                        Protein 4
+                    </p>
+                </section>
+            }
+            else
+            {
+                <div style="text-align:center">
+                    <h4>This food has no available nutrient data.</h4>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#explorePortionSelectBox').prop('selectedIndex', $('#foodSelectedLabelField').val() - 1);
+    });
+
+    $('#explorePortionSelectBox').on('change', function () {
+        $('#exploreNutritionModal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+
+        var targetIndex = $('#explorePortionSelectBox').prop('selectedIndex') + 1;
+        var targetNdbno = $('#foodNdbnoField').val();
+
+        var container = $("#modalArea").empty();
+
+        $.get('/Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: targetIndex }, function (response) {
+            container.html(response);
+            $('#exploreNutritionModal').modal('toggle');
+        });
+    });
+</script>

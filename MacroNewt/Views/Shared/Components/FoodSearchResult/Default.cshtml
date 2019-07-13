@@ -1,0 +1,27 @@
+﻿@model List<Food>
+
+
+<div class="table-responsive" >
+    <table class="table foodTable table-striped table-borderless table-hover" id="foodSearchResults">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Food Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="foodItemRow" id="@($"searchResult-{item.Ndbno}")" value="@($"searchResult-{item.Ndbno}")" >
+                    <td class="foodTable-buttonCell">
+                        <input type="button" class="foodAddButton btn btn-sm btn-myGreen" data-ndbno="@item.Ndbno" data-foodname="@item.Name" value="Add" />
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

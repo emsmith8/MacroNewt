@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MacroNewt.Models.Meal>
+
+<div class="modal fade" id="mealCalendarModal" role="dialog">
+    <div class="modal-dialog vertical-align-center">
+        <div class="modal-content" style="width:100%;">
+
+            <div id="calendarDiv">
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        var calendarTarget = document.getElementById('calendarDiv');
+        
+
+        var calendar = new FullCalendar.Calendar(calendarTarget, {
+            plugins: ['dayGrid', 'timeGrid', 'interaction'],
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            navLinks: true,
+            timeZone: 'UTC',
+            eventLimit: true,
+            events: [
+                @foreach (var meal in Model)
+                {
+                    var last = Model.Last();
+
+                    string mealTitle = meal.Title.ToString();
+                    string startDate = meal.MealDate.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                    string endDate = meal.MealDate.AddHours(0.5).ToString("yyyy-MM-ddTHH:mm:ssZ");
+
+                    <text>{
+                        title: "@mealTitle",
+                        start: "@startDate",
+                        start: "@endDate",
+                        allDay: false
+                        }</text>
+                    if (meal != last)
+                    {
+                        <text>,</text>
+                    }
+                }
+            ]
+            
+            
+        });
+
+        calendar.render();
+
+        $('#mealCalendarModal').on('shown.bs.modal', function () {
+            calendar.render();
+            $('#calendarDiv').show();
+        });
+    });
+
+
+</script>

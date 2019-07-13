@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <div class="text-center">
+        <h1 class="display-4">MacroNewt</h1>
+        <div>
+            <p>Welcome back!</p><br />
+            <div class="d-flex justify-content-between col-12 col-sm-8">
+
+            </div>
+        </div>
+    </div>
+
+    <div style="width:50%; margin:0 auto;">
+        <div class="d-flex justify-content-around" style="margin-top:30px;">
+            <a class="btn btn-sm btn-myGreen" style="width:136px;" asp-controller="Logger" asp-action="Index">Log Meal</a>
+        </div>
+        <div class="d-flex justify-content-around" style="margin-top:20px;">
+            <button class="btn btn-sm btn-myBlueDark" id="showDailyStatsButton" style="width:136px;">Check today's stats</button>
+        </div>
+        <div class="d-flex justify-content-around" style="margin-top:20px;">
+            <button class="btn btn-sm btn-myBlueDark" id="showMealAnalytics" style="width:136px;">Meal Analytics</button>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        
+        $('#showDailyStatsButton').click(function () {
+            showCurrentCalModal();
+        });
+
+        $('#showMealAnalytics').click(function () {
+
+        });
+    });
+    
+</script>
+

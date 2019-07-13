@@ -1,0 +1,144 @@
+﻿@model MacroNewt.Models.Meal
+
+<div id="visContainer" style="visibility:hidden;">
+    <div class="justify-content-center" style="text-align:center">
+        <h5 style="color:#5bc0de">Edit Meal</h5>
+    </div>
+    <div id="smartwizard" class="container-fluid">
+        <ul class="justify-content-center">
+            <li class="firstStep"><a href="#AddFoods">1<br /><small>Add/Remove Foods</small></a></li>
+            <li><a href="#MealDetails">2<br /><small>Meal Details</small></a></li>
+            <li><a href="#ReviewMeal">3<br /><small>Review</small></a></li>
+        </ul>
+        <div>
+            <div id="AddFoods">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10">
+                        <div class="currentMeal">
+                            <div class="Box-header d-flex justify-content-between">
+                                <div>
+                                    <strong class="currentMealHeader">Current Foods in this Meal:</strong>
+                                    <small style="color:red" id="addFoodPageMessage"></small>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <div>
+                                            <a style="float:right; margin-right:3px;" asp-action="ManageMeals" asp-controller="Admin" class="btn btn-sm btn-myGreen">Back</a>
+                                        </div>
+                                    }
+                                        <div>
+                                            <button href="#" id="addFoodsNext" class="btn btn-sm btn-myGreen float-right" style="display:block">
+                                                Next
+                                                <span class="fa fa-arrow-right fa-fw" aria-hidden="true"></span>
+                                            </button>
+                                        </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="currentMealFoodsBox">
+                                @Html.HiddenFor(model => Model.ReLogged, new { id = "reLogged" })
+                                <table class="table foodTable table-borderless table-hover" id="currentFoods" data-mealTitle="@Model.Title" data-mealDate="@Model.MealDate" data-mealId="@Model.Id">
+                                    <tbody>
+                                        <tr id="NoFoodsRow">
+                                            <td colspan="2" style="text-align:center">
+                                                No Foods Selected
+                                            </td>
+                                        </tr>
+                                        @for (int i = 0; i < Model.FoodComponents.Count; i++)
+                                        {
+                                            <tr class="foodItemRow" id="mealItem-@Model.FoodComponents[i].Ndbno" data-old="old">
+                                                <td class="currentMealTableButtonCell">
+                                                    <input type="button" class="btn btn-sm btn-myBlueDark removeFoodButton" 
+                                                           value="Remove" data-foodname="@Model.FoodComponents[i].Name"
+                                                           data-ndbno="@Model.FoodComponents[i].Ndbno"
+                                                           data-servings="@Model.FoodComponents[i].NumberOfServings"
+                                                           data-portion="@Model.FoodComponents[i].Value"
+                                                           data-pindex="@Model.FoodComponents[i].PortionIndex"
+                                                           data-chosenPortion="@Model.FoodComponents[i].SelectedPortionLabel"/>
+                                                </td>
+                                                <td>
+                                                    @Model.FoodComponents[i].Name
+                                                </td>
+                                            </tr>
+                                            
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center" style="margin-bottom:30px;">
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <input type="text" id="searchString" name="foodName" class="form-control" placeholder="e.g. 'Chicken' " 
+                                   aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-myBlueDark" id="searchFoods"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10" id="searchContainer">
+
+                    </div>
+                </div>
+            </div>
+            <div id="MealDetails">
+                <div id="componentContainer">
+
+                </div>
+                <div id="confirmContainer">
+
+                </div>
+            </div>
+            <div id="ReviewMeal">
+                <div id="reviewComponentContainer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#smartwizard').smartWizard({
+            theme: 'circles',
+            keyNavigation: false,
+            anchorSettings: {
+                markDoneStep: true,
+                enableAnchorOnDoneStep: false
+            },
+            toolbarSettings: {
+                toolbarPosition: 'none',
+            }
+        });
+        document.getElementById("searchFoods").addEventListener('click', handleSearchFoodsClick, false);
+        document.getElementById("addFoodsNext").addEventListener('click', handleAddFoodsNextClick, false);
+        document.getElementById("visContainer").style.visibility = "visible";
+        document.addEventListener("keyup", function (e) {
+            if (e.keyCode === 13) {
+                handleSearchFoodsClick();
+            }
+        });
+        
+
+        var numButtons = document.getElementsByClassName("removeFoodButton");
+        
+        for (var i = 0; i < numButtons.length; i++) {
+            numButtons[i].addEventListener('click', removeFoodFromMeal, false);
+        }
+        if (document.getElementById('currentFoods').getElementsByTagName('tr').length > 1) {
+            if (document.getElementById("NoFoodsRow").style.display = "block") {
+                document.getElementById("NoFoodsRow").style.display = "none"
+                document.getElementById("addFoodsNext").style.display = "block";
+            }
+        }
+    })
+
+</script>
+

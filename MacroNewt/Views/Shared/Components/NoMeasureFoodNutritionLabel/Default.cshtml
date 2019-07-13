@@ -1,0 +1,249 @@
+﻿@model NoMeasureFood
+
+<div class="modal fade" id="noMeasureNutritionModal_@Model.FoodId" role="dialog">
+    <div class="modal-dialog vertical-align-center">
+        <div class="modal-content">
+
+            <section class="performance-facts">
+                <header class="performance-facts__header">
+                    <button type="button" class="close" data-dismiss="modal" data-target="#mealNutritionModal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h1 class="performance-facts__title">Nutrition Facts</h1>
+                    <p>Serving Size (@(String.Format("{0:0}", Model.Mass))g)</p>
+                </header>
+                <table class="performance-facts__table">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="small-info">
+                                Amount Per Serving
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th colspan="2">
+                                <b>Calories</b>
+                                @(String.Format("{0:0}", Model.Calories))
+                            </th>
+                            <td>
+                                Calories from Fat
+                                @(String.Format("{0:0}", Model.Fat * 9))
+                            </td>
+                        </tr>
+                        <tr class="thick-row">
+                            <td colspan="3" class="small-info">
+                                <b>% Daily Value*</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">
+                                <b>Total Fat</b>
+                                @(String.Format("{0:0.##}", Model.Fat)) g
+                            </th>
+                            <td>
+                                <b>@Math.Round(Model.Fat / .65, 0)%</b>
+                            </td>
+                        </tr>
+                        @if (Model.SatFat != 0)
+                        {
+                            <tr>
+                                <td class="blank-cell"></td>
+                                <th>
+                                    Saturated Fat
+                                    @(String.Format("{0:0.##}", Model.SatFat)) g
+                                </th>
+                                <td>
+                                    <b>@Math.Round(Model.SatFat / .20, 0)%</b>
+                                </td>
+                            </tr>
+                        }
+                        @if (Model.TransFat != 0)
+                        {
+                            <tr>
+                                <td class="blank-cell"></td>
+                                <th>
+                                    Trans Fat
+                                    @(String.Format("{0:0.##}", Model.TransFat)) g
+                                </th>
+                                <td></td>
+                            </tr>
+                        }
+                        @if (Model.PolyFat != 0)
+                        {
+                            <tr>
+                                <td class="blank-cell"></td>
+                                <th>
+                                    Polyunsaturated Fat
+                                    @(String.Format("{0:0.##}", Model.PolyFat)) g
+                                </th>
+                                <td>
+                                    <b></b>
+                                </td>
+                            </tr>
+                        }
+                        @if (Model.MonoFat != 0)
+                        {
+                            <tr>
+                                <td class="blank-cell"></td>
+                                <th>
+                                    Monounsaturated Fat
+                                    @(String.Format("{0:0.##}", Model.MonoFat)) g
+                                </th>
+                                <td></td>
+                            </tr>
+                        }
+                        <tr>
+                            <th colspan="2">
+                                <b>Cholesterol</b>
+                                @(String.Format("{0:0.##}", Model.Cholesterol)) mg
+                            </th>
+                            <td>
+                                <b>@Math.Round(Model.Cholesterol / 3.0, 0)%</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">
+                                <b>Sodium</b>
+                                @(String.Format("{0:0.##}", Model.Sodium)) mg
+                            </th>
+                            <td>
+                                @Math.Round(Model.Sodium / 24.0, 0)%
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">
+                                <b>Total Carbohydrate</b>
+                                @(String.Format("{0:0.##}", Model.Carbs)) g
+                            </th>
+                            <td>
+                                @Math.Round(Model.Carbs / 3.0, 0)%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="blank-cell"></td>
+                            <th>
+                                Dietary Fiber
+                                @(String.Format("{0:0.##}", Model.Fiber)) g
+                            </th>
+                            <td>
+                                @Math.Round(Model.Fiber / .25, 0)%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="blank-cell"></td>
+                            <th>
+                                Sugars
+                                @(String.Format("{0:0.##}", Model.Sugar)) g
+                            </th>
+                            <td></td>
+                        </tr>
+                        <tr class="thick-end">
+                            <th colspan="2">
+                                <b>Protein</b>
+                                @(String.Format("{0:0.##}", Model.Protein)) g
+                            </th>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="performance-facts__table--grid">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Vitamin A
+                                @Math.Round(Model.VitA / 9.0, 0)%
+                            </td>
+                            <td style="text-align:center">
+                                @Html.Raw(((char)8226).ToString())
+                            </td>
+                            <td style="text-align:right">
+                                Vitamin C
+                                @Math.Round(Model.VitC / .90, 0)%
+                            </td>
+                        </tr>
+                        <tr class="thin-end">
+                            <td>
+                                Calcium
+                                @Math.Round(Model.Calcium / 13.0, 0)%
+                            </td>
+                            <td style="text-align:center">
+                                @Html.Raw(((char)8226).ToString())
+                            </td>
+                            <td style="text-align:right">
+                                Iron
+                                @Math.Round(Model.Iron / .18, 0)%
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="small-info">* Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs:</p>
+
+                <table class="performance-facts__table--small small-info">
+                    <thead>
+                        <tr>
+                            <td colspan="2"></td>
+                            <th>Calories:</th>
+                            <th>2,000</th>
+                            <th>2,500</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th colspan="2">Total Fat</th>
+                            <td>Less than</td>
+                            <td>65g</td>
+                            <td>80g</td>
+                        </tr>
+                        <tr>
+                            <td class="blank-cell"></td>
+                            <th>Saturated Fat</th>
+                            <td>Less than</td>
+                            <td>20g</td>
+                            <td>25g</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Cholesterol</th>
+                            <td>Less than</td>
+                            <td>300mg</td>
+                            <td>300 mg</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Sodium</th>
+                            <td>Less than</td>
+                            <td>2,400mg</td>
+                            <td>2,400mg</td>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Total Carbohydrate</th>
+                            <td>300g</td>
+                            <td>375g</td>
+                        </tr>
+                        <tr>
+                            <td class="blank-cell"></td>
+                            <th colspan="2">Dietary Fiber</th>
+                            <td>25g</td>
+                            <td>30g</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="small-info">
+                    Calories per gram:
+                </p>
+                <p class="small-info text-center">
+                    Fat 9
+                    &bull;
+                    Carbohydrate 4
+                    &bull;
+                    Protein 4
+                </p>
+            </section>
+
+
+        </div>
+    </div>
+</div>
+

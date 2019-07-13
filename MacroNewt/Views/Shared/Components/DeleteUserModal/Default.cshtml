@@ -1,0 +1,67 @@
+﻿@model MacroNewt.Areas.Identity.Data.MacroNewtUser
+
+<div class="modal fade" id="deleteUserModal" role="dialog">
+    <div class="modal-dialog vertical-align-center">
+        <div class="modal-content" style="width:100%;">
+
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="deleteSoftBack">
+                        <div class="Box-header form-row justify-content-around">
+                            <div class="blueTextColor col-12" style="text-align:center;">
+                                Delete this user?
+                            </div>
+                        </div>
+                        <div>
+                            <dl class="form-row">
+                                <dt class="col-4" style="margin: 0px 0px 15px 10px">
+                                    @Html.DisplayNameFor(model => model.Name):
+                                </dt>
+                                <dd class="col-7">
+                                    @Html.DisplayFor(model => model.Name)
+                                </dd>
+                                <dt class="col-4" style="margin: 0px 0px 15px 10px">
+                                    @Html.DisplayNameFor(model => model.Email):
+                                </dt>
+                                <dd class="col-7">
+                                    @Html.DisplayFor(model => model.Email)
+                                </dd>
+                                <dt class="col-4" style="margin: 0px 0px 15px 10px">
+                                    @Html.DisplayNameFor(model => model.Id):
+                                </dt>
+                                <dd class="col-7">
+                                    @Html.DisplayFor(model => model.Id)
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="form-row justify-content-around" style="margin-bottom:10px;">
+                            <div class="col-6">
+
+                            </div>
+                            <div class="col-2" style="margin-right:8px;">
+                                <button type="button" class="btn btn-secondary" style="line-height:18px;" data-dismiss="modal" data-target="#deleteMealModal">
+                                    <span>Cancel</span>
+                                </button>
+                            </div>
+                            <div class="col-3">
+                                <form asp-action="Delete">
+                                    <input type="hidden" asp-for="Id" />
+                                    <input type="submit" style="line-height:18px;" value="Delete" class="btn btn-danger" />
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#deleteUserModal').modal('toggle');
+    });
+</script>

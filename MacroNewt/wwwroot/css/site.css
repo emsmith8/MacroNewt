@@ -1,0 +1,935 @@
+﻿/* Experimenting with gradient background to use but for the time being prefer white */
+/*.home-page-background {
+    background-image: linear-gradient(160deg, hsla(0, 10%, 100%, 0.5) 30%, #fff), linear-gradient(30deg, #a0d6e6 40%, #f0fafd);
+    margin: -20px;
+}*/
+
+
+.slider.slider-horizontal {
+    width: 100% !important;
+}
+
+
+.slider .tooltip.in {
+    opacity: 1;
+}
+
+.tooltip-inner {
+    background-color: #5BC0DE;
+}
+
+.slider .tooltip.top .tooltip-arrow {
+    bottom: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px 5px 0;
+    border-top-color: #5BC0DE;
+}
+
+.slider .tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.slider .tooltip.top {
+    padding: 5px 0;
+    margin-top: -40px !important;
+    z-index: 0;
+}
+
+.slider-handle {
+    background-color: #5BC0DE !important;
+    background-image: linear-gradient(to bottom, #B5E9F8 0, #5BC0DE 100%) !important;
+}
+
+
+
+.macroPercentageSign {
+    position: absolute;
+    right: 20px;
+    top: 7px;
+}
+
+
+
+.targetCalInput {
+    background: rgba(0,0,0,0);
+    border: none;
+    width: 45px;
+    margin-left: 10px;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.targetCalInput:focus {
+    outline: none;
+}
+
+.no-spinners::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.bmrModalButton {
+    color: #FFF;
+    background-color: #6D8AC3;
+    border-color: #6D8AC3;
+    white-space: nowrap;
+    max-height: 32px;
+    margin-right: 10px;
+}
+
+
+/*.slider-rangeHighlight {
+    background: #D1D5DA;
+}*/
+
+
+.slider-rangeHighlight.recommendRange {
+    background: rgba(133, 236, 186, 0.4);
+}
+
+.rangeRecommendation {
+    height: 10px;
+    background-color: rgba(133, 236, 186, 0.6);
+    margin-top: 7px;
+    margin-right: 10px;
+    width: 30px;
+}
+
+
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+a {
+    color: #48A4BE;
+}
+
+    a:hover {
+        color: #2A8BA7;
+    }
+
+
+/* Readonly input style
+-------------------------------------------------- */
+
+input[readonly].cal {
+    background-color: rgb(232, 240, 254);
+}
+
+input[readonly].macroTotal {
+    background-color: rgba(87, 214, 130, 0.3);
+}
+
+.grayReadonly {
+    background-color: #d8d8d8;
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+/* My side by side divs
+    -------------------------------------------------*/
+
+.container{
+    display: flex;
+}
+
+
+.flex-item{
+    flex-grow: 1;
+}
+
+
+/* Popup box stuff 
+    ------------------------------------------------*/
+
+
+.successAlert {
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.updateAlert {
+    padding: 20px;
+    background-color: rgba(76, 175, 82, 0.2);
+    color: black;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #48A4BE;
+}
+
+/* Don't remember what
+    -------------------------------------------------*/
+
+
+.nutritionLabelIcon {
+    background: url('/images/nutritionIcon.jpg');
+    height: 32px;
+    width: 32px;
+    display: block;
+}
+
+
+@media (max-width: 770px) {
+    .pickerBox {
+        display: inline-block !important;
+        padding-left: 5px;
+    }
+
+    .pickerArea {
+        padding-left: 5px;
+    }
+}
+
+.historyDatePicker {
+    min-width: 155px;
+}
+
+.note {
+    font-size: .8em;
+}
+
+.databaseText {
+    color: #d1d5da;
+    font-weight: bold;
+    line-height: 36px;
+}
+
+
+.foodTable {
+    margin-bottom: 0px;
+}
+
+.mealTable {
+    margin-bottom: 0px;
+}
+
+.foodTable td {
+    vertical-align: middle;
+    padding: 2px 5px 2px 10px;
+    min-width: 60px;
+    height: 48px;
+}
+
+.mealTable td {
+    vertical-align: middle;
+    padding: 2px 5px 2px 10px;
+    min-width: 60px;
+    height: 48px;
+}
+
+.foodTable-buttonCell {
+    text-align: center; 
+}
+
+.mealTable-buttonCell {
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.foodAddButton {
+    display: none;
+    width:100%;
+}
+
+.removeFoodButton {
+    width: 100%;
+}
+
+.foodTable tr:hover .foodAddButton{
+    display:block;
+}
+
+@media (max-width: 450px) {
+    .foodAddButton {
+        display: block;
+        width: 100%;
+    }
+}
+
+#currentFoods tbody .foodItemRow:hover {
+    background-color: #7EB8F5;
+    color: white;
+}
+
+.foodTable tbody tr:hover {
+    background-color: #6FD084;
+    color: white;
+}
+
+table.dataTable tbody td {
+    padding: 2px 5px 2px 10px;
+}
+
+#currentFoods #NoFoodsRow:hover {
+    background-color: #fff;
+    color: black;
+}
+
+.findBox {
+    margin-top: 10px;
+}
+
+.findBoxStyle {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #495057;
+    background-color: #e8f0fe;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s
+}
+
+.findBoxLabelStyle {
+    color: #5bc0de;
+    font-weight: 600;
+}
+
+.mealSummary {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    margin-bottom: 30px;
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.mealSummaryFoodBox {
+    padding: 10px;
+}
+
+    .mealSummaryFoodBox .form-control {
+        background-color: #fcfdff;
+        border: none;
+        padding: 0;
+        font-weight: bold;
+        color: #48A4BE;
+    }
+
+.shortCalHeader {
+    display: none;
+}
+
+@media (max-width: 375px){
+    .longCalHeader {
+        display: none;
+    }
+    .shortCalHeader {
+        display: inline-block;
+    }
+}
+
+.currentCal:hover {
+    background-color: currentColor;
+    cursor: pointer;
+}
+
+.targetCal:hover {
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.dailyStats:hover {
+    background-color: rgba(91, 193, 222, 0.3);
+    cursor: pointer;
+}
+
+.profileEntry:hover {
+    background-color: rgba(91, 193, 222, 0.3);
+    cursor: pointer;
+}
+
+.mealHistoryBox {
+    padding: 0px 0px 5px 0px;
+}
+
+.table thead th {
+    border-top: 0px;
+    border-bottom: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.summaryHeader {
+    color: #48A4BE;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.standardHeader {
+    color: #48A4BE;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.historyDatesHeader {
+    padding-top: 4px;
+    font-weight: bold;
+}
+
+.summaryRow {
+    margin-left: 10px;
+}
+
+.btn-myBlue {
+    color: #fff;
+    background-color: #3A99FC;
+    background-image: linear-gradient(to bottom, #62AEFC,
+        #3A99FC 90%);
+}
+
+.btn-myGreen {
+    color: #fff;
+    background-color: #28a745;
+    background-image: linear-gradient(to bottom, #34d058,
+        #28a745 90%);
+}
+
+.btn-myBlueDark {
+    color: #fff !important;
+    background-color: #74B9D3;
+    background-image: linear-gradient(to bottom, #A3D6E9,
+        #74B9D3 90%);
+}
+
+.btn-myBlueLight {
+    color: #fff;
+    background-color: #84D2F0;
+    background-image: linear-gradient(to bottom, #B3E6F9, 
+        #84D2F0 90%);
+}
+
+.blueTextColor {
+    color: #3A99FC;
+    font-weight: bold;
+    line-height: 31px;
+}
+
+.blueLinks {
+    color: #48A4BE;
+}
+
+.deleteMeal {
+    color: #000000 !important;
+}
+
+.deleteUser {
+    color: #000000 !important;
+}
+
+.short-text {
+    display: none;
+}
+
+.btn-myRed {
+    color: #fff;
+    background-image: linear-gradient(to bottom, #FF000080, #FF3232 90%);
+    border: none;
+}
+
+
+.updateBMRBaseButton {
+    line-height: 1;
+    color: black !important;
+}
+
+.updateCalBaseButton {
+    margin-left: 10px;
+    margin-top: 3px;
+    height: 50%;
+}
+
+@media (max-width: 450px) {
+    .short-text { display: inline-block; }
+    .full-text { display: none; }
+}
+
+.foodInfoButton {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 3px;
+    color: #fcfdff;
+}
+
+.spaceHolderReview {
+    width: 83px;
+}
+
+.spaceHolderDetails {
+    width: 134px;
+}
+
+
+.spaceHolderHistory {
+    width: 134px;
+}
+
+@media (max-width: 550px) {
+    .spaceHolderDetails {
+        width: 0px;
+    }
+}
+
+.databaseNoticeModalSizing {
+    width: 125%;
+}
+
+@media (max-width: 770px) {
+    .databaseNoticeModalSizing {
+        width: 100%;
+    }
+}
+
+.standardModalSizing {
+    width: 125%;
+}
+
+@media (max-width: 770px) {
+    .standardModalSizing {
+        width: 100%;
+    }
+}
+
+.standardModalContentPadding {
+    padding: 0px 15px 10px 15px;
+}
+
+.confirmModalSizing {
+    width: 125%;
+}
+
+@media (max-width: 770px) {
+    .confirmModalSizing {
+        width: 100%;
+    }
+}
+
+.standardShadowBox {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.currentMeal {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    margin-bottom: 30px;
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.databaseNotice {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.mealHistory {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    margin-bottom: 30px;
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.mealHistoryModal {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.existingMeals {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.existingUsers {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.existingUserDetails {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 30px;
+}
+
+.registerUserDetails {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 30px;
+}
+
+.standardSoftBack {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.softBack {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    margin-bottom: 30px;
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.deleteSoftBack {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.dailyGoalSoftBack {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.dailyTargetHeaders {
+    font-weight: bold;
+    line-height: 31px;
+}
+
+.dailyTargetTodayColor {
+    color: #007bff;
+    font-weight: bold;
+    line-height: 31px;
+}
+
+.dailyTargetMealColor {
+    color: #28a745;
+    font-weight: bold;
+    line-height: 31px;
+}
+
+.barCircle {
+    margin-top: -10px;
+    z-index: 1;
+    height: 40px;
+    width: 40px;
+    border-radius: 25px;
+}
+
+.blueDark {
+    color: #5BC0DE;
+    font-weight: bold;
+    line-height: 31px;
+}
+
+.BMRStatFont {
+    color: #48A4BE;
+    font-weight: bold;
+}
+
+.BMRAsterisk {
+    font-weight: lighter;
+    font-size: .8em;
+}
+
+h5 {
+    text-align: center;
+    position: relative;
+    color: #5BC0DE;
+    /*background-color: #fff;*/
+}
+
+h5 .top-line {
+    border-bottom: 5px solid #F5F5F5;
+    position: absolute;
+    width: 105%;
+    left: -10px;
+    top: 50%;
+    margin-top: -1px;
+    z-index: 1;
+}
+
+h5 .text {
+    background-color: #fff;
+    position: relative;
+    z-index: 2;
+    padding: 10px;
+    display: inline-block;
+}
+
+.Box-header {
+    background-color: #f6f8fa;
+    border: 1px solid #d1d5da;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    margin: -1px -1px 0px 0px;
+    padding: 10px;
+    height: 51px;
+}
+
+.detailsShortText {
+    display: none;
+}
+
+@media (max-width: 400px){
+    .detailsLongText {
+        display: none;
+    }
+    .detailsShortText {
+        display: inline-block;
+    }
+}
+
+
+.header-line-format {
+    text-align: center;
+    padding: 10px 0 15px 0;
+}
+
+/* -------------------------------------------
+    various box styling not being used right now */
+
+.Box-body-1 {
+    text-align: center;
+}
+
+.Box-body-1, .Box-body-2, .Box-body-3  {
+    width: 33%;
+    float: left;
+    min-height: 26px;
+}
+
+@media (max-width: 450px) {
+    .Box-body-1 {
+        width: 0%;
+        min-height: 26px;
+        text-align: left;
+    }
+    .Box-body-2 {
+        width: 50%;
+        min-height: 26px;
+    }
+    .Box-body-3 {
+        width: 50%;
+        min-height: 26px;
+    }
+}
+
+.history-box {
+    width: 50%;
+    float: left;
+    min-height: 26px;
+}
+
+/* -------------------------------------------- */
+
+
+.explore-main {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border-radius: .25rem!important;
+}
+
+.explore-container {
+    display: block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.explore-header {
+    background-color: #f6f8fa;
+    border: 1px solid #d1d5da;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    margin: -1px;
+    padding: 10px 10px 6px 10px;
+    height: 50px;
+}
+
+.ExploreFoodHeader {
+    color: #5bc0de;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.ExploreFoodBox {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    margin-bottom: 30px;
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.ExploreSearchBox {
+    padding: 10px 0px 10px 0px;
+}
+
+.HistoryControlBox {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    margin-bottom: 20px;
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding: 10px 0px 10px 0px;
+}
+
+.AdminControlBox {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    margin-bottom: 30px;
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.ConfirmMealControlBox {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    margin-bottom: 20px;
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding: 10px 0px 10px 0px;
+}
+
+.ProfileIndexBox {
+    box-shadow: inset 0 0 10px rgba(27,31,35,.05);
+    margin-bottom: 20px;
+    border-radius: 3px;
+    background-color: #fcfdff;
+    border: 1px solid #d1d5da;
+    padding: 10px;
+}
+
+.currentMealHeader {
+    color: #5bc0de;
+    line-height: 31px;
+}
+
+.databaseNoticeHeaderFont {
+    color: #5bc0de;
+    line-height: 31px;
+    font-weight: bold;
+}
+
+.currentMealFoodsBox {
+    padding: 5px 0px 5px 0px;
+}
+
+.currentMealTableButtonCell {
+    width:87px;
+}
+
+.control-label {
+    font-weight: bold;
+}
+
+#CalorieTotal {
+    border: none;
+    background-color: transparent;
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}

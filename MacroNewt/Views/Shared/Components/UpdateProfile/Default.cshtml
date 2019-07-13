@@ -1,0 +1,113 @@
+﻿@model MacroNewt.Models.ViewModels.UpdateProfileViewModel
+
+<div class="modal fade" id="updateProfileModal" role="dialog">
+    <div class="modal-dialog vertical-align-center">
+        <div class="modal-content standardModalSizing">
+
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="standardSoftBack">
+                        <div class="Box-header form-row justify-content-around">
+                            <div class="blueDark">
+                                Please complete the following
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#updateProfileModal">
+                                    <span>Close</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="standardModalContentPadding">
+                            <form asp-controller="Home" asp-action="UpdateProfileStats" id="updateProfileStatsForm">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+
+                                <div class="form-group">
+                                    <label asp-for="@Model.Gender"></label>
+                                    <select asp-for="@Model.Gender" class="form-control">
+                                        <option disabled selected value=""> -- Choose gender -- </option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.HeightFeet"></label>
+                                    <div class="d-flex">
+                                        <select asp-for="@Model.HeightFeet" class="form-control">
+                                            @if (Model.HeightFeet == -1)
+                                            {
+                                                <option selected value="-1"> -- Feet -- </option>
+                                            }
+                                            <option value="1">1 ft</option>
+                                            <option value="2">2 ft</option>
+                                            <option value="3">3 ft</option>
+                                            <option value="4">4 ft</option>
+                                            <option value="5">5 ft</option>
+                                            <option value="6">6 ft</option>
+                                            <option value="7">7 ft</option>
+                                        </select>
+                                        <select asp-for="@Model.HeightInches" class="form-control">
+                                            @if (Model.HeightInches == -1)
+                                            {
+                                                <option selected value="-1"> -- Inches -- </option>
+                                            }
+                                            <option value="0">0 in</option>
+                                            <option value="1">1 in</option>
+                                            <option value="2">2 in</option>
+                                            <option value="3">3 in</option>
+                                            <option value="4">4 in</option>
+                                            <option value="5">5 in</option>
+                                            <option value="6">6 in</option>
+                                            <option value="7">7 in</option>
+                                            <option value="8">8 in</option>
+                                            <option value="9">9 in</option>
+                                            <option value="10">10 in</option>
+                                            <option value="11">11 in</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.Weight"></label>
+                                    <input asp-for="@Model.Weight" type="number" step="1" min="0" value="0" class="form-control" />
+                                </div>
+
+                                <div style="text-align:center;">
+                                    <button type="button" class="btn btn-myBlueDark" id="confirmUpdateProfileButton">Save</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#updateProfileModal').modal('toggle');
+
+        document.getElementById("confirmUpdateProfileButton").addEventListener('click', function () {
+
+            $('#updateProfileModal').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+
+            var form = $('#updateProfileStatsForm');
+
+            $.ajax({
+                url: '/Home/UpdateProfileStats',
+                type: 'POST',
+                data: form.serialize(),
+                success: function (data) {
+                    var container = $('#bmrModalContainer').empty();
+                    container.html(data);
+                }
+            });
+            
+        });
+    });
+</script>

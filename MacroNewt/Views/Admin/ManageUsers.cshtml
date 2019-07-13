@@ -1,0 +1,95 @@
+﻿@model IEnumerable<MacroNewt.Areas.Identity.Data.MacroNewtUser>
+
+<div id="visContainer" style="margin:5px;">
+
+    <h5>
+        <span class="top-line"></span>
+        <span class="text">Manage Users</span>
+    </h5>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8" style="margin:auto; padding:0px;">
+            <div class="AdminControlBox">
+                <div class="Box-header d-flex justify-content-between">
+                    <div>
+                        <p class="summaryHeader">All Existing Users</p>
+                    </div>
+                    <div>
+                        <a style="float:right;" asp-action="Index" asp-controller="Admin" class="btn btn-sm btn-myGreen">Back</a>
+                    </div>
+                </div>
+
+                <div class="existingUsers col-12">
+                    <table class="table" style="word-break:break-all; margin-bottom:0px;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DOB)
+                                </th>
+                                <th>
+                                    Actions
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DOB)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-myBlueDark" asp-action="EditUserDetails" asp-controller="Admin" asp-route-id="@item.Id">Edit</a>
+                                        <a class="btn btn-sm btn-myBlueDark" asp-action="ReviewUserDetails" asp-controller="Admin" asp-route-id="@item.Id">Details</a>
+                                        <a class="btn btn-sm btn-myRed deleteUser" href="#" data-itemID="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteUserContainer">
+
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        var deleteUserButtons = document.querySelectorAll(".deleteUser");
+
+        for (var i = 0; i < deleteUserButtons.length; i++) {
+            var btn = deleteUserButtons[i];
+
+            btn.addEventListener('click', function () {
+                deleteUser(this.getAttribute('data-itemID'));
+            });
+        }
+    });
+
+
+    function deleteUser(itemId) {
+        $.get('/Admin/Delete', { id: itemId }, function (response) {
+            var container = $("#deleteUserContainer").empty();
+            container.html(response);
+        });
+    }
+</script>

@@ -1,0 +1,67 @@
+﻿@model DailyCalTotal
+
+@using Microsoft.AspNetCore.Identity
+@using MacroNewt.Areas.Identity.Data
+@inject SignInManager<MacroNewtUser> SignInManager
+@inject UserManager<MacroNewtUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+
+        <li>
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" style="margin:2px; color:rgba(255,255,255,.5);" type="button" data-toggle="dropdown">@UserManager.GetUserAsync(User).Result.ProfileName</button>
+                <div class="dropdown-menu">
+                    @if (User.IsInRole("User"))
+                    {
+                        <a class="dropdown-item currentCal" id="dropdownDailyCal">Today's total: @Model.TotalDailyCalories</a>
+                        <a class="dropdown-item targetCal" id="dropdownTargetCal">Daily target: @UserManager.GetUserAsync(User).Result.DailyTargetCalories</a>
+                        <a class="dropdown-item dailyStats" id="dropdownDailyStats">Daily stats</a>
+                    }
+                    <a class="dropdown-item profileEntry" id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Profile">Profile</a>
+                </div>
+            </div>
+        </li>
+        
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>
+
+<script>
+    $(document).ready(function () {
+        @if (SignInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
+        {
+            <text>document.getElementById("dropdownDailyStats").addEventListener('click', showCurrentCalModal, false);</text>
+            if (Model.TotalDailyCalories > UserManager.GetUserAsync(User).Result.DailyTargetCalories)
+            {
+                <text>$('#dropdownDailyCal').css('background', 'rgb(255, 86, 86, 0.3)');</text>
+            }
+            else
+            {
+                <text>$('#dropdownDailyCal').css('background', 'rgb(87, 214, 130, 0.3)');</text>
+            }
+
+            <text>$.get('/Meals/GetCurrentDayCalStats', function(response) {
+            $('#currentDayCalModalContainer').html(response);
+            });</text>
+        }
+    });
+
+    function showCurrentCalModal() {
+        $('#currentDayStatsModal').modal('toggle');
+    }
+</script>

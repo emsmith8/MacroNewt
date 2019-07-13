@@ -1,0 +1,424 @@
+﻿@model ConfirmMealViewModel
+
+<div class="modal fade" id="confirmMealModal" role="dialog">
+    <div class="modal-dialog vertical-align-center">
+        <div class="modal-content confirmModalSizing">
+
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="dailyGoalSoftBack">
+                        <div class="Box-header form-row justify-content-around">
+                            <div class="blueTextColor col-6">
+                                @if (Model.Admin)
+                                {
+                                    <text>@Model.UserEmail</text>
+                                }
+                                else
+                                {
+                                    <text>Daily goal changes</text>
+                                }
+                            </div>
+                            <div class="col-2 col-md-3">
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#confirmMealModal" style="float:right;">
+                                    Cancel
+                                </button>
+                            </div>
+                            <div class="col-4 col-md-3">
+                                <button type="button" id="confirmMealLog" class="btn btn-sm btn-myBlue" style="width:100px;">
+                                    @if (Model.EditingMeal)
+                                    {
+                                        <span>Edit Meal</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Log Meal</span>
+                                    }
+                                    <span class="fa fa-floppy-o" style="margin-left:5px;" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
+                            <p class="dailyTargetHeaders">
+                                Daily Target Calories: @Model.TargetCalories
+                                <span class="dailyTargetHeaders" id="dailyTargetCalOver"></span>
+                            </p>
+                        </div>
+                        <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
+                            @if (Model.CurrentDayCalories > Model.TargetCalories)
+                            {
+                                <div class="progress-bar progress-bar-striped" style="background-color:#F01E1E; width:67%; border-right:5px dotted black">@Model.CurrentDayCalories</div>
+                                if (Model.TotalCaloriesSurplusDisplayPercent < 10)
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#F01E1E; width:@Model.TotalOldCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#C20808; width:@Model.TotalNewCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+
+                                    <div style="display:flex; justify-content:center; flex-direction:column; color:#F01E1E; margin-left:20px;">@Model.TotalCaloriesSurplusPercent%</div>
+                                }
+                                else if (Model.TotalCaloriesSurplusDisplayPercent > 33)
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#F01E1E; width:@Model.TotalOldCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#C20808; width:@Model.TotalNewCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-60px;">@Model.TotalCaloriesSurplusPercent%</div>
+                                }
+                                else
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#F01E1E; width:@Model.TotalOldCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#C20808; width:@Model.TotalNewCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-40px;">@Model.TotalCaloriesSurplusPercent%</div>
+                                }
+                            }
+                            else if (Model.MealCaloriesSurplus > 0)
+                            {
+                                <div class="progress-bar progress-bar-striped" style="width:@Model.CurrentDayCaloriesPercent%; background-color:#8CB1D8;">@Model.CurrentDayCalories</div>
+                                <div class="progress-bar progress-bar-striped" style="background-color:#F01E1E; width:@Model.MealCaloriesSurplusUnderPercent%;" aria-valuemin="0" aria-valuemax="100">@Model.MealCalories</div>
+                                if (Model.MealCaloriesSurplusOverPercent > 38)
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#F01E1E; border-left:5px dotted black; width:38%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                                else
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#F01E1E; border-left:5px dotted black; width:@Model.MealCaloriesSurplusOverPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                                if (Model.MealCaloriesSurplusOverPercent < 21)
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#d3d3d3; color:#F01E1E; width:@(((50 - Model.MealCaloriesSurplusOverPercent) / 150))%;" aria-valuemin="0" aria-valuemax="100">&nbsp @Model.MealCaloriesSurplusOverDisplayPercent%</div>
+                                }
+                                else
+                                {
+                                    <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-40px;">@Model.MealCaloriesSurplusOverDisplayPercent%</div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="progress-bar progress-bar-striped" style="width:@Model.CurrentDayCaloriesPercent%; background-color:#8CB1D8;">@Model.CurrentDayCalories</div>
+
+
+                                if (Model.MealCaloriesPercent > 5)
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#28a745; width:@Model.MealCaloriesPercent%;" aria-valuemin="0" aria-valuemax="100">@Model.MealCalories</div>
+                                }
+                                else
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#28a745; width:@Model.MealCaloriesPercent%;" aria-valuemin="0" aria-valuemax="100"><span style="margin-left:20px; z-index:1; color:black;">@Model.MealCalories</span></div>
+                                }
+                                <div class="progress-bar progress-bar-striped" style="background-color:#d3d3d3; border-right:5px dotted black; width:@(Model.MealCaloriesRemainingPercent)%;" aria-valuemin="0" aria-valuemax="100"></div>
+                            }
+                        </div>
+
+                        <div class="col-12 form-row justify-content-around" style="margin-top: -20px;">
+                            <div class="col-4">
+                                0<span style="font-size:10px;">%</span>
+                            </div>
+                            <div class="col-4">
+                                50<span style="font-size:10px;">%</span>
+                            </div>
+                            <div class="col-3">
+                                100<span style="font-size:10px;">%</span>
+                            </div>
+                            <div class="col-1">
+                                150<span style="font-size:10px;">%</span>
+                            </div>
+                        </div>
+
+                        @if (!Model.ShowMacros)
+                        {
+                            <div class="col-12" style="margin:20px 0px 20px 0px; text-align:center;">
+                                <a asp-area="Identity" asp-page="/Account/Manage/UserGoals" id="setUpMacros" class="btn btn-sm btn-myBlue">Macro Setup</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
+                                <p class="dailyTargetHeaders">
+                                    Daily Target Protein Calories: @Model.TargetProteinCalories
+                                    <span class="dailyTargetHeaders" id="dailyTargetProteinOver"></span>
+                                </p>
+                            </div>
+                            <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
+                                @if (Model.CurrentDayProteinCalories > Model.TargetProteinCalories)
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:67%; border-right:5px dotted black">@Model.CurrentDayProteinCalories</div>
+                                    if (Model.TotalProteinCaloriesSurplusDisplayPercent < 10)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalOldProteinCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#E8A435; width:@Model.TotalNewProteinCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div style="display:flex; justify-content:center; flex-direction:column; color:#FFC05B; margin-left:20px;">@Model.TotalProteinCaloriesSurplusPercent%</div>
+                                    }
+                                    else if (Model.TotalProteinCaloriesSurplusDisplayPercent > 33)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalOldProteinCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#E8A435; width:@Model.TotalNewProteinCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-60px;">@Model.TotalProteinCaloriesSurplusPercent%</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalOldProteinCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#E8A435; width:@Model.TotalNewProteinCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-40px;">@Model.TotalProteinCaloriesSurplusPercent%</div>
+                                    }
+                                }
+                                else if (Model.MealProteinCaloriesSurplus > 0)
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="width:@Model.CurrentDayProteinCaloriesPercent%; background-color:#8CB1D8;">@Model.CurrentDayProteinCalories</div>
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.MealProteinCaloriesSurplusUnderPercent%;" aria-valuemin="0" aria-valuemax="100">@Model.MealProteinCalories</div>
+                                    if (Model.MealProteinCaloriesSurplusOverPercent > 38)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; border-left:5px dotted black; width:38%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; border-left:5px dotted black; width:@Model.MealProteinCaloriesSurplusOverPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    }
+                                    if (Model.MealProteinCaloriesSurplusOverPercent < 21)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#d3d3d3; color:#FFC05B; width:@(((50 - Model.MealProteinCaloriesSurplusOverPercent) / 150))%;" aria-valuemin="0" aria-valuemax="100">&nbsp @Model.MealProteinCaloriesSurplusOverDisplayPercent%</div>
+                                    }
+                                    else
+                                    {
+                                        <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-55px;">@Model.MealProteinCaloriesSurplusOverDisplayPercent%</div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="width:@Model.CurrentDayProteinCaloriesPercent%; background-color:#8CB1D8;">@Model.CurrentDayProteinCalories</div>
+
+                                    if (Model.MealProteinCaloriesPercent > 5)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#28a745; width:@Model.MealProteinCaloriesPercent%;" aria-valuemin="0" aria-valuemax="100">@Model.MealProteinCalories</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#28a745; width:@Model.MealProteinCaloriesPercent%;" aria-valuemin="0" aria-valuemax="100"><span style="margin-left:20px; z-index:1; color:black;">@Model.MealProteinCalories</span></div>
+                                    }
+
+
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#d3d3d3; border-right:5px dotted black; width:@(Model.MealProteinCaloriesRemainingPercent)%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                            </div>
+                            <div class="col-12 form-row justify-content-around" style="margin-top: -20px;">
+                                <div class="col-4">
+                                    0<span style="font-size:10px;">%</span>
+                                </div>
+                                <div class="col-4">
+                                    50<span style="font-size:10px;">%</span>
+                                </div>
+                                <div class="col-3">
+                                    100<span style="font-size:10px;">%</span>
+                                </div>
+                                <div class="col-1">
+                                    150<span style="font-size:10px;">%</span>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
+                                <p class="dailyTargetHeaders">
+                                    Daily Target Fat Calories: @Model.TargetFatCalories
+                                    <span class="dailyTargetHeaders" id="dailyTargetFatOver"></span>
+                                </p>
+                            </div>
+                            <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
+                                @if (Model.CurrentDayFatCalories > Model.TargetFatCalories)
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:67%; border-right:5px dotted black">@Model.CurrentDayFatCalories</div>
+                                    if (Model.TotalFatCaloriesSurplusDisplayPercent < 10)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalOldFatCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#E8A435; width:@Model.TotalNewFatCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div style="display:flex; justify-content:center; flex-direction:column; color:#FFC05B; margin-left:20px;">@Model.TotalFatCaloriesSurplusPercent%</div>
+                                    }
+                                    else if (Model.TotalFatCaloriesSurplusDisplayPercent > 33)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalOldFatCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#E8A435; width:@Model.TotalNewFatCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-60px;">@Model.TotalFatCaloriesSurplusPercent%</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalOldFatCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#E8A435; width:@Model.TotalNewFatCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-40px;">@Model.TotalFatCaloriesSurplusPercent%</div>
+                                    }
+
+
+                                }
+                                else if (Model.MealFatCaloriesSurplus > 0)
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="width:@Model.CurrentDayFatCaloriesPercent%; background-color:#8CB1D8;">@Model.CurrentDayFatCalories</div>
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.MealFatCaloriesSurplusUnderPercent%;" aria-valuemin="0" aria-valuemax="100">@Model.MealFatCalories</div>
+                                    if (Model.MealFatCaloriesSurplusOverPercent > 38)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; border-left:5px dotted black; width:38%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; border-left:5px dotted black; width:@Model.MealFatCaloriesSurplusOverPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    }
+                                    if (Model.MealFatCaloriesSurplusOverPercent < 21)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#d3d3d3; color:#FFC05B; width:@(((50 - Model.MealFatCaloriesSurplusOverPercent) / 150))%;" aria-valuemin="0" aria-valuemax="100">&nbsp @Model.MealFatCaloriesSurplusOverDisplayPercent%</div>
+                                    }
+                                    else
+                                    {
+                                        <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-55px;">@Model.MealFatCaloriesSurplusOverDisplayPercent%</div>
+                                    }
+                                }
+                                else
+                                {
+
+                                    <div class="progress-bar progress-bar-striped" style="width:@Model.CurrentDayFatCaloriesPercent%; background-color:#8CB1D8;">@Model.CurrentDayFatCalories</div>
+
+                                    if (Model.MealFatCaloriesPercent > 5)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#28a745; width:@Model.MealFatCaloriesPercent%;" aria-valuemin="0" aria-valuemax="100">@Model.MealFatCalories</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#28a745; width:@Model.MealFatCaloriesPercent%;" aria-valuemin="0" aria-valuemax="100"><span style="margin-left:20px; z-index:1; color:black;">@Model.MealFatCalories</span></div>
+                                    }
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#d3d3d3; border-right:5px dotted black; width:@(Model.MealFatCaloriesRemainingPercent)%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                            </div>
+                            <div class="col-12 form-row justify-content-around" style="margin-top: -20px;">
+                                <div class="col-4">
+                                    0<span style="font-size:10px;">%</span>
+                                </div>
+                                <div class="col-4">
+                                    50<span style="font-size:10px;">%</span>
+                                </div>
+                                <div class="col-3">
+                                    100<span style="font-size:10px;">%</span>
+                                </div>
+                                <div class="col-1">
+                                    150<span style="font-size:10px;">%</span>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
+                                <p class="dailyTargetHeaders">
+                                    Daily Target Carb Calories: @Model.TargetCarbCalories
+                                    <span class="dailyTargetHeaders" id="dailyTargetCarbOver"></span>
+                                </p>
+                            </div>
+                            <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
+                                @if (Model.CurrentDayCarbCalories > Model.TargetCarbCalories)
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:67%; border-right:5px dotted black">@Model.CurrentDayCarbCalories</div>
+                                    if (Model.TotalCarbCaloriesSurplusDisplayPercent < 10)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalOldCarbCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#E8A435; width:@Model.TotalNewCarbCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div style="display:flex; justify-content:center; flex-direction:column; color:#FFC05B; margin-left:20px;">@Model.TotalCarbCaloriesSurplusPercent%</div>
+                                    }
+                                    else if (Model.TotalCarbCaloriesSurplusDisplayPercent > 33)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalOldCarbCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#E8A435; width:@Model.TotalNewCarbCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-60px;">@Model.TotalCarbCaloriesSurplusPercent%</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalOldCarbCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#E8A435; width:@Model.TotalNewCarbCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-40px;">@Model.TotalCarbCaloriesSurplusPercent%</div>
+                                    }
+
+
+                                }
+                                else if (Model.MealCarbCaloriesSurplus > 0)
+                                {
+                                    <div class="progress-bar progress-bar-striped" style="width:@Model.CurrentDayCarbCaloriesPercent%; background-color:#8CB1D8;">@Model.CurrentDayCarbCalories</div>
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.MealCarbCaloriesSurplusUnderPercent%;" aria-valuemin="0" aria-valuemax="100">@Model.MealCarbCalories</div>
+                                    if (Model.MealCarbCaloriesSurplusOverPercent > 38)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; border-left:5px dotted black; width:38%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; border-left:5px dotted black; width:@Model.MealCarbCaloriesSurplusOverPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    }
+                                    if (Model.MealCarbCaloriesSurplusOverPercent < 21)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#d3d3d3; color:#FFC05B; width:@(((50 - Model.MealCarbCaloriesSurplusOverPercent) / 150))%;" aria-valuemin="0" aria-valuemax="100">&nbsp @Model.MealCarbCaloriesSurplusOverDisplayPercent%</div>
+                                    }
+                                    else
+                                    {
+                                        <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-55px;">@Model.MealCarbCaloriesSurplusOverDisplayPercent%</div>
+                                    }
+                                }
+                                else
+                                {
+
+                                    <div class="progress-bar progress-bar-striped" style="width:@Model.CurrentDayCarbCaloriesPercent%; background-color:#8CB1D8;">@Model.CurrentDayCarbCalories</div>
+
+                                    if (Model.MealCarbCaloriesPercent > 5)
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#28a745; width:@Model.MealCarbCaloriesPercent%;" aria-valuemin="0" aria-valuemax="100">@Model.MealCarbCalories</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="progress-bar progress-bar-striped" style="background-color:#28a745; width:@Model.MealCarbCaloriesPercent%;" aria-valuemin="0" aria-valuemax="100"><span style="margin-left:20px; z-index:1; color:black;">@Model.MealCarbCalories</span></div>
+                                    }
+                                    <div class="progress-bar progress-bar-striped" style="background-color:#d3d3d3; border-right:5px dotted black; width:@(Model.MealCarbCaloriesRemainingPercent)%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                }
+                            </div>
+                            <div class="col-12 form-row justify-content-around" style="margin-top:-20px; margin-bottom:20px;">
+                                <div class="col-4">
+                                    0<span style="font-size:10px;">%</span>
+                                </div>
+                                <div class="col-4">
+                                    50<span style="font-size:10px;">%</span>
+                                </div>
+                                <div class="col-3">
+                                    100<span style="font-size:10px;">%</span>
+                                </div>
+                                <div class="col-1">
+                                    150<span style="font-size:10px;">%</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        if (@Model.CurrentDayCalories + @Model.MealCalories  > @Model.TargetCalories) {
+            $('#dailyTargetCalOver').text("(" + (@Model.CurrentDayCalories + @Model.MealCalories) + ")");
+            $('#dailyTargetCalOver').css('color', '#F01E1E');
+        }
+        else {
+            $('#dailyTargetCalOver').text("(" + (@Model.CurrentDayCalories + @Model.MealCalories) + ")");
+        }
+        if (@Model.CurrentDayProteinCalories  + @Model.MealProteinCalories  > @Model.TargetProteinCalories) {
+            $('#dailyTargetProteinOver').text("(" + (@Model.CurrentDayProteinCalories + @Model.MealProteinCalories) + ")");
+            $('#dailyTargetProteinOver').css('color', '#FFC05B');
+        }
+        else {
+            $('#dailyTargetProteinOver').text("(" + (@Model.CurrentDayProteinCalories + @Model.MealProteinCalories) + ")");
+        }
+        if (@Model.CurrentDayFatCalories + @Model.MealFatCalories > @Model.TargetFatCalories) {
+            $('#dailyTargetFatOver').text("(" + (@Model.CurrentDayFatCalories + @Model.MealFatCalories) + ")");
+            $('#dailyTargetFatOver').css('color', '#FFC05B');
+        }
+        else {
+            $('#dailyTargetFatOver').text("(" + (@Model.CurrentDayFatCalories + @Model.MealFatCalories) + ")");
+        }
+        if (@Model.CurrentDayCarbCalories + @Model.MealCarbCalories > @Model.TargetCarbCalories) {
+            $('#dailyTargetCarbOver').text("(" + (@Model.CurrentDayCarbCalories + @Model.MealCarbCalories) + ")");
+            $('#dailyTargetCarbOver').css('color', '#FFC05B');
+        }
+        else {
+            $('#dailyTargetCarbOver').text("(" + (@Model.CurrentDayCarbCalories + @Model.MealCarbCalories) + ")");
+        }
+    });
+</script>

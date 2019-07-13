@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/lib/smartwizard/dist/js/jquery.smartWizard.min.js",
+    "inputFiles": [
+      "wwwroot/lib/smartwizard/dist/js/jquery.smartWizard.js"
+    ]
+  }
+]

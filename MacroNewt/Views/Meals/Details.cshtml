@@ -1,0 +1,189 @@
+﻿@model MacroNewt.Models.ViewModels.FoodViewModel
+
+<div id="visContainer" style="visibility:hidden;">
+
+    <h5>
+        <span class="top-line"></span>
+        <span class="text">Details</span>
+    </h5>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="currentMeal" id="currentMealBox" style="display:block;">
+
+                <div class="Box-header d-flex justify-content-between">
+                    <div>
+                        <p class="summaryHeader">
+                            Meal Info @if (User.IsInRole("Admin"))
+                            {
+                                <text> - @Model.UserEmail</text>
+                            }
+                        </p>
+                    </div>
+                    <div>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a style="float:right;" asp-action="ManageMeals" asp-controller="Admin" class="btn btn-sm btn-myGreen">Back to List</a>
+                        }
+                        else
+                        {
+                            <a style="float:right;" asp-action="Index" class="btn btn-sm btn-myGreen">Back to List</a>
+                        }
+                        <a style="float:right; margin-right:4px;" asp-action="Edit" asp-route-id="@Model.MealId" class="btn btn-sm btn-myBlueDark">Edit</a>
+
+                    </div>
+                </div>
+
+                <div class="mealSummaryFoodBox" id="mealSummaryFoodBox">
+                    <div class="meal">
+                        <div class="form-row ml-2 mr-2">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label asp-for="Title" class="control-label"></label>
+                                    <div class="form-control">
+                                        @Html.DisplayFor(model => model.Title)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label class="control-label">Nutrition</label>
+                                    <div class="form-control control-centered">
+                                        <button class="foodInfoButton btn btn-sm" data-toggle="modal" data-target="#mealNutritionModal"><i class="nutritionLabelIcon"></i></button>
+                                        @*<a class="foodInfoButton btn btn-sm" data-toggle="modal" data-target="#mealNutritionModal"><i class="fa fa-info-circle fa-lg foodInfoIcon"></i></a>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="form-group float-right">
+                                    <label asp-for="MealCount" class="control-label"></label>
+                                    <div class="form-control" style="text-align:center">
+                                        @Html.DisplayFor(model => model.MealCount)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row ml-2 mr-2">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label asp-for="MealDate" class="control-label"></label>
+                                    <div class="form-control control-centered">
+                                        @Html.ValueFor(model => model.MealDate, "{0:MM/dd/yyyy}")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label class="control-label">Time</label>
+                                    <div class="form-control control-centered">
+                                        @Html.ValueFor(model => model.MealDate, "{0:hh:mm tt}")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="form-group float-right">
+                                    <label asp-for="CalorieTotal" class="control-label"></label>
+                                    <div class="form-control" style="text-align:center">
+                                        @Html.DisplayFor(model => model.CalorieTotal)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr class="form-row mr-2">
+                                <td class="form-group col-2" align="center">
+                                    <strong class="full-text">Nutrition</strong>
+                                    <strong class="short-text">Nut.</strong>
+                                </td>
+                                <td class="form-group col-3" align="center">
+                                    <strong>Food(s):</strong>
+                                </td>
+                                <td class="form-group col-2" align="center">
+                                    <strong class="full-text">Number of servings:</strong>
+                                    <strong class="short-text"># Serv</strong>
+                                </td>
+                                <td class="form-group col-2" align="center">
+                                    <strong class="full-text">Calories per serving:</strong>
+                                    <strong class="short-text">
+                                        Cal
+                                        per
+                                        Serv.
+                                    </strong>
+                                </td>
+                                <td class="form-group col-3" align="center">
+                                    <strong class="full-text">Calories for food:</strong>
+                                    <strong class="short-text">
+                                        Cal
+                                        per
+                                        Food
+                                    </strong>
+                                </td>
+                            </tr>
+
+                            @for (int i = 0; i < Model.Foods.Count; i++)
+                            {
+
+                                <tr class="form-row">
+                                    <td class="form-group col-2" align="center">
+                                        @if (Model.Foods[i].Nutrients[0].Measures.Count == 0)
+                                        {
+                                            <button class="foodInfoButton btn btn-sm" data-toggle="modal" data-target="#noMeasureNutritionModal_@Model.Foods[i].FoodId"><i class="nutritionLabelIcon"></i></button>
+                                        }
+                                        else
+                                        {
+                                            <button class="foodInfoButton btn btn-sm" data-toggle="modal" data-target="#nutritionModal_@Model.Foods[i].FoodId"><i class="nutritionLabelIcon"></i></button>
+
+                                        }
+                                    </td>
+                                    <td class="form-group col-3">
+                                        @Html.DisplayFor(model => Model.Foods[i].Name)
+                                    </td>
+                                    <td class="form-group col-2" align="center">
+                                        @Html.ValueFor(model => Model.Foods[i].NumberOfServings, "{0:0.##}")
+                                    </td>
+                                    <td class="form-group col-2" align="center">
+                                        @Html.DisplayFor(model => Model.Foods[i].Value)
+                                    </td>
+                                    <td class="form-group col-3" align="center">
+                                        @(String.Format("{0:0}", (Model.Foods[i].Value * Model.Foods[i].NumberOfServings)))
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            @foreach (Food f in Model.Foods)
+            {
+                if (f.SelectedPortionLabel == "100g")
+                {
+                    @await Component.InvokeAsync("NoMeasureFoodNutritionLabel", new { nmf = Food.GetNoMeasureNutrients(f) });
+                }
+                else
+                {
+                    @await Component.InvokeAsync("NutritionLabel", new { foodId = f.FoodId })
+                }
+            }
+
+
+            @await Component.InvokeAsync("MealTotalNutritionLabel", new { mtn = Food.GetTotalMealNutrients(Model.Foods) })
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        document.getElementById("visContainer").style.visibility = "visible";
+    });
+</script>

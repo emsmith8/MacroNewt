@@ -1,0 +1,169 @@
+﻿
+<div id="visContainer" style="visibility:hidden;">
+    <div class="justify-content-center" style="text-align:center">
+        <h5 style="color:#5bc0de">Log a New Meal</h5>
+    </div>
+    <div id="smartwizard" class="container-fluid">
+        <ul class="justify-content-center">
+            <li class="firstStep"><a href="#AddFoods">1<br /><small>Search Foods</small></a></li>
+            <li><a href="#MealDetails">2<br /><small>Meal Details</small></a></li>
+            <li><a href="#ReviewMeal">3<br /><small>Review</small></a></li>
+        </ul>
+        <div>
+            <div id="AddFoods">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10 col-lg-8">
+                        <div class="currentMeal">
+                            <div class="Box-header d-flex justify-content-between">
+                                <div>
+                                    <strong class="currentMealHeader">Current Foods in this Meal:</strong>
+                                    <small style="color:red" id="addFoodPageMessage"></small>
+                                </div>
+                                <div>
+                                    <button href="#" id="relogPreviousMeal" class="btn btn-sm btn-myGreen" style="display:block">
+                                        Previous Meals
+                                        <span class="fa fa-history fa-fw" aria-hidden="true"></span>
+                                    </button>
+                                    <button href="#" id="addFoodsNext" class="btn btn-sm btn-myGreen" style="display:none">
+                                        Next
+                                        <span class="fa fa-arrow-right fa-fw" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="currentMealFoodsBox">
+                                <table class="table foodTable table-borderless table-hover" id="currentFoods">
+                                    <tbody>
+                                        <tr id="NoFoodsRow">
+                                            <td colspan="2" style="text-align:center">
+                                                No Foods Selected
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="oldMealsModalContainer">
+
+                </div>
+
+                
+                <div id="databaseNoticeModalContainer">
+                    <div class="modal fade" id="databaseNoticeModal" role="dialog">
+                        <div class="modal-dialog vertical-align-center">
+                            <div class="modal-content databaseNoticeModalSizing">
+
+
+                                <div class="databaseNotice">
+                                    <div class="Box-header d-flex justify-content-center databaseNoticeHeaderFont">
+                                        Please Note
+                                    </div>
+                                    <div style="margin:10px;">
+                                        <span>
+                                            Due to the large number of items in the branded database and a search result limit of 1500,
+                                            unspecific searches may result in the exclusion of food items.
+                                        </span><br />
+                                        <br />
+                                        <span>
+                                            You can try searching UPC codes for exact product matches if available.
+                                        </span>
+                                    </div>
+                                    <div style="margin:0px 10px 10px 0px; float:right;">
+                                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#databaseNoticeModal">
+                                            Close
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center" style="margin-bottom:15px;">
+                    <div class="form-row col-12 col-sm-6 col-lg-4">
+                        <select class="form-control targetDatabase" id="targetDatabase">
+                            <option value="Standard">Database: Standard Reference</option>
+                            <option value="Branded">Database: Branded Food Products</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row justify-content-center" style="margin-bottom:30px;">
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="input-group">
+                            <input type="text" id="searchString" name="foodName" class="form-control" placeholder="e.g. 'Chicken' " aria-label="Input group example" aria-describedby="btnGroupAddon">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-myBlueDark" id="searchFoods"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10 col-lg-8" id="searchContainer">
+
+                    </div>
+                </div>
+            </div>
+            <div id="MealDetails">
+                <div id="componentContainer">
+
+                </div>
+                <div id="confirmContainer">
+
+                </div>
+            </div>
+            <div id="ReviewMeal">
+                <div id="reviewComponentContainer">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#smartwizard').smartWizard({
+            theme: 'circles',
+            keyNavigation: false,
+            anchorSettings: {
+                markDoneStep: true,
+                enableAnchorOnDoneStep: false
+            },
+            toolbarSettings: {
+                toolbarPosition: 'none',                
+            }
+        });
+        document.getElementById("searchFoods").addEventListener('click', handleSearchFoodsClick, false);
+        document.getElementById("relogPreviousMeal").addEventListener('click', showOldMealsModal, false);
+        document.getElementById("addFoodsNext").addEventListener('click', handleAddFoodsNextClick, false);
+        document.getElementById("visContainer").style.visibility = "visible";
+        document.addEventListener("keyup", function (e) {
+            if (e.keyCode === 13) {
+                handleSearchFoodsClick();
+            }
+        });
+
+        $(".targetDatabase").change(function () {
+            if ($(this).val() == 'Branded') {
+                $('#databaseNoticeModal').modal('toggle');
+                $('#searchString').attr("placeholder", "e.g. '011110024527'")
+            }
+            else {
+                $('#searchString').attr("placeholder", "e.g. 'Chicken'")
+            }
+        });
+    })
+
+    function showOldMealsModal() {
+        var container = $("#oldMealsModalContainer").empty();
+        $.get('/Meals/GetOldMealsModal', function (result) {
+            container.html(result);
+        });
+    }
+    
+</script>

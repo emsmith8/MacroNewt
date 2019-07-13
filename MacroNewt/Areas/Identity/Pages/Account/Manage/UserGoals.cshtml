@@ -1,0 +1,420 @@
+﻿@page
+@model MacroNewt.Areas.Identity.Pages.Account.Manage.UserGoalsModel
+@{
+    ViewData["Title"] = "Goals";
+    ViewData["ActivePage"] = ManageNavPages.UserGoals;
+}
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/css/bootstrap-slider.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.js"></script>
+</head>
+
+<div id="visContainer" style="visibility:hidden;">
+    <div class="d-flex justify-content-between">
+        <h4 id="profileGoals">Adjust targets if desired</h4>
+        <button href="#" type="button" id="showBMRModal" class="btn btn-sm bmrModalButton">Find BMR</button>
+    </div>
+
+    <partial name="_StatusMessage" for="StatusMessage" />
+    <div id="bannerContainer">
+
+    </div>
+    <div class="row">
+        <div class="col-md-10" style="padding-bottom:10px;">
+            <form id="profile-form" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Input.BaseCalorieTarget"></label>
+                    <div class="d-flex">
+                        <input asp-for="Input.BaseCalorieTarget" id="calTargetPicker" class="form-control col-3" style="min-width:80px;"/>
+                        <button type="button" id="updateBaseCaloriesButton" class="btn btn-sm btn-myBlueDark updateCalBaseButton">Use as base</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Goal"></label>
+                    <select asp-for="Input.Goal" id="goalSelection" class="form-control">
+                        <option disabled selected value=""> -- Choose goal -- </option>
+                        <option value="Loss">Lose fat</option>
+                        <option value="Maintain">Maintain weight</option>
+                        <option value="Gain">Gain mass</option>
+                    </select>
+                </div>
+                <div class="form-group" id="paceDiv">
+                    <label asp-for="Input.Pace"></label>
+                    <select asp-for="Input.Pace" id="paceSelection" class="form-control">
+                        <option disabled selected value=""> -- Choose pace -- </option>
+                        <option value="Relaxed">Relaxed</option>
+                        <option value="Neutral">Neutral</option>
+                        <option value="Aggressive">Aggressive</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="currentAdjustmentTotal" style="display:none;">
+                    <label id="adjustmentLabel"></label>
+                    <span style="display:inline-block;"><label class="targetCalInput">@Model.Input.CalAdjustment</label>kcal/day</span>
+                </div>
+                <div class="form-group" id="currentAdjustedTotal" style="display:none; margin-top:-20px;">
+                    <label>Adjusted total goal: </label>
+                    <span style="display:inline-block;"><label class="targetCalInput" id="currentAdjustedTotalLabel">@(Model.Input.BaseCalorieTarget + Model.Input.CalAdjustment)</label>kcal/day</span>
+                </div>
+
+                <div class="form-group" id="recommendValDiv" style="display:none;">
+                    <div class="d-flex">
+                        <label id="recommendedAdjustmentLabel"></label>
+                        <span style="display:inline-block;"><input asp-for="Input.CalAdjustment" id="targetCalInput" class="targetCalInput no-spinners" readonly="readonly" />kcal/day</span>
+                    </div>
+
+                    <div class="d-flex" style="margin-top:-10px;">
+                        <label>Recommended total goal: </label>
+                        <span style="display:inline-block;"><label class="targetCalInput" id="recommendedTargetGoalLabel"></label>kcal/day</span>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-myBlueDark" style="line-height:1;">Adjust Goals</button>
+                    </div>
+                    <input type="hidden" id="hiddenTargetVal"/>
+                </div>
+
+                <div class="d-flex" id="recommendationLegendDiv" style="display:none !important;">
+                    <hr class="rangeRecommendation" />
+                    <label>Recommended range</label>
+                </div>
+                <div class="form-group" id="carbDiv" style="margin:50px 10px 0 10px;">
+                    <input asp-for="Input.CarbPercent" id="carbSlider" type="text"
+                           data-provide="slider"
+                           data-slider-min="0"
+                           data-slider-max="100"
+                           data-slider-step="5"
+                           data-slider-value="@if (Model.Input.CarbPercent != 0) {
+                                                @Model.Input.CarbPercent
+                                            }
+                                            else {
+                                                <text>55</text>
+                                            }"
+                           data-slider-rangeHighlights='[{"start": 43, "end": 67, "class": "recommendRange"}]'
+                           data-slider-tooltip="always" />
+                    <label asp-for="Input.CarbPercent"></label>
+                </div>
+                <div class="form-group" id="fatDiv" style="margin:50px 10px 0 10px;">
+                    <input asp-for="Input.FatPercent" id="fatSlider" type="text"
+                           data-provide="slider"
+                           data-slider-min="0"
+                           data-slider-max="100"
+                           data-slider-step="5"
+                           data-slider-value="@if (Model.Input.FatPercent != 0) {
+                                                @Model.Input.FatPercent
+                                            }
+                                            else {
+                                                <text>25</text>
+                                            }"
+                           data-slider-rangeHighlights='[{"start": 18, "end": 37, "class": "recommendRange"}]'
+                           data-slider-tooltip="always" />
+                    <label asp-for="Input.FatPercent"></label>
+                </div>
+                <div class="form-group" id="proteinDiv" style="margin:50px 10px 0 10px;">
+                    <input asp-for="Input.ProteinPercent" id="proteinSlider" type="text"
+                           data-provide="slider"
+                           data-slider-min="0"
+                           data-slider-max="100"
+                           data-slider-step="5"
+                           data-slider-value="@if (Model.Input.ProteinPercent != 0) {
+                                                @Model.Input.ProteinPercent
+                                            }
+                                            else {
+                                                <text>20</text>
+                                            }"
+                           data-slider-rangeHighlights='[{"start": 8, "end": 37, "class": "recommendRange"}]'
+                           data-slider-tooltip="always" />
+                    <label asp-for="Input.ProteinPercent"></label>
+                </div>
+                <div class="col-6" id="percentTotalDiv" style="display: none; margin: 25px 0 20px 0">
+                    <input asp-for="Input.PercentTotal" id="percentTotal" class="form-control macroTotal" readonly="readonly"
+                           value="@if (Model.Input.PercentTotal != 0) {
+
+                                @Model.Input.PercentTotal
+                            }
+                            else {
+                                <text>100</text>
+                            }" />
+                    <label asp-for="Input.PercentTotal" class="macroPercentageSign"></label>
+                </div>
+
+                <button id="update-profile-button" type="submit" class="btn btn-myBlueDark">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="bmrModalContainer">
+
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script>
+    $(document).ready(function () {
+        $('#updateBaseCaloriesButton').hide();
+
+        if ($('#goalSelection').val() == null) {
+            $('#paceDiv').hide();
+            $('#carbDiv').hide();
+            $('#fatDiv').hide();
+            $('#proteinDiv').hide();
+            $('#profileGoals').text("Select overall goal");
+        }
+        else {
+            $('#percentTotalDiv').show();
+
+            @if(Model.Input.CalAdjustment > 0)
+            {
+                <text>$('#adjustmentLabel').text("Current surplus: ");</text>
+            }
+            else if (Model.Input.CalAdjustment < 0)
+            {
+                <text>$('#adjustmentLabel').text("Current deficit: ");</text>
+            }
+            else
+            {
+                <text>$('#adjustmentLabel').text("Current adjustment: ");</text>
+            }
+
+            $('#currentAdjustmentTotal').show();
+            $('#currentAdjustedTotal').show();
+
+            $('#recommendationLegendDiv').show();
+            if ($('#percentTotal').val() == 100) {
+                $('#percentTotal').css('background', 'rgb(87, 214, 130, 0.3)');
+            }
+            else {
+                $('#percentTotal').css('background', 'rgb(255, 199, 199, 0.3)');
+            }
+        }
+
+        $('#hiddenTargetVal').val(@Model.Input.CalAdjustment);
+
+        if ($('#goalSelection').val() == "Maintain") {
+            $('#paceDiv').hide();
+        }
+
+        $('#showBMRModal').on('click', getBMRModal);
+
+        $('#calTargetPicker').on('change', function () {
+            $('#updateBaseCaloriesButton').css("display", "inline-block");
+        });
+
+        document.getElementById("visContainer").style.visibility = "visible";
+
+        $('#updateBaseCaloriesButton').click(function () {
+            updateBaseCalories($('#calTargetPicker').val())
+        });
+    });
+
+    function updateBaseCalories(target) {
+        $.post('/Home/UpdateCalorieTarget', { calTarget: target }, function (data) {
+            $('#bannerContainer').empty().append("<div class='updateAlert'><span>Target Updated</span></div > ");
+            $('#updateBaseCaloriesButton').hide();
+
+            var currentBase = $('#calTargetPicker').val();
+            var targetVal = $('#hiddenTargetVal').val();
+            var currentRecTarget = parseInt(currentBase) + parseInt(targetVal);
+            $('#recommendedTargetGoalLabel').text(currentRecTarget);
+            $('#currentAdjustedTotalLabel').text(currentRecTarget);
+
+            refreshUserInfo();
+
+        }).fail(function () {
+            console.log("error");
+        });
+    }
+
+    function getBMRModal() {
+        var container = $('#bmrModalContainer').empty();
+        $.get('/Home/CheckProfileComplete', function (result) {
+            container.html(result);
+        });
+    }
+
+    $("#goalSelection").on('change', function () {
+        $('#paceDiv').show();
+        if ($('#paceSelection').val() == null) {
+            $('#profileGoals').text("Select your pace");
+        }
+        var currentGoalVal = $('#goalSelection').val();
+        var currentPaceVal = $('#paceSelection').val();
+        var targetVal;
+        var recommendLabelText;
+        var currentBase = $('#calTargetPicker').val();
+        
+
+        if ($('#goalSelection').val() == "Maintain") {
+            $('#paceSelection').val("Neutral");
+            $('#paceDiv').hide();
+            $('#targetCalInput').val(0);
+
+            $('#currentAdjustmentTotal').hide();
+            $('#currentAdjustedTotal').hide();
+
+            $('#recommendedAdjustmentLabel').text("Recommended adjustment: ");
+            $('#recommendedTargetGoalLabel').text(currentRecTarget);
+
+            $('#recommendValDiv').css("display", "inline-block");
+
+            $('#recommendationLegendDiv').show();
+            $('#carbDiv').show();
+            $('#fatDiv').show();
+            $('#proteinDiv').show();
+            $('#percentTotalDiv').show();
+        }
+        else if (currentPaceVal == "Relaxed" || currentPaceVal == "Neutral" || currentPaceVal == "Aggressive") {
+            
+            switch (currentGoalVal) {
+                case "Loss":
+                    recommendLabelText = "Recommended deficit: ";
+                    switch (currentPaceVal) {
+                        case "Relaxed":
+                            targetVal = -250;
+                            break;
+                        case "Neutral":
+                            targetVal = -500;
+                            break;
+                        case "Aggressive":
+                            targetVal = -1000;
+                            break;
+                    }
+                    break;
+                case "Maintain":
+                    recommendLabelText = "Recommended adjustment: ";
+                    targetVal = 0;
+                    break;
+                case "Gain":
+                    recommendLabelText = "Recommended surplus: ";
+                    switch (currentPaceVal) {
+                        case "Relaxed":
+                            targetVal = 250;
+                            break;
+                        case "Neutral":
+                            targetVal = 500;
+                            break;
+                        case "Aggressive":
+                            targetVal = 1000;
+                            break;
+                    }
+                    break;
+            }
+            $('#hiddenTargetVal').val(targetVal);
+
+            var currentRecTarget = parseInt(currentBase) + parseInt(targetVal);
+            
+            $('#targetCalInput').val(targetVal);
+
+            $('#currentAdjustmentTotal').hide();
+            $('#currentAdjustedTotal').hide();
+
+            $('#recommendedAdjustmentLabel').text(recommendLabelText);
+            $('#recommendedTargetGoalLabel').text(currentRecTarget);
+            $('#recommendValDiv').css("display", "inline-block");
+        }
+
+        if (((currentGoalVal == "Gain") && ($('#targetCalInput').val() < 0))
+            || ((currentGoalVal == "Lose") && ($('#targetCalInput').val() > 0))) {
+            $('#targetCalInput').val(currentGoalVal * -1);
+        }
+        
+    });
+
+    $('#paceSelection').on('change', function () {
+        $('#profileGoals').text("Adjust targets if desired");
+
+        var goalVal = $('#goalSelection').val();
+        var paceVal = $('#paceSelection').val();
+        var targetVal;
+        var recommendLabelText;
+        var currentBase = $('#calTargetPicker').val();
+
+        
+        switch (goalVal) {
+            case "Loss":
+                recommendLabelText = "Recommended deficit: ";
+                switch (paceVal) {
+                    case "Relaxed":
+                        targetVal = -250;
+                        break;
+                    case "Neutral":
+                        targetVal = -500;
+                        break;
+                    case "Aggressive":
+                        targetVal = -1000;
+                        break;
+                }
+                break;
+            case "Maintain":
+                recommendLabelText = "Recommended adjustment: ";
+                targetVal = 0;
+                break;
+            case "Gain":
+                recommendLabelText = "Recommended surplus: ";
+                switch (paceVal) {
+                    case "Relaxed":
+                        targetVal = 250;
+                        break;
+                    case "Neutral":
+                        targetVal = 500;
+                        break;
+                    case "Aggressive":
+                        targetVal = 1000;
+                        break;
+                }
+                break;
+        }
+        $('#hiddenTargetVal').val(targetVal);
+
+        var currentRecTarget = parseInt(currentBase) + parseInt(targetVal);
+
+        $('#currentAdjustmentTotal').hide();
+        $('#currentAdjustedTotal').hide();
+
+        $('#targetCalInput').val(targetVal);
+        if (goalVal != "Maintain") {
+            $('#recommendedAdjustmentLabel').text(recommendLabelText);
+            $('#recommendedTargetGoalLabel').text(currentRecTarget);
+            $('#recommendValDiv').css("display", "block");
+        }
+        
+        
+        $('#recommendationLegendDiv').show();
+        $('#carbDiv').show();
+        $('#fatDiv').show();
+        $('#proteinDiv').show();
+        $('#percentTotalDiv').show();
+    });
+
+    function updateTotal() {
+        var carbVal = parseInt($('#carbSlider').val());
+        var fatVal = parseInt($('#fatSlider').val());
+        var proteinVal = parseInt($('#proteinSlider').val());
+
+        var total = carbVal + fatVal + proteinVal;
+
+        $('#percentTotal').val(total);
+        if (total == 100) {
+            $('#percentTotal').css('background', 'rgb(87, 214, 130, 0.3)');
+        }
+        else {
+            $('#percentTotal').css('background', 'rgb(255, 199, 199, 0.3)');
+        }
+    }
+
+    $("#carbSlider").slider().on('change', updateTotal);
+
+    $("#fatSlider").slider().on('change', updateTotal);
+
+    $("#proteinSlider").slider().on('change', updateTotal);
+
+</script>

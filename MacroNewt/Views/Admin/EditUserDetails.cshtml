@@ -1,0 +1,66 @@
+﻿@model MacroNewt.Areas.Identity.Data.MacroNewtUser
+
+<div id="visContainer" style="margin:5px;">
+
+    <h5>
+        <span class="top-line"></span>
+        <span class="text">Edit User</span>
+    </h5>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8" style="margin:auto; padding:0px;">
+            <div class="existingUserDetails">
+                <div class="Box-header d-flex justify-content-between">
+                    <div>
+                        <p class="summaryHeader">User info</p>
+                    </div>
+                    <div>
+                        <a style="float:right;" asp-action="ManageUsers" asp-controller="Admin" class="btn btn-sm btn-myGreen">Back</a>
+                    </div>
+                </div>
+
+                <div style="padding:10px;">
+                    <div class="row">
+                        <div class="col-12" style="padding-bottom:10px;">
+                            <form id="profile-form" method="post">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.ProfileName"></label>
+                                    <input asp-for="@Model.ProfileName" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Name"></label>
+                                        <input asp-for="@Model.Name" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="@Model.DOB"></label>
+                                        <input asp-for="@Model.DOB" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Gender"></label>
+                                        <select asp-for="@Model.Gender" class="form-control">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Weight"></label>
+                                        <input asp-for="@Model.Weight" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="@Model.DailyTargetCalories"></label>
+                                        <input asp-for="@Model.DailyTargetCalories" class="form-control" />
+                                    </div>
+                                </div>
+                                <button id="update-user-profile-button" type="submit" class="btn btn-myBlueDark">Save</button>
+                                @Html.HiddenFor(model => model.Id)
+                                @Html.AntiForgeryToken()
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<MacroNewt.Models.Meal>
+
+<div class="modal fade" id="oldMealsModal" role="dialog">
+    <div class="modal-dialog vertical-align-center">
+        <div class="modal-content">
+
+            <div class="row justify-content-center" style="margin:auto;" id="fullHistoryBox">
+
+                <div class="mealHistoryModal" style="width:103%;">
+                    <div class="Box-header d-flex justify-content-between">
+                        <div>
+                            <p class="summaryHeader">All Logged Meals</p>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" style="line-height:18px;" data-dismiss="modal" data-target="#oldMealsModal">
+                                <span>Cancel</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mealHistoryBox">
+                        <table class="table mealTable" style="margin-bottom:0px;">
+                            <thead>
+                                <tr>
+                                    <th>
+
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.MealDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Calories)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Count() == 0)
+                                {
+                                    <tr id="NoFoodsRow">
+                                        <td colspan="4" style="text-align:center">
+                                            No previous meals
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="mealTable-buttonCell">
+                                                <a class="btn btn-sm btn-myBlueDark" style="width:100%; font-size:0.6em;" asp-action="Edit" asp-controller="Meals" asp-route-id="@item.Id" asp-route-relog="true">Re-Log</a>
+                                            </td>
+                                            <td style="vertical-align:inherit;">
+                                                @Html.DisplayFor(modelItem => item.Title)
+                                            </td>
+                                            <td style="vertical-align:inherit;">
+                                                @Html.DisplayFor(modelItem => item.MealDate)
+                                            </td>
+                                            <td style="vertical-align:inherit;">
+                                                @Html.DisplayFor(modelItem => item.Calories)
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#oldMealsModal").modal('toggle');
+    });
+</script>

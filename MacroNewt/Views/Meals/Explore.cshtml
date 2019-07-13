@@ -1,0 +1,106 @@
+﻿<div id="visContainer" style="visibility:hidden;">
+    <div class="container-fluid explore-main">
+
+        <h5>
+            <span class="top-line"></span>
+            <span class="text">Explore</span>
+        </h5>
+
+        <div class="explore-container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+
+                    <div id="databaseNoticeContainer">
+                        <div class="modal fade" id="databaseNoticeModal" role="dialog">
+                            <div class="modal-dialog vertical-align-center">
+                                <div class="modal-content databaseNoticeModalSizing">
+
+
+                                    <div class="databaseNotice">
+                                        <div class="Box-header d-flex justify-content-center databaseNoticeHeaderFont">
+                                            Please Note
+                                        </div>
+                                        <div style="margin:10px;">
+                                            <span>
+                                                Due to the large number of items in the branded database and a search result limit of 1500,
+                                                unspecific searches may result in the exclusion of food items.
+                                            </span><br />
+                                            <br />
+                                            <span>
+                                                You can try searching UPC codes for exact product matches if available.
+                                            </span>
+                                        </div>
+                                        <div style="margin:0px 10px 10px 0px; float:right;">
+                                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#databaseNoticeModal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center" style="margin-bottom:15px;">
+                        <div class="form-row col-12 col-sm-6 col-lg-4">
+                            <select class="form-control targetDatabase" id="targetDatabase">
+                                <option value="Standard">Database: Standard Reference</option>
+                                <option value="Branded">Database: Branded Food Products</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="ExploreFoodBox">
+                        <div class="explore-header d-flex justify-content-between">
+                            <div>
+                                <strong class="ExploreFoodHeader">Search foods and find nutrion:</strong>
+                            </div>
+                        </div>
+                        <div class="ExploreSearchBox">
+                            <div class="input-group col-8 col-md-6" style="margin:auto;">
+                                <input type="text" id="searchString" name="foodName" class="form-control" placeholder="e.g. 'Chicken' " aria-label="Input group example" aria-describedby="btnGroupAddon">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-myBlueDark" id="searchFoods"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-10 col-lg-8">
+                    <div id="searchContainer">
+
+                    </div>
+                </div>
+                <div id="modalArea">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        
+        document.getElementById("searchFoods").addEventListener('click', handleExploreSearchFoods, false);
+        document.getElementById("visContainer").style.visibility = "visible";
+        document.addEventListener("keyup", function (e) {
+            if (e.keyCode === 13) {
+                handleExploreSearchFoods();
+            }
+        });
+        $(".targetDatabase").change(function () {
+            if ($(this).val() == 'Branded') {
+                $('#databaseNoticeModal').modal('toggle');
+                $('#searchString').attr("placeholder", "e.g. '011110024527'")
+            }
+            else {
+                $('#searchString').attr("placeholder", "e.g. 'Chicken'")
+            }
+        });
+    })
+    
+
+</script>

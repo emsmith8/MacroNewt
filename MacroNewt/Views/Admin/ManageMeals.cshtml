@@ -1,0 +1,102 @@
+﻿@model IEnumerable<MacroNewt.Models.Meal>
+
+<div id="visContainer" style="margin:5px;">
+
+    <h5>
+        <span class="top-line"></span>
+        <span class="text">Manage Meals</span>
+    </h5>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8" style="margin:auto; padding:0px;">
+            <div class="AdminControlBox">
+                <div class="Box-header d-flex justify-content-between">
+                    <div>
+                        <p class="summaryHeader">All User Meals</p>
+                    </div>
+                    <div>
+                        <a style="float:right;" asp-action="Index" asp-controller="Admin" class="btn btn-sm btn-myGreen">Back</a>
+                    </div>
+                </div>
+
+                <div class="existingMeals">
+                    <table class="table" style="word-break:break-all; margin-bottom:0px;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UserEmail)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Title)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MealDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Calories)
+                                </th>
+                                <th>
+                                    Actions
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserEmail)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MealDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Calories)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-myBlueDark" asp-action="Edit" asp-controller="Meals" asp-route-id="@item.Id">Edit</a>
+                                        <a class="btn btn-sm btn-myBlueDark" asp-action="Details" asp-controller="Meals" asp-route-id="@item.Id">Details</a>
+                                        <a class="btn btn-sm btn-myRed deleteMeal" href="#" data-itemID="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteMealContainer">
+
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        var deleteMealButtons = document.querySelectorAll(".deleteMeal");
+
+        for (var i = 0; i < deleteMealButtons.length; i++) {
+            var btn = deleteMealButtons[i];
+
+            btn.addEventListener('click', function () {
+                deleteMeal(this.getAttribute('data-itemID'));
+            });
+        }
+        
+    });
+
+    function deleteMeal(itemId) {
+        $.get('/Meals/Delete', { id: itemId }, function (response) {
+            var container = $("#deleteMealContainer").empty();
+            container.html(response);
+        });
+    }
+</script>

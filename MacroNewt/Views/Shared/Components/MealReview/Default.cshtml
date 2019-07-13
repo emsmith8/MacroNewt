@@ -1,0 +1,139 @@
+﻿@model MacroNewt.Models.ViewModels.FoodViewModel;
+
+<br />
+
+<div class="successAlert">
+    @if (Model.Edited == "edited")
+    {
+        <strong>Meal successfully edited</strong>
+    }
+    else
+    {
+        <strong>Meal successfully logged</strong>
+    }
+</div>
+
+<br />
+<div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+        <div class="currentMeal">
+            <div class="Box-header d-flex justify-content-between">
+                @*<div class="spaceHolderReview blueTextColor">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <text>@Model.UserEmail</text>
+                    }
+                </div>*@
+                <div>
+                    <p class="summaryHeader">
+                        Meal Summary @if (User.IsInRole("Admin"))
+                        {
+                            <text> - @Model.UserEmail</text>
+                        }
+                    </p>
+                    
+                </div>
+                <div>
+                    <a asp-action="Index" asp-controller="Home" id="logFinishReturnHome" class="btn btn-sm btn-myGreen">
+                        Home <span class="fa fa-home"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="mealSummaryFoodBox">
+
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr class="form-row mt-3">
+                            <td class="form-group col-1 col-md-2"></td>
+                            <td class="form-group col-6 col-md-4">
+                                <strong>Meal Name:</strong>
+                                @Html.DisplayFor(model => model.Title)
+                            </td>
+                            <td class="form-group col-4 col-md-3">
+                                <strong>Date:</strong>
+                                @Html.ValueFor(model => model.MealDate, "{0:MM/dd/yyyy}")
+                            </td>
+                            <td class="form-group col-1 col-md-3"></td>
+                        </tr>
+                        <tr class="form-row">
+                            <td class="form-group col-1 col-md-2">
+
+                            </td>
+                            <td class="form-group col-6 col-md-4">
+                                <strong>Meals This Day:</strong>
+                                @Html.DisplayFor(model => model.MealCount)
+                            </td>
+                            <td class="form-group col-4 col-md-3">
+                                <strong>Time:</strong>
+                                @Html.ValueFor(model => model.MealDate, "{0:hh:mm tt}")
+                            </td>
+                            <td class="form-group col-1 col-md-3">
+
+                            </td>
+                        </tr>
+                        <tr class="form-row">
+                            <td class="form-group col-1 col-md-2">
+
+                            </td>
+                            <td class="form-group col-6 col-md-4">
+                                <strong>Total Calories:</strong>
+                                @Html.DisplayFor(model => model.CalorieTotal)
+                            </td>
+                            <td class="form-group col-3 col-md-3">
+                                <strong>Meal Type</strong>
+                                @Html.DisplayFor(model => model.MealType)
+                            </td>
+                            <td class="form-group col-2 col-md-3">
+
+                            </td>
+                        </tr>
+
+                        <tr class="form-row ml-4">
+                            <td class="form-group col-4">
+                                <strong>Food(s):</strong>
+                            </td>
+                            <td class="form-group col-3">
+                                <strong>Number of servings:</strong>
+                            </td>
+                            <td class="form-group col-3">
+                                <strong>Calories per serving:</strong>
+                            </td>
+                            <td class="form-group col-2">
+                                <strong>Calories for food:</strong>
+                            </td>
+                        </tr>
+
+                        @for (int i = 0; i < Model.Foods.Count; i++)
+                        {
+                                
+                        <tr class="form-row ml-4">
+                            <td class="form-group col-4">
+                                @Model.Foods[i].Name
+                                @*@Html.DisplayFor(model => Model.Foods[i].Name)*@
+                            </td>
+                            <td class="form-group col-3" align="center">
+                                @String.Format("{0:0.##}", Model.Foods[i].NumberOfServings)
+                                @*@Html.ValueFor(model => Model.Foods[i].NumberOfServings, "{0:0.##}")*@
+                            </td>
+                            <td class="form-group col-3" align="center">
+                                @Model.Foods[i].Value
+                                @*@Html.DisplayFor(model => Model.Foods[i].Value)*@
+                            </td>
+                            <td class="form-group col-2" align="center">
+                                @String.Format("{0:0}", (Model.Foods[i].Value * Model.Foods[i].NumberOfServings))
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".successAlert").fadeOut(8000);
+    });
+</script>
+

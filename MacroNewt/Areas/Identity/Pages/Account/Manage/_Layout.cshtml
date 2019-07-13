@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div class="row justify-content-around" style="padding-left:5px; padding-right:5px;">
+    <div class="ProfileIndexBox col-12 col-sm-10">
+        <div>
+            <h5>Change your account settings</h5>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <partial name="_ManageNav" />
+                </div>
+                <div class="col-md-6">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
