@@ -1,3 +1,3 @@
-# FiTrack
+# MacroNewt
 
-Fitness tracking ASP.NET Core MVC app
+Food and nutrition tracking ASP.NET Core MVC app
