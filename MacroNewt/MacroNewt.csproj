@@ -33,9 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Identity\Data\FiTrackRole.cs" />
-    <Compile Remove="Areas\Identity\Data\FiTrackWebAppContext.cs" />
-    <Compile Remove="FiTrackDbInitializer.cs" />
+    <Compile Remove="Areas\Identity\Data\MacroNewtRole.cs" />
+    <Compile Remove="Areas\Identity\Data\MacroNewtWebAppContext.cs" />
+    <Compile Remove="MacroNewtDbInitializer.cs" />
     <Compile Remove="Models\ViewModels\FoodListViewModel.cs" />
     <Compile Remove="Models\ViewModels\FoodNutrientViewModel.cs" />
     <Compile Remove="Models\ViewModels\NutritionLabel.cs" />
