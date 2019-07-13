@@ -168,7 +168,7 @@
     });
 
     function updateCalorieTarget(target) {
-        $.post('/Home/UpdateCalorieTarget', { calTarget: target }, function (data) {
+        $.post('Home/UpdateCalorieTarget', { calTarget: target }, function (data) {
             $('#BMRBannerContainer').empty().append("<div class='updateAlert'><span>Target Updated</span></div > ");
 
             var currentBase = target;

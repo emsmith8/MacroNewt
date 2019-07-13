@@ -87,7 +87,7 @@
 
 
     function deleteUser(itemId) {
-        $.get('/Admin/Delete', { id: itemId }, function (response) {
+        $.get('Admin/Delete', { id: itemId }, function (response) {
             var container = $("#deleteUserContainer").empty();
             container.html(response);
         });

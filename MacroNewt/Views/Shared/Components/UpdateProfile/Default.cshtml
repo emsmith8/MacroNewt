@@ -99,7 +99,7 @@
             var form = $('#updateProfileStatsForm');
 
             $.ajax({
-                url: '/Home/UpdateProfileStats',
+                url: 'Home/UpdateProfileStats',
                 type: 'POST',
                 data: form.serialize(),
                 success: function (data) {

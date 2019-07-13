@@ -94,7 +94,7 @@
     });
 
     function deleteMeal(itemId) {
-        $.get('/Meals/Delete', { id: itemId }, function (response) {
+        $.get('Meals/Delete', { id: itemId }, function (response) {
             var container = $("#deleteMealContainer").empty();
             container.html(response);
         });

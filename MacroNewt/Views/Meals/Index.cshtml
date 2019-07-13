@@ -147,7 +147,7 @@
     $(document).ready(function () {
         document.getElementById("visContainer").style.visibility = "visible";
 
-        $.get('/Meals/BuildMealCalendarModal', function (response) {
+        $.get('Meals/BuildMealCalendarModal', function (response) {
             $('#calendarContainer').html(response);
         });
 
@@ -199,7 +199,7 @@
 
     function deleteMeal(itemId) {
 
-        $.get('/Meals/Delete', { id: itemId }, function (response) {
+        $.get('Meals/Delete', { id: itemId }, function (response) {
             var container = $("#deleteMealContainer").empty();
             container.html(response);
         });
@@ -217,7 +217,7 @@
 
         var eDate = sDate;
 
-        $.get('/Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
+        $.get('Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
             var container = $("#customHistoryContainer").empty();
             container.html(response);
         });
@@ -235,7 +235,7 @@
             return;
         }
 
-        $.get('/Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
+        $.get('Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
             var container = $("#customHistoryContainer").empty();
             container.html(response);
         });

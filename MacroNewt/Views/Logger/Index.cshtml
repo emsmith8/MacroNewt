@@ -161,7 +161,7 @@
 
     function showOldMealsModal() {
         var container = $("#oldMealsModalContainer").empty();
-        $.get('/Meals/GetOldMealsModal', function (result) {
+        $.get('Meals/GetOldMealsModal', function (result) {
             container.html(result);
         });
     }

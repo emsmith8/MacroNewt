@@ -26,7 +26,7 @@ function handleSearchFoodsClick(e) {
     else {
         var container = $("#searchContainer").empty();
         
-        $.get('/Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
+        $.get('Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
             console.log("Well, i got here");
             container.html(data);
             var addFoodButtons = document.querySelectorAll(".foodAddButton");
@@ -139,7 +139,7 @@ function handleSubmitMealClick() {
         foodItems.push(foodItem);
     });
     var container = $("#componentContainer");
-    $.get('/Logger/GetMealDetailViewComponent', { formData: JSON.stringify(foodItems), mId: mID, reLogged: reLogged }, function (result) {
+    $.get('Logger/GetMealDetailViewComponent', { formData: JSON.stringify(foodItems), mId: mID, reLogged: reLogged }, function (result) {
         container.html(result);
         
         console.log("The length of servings is " + servings.length);
@@ -402,7 +402,7 @@ function handleSubmitMealLogClick() {
     var portion = [];
     console.log("The title is " + title);
     $.ajax({
-        url: '/Logger/ConfirmMeal',
+        url: 'Logger/ConfirmMeal',
         type: 'POST',
         data: form.serialize(),
         success: function (data, status, xhr) {
@@ -460,7 +460,7 @@ function confirmAndLogMeal() {
     var edited = $('#edited').val();
 
     $.ajax({
-        url: '/Logger/LogMeal',
+        url: 'Logger/LogMeal',
         type: 'POST',
         data: form.serialize(),
         success: function (response) {
@@ -469,7 +469,7 @@ function confirmAndLogMeal() {
 
                 refreshUserInfo();
 
-                $.get('/Logger/GetMealReviewViewComponent', { mealTitle: title, mealID: response.mealID, edited: edited }, function (response) {
+                $.get('Logger/GetMealReviewViewComponent', { mealTitle: title, mealID: response.mealID, edited: edited }, function (response) {
                     $('#confirmMealModal').modal('hide');
                     $("#reviewComponentContainer").html(response);
                 });
@@ -492,7 +492,7 @@ function handleExploreSearchFoods(e) {
     else {
         var container = $("#searchContainer").empty();
 
-        $.get('/Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
+        $.get('Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
             container.html(data);
             var exploreFoodButtons = document.querySelectorAll(".foodAddButton");
             [].forEach.call(exploreFoodButtons, function (elem, i) {
@@ -521,7 +521,7 @@ function handleExploreSearchFoods(e) {
 function exploreFood(targetNdbno) {
     var container = $("#modalArea");
 
-    $.get('/Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: 1}, function (response) {
+    $.get('Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: 1}, function (response) {
         container.html(response);
         $('#exploreNutritionModal').modal('toggle');
     });
@@ -531,7 +531,7 @@ function exploreFood(targetNdbno) {
 function refreshUserInfo() {
     $.ajax({
         type: 'GET',
-        url: '/Home/RefreshUserInfo',
+        url: 'Home/RefreshUserInfo',
         success: function (result) {
             var loggedInContainer = $('#loggedInUserInfoContainer').empty();
             loggedInContainer.html(result);

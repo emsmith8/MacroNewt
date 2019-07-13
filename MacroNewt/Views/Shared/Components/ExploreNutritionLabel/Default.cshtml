@@ -338,7 +338,7 @@
 
         var container = $("#modalArea").empty();
 
-        $.get('/Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: targetIndex }, function (response) {
+        $.get('Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: targetIndex }, function (response) {
             container.html(response);
             $('#exploreNutritionModal').modal('toggle');
         });
