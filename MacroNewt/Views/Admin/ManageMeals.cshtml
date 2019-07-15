@@ -94,7 +94,11 @@
     });
 
     function deleteMeal(itemId) {
-        $.get('Meals/Delete', { id: itemId }, function (response) {
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+        //$.get('/Meals/Delete', { id: itemId }, function (response) {
+        $.get(baseUrl + 'Meals/Delete', { id: itemId }, function (response) {
             var container = $("#deleteMealContainer").empty();
             container.html(response);
         });

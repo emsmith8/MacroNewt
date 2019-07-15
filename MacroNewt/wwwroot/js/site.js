@@ -18,6 +18,9 @@ function handleMealDetailsNextClick() {
 }
 
 function handleSearchFoodsClick(e) {
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
     var food = $("#searchString").val();
     var database = $("#targetDatabase").children('option:selected').val();
     if (food.length == 0) {
@@ -26,7 +29,8 @@ function handleSearchFoodsClick(e) {
     else {
         var container = $("#searchContainer").empty();
         
-        $.get('Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
+        //$.get('/Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
+        $.get(baseUrl + 'Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
             console.log("Well, i got here");
             container.html(data);
             var addFoodButtons = document.querySelectorAll(".foodAddButton");
@@ -93,6 +97,9 @@ function hideFoodsAlreadyInMeal() {
 }
 
 function handleSubmitMealClick() {
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
     var foodItems = [];
     var servings = [];
     var portion = [];
@@ -139,7 +146,8 @@ function handleSubmitMealClick() {
         foodItems.push(foodItem);
     });
     var container = $("#componentContainer");
-    $.get('Logger/GetMealDetailViewComponent', { formData: JSON.stringify(foodItems), mId: mID, reLogged: reLogged }, function (result) {
+    //$.get('/Logger/GetMealDetailViewComponent', { formData: JSON.stringify(foodItems), mId: mID, reLogged: reLogged }, function (result) {
+    $.get(baseUrl + 'Logger/GetMealDetailViewComponent', { formData: JSON.stringify(foodItems), mId: mID, reLogged: reLogged }, function (result) {
         container.html(result);
         
         console.log("The length of servings is " + servings.length);
@@ -369,6 +377,9 @@ function removeFoodFromMeal(e) {
 }
 
 function handleSubmitMealLogClick() {
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
     var form = $("#ConfirmMealForm");
     var title = $('#mealTitleInput').val();
 
@@ -402,7 +413,8 @@ function handleSubmitMealLogClick() {
     var portion = [];
     console.log("The title is " + title);
     $.ajax({
-        url: 'Logger/ConfirmMeal',
+        //url: '/Logger/ConfirmMeal',
+        url: baseUrl + 'Logger/ConfirmMeal',
         type: 'POST',
         data: form.serialize(),
         success: function (data, status, xhr) {
@@ -453,6 +465,8 @@ function handleSubmitMealLogClick() {
 }
 
 function confirmAndLogMeal() {
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
     var form = $("#ConfirmMealForm");
     var title = $('#mealTitleInput').val();
@@ -460,7 +474,8 @@ function confirmAndLogMeal() {
     var edited = $('#edited').val();
 
     $.ajax({
-        url: 'Logger/LogMeal',
+        //url: '/Logger/LogMeal',
+        url: baseUrl + 'Logger/LogMeal',
         type: 'POST',
         data: form.serialize(),
         success: function (response) {
@@ -469,7 +484,8 @@ function confirmAndLogMeal() {
 
                 refreshUserInfo();
 
-                $.get('Logger/GetMealReviewViewComponent', { mealTitle: title, mealID: response.mealID, edited: edited }, function (response) {
+                //$.get('/Logger/GetMealReviewViewComponent', { mealTitle: title, mealID: response.mealID, edited: edited }, function (response) {
+                $.get(baseUrl + 'Logger/GetMealReviewViewComponent', { mealTitle: title, mealID: response.mealID, edited: edited }, function (response) {
                     $('#confirmMealModal').modal('hide');
                     $("#reviewComponentContainer").html(response);
                 });
@@ -484,6 +500,9 @@ function confirmAndLogMeal() {
 }
 
 function handleExploreSearchFoods(e) {
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
     var food = $("#searchString").val();
     var database = $("#targetDatabase").children('option:selected').val();
     if (food.length == 0) {
@@ -492,7 +511,8 @@ function handleExploreSearchFoods(e) {
     else {
         var container = $("#searchContainer").empty();
 
-        $.get('Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
+        //$.get('/Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
+        $.get(baseUrl + 'Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
             container.html(data);
             var exploreFoodButtons = document.querySelectorAll(".foodAddButton");
             [].forEach.call(exploreFoodButtons, function (elem, i) {
@@ -519,9 +539,13 @@ function handleExploreSearchFoods(e) {
 }
 
 function exploreFood(targetNdbno) {
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
     var container = $("#modalArea");
 
-    $.get('Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: 1}, function (response) {
+    //$.get('/Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: 1}, function (response) {
+    $.get(baseUrl + 'Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: 1 }, function (response) {
         container.html(response);
         $('#exploreNutritionModal').modal('toggle');
     });
@@ -529,9 +553,13 @@ function exploreFood(targetNdbno) {
 }
 
 function refreshUserInfo() {
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
     $.ajax({
         type: 'GET',
-        url: 'Home/RefreshUserInfo',
+        //url: '/Home/RefreshUserInfo',
+        url: baseUrl + 'Home/RefreshUserInfo',
         success: function (result) {
             var loggedInContainer = $('#loggedInUserInfoContainer').empty();
             loggedInContainer.html(result);

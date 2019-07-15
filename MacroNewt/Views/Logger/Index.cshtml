@@ -160,8 +160,12 @@
     })
 
     function showOldMealsModal() {
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
         var container = $("#oldMealsModalContainer").empty();
-        $.get('Meals/GetOldMealsModal', function (result) {
+        //$.get('/Meals/GetOldMealsModal', function (result) {
+        $.get(baseUrl + 'Meals/GetOldMealsModal', function (result) {
             container.html(result);
         });
     }
