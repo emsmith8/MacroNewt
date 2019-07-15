@@ -92,6 +92,9 @@
 
         document.getElementById("confirmUpdateProfileButton").addEventListener('click', function () {
 
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
             $('#updateProfileModal').modal('hide');
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
@@ -99,7 +102,8 @@
             var form = $('#updateProfileStatsForm');
 
             $.ajax({
-                url: '/Home/UpdateProfileStats',
+                //url: '/Home/UpdateProfileStats',
+                url: baseUrl + 'Home/UpdateProfileStats',
                 type: 'POST',
                 data: form.serialize(),
                 success: function (data) {

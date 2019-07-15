@@ -217,7 +217,11 @@
     });
 
     function updateBaseCalories(target) {
-        $.post('/Home/UpdateCalorieTarget', { calTarget: target }, function (data) {
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+        //$.post('/Home/UpdateCalorieTarget', { calTarget: target }, function (data) {
+        $.post(baseUrl + 'Home/UpdateCalorieTarget', { calTarget: target }, function (data) {
             $('#bannerContainer').empty().append("<div class='updateAlert'><span>Target Updated</span></div > ");
             $('#updateBaseCaloriesButton').hide();
 
@@ -235,8 +239,12 @@
     }
 
     function getBMRModal() {
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
         var container = $('#bmrModalContainer').empty();
-        $.get('/Home/CheckProfileComplete', function (result) {
+        //$.get('/Home/CheckProfileComplete', function (result) {
+        $.get(baseUrl + 'Home/CheckProfileComplete', function (result) {
             container.html(result);
         });
     }

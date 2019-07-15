@@ -329,6 +329,9 @@
     });
 
     $('#explorePortionSelectBox').on('change', function () {
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
         $('#exploreNutritionModal').modal('hide');
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
@@ -338,7 +341,8 @@
 
         var container = $("#modalArea").empty();
 
-        $.get('/Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: targetIndex }, function (response) {
+        //$.get('/Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: targetIndex }, function (response) {
+        $.get(baseUrl + 'Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: targetIndex }, function (response) {
             container.html(response);
             $('#exploreNutritionModal').modal('toggle');
         });

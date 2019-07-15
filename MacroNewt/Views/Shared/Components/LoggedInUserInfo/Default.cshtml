@@ -43,6 +43,9 @@
 
 <script>
     $(document).ready(function () {
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
         @if (SignInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
         {
             <text>document.getElementById("dropdownDailyStats").addEventListener('click', showCurrentCalModal, false);</text>
@@ -54,8 +57,10 @@
             {
                 <text>$('#dropdownDailyCal').css('background', 'rgb(87, 214, 130, 0.3)');</text>
             }
+            
 
-            <text>$.get('/Meals/GetCurrentDayCalStats', function(response) {
+            @*<text>$.get('/Meals/GetCurrentDayCalStats', function(response) {*@
+            <text>$.get(baseUrl + 'Meals/GetCurrentDayCalStats', function(response) {
             $('#currentDayCalModalContainer').html(response);
             });</text>
         }

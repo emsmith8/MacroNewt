@@ -147,9 +147,18 @@
     $(document).ready(function () {
         document.getElementById("visContainer").style.visibility = "visible";
 
-        $.get('/Meals/BuildMealCalendarModal', function (response) {
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+        console.log("The base url is " + baseUrl);
+
+        $.get(baseUrl + 'Meals/BuildMealCalendarModal', function (response) {
             $('#calendarContainer').html(response);
         });
+
+        //$.get('/Meals/BuildMealCalendarModal', function (response) {
+        //    $('#calendarContainer').html(response);
+        //});
 
         $('#getCalendarModalButton').click(function () {
             $('#calendarDiv').hide();
@@ -198,8 +207,11 @@
     });
 
     function deleteMeal(itemId) {
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
-        $.get('/Meals/Delete', { id: itemId }, function (response) {
+        //$.get('/Meals/Delete', { id: itemId }, function (response) {
+        $.get(baseUrl + 'Meals/Delete', { id: itemId }, function (response) {
             var container = $("#deleteMealContainer").empty();
             container.html(response);
         });
@@ -207,6 +219,9 @@
     }
 
     function updateDay(e) {
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
 
         var sDate = $('#datetimepicker2').datetimepicker('viewDate');
 
@@ -217,7 +232,8 @@
 
         var eDate = sDate;
 
-        $.get('/Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
+        //$.get('/Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
+        $.get(baseUrl + 'Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
             var container = $("#customHistoryContainer").empty();
             container.html(response);
         });
@@ -227,6 +243,9 @@
     }
 
     function updateRange(e) {
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
         var sDate = $('#datetimepicker3').datetimepicker('viewDate');
         var eDate = $('#datetimepicker4').datetimepicker('viewDate');
 
@@ -235,7 +254,8 @@
             return;
         }
 
-        $.get('/Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
+        //$.get('/Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
+        $.get(baseUrl + 'Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
             var container = $("#customHistoryContainer").empty();
             container.html(response);
         });
