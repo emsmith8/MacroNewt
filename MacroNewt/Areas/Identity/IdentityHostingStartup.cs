@@ -15,6 +15,7 @@ namespace MacroNewt.Areas.Identity.Data
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
+
                 services.AddDbContext<MacroNewtContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("MacroNewtContext")));
@@ -28,5 +29,6 @@ namespace MacroNewt.Areas.Identity.Data
              //       .AddEntityFrameworkStores<MacroNewtContext>();
             });
         }
+
     }
 }

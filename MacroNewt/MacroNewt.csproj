@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <UserSecretsId>b16f97af-8815-47e4-a0fc-be48cbeadaa1</UserSecretsId>
+    <UserSecretsId>26213229-3ada-44ad-980c-03f184d04291</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -64,6 +64,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.3" />
+    <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
@@ -76,6 +79,101 @@
   <ItemGroup>
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\CHANGELOG.md" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\demos\js\theme-chooser.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\demos\php\get-events.php" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\demos\php\get-time-zones.php" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\demos\php\utils.php" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\bootstrap\main.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\bootstrap\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales-all.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales-all.min.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\af.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ar-dz.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ar-kw.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ar-ly.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ar-ma.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ar-sa.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ar-tn.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ar.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\bg.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\bs.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ca.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\cs.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\da.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\de.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\el.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\en-au.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\en-gb.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\en-nz.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\es-us.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\es.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\et.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\eu.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\fa.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\fi.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\fr-ca.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\fr-ch.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\fr.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\gl.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\he.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\hi.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\hr.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\hu.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\id.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\is.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\it.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ja.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ka.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\kk.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ko.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\lb.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\lt.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\lv.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\mk.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ms.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\nb.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\nl.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\nn.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\pl.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\pt-br.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\pt.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ro.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\ru.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\sk.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\sl.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\sq.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\sr-cyrl.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\sr.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\sv.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\th.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\tr.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\uk.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\vi.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\zh-cn.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\locales\zh-tw.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\main.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\core\theme-chooser.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\daygrid\main.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\daygrid\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\google-calendar\main.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\google-calendar\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\interaction\main.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\interaction\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\list\main.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\list\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\luxon\main.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\luxon\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\moment-timezone\main.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\moment-timezone\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\moment\main.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\moment\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\rrule\main.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\rrule\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\timegrid\main.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\packages\timegrid\main.min.js" />
+    <None Include="wwwroot\lib\fullcalendar-4.2.0\vendor\rrule.js" />
   </ItemGroup>
 
 </Project>

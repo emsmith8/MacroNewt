@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace MacroNewt
 {
@@ -47,6 +48,8 @@ namespace MacroNewt
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            
 
             services.AddDbContext<MacroNewtContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MacroNewtContext")));
