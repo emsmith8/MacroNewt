@@ -23,26 +23,8 @@ namespace MacroNewt
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((ctx, builder) =>
-            {
-                var keyVaultEndpoint = GetKeyVaultEndpoint();
-                if (!string.IsNullOrEmpty(keyVaultEndpoint))
-                {
-                    var azureServiceTokenProvider = new AzureServiceTokenProvider();
-                    var keyVaultClient = new KeyVaultClient(
-                        new KeyVaultClient.AuthenticationCallback(
-                            azureServiceTokenProvider.KeyVaultTokenCallback));
-                    builder.AddAzureKeyVault(
-                        keyVaultEndpoint, keyVaultClient, new DefaultKeyVaultSecretManager());
-                }
-            }
-         )
                 .UseSetting(WebHostDefaults.DetailedErrorsKey, "true")
                 .UseStartup<Startup>();
-
-        
-
-        private static string GetKeyVaultEndpoint() => "https://macronewt-vault.vault.azure.net";
     }
 
 }
