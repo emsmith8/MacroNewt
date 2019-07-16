@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace MacroNewt
 {
@@ -48,8 +49,25 @@ namespace MacroNewt
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            string keyStuff = "User ID=esmithadmin;Password=" + Configuration["esmithadmin"];
+            //Debug.WriteLine("stuff is " + keyStuff);
+
+            //var connections = Configuration.GetSection("ConnectionStrings").GetChildren().AsEnumerable();
+            //Debug.WriteLine("I got here");
+
+            //string connect1 = Configuration.GetConnectionString("MacroNewtContext1");
+            //string connect2 = Configuration.GetConnectionString("MacroNewtContext2");
+            string connect1 = Configuration["ConnectionStrings:MacroNewtContext1:ConnectionString"];
+            string connect2 = Configuration["ConnectionStrings:MacroNewtContext2:ConnectionString"];
+
+
+            string fullConnex = connect1 + keyStuff + connect2;
+            //Debug.WriteLine("strings are " + connect1 + " and " + connect2);
+
             services.AddDbContext<MacroNewtContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("MacroNewtContext")));
+                    //options.UseSqlServer(Configuration.GetConnectionString("MacroNewtContext1") + keyStuff + Configuration.GetConnectionString("MacroNewtContext2")));
+                    //options.UseSqlServer(Configuration.GetConnectionString("MacroNewtContext")));
+                    options.UseSqlServer(fullConnex));
 
             services.AddAuthorization(options =>
             {
@@ -137,7 +155,8 @@ namespace MacroNewt
                 Email = Configuration["AppSettings:UserEmail"]
             };
 
-            string userPWD = Configuration["AppSettings:UserPassword"];
+            //string userPWD = Configuration["AppSettings:UserPassword"];
+            string userPWD = Configuration["adminAccountEmail"];
             var _user = await _userManager.FindByEmailAsync(Configuration["AppSettings:UserEmail"]);
 
             if (_user == null)

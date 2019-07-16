@@ -15,9 +15,19 @@ namespace MacroNewt.Areas.Identity.Data
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
+
+                string keyStuff = "User ID=esmithadmin;Password=" + context.Configuration["esmithadmin"];
+                string connect1 = context.Configuration["ConnectionStrings:MacroNewtContext1:ConnectionString"];
+                string connect2 = context.Configuration["ConnectionStrings:MacroNewtContext2:ConnectionString"];
+
+
+                string fullConnex = connect1 + keyStuff + connect2;
+
+
                 services.AddDbContext<MacroNewtContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("MacroNewtContext")));
+                        //context.Configuration.GetConnectionString("MacroNewtContext")));
+                        fullConnex));
 
                 services.AddIdentity<MacroNewtUser, IdentityRole>()
                    // .AddRoleManager<RoleManager<IdentityRole>>()
