@@ -23,48 +23,60 @@
     <div class="row justify-content-around" style="padding-bottom:15px;">
 
         <div class="col-12 col-md-10 col-lg-8 d-flex pickerArea HistoryControlBox">
-            <div class="col-6 d-flex pickerBox">
-                <div class="col-12 col-md-6 historyDatePicker">
-                    <strong>Choose day: </strong>
-                    <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
-                        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            <div id="dayPickBox">
+                <div class="col-6 d-flex pickerBox">
+                    <div class="col-12 col-md-6 historyDatePicker">
+                        <strong>Choose day: </strong>
+                        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
+                            <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <strong>Update day</strong>
-                    <div>
-                        <button id="updateDayButton" class="btn btn-sm btn-myBlueDark" style="min-width:60%;">Go</button>
+                    <div class="col-12">
+                        <strong>Update day</strong>
+                        <div>
+                            <button id="updateDayButton" class="btn btn-sm btn-myBlueDark" style="min-width:60%;">Go</button>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-            <div class="col-6 d-flex pickerBox">
-                <div class="col-12 col-md-6 historyDatePicker">
-                    <strong>Choose range: </strong>
-                    <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3" />
-                        <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            <div id="rangePickBox">
+                <div class="col-6 d-flex pickerBox">
+                    <div class="col-12 col-md-6 historyDatePicker">
+                        <strong>Choose range: </strong>
+                        <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3" />
+                            <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                        <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" />
+                            <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" />
-                        <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    <div class="col-12">
+                        <strong>Update range</strong>
+                        <div>
+                            <button id="updateRangeButton" class="btn btn-sm btn-myBlueDark" style="min-width:60%;">Go</button>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <strong>Update range</strong>
-                    <div>
-                        <button id="updateRangeButton" class="btn btn-sm btn-myBlueDark" style="min-width:60%;">Go</button>
-                    </div>
-                </div>
 
+                </div>
             </div>
+
+            <div>
+                <button id="chooseRangeButton" class="btn btn-sm btn-myBlueDark" style="min-width:60%; margin-top:25%;">Range</button>
+            </div>
+            <div>
+                <button id="chooseDayButton" class="btn btn-sm btn-myBlueDark" style="min-width:60%; margin-top:25%;">Day</button>
+            </div>
+
         </div>
     </div>
 
@@ -123,11 +135,11 @@
         </div>
     </div>
 
-    <div class="text-center">
+    @*<div class="text-center">
         <button class="btn btn-sm btn-myBlueDark" id="getCalendarModalButton">
             Calendar View
         </button>
-    </div>
+    </div>*@
 
     <div id="deleteMealContainer">
 
@@ -137,9 +149,9 @@
 
     </div>
 
-    <div id="calendarContainer" style="margin-bottom: 20px;">
+    @*<div id="calendarContainer" style="margin-bottom: 20px;">
 
-    </div>
+    </div>*@
 
 </div>
 
@@ -150,20 +162,19 @@
         var getUrl = window.location;
         var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
-        console.log("The base url is " + baseUrl);
 
-        $.get(baseUrl + 'Meals/BuildMealCalendarModal', function (response) {
-            $('#calendarContainer').html(response);
-        });
-
-        //$.get('/Meals/BuildMealCalendarModal', function (response) {
+        //$.get(baseUrl + 'Meals/BuildMealCalendarModal', function (response) {
         //    $('#calendarContainer').html(response);
         //});
 
-        $('#getCalendarModalButton').click(function () {
-            $('#calendarDiv').hide();
-            $('#mealCalendarModal').modal('toggle');
-        });
+        ////$.get('/Meals/BuildMealCalendarModal', function (response) {
+        ////    $('#calendarContainer').html(response);
+        ////});
+
+        //$('#getCalendarModalButton').click(function () {
+        //    $('#calendarDiv').hide();
+        //    $('#mealCalendarModal').modal('toggle');
+        //});
 
         var deleteMealButtons = document.querySelectorAll(".deleteMeal");
 
@@ -203,6 +214,23 @@
         $('#datetimepicker2').datetimepicker('viewDate', moment('01/01/2000', 'MM/DD/YYYY'));
         $('#datetimepicker3').datetimepicker('viewDate', moment('01/01/2000', 'MM/DD/YYYY'));
         $('#datetimepicker4').datetimepicker('viewDate', moment('01/01/2000', 'MM/DD/YYYY'));
+
+        $('#rangePickBox').hide();
+        $('#chooseDayButton').hide();
+
+        $('#chooseRangeButton').on('click', function () {
+            $('#dayPickBox').hide();
+            $('#rangePickBox').show();
+            $('#chooseRangeButton').hide();
+            $('#chooseDayButton').show();
+        });
+
+        $('#chooseDayButton').on('click', function () {
+            $('#rangePickBox').hide();
+            $('#dayPickBox').show();
+            $('#chooseDayButton').hide();
+            $('#chooseRangeButton').show();
+        });
 
     });
 

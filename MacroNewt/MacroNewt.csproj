@@ -39,6 +39,7 @@
     <Compile Remove="MacroNewtDbInitializer.cs" />
     <Compile Remove="Models\ViewModels\FoodListViewModel.cs" />
     <Compile Remove="Models\ViewModels\FoodNutrientViewModel.cs" />
+    <Compile Remove="Models\ViewModels\MealAnalyticsViewModel.cs" />
     <Compile Remove="Models\ViewModels\NutritionLabel.cs" />
     <Compile Remove="Services\IEmailSender.cs" />
     <Compile Remove="ViewComponents\AdminConfirmMealViewComponent.cs" />

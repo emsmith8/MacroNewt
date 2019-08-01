@@ -50,6 +50,17 @@ namespace MacroNewt.Controllers
             return View();
         }
 
+        public IActionResult GetMealAnalytics()
+        {
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var meals = _context.Meal
+                .Where(m => m.UserId == userID)
+                .ToList();
+
+            return ViewComponent("MealAnalytics", meals);
+        }
+
         public IActionResult CheckProfileComplete()
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);

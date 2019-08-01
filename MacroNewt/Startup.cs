@@ -140,7 +140,7 @@ namespace MacroNewt
                 Email = Configuration["AppSettings:UserEmail"]
             };
 
-            string userPWD = Configuration["AppSettings:UserPassword"];
+            string userPWD = Configuration["AppSettings:Password"];
             var _user = await _userManager.FindByEmailAsync(Configuration["AppSettings:UserEmail"]);
 
             if (_user == null)

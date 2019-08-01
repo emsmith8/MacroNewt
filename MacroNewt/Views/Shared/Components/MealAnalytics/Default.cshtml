@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MacroNewt.Models.Meal>
+
+<div class="modal fade" id="mealAnalyticsModal" role="dialog">
+    <div class="modal-dialog vertical-align-center">
+        <div class="modal-content confirmModalSizing">
+
+            <div id="calorieChartContainer">
+
+                <canvas id="calChart" width="400" height="400"></canvas>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function (){
+
+        var calChartContainer = document.getElementById("calChart").getContext('2d');
+
+        var calChart = new Chart(calChartContainer, {
+            type: 'line',
+            data: {
+                labels: ["FirstMeal", "SecondMeal"],
+                datasets: [{
+                    label: "First dataset",
+                    data: [40, 60],
+                    backgroundColor: [
+                        'rgba(105, 0, 132, .2)',
+                    ],
+                    borderColor: [
+                        'rgba(200, 99, 132, .7)',
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+    });
+</script>

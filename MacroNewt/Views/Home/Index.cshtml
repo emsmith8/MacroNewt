@@ -2,6 +2,8 @@
     ViewData["Title"] = "Home Page";
 }
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 <div>
     <div class="text-center">
         <h1 class="display-4">MacroNewt</h1>
@@ -24,6 +26,10 @@
             <button class="btn btn-sm btn-myBlueDark" id="showMealAnalytics" style="width:136px;">Meal Analytics</button>
         </div>
     </div>
+
+    <div id="mealAnalyticsModalContainer">
+
+    </div>
 </div>
 
 
@@ -36,7 +42,13 @@
         });
 
         $('#showMealAnalytics').click(function () {
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
+            $.get(baseUrl + 'Home/GetMealAnalytics', function (response) {
+                $('#mealAnalyticsModalContainer').html(response);
+                $('#mealAnalyticsModal').modal('toggle');
+            });
         });
     });
     
