@@ -54,11 +54,24 @@ namespace MacroNewt.Controllers
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var meals = _context.Meal
-                .Where(m => m.UserId == userID)
+            var dailyTotals = _context.DailyCalTotal
+                .Where(d => (d.Id == userID) && (DateTime.Now - d.CalorieDay).TotalDays <= 31)
                 .ToList();
 
-            return ViewComponent("MealAnalytics", meals);
+            MealAnalyticsViewModel mav = new MealAnalyticsViewModel
+            {
+                DailyTotals = dailyTotals
+            };
+
+            foreach (DailyCalTotal d in dailyTotals)
+            {
+                mav.FatMonthTotal += d.TotalDailyFatCalories;
+                mav.CarbMonthTotal += d.TotalDailyCarbCalories;
+                mav.ProteinMonthTotal += d.TotalDailyProteinCalories;
+            }
+
+
+            return ViewComponent("MealAnalytics", mav);
         }
 
         public IActionResult CheckProfileComplete()

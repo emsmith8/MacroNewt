@@ -488,6 +488,11 @@ table.dataTable tbody td {
     border: none;
 }
 
+.redAlertText {
+    color: red;
+    font-weight: bold;
+}
+
 
 .updateBMRBaseButton {
     line-height: 1;
@@ -556,7 +561,8 @@ table.dataTable tbody td {
 }
 
 .confirmModalSizing {
-    width: 125%;
+    /*width: 125%;*/
+    width: 100%;
 }
 
 @media (max-width: 770px) {
@@ -726,6 +732,11 @@ table.dataTable tbody td {
 .BMRAsterisk {
     font-weight: lighter;
     font-size: .8em;
+}
+
+.AsteriskNote {
+    font-weight: lighter;
+    font-size: .9em;
 }
 
 h5 {
@@ -932,4 +943,9 @@ h5 .text {
     font-size: 20px;
     font-weight: bold;
     text-align: center;
+}
+
+
+.highlighted-cal-dates {
+    background-color: red;
 }

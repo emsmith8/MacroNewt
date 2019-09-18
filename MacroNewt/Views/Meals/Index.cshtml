@@ -1,6 +1,6 @@
-﻿@model IEnumerable<MacroNewt.Models.Meal>
+﻿@model HistoryDataViewModel
 
-<link href='~/lib/fullcalendar-4.2.0/packages/core/main.css' rel='stylesheet' />
+@*<link href='~/lib/fullcalendar-4.2.0/packages/core/main.css' rel='stylesheet' />
 <link href='~/lib/fullcalendar-4.2.0/packages/daygrid/main.css' rel='stylesheet' />
 <link href='~/lib/fullcalendar-4.2.0/packages/timegrid/main.css' rel='stylesheet' />
 <link href='~/lib/fullcalendar-4.2.0/packages/list/main.css' rel='stylesheet' />
@@ -10,7 +10,12 @@
 <script src='~/lib/fullcalendar-4.2.0/packages/daygrid/main.js'></script>
 <script src='~/lib/fullcalendar-4.2.0/packages/timegrid/main.js'></script>
 <script src='~/lib/fullcalendar-4.2.0/packages/interaction/main.js'></script>
-<script src='~/lib/fullcalendar-4.2.0/packages/list/main.js'></script>
+<script src='~/lib/fullcalendar-4.2.0/packages/list/main.js'></script>*@
+
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.42/css/bootstrap-datetimepicker.css" />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.42/js/bootstrap-datetimepicker.min.js"></script>*@
 
 
 <div id="visContainer" style="visibility:hidden; margin:5px;">
@@ -94,13 +99,15 @@
                         <thead>
                             <tr class="d-flex">
                                 <th class="col-4">
-                                    @Html.DisplayNameFor(model => model.Title)
+                                    Title
+                                    @*@Html.DisplayNameFor(model => model.Title)*@
                                 </th>
                                 <th class="col-3">
-                                    @Html.DisplayNameFor(model => model.MealDate)
+                                    Meal Date
+                                    @*@Html.DisplayNameFor(model => model.MealDate)*@
                                 </th>
                                 <th class="col-2">
-                                    <label class="longCalHeader">@Html.DisplayNameFor(model => model.Calories)</label>
+                                    <label class="longCalHeader">@*@Html.DisplayNameFor(model => model.Calories)*@Calories</label>
                                     <label class="shortCalHeader">Cal</label>
                                 </th>
                                 <th class="col-3">
@@ -109,7 +116,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.Meals)
                             {
                                 <tr class="d-flex">
                                     <td class="col-4">
@@ -149,9 +156,13 @@
 
     </div>
 
-    @*<div id="calendarContainer" style="margin-bottom: 20px;">
-
-    </div>*@
+    <div id="calendarContainer" style="margin-bottom: 20px;">
+        <div class="input-group date" id="datetimepickerCal" data-target-input="nearest">
+            <div class="input-group-append" data-target="#datetimepickerCal" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -193,23 +204,73 @@
         updateRangeButton.addEventListener('click', updateRange, false);
 
         $('#datetimepicker2').datetimepicker({
-            format: 'MM/DD/YYYY',
-            buttons: {
-                showToday: true,
-            }
+            format: 'MM/DD/YYYY'
+            //format: 'MM/DD/YYYY',
+            //buttons: {
+            //    showToday: true,
+            //}
         });
         $('#datetimepicker3').datetimepicker({
-            format: 'MM/DD/YYYY',
-            buttons: {
-                showToday: true,
-            }
+            format: 'MM/DD/YYYY'
+            //format: 'MM/DD/YYYY',
+            //buttons: {
+            //    showToday: true,
+            //}
         });
         $('#datetimepicker4').datetimepicker({
-            format: 'MM/DD/YYYY',
-            buttons: {
-                showToday: true,
-            }
+            format: 'MM/DD/YYYY'
+            //format: 'MM/DD/YYYY',
+            //buttons: {
+            //    showToday: true,
+            //}
         });
+
+
+        $('#datetimepickerCal').datetimepicker({
+            format: 'MM/DD/YYYY'
+            //sideBySide: true,
+            //buttons: {
+            //    showToday: true
+            //}
+        });
+
+        
+
+
+        //$('#datetimepicker').on('shown.bs.modal', function () {
+        //    console.log("I'm triggering properly");
+        //    var targetElement = $('td[data-day="08/29/2019"]');
+        //    targetElement.css('background-color', 'red');
+        //});
+
+        //$(document).on('click', function () {
+        //    formatMealDates();
+        //});
+
+
+        //$(document).mouseup(blahFunction());
+
+        //$('#datetimepickerCal').on('change.datetimepicker show.datetimepicker update.datetimepicker', function (e) {
+        //    formatMealDates();
+        //});
+
+        //var today = new Date();
+        //var dd = String(today.getDate()).padStart(2, '0');
+        //var mm = String(today.getMonth() + 1).padStart(2, '0');
+        //var yyyy = today.getFullYear();
+
+        //today = mm + '/' + dd + '/' + yyyy;
+
+
+        /*
+        window.setInterval(function () {
+            if ($(".datepicker-days")[0]) {
+                formatMealDates();
+                console.log("doing this thing");
+            }
+        }, 1000);
+        */
+
 
         $('#datetimepicker2').datetimepicker('viewDate', moment('01/01/2000', 'MM/DD/YYYY'));
         $('#datetimepicker3').datetimepicker('viewDate', moment('01/01/2000', 'MM/DD/YYYY'));
@@ -232,7 +293,61 @@
             $('#chooseRangeButton').show();
         });
 
+
+        //$('#datetimepickerCal').on('click', function () {
+        //    console.log("working workign working click click clik");
+        //    $('.table').on('click', 'td', function () {
+        //        console.log("table click table click table click");
+        //    });
+        //});
+
+        //$(document).on('click', ".fa fa-chevron-left", function (e) {
+        //    console.log("Fa was clicked");
+        //});
+
+        
+
     });
+
+    //$('#datetimepickerCal').on('show.datetimepicker', function (e) {
+    //        console.log("Show Event: " + e);
+    //    });
+
+    //    $('#datetimepickerCal').on('update.datetimepicker', function (e) {
+    //        console.log("Update Event: " + e);
+    //    });
+
+        $('#datetimepickerCal').on('change.datetimepicker', function (e) {
+            console.log("Change Event: ");
+        });
+
+    $(document.body).on('click', '.fa', function (e) {
+            console.log("fa was clicked");
+        });
+
+    function formatMealDates() {
+
+        @foreach (var item in Model.DailyTotals)
+        {
+           // var tDate = item.CalorieDay;
+            <text>
+        
+            var targetElement = $('td[data-day="@item.CalorieDay.ToString("MM/dd/yyyy")"]');
+            
+            console.log(targetElement);
+            targetElement.addClass("highlighted-cal-dates");
+            </text>
+        }
+
+            @*<text>
+            var targetElement = $('td[data-day="08/29/2019"]');
+            console.log("tDate is " + @tDate);
+            console.log(targetElement);
+            targetElement.addClass("highlighted-cal-dates");
+            </text>*@
+        
+    }
+
 
     function deleteMeal(itemId) {
         var getUrl = window.location;

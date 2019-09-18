@@ -1,14 +1,50 @@
-﻿@model IEnumerable<MacroNewt.Models.Meal>
+﻿@model MealAnalyticsViewModel
 
 <div class="modal fade" id="mealAnalyticsModal" role="dialog">
     <div class="modal-dialog vertical-align-center">
-        <div class="modal-content confirmModalSizing">
+        <div class="modal-content">
 
-            <div id="calorieChartContainer">
+            @if (Model.DailyTotals.Count == 1 && Model.DailyTotals[0].TotalDailyCalories == 0)
+            {
+                <div style="background-color:#dad7d2;">
+                    <div id="noHistoryDiv" style="text-align:center; padding-top:10px;">
+                        <span class="redAlertText">No meal history for the past 2 weeks</span>
+                    </div>
+                    <div style="padding:10px 0 10px 0; text-align:center;">
+                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#mealAnalyticsModal">
+                            <span>Close</span>
+                        </button>
+                    </div>
+                </div>
 
-                <canvas id="calChart" width="400" height="400"></canvas>
+            }
+            else
+            {
+                <div id="headerMessageDiv" style="text-align:center;">
+                    <h5 class="blueDark">Meals from previous 2 weeks</h5>
+                </div>
 
-            </div>
+                <div id="calorieChartContainer">
+
+                    <canvas id="calChart" width="400" height="400"></canvas>
+
+                </div>
+
+                <div id="macroChartContainer">
+
+                    <canvas id="macroChart" width="400" height="400"></canvas>
+
+                </div>
+
+                <div style="padding:10px 0 10px 0; text-align:center;">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#mealAnalyticsModal">
+                        <span>Close</span>
+                    </button>
+                </div>
+
+            }
+
+
 
 
 
@@ -19,28 +55,100 @@
 <script>
     $(document).ready(function (){
 
-        var calChartContainer = document.getElementById("calChart").getContext('2d');
+        if (document.getElementById("headerMessageDiv")) {
+            var calChartx = document.getElementById("calChart").getContext('2d');
 
-        var calChart = new Chart(calChartContainer, {
-            type: 'line',
-            data: {
-                labels: ["FirstMeal", "SecondMeal"],
-                datasets: [{
-                    label: "First dataset",
-                    data: [40, 60],
-                    backgroundColor: [
-                        'rgba(105, 0, 132, .2)',
-                    ],
-                    borderColor: [
-                        'rgba(200, 99, 132, .7)',
-                    ],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
+            var calChart = new Chart(calChartx, {
+                type: 'line',
+                data: {
+                    labels: [
+                        @foreach (var dailyCalTotal in Model.DailyTotals)
+                        {
+                            var last = Model.DailyTotals.Last();
 
+                            <text>"@dailyCalTotal.CalorieDay.ToString("M/d")"</text>
+                            if (dailyCalTotal != last)
+                            {
+                                <text>,</text>
+                            }
+                        }
+                    ],
+                    datasets: [{
+                        label: "Calories",
+                        data: [
+                            @foreach (var dailyCalTotal in Model.DailyTotals)
+                            {
+                                var last = Model.DailyTotals.Last();
+
+                                <text>@dailyCalTotal.TotalDailyCalories</text>
+                                if (dailyCalTotal != last)
+                                {
+                                    <text>,</text>
+                                }
+                            }
+                        ],
+                        backgroundColor: 'rgba(105, 0, 132, .2)',
+                        borderColor: 'rgba(200, 99, 132, .7)',
+                        borderWidth: 2,
+                        fill: false
+                    }
+
+                ]},
+                options: {
+                    responsive: true,
+                    plugins: {
+                        datalabels: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            var macroChartx = document.getElementById("macroChart").getContext('2d');
+
+            var macroChart = new Chart(macroChartx, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+					    data: [
+						    @Model.FatMonthTotal,
+                            @Model.CarbMonthTotal,
+                            @Model.ProteinMonthTotal
+					    ],
+					    backgroundColor: [
+						    'rgba(252, 214, 112, 1)',
+						    'rgba(102, 204, 153, 1)',
+						    'rgba(129, 207, 224, 1)'
+					    ],
+					    label: 'Macro balance'
+				    }],
+				    labels: [
+					    'Fat',
+					    'Carbs',
+					    'Protein'
+				    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        datalabels: {
+                        formatter: (value, macroChart) => {
+                        let sum = 0;
+                        let dataArr = macroChart.chart.data.datasets[0].data;
+                        dataArr.map(data => {
+                            sum += data;
+                        });
+                        let percentage = (value*100 / sum).toFixed(0)+"%";
+                        return percentage;
+                    },
+                    color: '#fff',
+                        }
+                    }
+                }
+
+            });
+        }
+        
     });
+
 </script>

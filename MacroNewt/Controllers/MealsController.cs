@@ -37,9 +37,22 @@ namespace MacroNewt.Areas.Identity.Data
 
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            return View(await _context.Meal
-                .Where(m => m.UserId == userID)
-                .ToListAsync());
+            HistoryDataViewModel hdv = new HistoryDataViewModel
+            {
+                Meals = await _context.Meal
+                    .Where(m => m.UserId == userID)
+                    .ToListAsync(),
+                DailyTotals = await _context.DailyCalTotal
+                    .Where(d => d.Id == userID)
+                    .ToListAsync()
+            };
+
+
+            return View(hdv);
+
+            //return View(await _context.Meal
+            //    .Where(m => m.UserId == userID)
+            //    .ToListAsync());
         }
 
         [Authorize]

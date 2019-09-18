@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MacroNewt.Areas.Identity.Data;
+using MacroNewt.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,9 @@ namespace MacroNewt.ViewComponents
 {
     public class MealAnalyticsViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(IEnumerable<Models.Meal> meals)
+        public IViewComponentResult Invoke(MealAnalyticsViewModel mav)
         {
-            return View(meals);
+            return View(mav);
         }
     }
 }

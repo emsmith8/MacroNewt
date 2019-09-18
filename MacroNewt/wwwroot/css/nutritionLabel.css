@@ -14,11 +14,13 @@
 p {
     margin: 0;
 }
-.modal-dialog {
+
+.modal-dialog.nutritionLabelWidth {
     max-width: 360px;
     min-width: 300px;
-    
+    transform: translateX(5%) !important;
 }
+
 .modal-open .modal {
      padding-right: 0px !important;
 }
