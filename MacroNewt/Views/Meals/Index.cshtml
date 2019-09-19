@@ -16,7 +16,9 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.42/js/bootstrap-datetimepicker.min.js"></script>*@
-
+@section  Head{ 
+    <link href="~/css/simpleCalendar.css" rel="stylesheet" />
+}
 
 <div id="visContainer" style="visibility:hidden; margin:5px;">
 
@@ -156,23 +158,46 @@
 
     </div>
 
-    <div id="calendarContainer" style="margin-bottom: 20px;">
-        <div class="input-group date" id="datetimepickerCal" data-target-input="nearest">
-            <div class="input-group-append" data-target="#datetimepickerCal" data-toggle="datetimepicker">
-                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+    <div id="calendarContainer" class="row justify-content-center">
+        <div class="col-12 col-md-10">
+            <div class="calendar" id="calendar">
+                <!-- Calendar toolbar -->
+                <div class="calendar-toolbar">
+                    <!-- Calendar "today" button -->
+                    <button data-toggle="calendar" data-action="today" class="btn btn-default">
+                        Today
+                    </button>
+                    <!-- Calendar "prev" button -->
+                    <button data-toggle="calendar" data-action="prev" class="btn btn-default">
+                        <i class="fa fa-chevron-left"></i>
+                    </button>
+                    <!-- Calendar "date-indicator" span -->
+                    <div class="calendar-current-date"
+                         data-day-format="MM/DD/YYYY"
+                         data-week-format="MM/DD/YYYY"
+                         data-month-format="MMMM, YYYY">
+                        (placeholder)
+                    </div>
+                    <!-- Calendar "next" button -->
+                    <button data-toggle="calendar" data-action="next" class="btn btn-default">
+                        <i class="fa fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
 </div>
-
+@section  scripts{ 
+<script src="~/js/simpleCalendar.js" type="text/javascript"></script>
+}
 <script>
     $(document).ready(function () {
         document.getElementById("visContainer").style.visibility = "visible";
 
         var getUrl = window.location;
         var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
-
+        $('#calendar').calendar();
 
         //$.get(baseUrl + 'Meals/BuildMealCalendarModal', function (response) {
         //    $('#calendarContainer').html(response);
@@ -233,9 +258,18 @@
             //    showToday: true
             //}
         });
-
-        
-
+        $('#datetimepickerCal').on('change.datetimepicker', function (e) {
+            console.log("Change Event Fired");
+        });
+        $('#datetimepickerCal').on('show.datetimepicker', function (e) {
+            console.log("Show Event Fired");
+        });
+        $('#datetimepickerCal').on('update.datetimepicker', function (e) {
+            console.log("Update Event Fired");
+        });
+        $('#datetimepickerCal').on('hide.datetimepicker', function (e) {
+            console.log("Hide Event Fired");
+        });
 
         //$('#datetimepicker').on('shown.bs.modal', function () {
         //    console.log("I'm triggering properly");
@@ -309,6 +343,11 @@
 
     });
 
+    function dayClick(e) {
+        console.log("Clicked " + e.target.getAttribute("data-date"));
+    }
+
+    
     //$('#datetimepickerCal').on('show.datetimepicker', function (e) {
     //        console.log("Show Event: " + e);
     //    });

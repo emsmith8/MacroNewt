@@ -51,6 +51,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    @RenderSection("Head", required:false)
 </head>
 <body>
     <header>
@@ -106,7 +107,7 @@
         <div class="container">
             &copy; 2019 - MacroNewt - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>   
+    </footer>  
 
     @RenderSection("Scripts", required: false)
 </body>

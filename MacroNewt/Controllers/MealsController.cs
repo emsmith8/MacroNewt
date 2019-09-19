@@ -290,5 +290,19 @@ namespace MacroNewt.Areas.Identity.Data
         {
             return _context.Meal.Any(e => e.Id == id);
         }
+
+        public async Task<JsonResult> GetMonthMealStatus(int month, int year)
+        {
+            Dictionary<string,string> results = new Dictionary<string, string>();
+            results.Add("09/01/19", "over");
+            results.Add("09/02/19", "over");
+            results.Add("09/03/19", "under");
+            results.Add("09/04/19", "under");
+            results.Add("09/05/19", "over");
+            results.Add("09/06/19", "over");
+            results.Add("09/07/19", "under");
+            results.Add("09/08/19", "under");
+            return Json(results);
+        }
     }
 }
