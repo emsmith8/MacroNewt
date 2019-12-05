@@ -66,6 +66,8 @@ namespace MacroNewt.Areas.Identity.Data
         public int DailyCalTotalId { get; set; }
         public int TotalDailyCalories { get; set; }
 
+        public int TargetDailyCalories { get; set; }
+
         public int TotalDailyProteinCalories { get; set; }
         public int TotalDailyFatCalories { get; set; }
         public int TotalDailyCarbCalories { get; set; }

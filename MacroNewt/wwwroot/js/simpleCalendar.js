@@ -102,6 +102,7 @@
 
         $view.html('');
         table.appendChild(tbody);
+
         table.className = 'table table-bordered';
 
         var week = 0, i;
@@ -109,21 +110,46 @@
             tr = document.createElement('tr');
             tr.className = 'calendar-month-row';
             for (i = 0; i < 7; i++) {
+
+                var tempDate = datetime.format('MM/DD/YY');
+                console.log("tempDate is " + tempDate);
+
                 td = document.createElement('td');
-                td.setAttribute("data-date", datetime.format('MM/DD/YY'));
-                td.addEventListener("click", dayClick, false);
-                if (dateData[datetime.format('MM/DD/YY')] == "over") {
-                    td.classList.add("overCal");
-                }
-                else if (dateData[datetime.format('MM/DD/YY')] == "under") {
-                    td.classList.add("underCal");
-                }
+                td.style.width = '14.28%';
+                td.setAttribute("data-date", datetime.format('MM/DD/YYYY'));
+                
+
                 td.appendChild(document.createTextNode(datetime.format('D')));
+
+                if (dateData[tempDate] != null) {
+                    td.appendChild(document.createElement("br"));
+
+                    td.style.cursor = "pointer";
+
+                    textDiv = document.createElement('div');
+                    textDiv.style.textAlign = "center";
+                    textDiv.appendChild(document.createTextNode(dateData[tempDate]["total"]));
+                    textDiv.setAttribute("data-date", datetime.format('MM/DD/YYYY'));
+                    td.appendChild(textDiv);
+                    console.log("warning warning");
+                    if (dateData[tempDate]["status"] == "over") {
+                        td.classList.add("overCal");
+                        console.log("BWOOP BWOOP");
+                    }
+                    else if (dateData[tempDate]["status"] == "under") {
+                        td.classList.add("underCal");
+                        console.log("BEEP BEEP");
+                    }
+                }
+
+                td.addEventListener("click", dayClick, false);
+                
                 if (month !== datetime.month()) {
                     td.className = 'calendar-prior-months-date';
                 }
                 tr.appendChild(td);
                 datetime.add(1, 'day');
+
             }
             tbody.appendChild(tr);
             week++;

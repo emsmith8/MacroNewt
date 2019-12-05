@@ -28,6 +28,7 @@ function handleSearchFoodsClick(e) {
     }
     else {
         var container = $("#searchContainer").empty();
+        $('#waitSpinnerModal').modal('toggle');
         
         //$.get('/Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
         $.get(baseUrl + 'Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
@@ -45,7 +46,7 @@ function handleSearchFoodsClick(e) {
             $("#foodSearchResults").DataTable({
                 "pageLength": 25,
                 "pagingType": "numbers",
-                "dom": '<"row" <"col-md-12 col-lg-8 d-flex justify-content-start" p><"col-md-12 col-lg-4 d-flex justify-content-end findBox" f>><"clear" i><"clear">rt<"bottom"<"actions">l<"clear">>',
+                "dom": '<"row" <"col-md-12 col-lg-8 d-flex justify-content-start" p><"col-md-12 col-lg-4 d-flex justify-content-end findBox" f>><"clear" i><"clear">rt<"bottom"<"actions">l<"col-md-12 col-lg-8 d-flex justify-content-start" p><"clear">>',
                 "order": [[1, 'asc']],
                 "columnDefs": [
                     {"width": "10%", "targets": 0}
@@ -55,8 +56,11 @@ function handleSearchFoodsClick(e) {
                     null
                 ]
             });
-            
+            console.log("Got here and should be hiding it");
+            $('#waitSpinnerModal').modal('hide');
+            $("html, body").animate({ scrollTop: "500px" }, 1000);
         });
+        
     }
     
 }
@@ -346,6 +350,8 @@ function addFoodToMeal(e) {
         }
     }
     document.getElementById("searchResult-" + ndbno).style.display = "none";
+
+    $('#foodAddedModal').modal('toggle');
 }
 
 function removeFoodFromMeal(e) {
@@ -438,6 +444,9 @@ function handleSubmitMealLogClick() {
                 [].forEach.call(servingSizeInputs, function (elem, i) {
                     elem.addEventListener('change', handleServingSizeChange, false);
                     servings.push(servingSizeInputs[i].value);
+
+                    $('#finishFoodDetailsButton_' + i).text("Edit");
+                    $('#finishFoodDetailsButton_' + i).addClass('btn-myBlueDark').removeClass('btn-myGreen');
                 });
                 var portionBoxes = document.getElementsByClassName('portionBox');
                 [].forEach.call(portionBoxes, function (elem, i) {
@@ -451,6 +460,10 @@ function handleSubmitMealLogClick() {
                     $('#autoNameCheckbox').prop("checked", true);
                     $('#mealTitleInput').prop("readonly", true);
                 }
+
+
+                $('#mealDetailsNext').prop("disabled", false);
+                $('#mealDetailsNext').addClass('btn-myGreen').removeClass('btn-secondary');
                 
                 var detailPrevButton = document.querySelector("#mealDetailsPrevious");
                 var detailNextButton = document.querySelector("#mealDetailsNext");
@@ -565,4 +578,20 @@ function refreshUserInfo() {
             loggedInContainer.html(result);
         }
     });
+}
+
+function scrollFunction() {
+
+    var myButton = document.getElementById("backToTopButton");
+
+    if (document.body.scrollTop > 480 || document.documentElement.scrollTop > 480) {
+        myButton.style.display = "block";
+    }
+    else {
+        myButton.style.display = "none";
+    }
+}
+
+function backToTop() {
+    $(window).scrollTop(0);
 }

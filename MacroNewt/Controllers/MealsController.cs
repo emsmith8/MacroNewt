@@ -37,6 +37,7 @@ namespace MacroNewt.Areas.Identity.Data
 
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            /* CAN GET RID OF */
             HistoryDataViewModel hdv = new HistoryDataViewModel
             {
                 Meals = await _context.Meal
@@ -293,16 +294,46 @@ namespace MacroNewt.Areas.Identity.Data
 
         public async Task<JsonResult> GetMonthMealStatus(int month, int year)
         {
-            Dictionary<string,string> results = new Dictionary<string, string>();
-            results.Add("09/01/19", "over");
-            results.Add("09/02/19", "over");
-            results.Add("09/03/19", "under");
-            results.Add("09/04/19", "under");
-            results.Add("09/05/19", "over");
-            results.Add("09/06/19", "over");
-            results.Add("09/07/19", "under");
-            results.Add("09/08/19", "under");
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            Dictionary<string,object> results = new Dictionary<string, object>();
+
+            var subResults = new List<object>();
+
+            var dt = await _context.DailyCalTotal
+                    .Where(d => (d.Id == userID) && (d.CalorieDay.Month == (month+1)) && (d.CalorieDay.Year == year) && (d.TotalDailyCalories != 0))
+                    .ToListAsync();
+
+            string overUnder = "";
+
+            for (int i = 0; i < dt.Count; i++)
+            {
+                if (dt[i].TotalDailyCalories > dt[i].TargetDailyCalories)
+                {
+                    overUnder = "over";
+                }
+                else
+                {
+                    overUnder = "under";
+                }
+
+                subResults.Add(new { Status = overUnder, Total = dt[i].TotalDailyCalories });
+
+                results.Add(dt[i].CalorieDay.ToString("MM/dd/yy"), subResults[i]);
+            }
+
             return Json(results);
+        }
+
+        public async Task<IActionResult> GetDayMealInfo(int month, int day, int year)
+        {
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var dayInfo = await _context.Meal
+                .Where(m => (m.UserId == userID) && (m.MealDate.Month == month) && (m.MealDate.Day == day) && (m.MealDate.Year == year))
+                .ToListAsync();
+
+            return ViewComponent("CalendarMealModal", dayInfo);
         }
     }
 }

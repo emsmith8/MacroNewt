@@ -27,13 +27,13 @@
                                             <a style="float:right; margin-right:3px;" asp-action="ManageMeals" asp-controller="Admin" class="btn btn-sm btn-myGreen">Back</a>
                                         </div>
                                     }
-                                        <div>
-                                            <button href="#" id="addFoodsNext" class="btn btn-sm btn-myGreen float-right" style="display:block">
-                                                Next
-                                                <span class="fa fa-arrow-right fa-fw" aria-hidden="true"></span>
-                                            </button>
-                                        </div>
-                                    
+                                    <div>
+                                        <button href="#" id="addFoodsNext" class="btn btn-sm btn-myGreen float-right" style="display:block">
+                                            Next
+                                            <span class="fa fa-arrow-right fa-fw" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="currentMealFoodsBox">
@@ -49,19 +49,19 @@
                                         {
                                             <tr class="foodItemRow" id="mealItem-@Model.FoodComponents[i].Ndbno" data-old="old">
                                                 <td class="currentMealTableButtonCell">
-                                                    <input type="button" class="btn btn-sm btn-myBlueDark removeFoodButton" 
+                                                    <input type="button" class="btn btn-sm btn-myBlueDark removeFoodButton"
                                                            value="Remove" data-foodname="@Model.FoodComponents[i].Name"
                                                            data-ndbno="@Model.FoodComponents[i].Ndbno"
                                                            data-servings="@Model.FoodComponents[i].NumberOfServings"
                                                            data-portion="@Model.FoodComponents[i].Value"
                                                            data-pindex="@Model.FoodComponents[i].PortionIndex"
-                                                           data-chosenPortion="@Model.FoodComponents[i].SelectedPortionLabel"/>
+                                                           data-chosenPortion="@Model.FoodComponents[i].SelectedPortionLabel" />
                                                 </td>
                                                 <td>
                                                     @Model.FoodComponents[i].Name
                                                 </td>
                                             </tr>
-                                            
+
                                         }
                                     </tbody>
                                 </table>
@@ -73,7 +73,7 @@
                 <div class="row justify-content-center" style="margin-bottom:30px;">
                     <div class="col-sm-4">
                         <div class="input-group">
-                            <input type="text" id="searchString" name="foodName" class="form-control" placeholder="e.g. 'Chicken' " 
+                            <input type="text" id="searchString" name="foodName" class="form-control" placeholder="e.g. 'Chicken' "
                                    aria-label="Input group example" aria-describedby="btnGroupAddon">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-myBlueDark" id="searchFoods"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -81,6 +81,35 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="foodAddedModalContainer">
+                    <div class="modal fade" id="foodAddedModal" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content fAModal">
+
+                                <div>
+                                    <div class="Box-header d-flex justify-content-center">
+                                        <span style="color:green;">Food added successfully</span>
+                                    </div>
+                                    <div class="d-flex justify-content-around" style="margin:10px 0 10px 0;">
+                                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#foodAddedModal">
+                                            Keep browsing
+                                        </button>
+                                        <button type="button" id="returnToTopButton" class="btn btn-sm btn-myGreen" data-dismiss="modal" data-target="#foodAddedModal">
+                                            Back to Top
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="backToTopCell">
+                    <button onclick="backToTop()" id="backToTopButton">Back to Top</button>
+                </div>
+
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10" id="searchContainer">
 
@@ -125,7 +154,8 @@
                 handleSearchFoodsClick();
             }
         });
-        
+
+        $('#returnToTopButton').click(backToTop);
 
         var numButtons = document.getElementsByClassName("removeFoodButton");
         
@@ -139,6 +169,8 @@
             }
         }
     })
+
+    window.onscroll = function () { scrollFunction() };
 
 </script>
 

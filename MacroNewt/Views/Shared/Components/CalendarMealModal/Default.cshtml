@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MacroNewt.Models.Meal>
+
+<div class="modal fade" id="calendarDaysMealsModal" role="dialog">
+    <div class="modal-dialog vertical-align-center">
+        <div class="modal-content" style="width:100%;">
+
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="deleteSoftBack">
+                        <div class="Box-header form-row justify-content-around">
+                            <div class="blueTextColor col-12" style="text-align:center;">
+                                Meals for this day
+                            </div>
+                        </div>
+                        <div style="padding-top:10px;">
+                            @foreach (Meal m in Model)
+                            {
+                                <dl class="form-row">
+                                    <dt class="col-4" style="margin: 0px 0px 15px 10px">
+                                        Title:
+                                    </dt>
+                                    <dd class="col-7">
+                                        @m.Title
+                                    </dd>
+                                    <dt class="col-4" style="margin: 0px 0px 15px 10px">
+                                        Date:
+                                    </dt>
+                                    <dd class="col-7">
+                                        @m.MealDate
+                                    </dd>
+                                    <dt class="col-4" style="margin: 0px 0px 15px 10px">
+                                        Calories:
+                                    </dt>
+                                    <dd class="col-7">
+                                        @m.Calories
+                                    </dd>
+                                </dl>
+                            }
+
+                            <div class="row justify-content-center" style="padding-bottom:10px;">
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#calendarDaysMealsModal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#calendarDaysMealsModal').modal('toggle');
+    });
+</script>

@@ -4,6 +4,25 @@
     margin: -20px;
 }*/
 
+.fAModal {
+    width: 75%;
+    margin: auto;
+}
+
+#backToTopButton {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 10px;
+    z-index: 10;
+    border: none;
+    outline: none;
+    background-color: #8DE48D;
+    color: white;
+    cursor: pointer;
+}
+
+
 
 .slider.slider-horizontal {
     width: 100% !important;
@@ -382,12 +401,12 @@ table.dataTable tbody td {
 
 .currentCal:hover {
     background-color: currentColor;
-    cursor: pointer;
+    cursor: default;
 }
 
 .targetCal:hover {
     background-color: rgb(255, 255, 255);
-    cursor: pointer;
+    cursor: default;
 }
 
 .dailyStats:hover {
@@ -453,6 +472,18 @@ table.dataTable tbody td {
         #74B9D3 90%);
 }
 
+.btn-myBlueDarker {
+    color: #fff !important;
+    background-color: #74B9D3;
+    background-image: linear-gradient(to bottom, #339fc7, #51b2d6 90%);
+}
+
+.btn-mySelectedGray {
+    color: #fff !important;
+    background-color: #CECECE;
+    background-image: linear-gradient(to bottom, #CECECE, #A2A0A0 90%);
+}
+
 .btn-myBlueLight {
     color: #fff;
     background-color: #84D2F0;
@@ -461,7 +492,7 @@ table.dataTable tbody td {
 }
 
 .blueTextColor {
-    color: #3A99FC;
+    color: #5bc0de;
     font-weight: bold;
     line-height: 31px;
 }
@@ -492,7 +523,6 @@ table.dataTable tbody td {
     color: red;
     font-weight: bold;
 }
-
 
 .updateBMRBaseButton {
     line-height: 1;
@@ -616,6 +646,13 @@ table.dataTable tbody td {
     border: 1px solid #d1d5da;
     padding-left: 0px;
     padding-right: 0px;
+}
+
+@media (max-width: 575px) {
+    .mealHistoryModal {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
 
 .existingMeals {

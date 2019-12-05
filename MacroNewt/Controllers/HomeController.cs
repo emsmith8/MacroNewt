@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity;
 using MacroNewt.Models.LogicModels;
 using System.Security.Claims;
 using MacroNewt.Models.ViewModels;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using System.Text.Encodings.Web;
 
 namespace MacroNewt.Controllers
 {
@@ -19,12 +21,14 @@ namespace MacroNewt.Controllers
         private readonly UserManager<MacroNewtUser> _userManager;
         private readonly MacroNewtContext _context;
         private readonly SignInManager<MacroNewtUser> _signInManager;
+        private readonly IEmailSender _emailSender;
 
-        public HomeController(UserManager<MacroNewtUser> userManager, MacroNewtContext context, SignInManager<MacroNewtUser> signInManager)
+        public HomeController(UserManager<MacroNewtUser> userManager, MacroNewtContext context, SignInManager<MacroNewtUser> signInManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _context = context;
             _signInManager = signInManager;
+            _emailSender = emailSender;
         }
 
 
@@ -35,8 +39,16 @@ namespace MacroNewt.Controllers
 
             UserStatsHandler ush = new UserStatsHandler(_userManager, _context);
 
-            var user = User;
-            
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            // var user = User;
+
+            UserConfirmedStatusViewModel ucs = new UserConfirmedStatusViewModel {
+                UserEmailConfirmed = _context.Users
+                    .Where(u => u.Id == userID)
+                    .Select(u => u.EmailConfirmed)
+                    .FirstOrDefault()
+            };
+
             if (User.IsInRole("Admin"))
             {
                 return RedirectToAction("Index", "Admin");
@@ -47,7 +59,7 @@ namespace MacroNewt.Controllers
                 ush.UpdateDailyCalories(User.FindFirstValue(ClaimTypes.NameIdentifier), DateTime.Today);
             }
             
-            return View();
+            return View(ucs);
         }
 
         public IActionResult GetMealAnalytics()
@@ -105,6 +117,27 @@ namespace MacroNewt.Controllers
             );
 
             return ViewComponent("BMRCalculator", bmrc);
+        }
+
+        public async Task<IActionResult> ResendConfirmationEmail()
+        {
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var user = _context.Users
+                .Where(u => u.Id == userID)
+                .FirstOrDefault();
+
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var callbackUrl = Url.Page(
+                "/Account/ConfirmEmail",
+                pageHandler: null,
+                values: new { area = "Identity", userId = user.Id, code },
+                protocol: Request.Scheme);
+
+            await _emailSender.SendEmailAsync(user.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+            return ViewComponent("ResendConfirmationEmail");
         }
 
         public IActionResult RefreshUserInfo()

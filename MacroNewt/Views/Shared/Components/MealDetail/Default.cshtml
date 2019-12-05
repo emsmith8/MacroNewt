@@ -4,9 +4,7 @@
     <div class="col-12 col-md-10 col-lg-8">
         <div class="softBack">
             <div class="Box-header form-row d-flex justify-content-between">
-                @*<div class="spaceHolderDetails form-group mb-0 col-1">
-
-                </div>*@
+                
                 <div class="form-group blueTextColor mb-0 col-xs-6">
                     
                     @if (User.IsInRole("Admin"))
@@ -17,14 +15,14 @@
                     else
                     {
                         <p class="detailsShortText">Details</p>
-                        <p class="detailsLongText">Please complete the details</p>
+                        <p class="detailsLongText">Complete details to continue</p>
                     }
                 </div>
                 <div class="form-group mb-0 col-xs-6">
-                    <button type="button" id="mealDetailsPrevious" class="btn btn-sm btn-secondary">
+                    <button type="button" id="mealDetailsPrevious" class="btn btn-sm btn-mySelectedGray">
                         <span class="fa fa-arrow-left fa-fw" aria-hidden="true"></span>Back
                     </button>
-                    <button type="button" id="mealDetailsNext" class="btn btn-sm btn-myGreen">
+                    <button type="button" id="mealDetailsNext" class="btn btn-sm btn-secondary" disabled>
                         Next<span class="fa fa-arrow-right fa-fw" aria-hidden="true"></span>
                     </button>
                 </div>
@@ -34,7 +32,7 @@
                 @Html.HiddenFor(model => Model.MealId,
                                     new { id = "mealID" })
                 @Html.HiddenFor(model => Model.UserId,
-                                    new { id = "userID"})
+                                    new { id = "userID" })
                 @Html.HiddenFor(model => Model.UserEmail)
                 @Html.HiddenFor(model => Model.ReLogged)
                 @Html.HiddenFor(model => Model.Edited,
@@ -78,104 +76,163 @@
                     <div class="form-group col-md-6">
                         <label class="control-label" style="font-weight:bold">Food Name</label>
                     </div>
-                    <div class="form-group col-md-2">
-                        <label class="control-label" style="font-weight:bold">Servings</label>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="control-label" style="font-weight:bold">Portion</label>
-                    </div>
+                    @*<div class="form-group col-md-2">
+                <label class="control-label" style="font-weight:bold">Servings</label>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="control-label" style="font-weight:bold">Portion</label>
+            </div>*@
                 </div>
                 @for (int i = 0; i < Model.Foods.Count; i++)
                 {
-                    @Html.HiddenFor(model => Model.Foods[i].Ndbno)
-                    <hidden id="Total_@i" class="FoodValue"></hidden>
                     <div class="form-row ml-4 mr-4">
                         <div class="form-group col-md-6">
                             @Html.DisplayFor(model => Model.Foods[i].Name)
-                            @Html.HiddenFor(model => Model.Foods[i].Name)
-                            @Html.HiddenFor(model => Model.Foods[i].Unit)
                         </div>
-                        <div class="form-group col-md-2">
-                            <input asp-for="@Model.Foods[i].NumberOfServings" data-foodIndex="@i" type="number" step=".25" min="0" class="servingSize form-control" />
-                            <span asp-validation-for="@Model.Foods[i].NumberOfServings" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4">
-
-                            <select asp-for="@Model.Foods[i].Value"
-                                    id="portionSelectBox_@i"
-                                    class="portionBox form-control"
-                                    data-foodIndex="@i"
-                                    data-portionIndex="@Model.Foods[i].PortionIndex">
-                                <option>Choose Portion</option>
-
-                                @{
-                                    int counter = 0;
-
-                                    if (Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Measures.Count == 0)
-                                    {
-                                        <option value="@Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Value"
-                                                data-proteinVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "203").FirstOrDefault().Value
-                                                data-fatVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "204").FirstOrDefault().Value
-                                                data-carbVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "205").FirstOrDefault().Value>
-                                            100 g (@Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Value kcal)
-                                        </option>
-                                    }
-
-                                    foreach (Measure x in Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Measures)
-                                    {
-                                        <option value="@x.Value"
-                                                data-proteinVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "203").FirstOrDefault().Measures[counter].Value
-                                                data-fatVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "204").FirstOrDefault().Measures[counter].Value
-                                                data-carbVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "205").FirstOrDefault().Measures[counter].Value>
-                                            @x.DisplayName
-                                        </option>
-                                        counter += 1;
-                                    }
-                                }
-
-                            </select>
-                            <span asp-validation-for="@Model.Foods[i].Value" class="text-danger"></span>
-                            @Html.HiddenFor(model => Model.Foods[i].PortionIndex,
-                                    new { id="portionChoiceIndex" + $"{i}"})
-
-                            @Html.HiddenFor(model => Model.Foods[i].FoodTotalProtein,
-                            new { @class="selectedPortionProtein", id="selectedPortionProtein" + $"{i}", Value = "null"})
-                            @Html.HiddenFor(model => Model.Foods[i].FoodTotalFat,
-                                new { @class = "selectedPortionFat", id ="selectedPortionFat" + $"{i}", Value = "null"})
-                            @Html.HiddenFor(model => Model.Foods[i].FoodTotalCarb,
-                                new { @class = "selectedPortionCarb", id ="selectedPortionCarb" + $"{i}", Value = "null"})
-
+                        <div class="form-group col-md-6">
+                            <button type="button" id="finishFoodDetailsButton_@i" data-toggle="modal" data-target="#foodDetailModal_@i" class="btn btn-sm btn-myGreen">
+                                Complete Details
+                            </button>
                         </div>
                     </div>
 
-                    for (int j = 0; j < Model.Foods[i].Nutrients.Count; j++)
-                    {
-                        @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].NId)
-                        @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Name)
-                        @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Group)
-                        @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Unit)
-                        @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Value)
+                    <div id="foodDetailModalContainer_@i">
+                        <div class="modal fade" id="foodDetailModal_@i" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content fAModal">
 
-                        for (int k = 0; k < Model.Foods[i].Nutrients[j].Measures.Count; k++)
-                        {
-                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Label)
-                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Eqv)
-                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Eunit)
-                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Qty)
-                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Value)
-                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].DisplayName)
-                        }
-                    }
+                                    <div class="standardSoftBack">
+                                        <p class="text-center" id="notCompleteMessage_@i" style="color:red;">
+
+                                        </p>
+                                        @*<div class="form-row ml-4 mr-4">
+            <div class="form-group col-md-6">
+                <label class="control-label" style="font-weight:bold">Food Name</label>
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label" style="font-weight:bold">Servings</label>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="control-label" style="font-weight:bold">Portion</label>
+            </div>
+        </div>*@
+
+                                        @Html.HiddenFor(model => Model.Foods[i].Ndbno)
+                                        <hidden id="Total_@i" class="FoodValue"></hidden>
+                                        <div class="ml-4 mr-4">
+                                            <div class="form-group">
+                                                <label class="control-label" style="font-weight:bold">Food Name</label>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.DisplayFor(model => Model.Foods[i].Name)
+                                                @Html.HiddenFor(model => Model.Foods[i].Name)
+                                                @Html.HiddenFor(model => Model.Foods[i].Unit)
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" style="font-weight:bold">Servings</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <input asp-for="@Model.Foods[i].NumberOfServings" data-foodIndex="@i" type="number" step=".25" min="0" class="servingSize form-control" />
+                                                <span asp-validation-for="@Model.Foods[i].NumberOfServings" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" style="font-weight:bold">Portion</label>
+                                            </div>
+                                            <div class="form-group">
+
+                                                <select asp-for="@Model.Foods[i].Value"
+                                                        id="portionSelectBox_@i"
+                                                        class="portionBox form-control"
+                                                        data-foodIndex="@i"
+                                                        data-portionIndex="@Model.Foods[i].PortionIndex">
+                                                    <option>Choose Portion</option>
+
+                                                    @{
+                                                        int counter = 0;
+
+                                                        if (Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Measures.Count == 0)
+                                                        {
+                                                            <option value="@Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Value"
+                                                                    data-proteinVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "203").FirstOrDefault().Value
+                                                                    data-fatVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "204").FirstOrDefault().Value
+                                                                    data-carbVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "205").FirstOrDefault().Value>
+                                                                100 g (@Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Value kcal)
+                                                            </option>
+                                                        }
+
+                                                        foreach (Measure x in Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Measures)
+                                                        {
+                                                            <option value="@x.Value"
+                                                                    data-proteinVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "203").FirstOrDefault().Measures[counter].Value
+                                                                    data-fatVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "204").FirstOrDefault().Measures[counter].Value
+                                                                    data-carbVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "205").FirstOrDefault().Measures[counter].Value>
+                                                                @x.DisplayName
+                                                            </option>
+                                                            counter += 1;
+                                                        }
+                                                    }
+
+                                                </select>
+                                                <span asp-validation-for="@Model.Foods[i].Value" class="text-danger"></span>
+                                                @Html.HiddenFor(model => Model.Foods[i].PortionIndex,
+                                                        new { id = "portionChoiceIndex" + $"{i}" })
+
+                                                @Html.HiddenFor(model => Model.Foods[i].FoodTotalProtein,
+                                                new { @class = "selectedPortionProtein", id = "selectedPortionProtein" + $"{i}", Value = "null" })
+                                                @Html.HiddenFor(model => Model.Foods[i].FoodTotalFat,
+                                                    new { @class = "selectedPortionFat", id = "selectedPortionFat" + $"{i}", Value = "null" })
+                                                @Html.HiddenFor(model => Model.Foods[i].FoodTotalCarb,
+                                                    new { @class = "selectedPortionCarb", id = "selectedPortionCarb" + $"{i}", Value = "null" })
+
+                                            </div>
+                                        </div>
+
+                                        @for (int j = 0; j < Model.Foods[i].Nutrients.Count; j++)
+                                        {
+                                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].NId)
+                                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Name)
+                                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Group)
+                                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Unit)
+                                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Value)
+
+                                            for (int k = 0; k < Model.Foods[i].Nutrients[j].Measures.Count; k++)
+                                            {
+                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Label)
+                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Eqv)
+                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Eunit)
+                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Qty)
+                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Value)
+                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].DisplayName)
+                                            }
+                                        }
+
+                                        <div class="d-flex justify-content-around" style="margin:10px 0 10px 0;">
+                                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#foodDetailModal_@i">
+                                                Cancel
+                                            </button>
+                                            <button type="button" id="checkDetailsCompleteButton_@i" onclick="checkDetailsComplete(@i)" data-totalButtonsNumber="@Model.Foods.Count" class="btn btn-sm btn-myGreen">
+                                                Done
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
 
 
                 }
 
                 @Html.HiddenFor(model => Model.ProteinTotal,
-                    new { id="mealTotalProtein", Value = "0"})
+                    new { id = "mealTotalProtein", Value = "0" })
                 @Html.HiddenFor(model => Model.FatTotal,
-                    new { id="mealTotalFat", Value = "0"})
+                    new { id = "mealTotalFat", Value = "0" })
                 @Html.HiddenFor(model => Model.CarbTotal,
-                    new { id="mealTotalCarb", Value = "0"})
+                    new { id = "mealTotalCarb", Value = "0" })
 
                 <div class="form-row ml-2 mr-2">
                     <div class="form-group col-md-8">
@@ -192,6 +249,55 @@
 </div>
 
 <script>
+    function checkDetailsComplete(foodNumber) {
+        var completeCount = 0;
+        var servingSize = $('#Foods_' + foodNumber + '__NumberOfServings').val();
+        console.log("The serving size is " + servingSize);
+        var portion = $('#portionSelectBox_' + foodNumber).children('option:selected').attr('value');
+        console.log("The portion is " + portion);
+        var buttonCount = $('#checkDetailsCompleteButton_' + foodNumber).attr('data-totalButtonsNumber');
+
+   //     var buttons = document.getElementsByClassName('checkComplete');
+
+
+        if (servingSize < 0.25 || portion == null) {
+            $("#notCompleteMessage_" + foodNumber).text("Please make sure to provide both the number of servings and the portion type");
+        }
+        else {
+            $('#notCompleteMessage').empty();
+            $('#finishFoodDetailsButton_' + foodNumber).text("Edit");
+            $('#finishFoodDetailsButton_' + foodNumber).addClass('btn-myBlueDark').removeClass('btn-myGreen');
+
+            console.log("button count is " + buttonCount);
+
+            for (var i = 0; i < buttonCount; i++) {
+                if ($('#finishFoodDetailsButton_' + i).text() == "Edit") {
+                    completeCount++;
+                    console.log("The new completeCount is " + completeCount);
+                }
+                else {
+                    console.log("wasn't edit i guess");
+                }
+                if (completeCount == buttonCount) {
+                    $('#mealDetailsNext').prop("disabled", false);
+                    $('#mealDetailsNext').addClass('btn-myGreen').removeClass('btn-secondary');
+                }
+            }
+
+            //[].forEach.call(buttons, function (button) {
+            //    console.log("I'm heeeeeeeeeeeeeere and button text is " + button.text());
+            //    if (button.value == "Edit") {
+            //        completeCount++;
+            //        console.log("The new completeCount is " + completeCount);
+            //    }
+            //})
+            //if (completeCount == buttonCount) {
+            //    alert("all buttons good to go");
+            //}
+            $('#foodDetailModal_' + foodNumber).modal('toggle');
+        }
+    }
+
     $(document).ready(function () {
         if (@Model.MealId != 0)
         {
@@ -201,6 +307,13 @@
                 document.getElementById("selectedPortionCarb" + x).value = $('#portionSelectBox_' + x).children('option:selected').attr('data-carbVal');
             }
         }
+
+        
+
+        //$("#checkDetailsCompleteButton").click(function () {
+        //    var ss = $('#Foods[].NumberOfServings').val();
+        //    console.log("The serving size is " + ss);
+        //});
 
         $('input[name=autoTitle]').change(function () {
             if ($(this).is(':checked')) {

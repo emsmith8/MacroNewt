@@ -123,7 +123,6 @@ namespace MacroNewt.Areas.Identity.Pages.Account
                     DailyTargetCalories = 2000,
                     UserName = Input.Email,
                     ProfileName = Input.ProfileName,
-            //        UserId = Guid.NewGuid(),
                     Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

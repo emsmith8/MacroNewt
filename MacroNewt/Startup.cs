@@ -49,7 +49,16 @@ namespace MacroNewt
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+                //options.SignIn.RequireConfirmedEmail = true;
+            });
 
             services.AddDbContext<MacroNewtContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MacroNewtContext")));
@@ -60,6 +69,10 @@ namespace MacroNewt
                //options.AddPolicy("AllUsers", policy => policy.RequireRole("User"));
             });
 
+            services.AddTransient<IEmailSender, EmailSender>();
+
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddRazorPagesOptions(options =>
                 {
@@ -67,7 +80,7 @@ namespace MacroNewt
                     options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
                     options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
                 });
-            
+
 
             services.ConfigureApplicationCookie(options => {
                 options.LoginPath = $"/Identity/Account/Login";

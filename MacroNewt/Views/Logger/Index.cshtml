@@ -1,6 +1,6 @@
 ﻿
 <div id="visContainer" style="visibility:hidden;">
-    <div class="justify-content-center" style="text-align:center">
+    <div class="justify-content-center" style="text-align:center; padding-top:7px;">
         <h5 style="color:#5bc0de">Log a New Meal</h5>
     </div>
     <div id="smartwizard" class="container-fluid">
@@ -50,7 +50,7 @@
 
                 </div>
 
-                
+
                 <div id="databaseNoticeModalContainer">
                     <div class="modal fade" id="databaseNoticeModal" role="dialog">
                         <div class="modal-dialog vertical-align-center">
@@ -101,6 +101,62 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="waitSpinnerContainer">
+
+                    <div class="modal" id="waitSpinnerModal">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <strong class="modalTitle">Fetching results, please wait</strong>
+                                        <p class="modalMessage"></p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="spinner-border text-primary" style="margin-top:15px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                
+
+                <div id="foodAddedModalContainer">
+                    <div class="modal fade" id="foodAddedModal" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content fAModal">
+
+                                <div>
+                                    <div class="Box-header d-flex justify-content-center">
+                                        <span style="color:green;">Food added successfully</span>
+                                    </div>
+                                    <div class="d-flex justify-content-around" style="margin:10px 0 10px 0;">
+                                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#foodAddedModal">
+                                            Keep browsing
+                                        </button>
+                                        <button type="button" id="returnToTopButton" class="btn btn-sm btn-myBlueDark" data-dismiss="modal" data-target="#foodAddedModal">
+                                            Back to Top
+                                        </button>
+                                        <button type="button" id="nextStepButton" class="btn btn-sm btn-myGreen" data-dismiss="modal" data-target="#foodAddedModal">
+                                            Next Step
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="backToTopCell">
+                    <button onclick="backToTop()" id="backToTopButton">Back to Top</button>
+                </div>
+
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10 col-lg-8" id="searchContainer">
 
@@ -148,6 +204,10 @@
             }
         });
 
+        $('#returnToTopButton').click(backToTop);
+
+        $('#nextStepButton').click(handleAddFoodsNextClick);
+
         $(".targetDatabase").change(function () {
             if ($(this).val() == 'Branded') {
                 $('#databaseNoticeModal').modal('toggle');
@@ -158,6 +218,8 @@
             }
         });
     })
+
+    window.onscroll = function () { scrollFunction() };
 
     function showOldMealsModal() {
         var getUrl = window.location;

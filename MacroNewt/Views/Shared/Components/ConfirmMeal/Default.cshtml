@@ -40,8 +40,15 @@
 
                         <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
                             <p class="dailyTargetHeaders">
-                                Daily Target Calories: @Model.TargetCalories
-                                <span class="dailyTargetHeaders" id="dailyTargetCalOver"></span>
+                                Daily Target Calories: @Model.TargetCalories <br />
+                                <span style="font-weight:lighter;">
+                                    <span id="calConsumedSpan" style="color:#2CB32C;">@Model.CurrentDayCalories</span>
+                                    calories already consumed today <br />
+                                    @Model.MealCalories calories from this meal <br />
+                                    <span  id="percentCalSpan" style="color:green;">@Model.PercentageCaloriesConsumed</span>
+                                    % of target calories consumed after this meal
+                                </span>
+                                @*<span class="dailyTargetHeaders" id="dailyTargetCalOver"></span>*@
                             </p>
                         </div>
                         <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
@@ -134,8 +141,15 @@
                         {
                             <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
                                 <p class="dailyTargetHeaders">
-                                    Daily Target Protein Calories: @Model.TargetProteinCalories
-                                    <span class="dailyTargetHeaders" id="dailyTargetProteinOver"></span>
+                                    Daily Target Protein Calories: @Model.TargetProteinCalories <br />
+                                    <span style="font-weight:lighter;">
+                                        <span id="proteinCalConsumedSpan" style="color:green;">@Model.CurrentDayProteinCalories</span>
+                                        calories from protein already consumed today <br />
+                                        @Model.MealProteinCalories calories from protein in this meal <br />
+                                        <span id="percentProteinCalSpan" style="color:green;">@Model.PercentageProteinCaloriesConsumed</span>
+                                        % of target protein calories consumed after this meal
+                                    </span>
+                                    @*<span class="dailyTargetHeaders" id="dailyTargetProteinOver"></span>*@
                                 </p>
                             </div>
                             <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
@@ -219,8 +233,15 @@
 
                             <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
                                 <p class="dailyTargetHeaders">
-                                    Daily Target Fat Calories: @Model.TargetFatCalories
-                                    <span class="dailyTargetHeaders" id="dailyTargetFatOver"></span>
+                                    Daily Target Fat Calories: @Model.TargetFatCalories <br />
+                                    <span style="font-weight:lighter;">
+                                        <span id="fatCalConsumedSpan" style="color:green;">@Model.CurrentDayFatCalories</span>
+                                        calories from fat already consumed today <br />
+                                        @Model.MealFatCalories calories from fat in this meal <br />
+                                        <span id="percentFatCalSpan" style="color:green;">@Model.PercentageFatCaloriesConsumed</span>
+                                        % of target fat calories consumed after this meal
+                                    </span>
+                                    @*<span class="dailyTargetHeaders" id="dailyTargetFatOver"></span>*@
                                 </p>
                             </div>
                             <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
@@ -304,8 +325,15 @@
 
                             <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
                                 <p class="dailyTargetHeaders">
-                                    Daily Target Carb Calories: @Model.TargetCarbCalories
-                                    <span class="dailyTargetHeaders" id="dailyTargetCarbOver"></span>
+                                    Daily Target Carb Calories: @Model.TargetCarbCalories <br />
+                                    <span style="font-weight:lighter;">
+                                        <span id="carbCalConsumedSpan" style="color:green;">@Model.CurrentDayCarbCalories</span>
+                                        calories from carbs already consumed today <br />
+                                        @Model.MealCarbCalories calories from carbs in this meal <br />
+                                        <span id="percentCarbCalSpan" style="color:green;">@Model.PercentageCarbCaloriesConsumed</span>
+                                        % of target carb calories consumed after this meal
+                                    </span>
+                                    @*<span class="dailyTargetHeaders" id="dailyTargetCarbOver"></span>*@
                                 </p>
                             </div>
                             <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
@@ -395,7 +423,60 @@
 
 <script>
     $(document).ready(function () {
-        if (@Model.CurrentDayCalories + @Model.MealCalories  > @Model.TargetCalories) {
+
+        @if (Model.CurrentDayCalories > Model.TargetCalories)
+        {
+            <text>
+                document.getElementById("calConsumedSpan").style.color = "red";
+            </text>
+        }
+        @if (Model.CurrentDayCalories + Model.MealCalories > Model.TargetCalories)
+        {
+            <text>
+                document.getElementById("percentCalSpan").style.color = "red";
+            </text>
+        }
+
+        @if (Model.CurrentDayProteinCalories > Model.TargetProteinCalories)
+        {
+            <text>
+                document.getElementById("proteinCalConsumedSpan").style.color = "red";
+            </text>
+        }
+        @if (Model.CurrentDayProteinCalories + Model.MealProteinCalories > Model.TargetProteinCalories)
+        {
+            <text>
+                document.getElementById("percentProteinCalSpan").style.color = "red";
+            </text>
+        }
+
+        @if (Model.CurrentDayFatCalories > Model.TargetFatCalories)
+        {
+            <text>
+                document.getElementById("fatCalConsumedSpan").style.color = "red";
+            </text>
+        }
+        @if (Model.CurrentDayFatCalories + Model.MealFatCalories > Model.TargetFatCalories)
+        {
+            <text>
+                document.getElementById("percentFatCalSpan").style.color = "red";
+            </text>
+        }
+
+        @if (Model.CurrentDayCarbCalories > Model.TargetCarbCalories)
+        {
+            <text>
+                document.getElementById("carbCalConsumedSpan").style.color = "red";
+            </text>
+        }
+        @if (Model.CurrentDayCarbCalories + Model.MealCarbCalories > Model.TargetCarbCalories)
+        {
+            <text>
+                document.getElementById("percentCarbCalSpan").style.color = "red";
+            </text>
+        }
+
+        @*if (@Model.CurrentDayCalories + @Model.MealCalories  > @Model.TargetCalories) {
             $('#dailyTargetCalOver').text("(" + (@Model.CurrentDayCalories + @Model.MealCalories) + ")");
             $('#dailyTargetCalOver').css('color', '#F01E1E');
         }
@@ -422,6 +503,6 @@
         }
         else {
             $('#dailyTargetCarbOver').text("(" + (@Model.CurrentDayCarbCalories + @Model.MealCarbCalories) + ")");
-        }
+        }*@
     });
 </script>

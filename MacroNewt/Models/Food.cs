@@ -19,7 +19,7 @@ namespace MacroNewt.Models
         public string Unit { get; set; }
         [Required(ErrorMessage = "You must select a portion size")]        
         public int? Value { get; set; }
-        [Range(0.25, 10.0, ErrorMessage = "Must be between 0.25 and 10")]
+        [Range(0.25, 100.0, ErrorMessage = "Must be between 0.25 and 100")]
         public decimal NumberOfServings {get;set;}
         public int PortionIndex { get; set; }       
 

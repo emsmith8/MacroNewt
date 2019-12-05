@@ -14,6 +14,7 @@ namespace MacroNewt.Models.ViewModels
         public int TargetCalories { get; set; }
         public int CurrentDayCalories { get; set; }
         public double CurrentDayCaloriesPercent { get; set; }
+        public double PercentageCaloriesConsumed { get; set; }
         public int MealCalories { get; set; }
         public double MealCaloriesPercent { get; set; }
         public double MealCaloriesRemainingPercent { get; set; }
@@ -31,6 +32,7 @@ namespace MacroNewt.Models.ViewModels
         public int TargetProteinCalories { get; set; }
         public int CurrentDayProteinCalories { get; set; }
         public double CurrentDayProteinCaloriesPercent { get; set; }
+        public double PercentageProteinCaloriesConsumed { get; set; }
         public int MealProteinCalories { get; set; }
         public double MealProteinCaloriesPercent { get; set; }
         public double MealProteinCaloriesRemainingPercent { get; set; }
@@ -48,6 +50,7 @@ namespace MacroNewt.Models.ViewModels
         public int TargetFatCalories { get; set; }
         public int CurrentDayFatCalories { get; set; }
         public double CurrentDayFatCaloriesPercent { get; set; }
+        public double PercentageFatCaloriesConsumed { get; set; }
         public int MealFatCalories { get; set; }
         public double MealFatCaloriesPercent { get; set; }
         public double MealFatCaloriesRemainingPercent { get; set; }
@@ -65,6 +68,7 @@ namespace MacroNewt.Models.ViewModels
         public int TargetCarbCalories { get; set; }
         public int CurrentDayCarbCalories { get; set; }
         public double CurrentDayCarbCaloriesPercent { get; set; }
+        public double PercentageCarbCaloriesConsumed { get; set; }
         public int MealCarbCalories { get; set; }
         public double MealCarbCaloriesPercent { get; set; }
         public double MealCarbCaloriesRemainingPercent { get; set; }

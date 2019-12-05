@@ -32,7 +32,24 @@ namespace MacroNewt.Areas.Identity.Data
         [Authorize]
         public IActionResult Index()
         {
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var userEmailStatus = _context.Users
+                .Where(u => u.Id == userID)
+                .Select(u => u.EmailConfirmed)
+                .FirstOrDefault();
+
+            if (!userEmailStatus)
+            {
+                return RedirectToAction("NotConfirmed", "Logger");
+            }
+
             ViewBag.Title = "Log Meal";
+            return View();
+        }
+
+        public IActionResult NotConfirmed()
+        {
             return View();
         }
         
@@ -60,7 +77,7 @@ namespace MacroNewt.Areas.Identity.Data
                         Content = $"<strong style='color:red'>Couldn't find '{foodName}'. Please try again.</strong>"
                     };
                 }
-
+                System.Threading.Thread.Sleep(3000);
                 return ViewComponent("FoodSearchResult", handler.StoreSearchReturns(dataObjects));
                 
             }

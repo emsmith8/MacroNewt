@@ -64,20 +64,24 @@ namespace MacroNewt.Models.LogicModels
                 TargetCalories = targetTotalCal,
                 CurrentDayCalories = dct.TotalDailyCalories,
                 CurrentDayCaloriesPercent = Math.Round(((dct.TotalDailyCalories * 100) / (targetTotalCal * 1.5))),
+                PercentageCaloriesConsumed = Math.Round(dct.TotalDailyCalories * 100.0 / targetTotalCal),
                 TargetProteinCalories = Convert.ToInt32(proteinTar),
                 //TargetProteinCalories = (targetTotalCal / 5),
                 CurrentDayProteinCalories = dct.TotalDailyProteinCalories,
                 CurrentDayProteinCaloriesPercent = Math.Round(((dct.TotalDailyProteinCalories * 100) / (proteinTar * 1.5))),
+                PercentageProteinCaloriesConsumed = Math.Round(dct.TotalDailyProteinCalories * 100.0 / proteinTar),
                 //CurrentDayProteinCaloriesPercent = Math.Round(((dct.TotalDailyProteinCalories * 100) / (targetTotalCal * 1.5 / 5))),
                 TargetFatCalories = Convert.ToInt32(fatTar),
                 //TargetFatCalories = (targetTotalCal / 3),
                 CurrentDayFatCalories = dct.TotalDailyFatCalories,
                 CurrentDayFatCaloriesPercent = Math.Round(((dct.TotalDailyFatCalories * 100) / (fatTar * 1.5))),
+                PercentageFatCaloriesConsumed = Math.Round(dct.TotalDailyFatCalories * 100.0 / fatTar),
                 //CurrentDayFatCaloriesPercent = Math.Round(((dct.TotalDailyFatCalories * 100) / (targetTotalCal * 1.5 / 3))),
                 TargetCarbCalories = Convert.ToInt32(carbTar),
                 //TargetCarbCalories = (targetTotalCal / 2),
                 CurrentDayCarbCalories = dct.TotalDailyCarbCalories,
-                CurrentDayCarbCaloriesPercent = Math.Round(((dct.TotalDailyCarbCalories * 100) / (carbTar * 1.5)))
+                CurrentDayCarbCaloriesPercent = Math.Round(((dct.TotalDailyCarbCalories * 100) / (carbTar * 1.5))),
+                PercentageCarbCaloriesConsumed = Math.Round(dct.TotalDailyCarbCalories * 100.0 / carbTar)
                 //CurrentDayCarbCaloriesPercent = Math.Round(((dct.TotalDailyCarbCalories * 100) / (targetTotalCal * 1.5 / 2)))
             };
 
@@ -214,12 +218,14 @@ namespace MacroNewt.Models.LogicModels
                 TargetCalories = targetTotalCal,
                 CurrentDayCalories = dct.TotalDailyCalories,
                 CurrentDayCaloriesPercent = Math.Round(((dct.TotalDailyCalories * 100) / (targetTotalCal * 1.5))),
+                PercentageCaloriesConsumed = Math.Round((dct.TotalDailyCalories + mealCalories) * 100.0 / targetTotalCal),
                 MealCalories = mealCalories,
                 MealCaloriesPercent = ((mealCalories * 100) / (targetTotalCal * 1.5)),
                 TargetProteinCalories = Convert.ToInt32(proteinTar),
                 //TargetProteinCalories = (targetTotalCal / 5),
                 CurrentDayProteinCalories = dct.TotalDailyProteinCalories,
                 CurrentDayProteinCaloriesPercent = Math.Round(((dct.TotalDailyProteinCalories * 100) / (proteinTar * 1.5))),
+                PercentageProteinCaloriesConsumed = Math.Round((dct.TotalDailyProteinCalories + (mealProtein * 4)) * 100.0 / proteinTar),
                 //CurrentDayProteinCaloriesPercent = Math.Round(((dct.TotalDailyProteinCalories * 100) / (targetTotalCal * 1.5 / 5))),
                 MealProteinCalories = (mealProtein * 4),
                 MealProteinCaloriesPercent = ((mealProtein * 4 * 100) / (proteinTar * 1.5)),
@@ -228,6 +234,7 @@ namespace MacroNewt.Models.LogicModels
                 //TargetFatCalories = (targetTotalCal / 3),
                 CurrentDayFatCalories = dct.TotalDailyFatCalories,
                 CurrentDayFatCaloriesPercent = Math.Round(((dct.TotalDailyFatCalories * 100) / (fatTar * 1.5))),
+                PercentageFatCaloriesConsumed = Math.Round((dct.TotalDailyFatCalories + (mealFat * 9)) * 100.0 / fatTar),
                 //CurrentDayFatCaloriesPercent = Math.Round(((dct.TotalDailyFatCalories * 100) / (targetTotalCal * 1.5 / 3))),
                 MealFatCalories = (mealFat * 9),
                 MealFatCaloriesPercent = ((mealFat * 9 * 100) / (fatTar * 1.5)),
@@ -236,6 +243,7 @@ namespace MacroNewt.Models.LogicModels
                 //TargetCarbCalories = (targetTotalCal / 2),
                 CurrentDayCarbCalories = dct.TotalDailyCarbCalories,
                 CurrentDayCarbCaloriesPercent = Math.Round(((dct.TotalDailyCarbCalories * 100) / (carbTar * 1.5))),
+                PercentageCarbCaloriesConsumed = Math.Round((dct.TotalDailyCarbCalories + (mealCarb * 4)) * 100.0 / carbTar),
                 //CurrentDayCarbCaloriesPercent = Math.Round(((dct.TotalDailyCarbCalories * 100) / (targetTotalCal * 1.5 / 2))),
                 MealCarbCalories = (mealCarb * 4),
                 MealCarbCaloriesPercent = ((mealCarb * 4 * 100) / (carbTar * 1.5))
@@ -398,7 +406,10 @@ namespace MacroNewt.Models.LogicModels
                 .Where(x => (x.UserId == userId) && (x.MealDate.Date == date.Date))
                 .Sum(x => x.CarbCalories);
 
-            
+            int targetTotalCal = _context.Users
+                .Where(u => u.Id == userId)
+                .Select(u => u.DailyTargetCalories)
+                .FirstOrDefault();
 
             var existingDayCal = _context.DailyCalTotal
                 .Where(x => (x.CalorieDay == date.Date) && (x.Id == userId))
@@ -420,6 +431,7 @@ namespace MacroNewt.Models.LogicModels
                 DailyCalTotal dct = new DailyCalTotal()
                 {
                     TotalDailyCalories = dailyCals,
+                    TargetDailyCalories = targetTotalCal,
                     TotalDailyProteinCalories = dailyProteinCals,
                     TotalDailyFatCalories = dailyFatCals,
                     TotalDailyCarbCalories = dailyCarbCals,

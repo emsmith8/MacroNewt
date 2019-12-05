@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Email not confirmed";
+}
+
+    <div id="noticeContainer">
+        <div class="row justify-content-around">
+            <div class="card" style="margin:5px 15px 10px 15px;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: red;">@ViewData["Title"]</h5>
+                    <p class="card-text">In order to log meals you must complete registration by confirming your email account.</p>
+                </div>
+                <div class="row justify-content-around">
+                    <div style="margin:15px 0 10px 0;">
+                        <a class="btn btn-sm btn-myBlueDarker" asp-controller="Home" asp-action="Index">Home</a>
+                    </div>
+                </div>
+                <div class="row justify-content-around">
+                    <div style="margin:10px 0 10px 0;">
+                        <a class="btn btn-sm btn-myBlueDarker" style="cursor:pointer;" id="resendConfirmation">Resend confirmation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    $(document).ready(function () {
+        $('#resendConfirmation').click(function () {
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+            var container = $('#noticeContainer');
+
+            $.get(baseUrl + 'Home/ResendConfirmationEmail', function(response) {
+                container.html(response);
+            });
+        });
+    });
+</script>
