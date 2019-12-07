@@ -77,7 +77,7 @@ namespace MacroNewt.Areas.Identity.Data
                         Content = $"<strong style='color:red'>Couldn't find '{foodName}'. Please try again.</strong>"
                     };
                 }
-                System.Threading.Thread.Sleep(3000);
+                //System.Threading.Thread.Sleep(3000);
                 return ViewComponent("FoodSearchResult", handler.StoreSearchReturns(dataObjects));
                 
             }
@@ -259,7 +259,7 @@ namespace MacroNewt.Areas.Identity.Data
         public IActionResult ConfirmMeal([Bind("CalorieTotal,ProteinTotal,FatTotal,CarbTotal,Title,MealDate,MealType,Foods,MealId,UserId,UserEmail,ReLogged")] FoodViewModel form)
         {
             Debug.WriteLine("The MealId is " + form.MealId);
-
+            //System.Threading.Thread.Sleep(3000);
             if (!ModelState.IsValid)
             {
                 Response.Headers.Add("vstatus", "fail");

@@ -8,16 +8,49 @@
 
     <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#listHistory" role="tab">List History</a>
+            <a class="nav-link active" data-toggle="tab" href="#calHistory" role="tab">Calendar History</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#calHistory" role="tab">Calendar History</a>
+            <a class="nav-link" data-toggle="tab" href="#listHistory" role="tab">List History</a>
         </li>
     </ul>
 
     <div class="tab-content" style="padding-top:10px">
 
-        <div id="listHistory" class="tab-pane active">
+        <div id="calHistory" class="tab-pane active">
+            <div id="calendarContainer" class="row justify-content-center">
+                <div class="col-12 col-md-10">
+                    <div class="calendar" id="calendar">
+                        <!-- Calendar toolbar -->
+                        <div class="calendar-toolbar">
+                            <!-- Calendar "today" button -->
+                            <button data-toggle="calendar" data-action="today" class="btn btn-default">
+                                Today
+                            </button>
+                            <!-- Calendar "prev" button -->
+                            <button data-toggle="calendar" data-action="prev" class="btn btn-default">
+                                <i class="fa fa-chevron-left"></i>
+                            </button>
+                            <!-- Calendar "date-indicator" span -->
+                            <div class="calendar-current-date"
+                                 data-day-format="MM/DD/YYYY"
+                                 data-week-format="MM/DD/YYYY"
+                                 data-month-format="MMMM, YYYY">
+                            </div>
+                            <!-- Calendar "next" button -->
+                            <button data-toggle="calendar" data-action="next" class="btn btn-default">
+                                <i class="fa fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="calendarModalContainer">
+
+            </div>
+        </div>
+        <div id="listHistory" class="tab-pane">
             <div class="row justify-content-around">
 
                 <div class="justify-content-around pickerArea HistoryControlBox">
@@ -147,49 +180,15 @@
                 </div>
             </div>
 
-            <div id="deleteMealContainer">
-
-            </div>
 
             <div class="row justify-content-center" id="customHistoryContainer">
 
             </div>
         </div>
 
-        <div id="calHistory" class="tab-pane">
-            <div id="calendarContainer" class="row justify-content-center">
-                <div class="col-12 col-md-10">
-                    <div class="calendar" id="calendar">
-                        <!-- Calendar toolbar -->
-                        <div class="calendar-toolbar">
-                            <!-- Calendar "today" button -->
-                            <button data-toggle="calendar" data-action="today" class="btn btn-default">
-                                Today
-                            </button>
-                            <!-- Calendar "prev" button -->
-                            <button data-toggle="calendar" data-action="prev" class="btn btn-default">
-                                <i class="fa fa-chevron-left"></i>
-                            </button>
-                            <!-- Calendar "date-indicator" span -->
-                            <div class="calendar-current-date"
-                                 data-day-format="MM/DD/YYYY"
-                                 data-week-format="MM/DD/YYYY"
-                                 data-month-format="MMMM, YYYY">
-                            </div>
-                            <!-- Calendar "next" button -->
-                            <button data-toggle="calendar" data-action="next" class="btn btn-default">
-                                <i class="fa fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="deleteMealContainer">
 
-            <div id="calendarModalContainer">
-
-            </div>
         </div>
-
 
     </div>
 
@@ -247,13 +246,13 @@
         });
 
 
-        $('#datetimepickerCal').datetimepicker({
-            format: 'MM/DD/YYYY'
-            //sideBySide: true,
-            //buttons: {
-            //    showToday: true
-            //}
-        });
+        //$('#datetimepickerCal').datetimepicker({
+        //    format: 'MM/DD/YYYY'
+        //    //sideBySide: true,
+        //    //buttons: {
+        //    //    showToday: true
+        //    //}
+        //});
 
 
         $('#datetimepicker2').datetimepicker('viewDate', moment('01/01/2000', 'MM/DD/YYYY'));
@@ -296,18 +295,6 @@
         })
     }
 
-
-    function deleteMeal(itemId) {
-        var getUrl = window.location;
-        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
-
-        //$.get('/Meals/Delete', { id: itemId }, function (response) {
-        $.get(baseUrl + 'Meals/Delete', { id: itemId }, function (response) {
-            var container = $("#deleteMealContainer").empty();
-            container.html(response);
-        });
-
-    }
 
     function updateDay(e) {
         var getUrl = window.location;

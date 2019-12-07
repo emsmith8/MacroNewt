@@ -44,5 +44,7 @@ namespace MacroNewt.Models.ViewModels
 
         public double TotalCarbCaloriesSurplusPercent { get; set; }
         public double TotalCarbCaloriesSurplusDisplayPercent { get; set; }
+
+        public string DayType { get; set; }
     }
 }

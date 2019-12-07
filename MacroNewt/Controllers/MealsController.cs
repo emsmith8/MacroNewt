@@ -99,6 +99,8 @@ namespace MacroNewt.Areas.Identity.Data
             return ViewComponent("MealCalendarHistory", mealList);
         }
 
+
+
         public IActionResult GetOldMealsModal()
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -117,6 +119,15 @@ namespace MacroNewt.Areas.Identity.Data
             MacroNewtUser user = _userManager.GetUserAsync(HttpContext.User).Result;
 
             return ViewComponent("CurrentDayCalStats", ush.GetCurrentMacroTargets(user));
+        }
+
+        public IActionResult GetSpecificDayCalStats(string targetDate)
+        {
+            UserStatsHandler ush = new UserStatsHandler(_userManager, _context);
+
+            MacroNewtUser user = _userManager.GetUserAsync(HttpContext.User).Result;
+
+            return ViewComponent("PastDayCalStats", ush.GetPastMacroTargets(user, targetDate));
         }
         
 

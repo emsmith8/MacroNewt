@@ -12,24 +12,28 @@
     <Compile Remove="Views\Shared\Components\AdminConfirmMeal\**" />
     <Compile Remove="Views\Shared\Components\EditFoodSearchResult\**" />
     <Compile Remove="Views\Shared\Components\FoodReport\**" />
+    <Compile Remove="Views\Shared\Components\MealCalendarHistory\**" />
     <Compile Remove="Views\Shared\MealTotalNutritionLabel\**" />
     <Content Remove="Data\**" />
     <Content Remove="obj\**" />
     <Content Remove="Views\Shared\Components\AdminConfirmMeal\**" />
     <Content Remove="Views\Shared\Components\EditFoodSearchResult\**" />
     <Content Remove="Views\Shared\Components\FoodReport\**" />
+    <Content Remove="Views\Shared\Components\MealCalendarHistory\**" />
     <Content Remove="Views\Shared\MealTotalNutritionLabel\**" />
     <EmbeddedResource Remove="Data\**" />
     <EmbeddedResource Remove="obj\**" />
     <EmbeddedResource Remove="Views\Shared\Components\AdminConfirmMeal\**" />
     <EmbeddedResource Remove="Views\Shared\Components\EditFoodSearchResult\**" />
     <EmbeddedResource Remove="Views\Shared\Components\FoodReport\**" />
+    <EmbeddedResource Remove="Views\Shared\Components\MealCalendarHistory\**" />
     <EmbeddedResource Remove="Views\Shared\MealTotalNutritionLabel\**" />
     <None Remove="Data\**" />
     <None Remove="obj\**" />
     <None Remove="Views\Shared\Components\AdminConfirmMeal\**" />
     <None Remove="Views\Shared\Components\EditFoodSearchResult\**" />
     <None Remove="Views\Shared\Components\FoodReport\**" />
+    <None Remove="Views\Shared\Components\MealCalendarHistory\**" />
     <None Remove="Views\Shared\MealTotalNutritionLabel\**" />
   </ItemGroup>
 
@@ -67,7 +71,7 @@
     <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.3" />
     <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="2.2.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="SendGrid" Version="9.12.0" />
   </ItemGroup>
 

@@ -13,29 +13,45 @@
                             </div>
                         </div>
                         <div style="padding-top:10px;">
+                            @{ int i = 0;}
                             @foreach (Meal m in Model)
                             {
-                                <dl class="form-row">
-                                    <dt class="col-4" style="margin: 0px 0px 15px 10px">
-                                        Title:
-                                    </dt>
-                                    <dd class="col-7">
-                                        @m.Title
-                                    </dd>
-                                    <dt class="col-4" style="margin: 0px 0px 15px 10px">
-                                        Date:
-                                    </dt>
-                                    <dd class="col-7">
-                                        @m.MealDate
-                                    </dd>
-                                    <dt class="col-4" style="margin: 0px 0px 15px 10px">
-                                        Calories:
-                                    </dt>
-                                    <dd class="col-7">
-                                        @m.Calories
-                                    </dd>
-                                </dl>
+                            <dl class="form-row">
+                                <dd class="col-12 text-center">
+                                    <a class="btn btn-sm btn-myBlueDark" asp-action="Edit" asp-route-id="@m.Id">Edit</a>
+                                    <a class="btn btn-sm btn-myBlueDark" asp-action="Details" asp-route-id="@m.Id">Details</a>
+                                    <a class="btn btn-sm btn-myRed deleteMeal" href="#" data-itemID="@m.Id">Delete</a>
+                                </dd>
+                                <dt class="col-3" style="margin: 0px 0px 15px 10px">
+                                    Title:
+                                </dt>
+                                <dd class="col-6">
+                                    @m.Title
+                                </dd>
+                                <dt class="col-3" style="margin: 0px 0px 15px 10px">
+                                    Date:
+                                </dt>
+                                <dd class="col-6" id="food_@i" data-tDate="@m.MealDate.Date">
+                                    @m.MealDate
+                                </dd>
+                                <dt class="col-3" style="margin: 0px 0px 15px 10px">
+                                    Calories:
+                                </dt>
+                                <dd class="col-3">
+                                    @m.Calories
+                                </dd>
+                            </dl>
+                                { i++;}
                             }
+
+                            <div id="thisDaysStats">
+                                @*<button type="button" class="btn btn-sm btn-myBlueDark" data-toggle="modal" data-target="#currentDayStatsModal">
+                                    Show Stats
+                                </button>
+                                <div id="statsContainer">
+
+                                </div>*@
+                            </div>
 
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#calendarDaysMealsModal">
@@ -55,6 +71,27 @@
 
 <script>
     $(document).ready(function () {
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+        var container = $('#thisDaysStats');
+
+        var tDate = $('#food_0').attr("data-tDate");
+
+        $.get(baseUrl + 'Meals/GetSpecificDayCalStats', { targetDate: tDate }, function (response) {
+            container.html(response);
+        });
+
         $('#calendarDaysMealsModal').modal('toggle');
+
+        var deleteMealButtons = document.querySelectorAll(".deleteMeal");
+
+        for (var i = 0; i < deleteMealButtons.length; i++) {
+            var btn = deleteMealButtons[i];
+
+            btn.addEventListener('click', function () {
+                deleteMeal(this.getAttribute('data-itemID'));
+            });
+        }
     });
 </script>

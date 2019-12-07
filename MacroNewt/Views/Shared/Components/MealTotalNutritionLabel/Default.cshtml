@@ -6,10 +6,14 @@
                 
             <section class="performance-facts">
                 <header class="performance-facts__header">
-                    <button type="button" class="close" data-dismiss="modal" data-target="#mealNutritionModal">
-                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                    </button>
-                    <h1 class="performance-facts__title">Nutrition Facts</h1>
+                    <div class="d-flex justify-content-between">
+                        <h1 class="performance-facts__title">Nutrition Facts</h1>
+                        <button type="button" class="btn btn-sm btn-mySelectedGray" data-dismiss="modal" data-target="#mealNutritionModal" style="height:60%;">
+                            @*<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>*@
+                            Close
+                        </button>
+                    </div>
+                    
                     <p>Serving Size 1 Meal (@(String.Format("{0:0}", Model.Mass))g)</p>
                 </header>
                 <table class="performance-facts__table">

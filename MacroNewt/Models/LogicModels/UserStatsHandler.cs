@@ -21,17 +21,8 @@ namespace MacroNewt.Models.LogicModels
             _context = context;
         }
 
-        public CurrentDayCalStatsViewModel GetCurrentMacroTargets(MacroNewtUser user)
+        public CurrentDayCalStatsViewModel OrganizeCalStats(MacroNewtUser user, int targetTotalCal, DailyCalTotal dct)
         {
-            int targetTotalCal = _context.Users
-                .Where(u => u.Id == user.Id)
-                .Select(u => u.DailyTargetCalories)
-                .FirstOrDefault();
-
-            DailyCalTotal dct = _context.DailyCalTotal
-                .Where(d => (d.Id == user.Id) && (d.CalorieDay == DateTime.Today))
-                .FirstOrDefault();
-
             if (dct == null)
             {
                 dct = new DailyCalTotal();
@@ -86,7 +77,7 @@ namespace MacroNewt.Models.LogicModels
             };
 
 
-            
+
 
             if (showMacros != null)
             {
@@ -150,6 +141,36 @@ namespace MacroNewt.Models.LogicModels
             }
 
             return cdcsvm;
+        }
+
+        public CurrentDayCalStatsViewModel GetPastMacroTargets(MacroNewtUser user, string targetDate)
+        {
+
+            int targetTotalCal = _context.Users
+                .Where(u => u.Id == user.Id)
+                .Select(u => u.DailyTargetCalories)
+                .FirstOrDefault();
+
+            DailyCalTotal dct = _context.DailyCalTotal
+                .Where(d => (d.Id == user.Id) && (d.CalorieDay.Date == Convert.ToDateTime(targetDate)))
+                .FirstOrDefault();
+
+            return OrganizeCalStats(user, targetTotalCal, dct);
+        }
+
+        public CurrentDayCalStatsViewModel GetCurrentMacroTargets(MacroNewtUser user)
+        {
+            int targetTotalCal = _context.Users
+                .Where(u => u.Id == user.Id)
+                .Select(u => u.DailyTargetCalories)
+                .FirstOrDefault();
+
+            DailyCalTotal dct = _context.DailyCalTotal
+                .Where(d => (d.Id == user.Id) && (d.CalorieDay == DateTime.Today))
+                .FirstOrDefault();
+
+            return OrganizeCalStats(user, targetTotalCal, dct);
+
         }
 
         public ConfirmMealViewModel GetMacroTargets(MacroNewtUser user, Boolean admin, int mealId, DateTime date, int mealCalories, int mealProtein, int mealFat, int mealCarb)

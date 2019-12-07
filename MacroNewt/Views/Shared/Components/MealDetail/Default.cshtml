@@ -1,252 +1,290 @@
 ﻿@model FoodViewModel
 
-<div class="row justify-content-center">
-    <div class="col-12 col-md-10 col-lg-8">
-        <div class="softBack">
-            <div class="Box-header form-row d-flex justify-content-between">
-                
-                <div class="form-group blueTextColor mb-0 col-xs-6">
-                    
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <p class="detailsShortText">Changes for @Model.UserEmail</p>
-                        <p class="detailsLongText">Please complete changes for @Model.UserEmail</p>
-                    }
-                    else
-                    {
-                        <p class="detailsShortText">Details</p>
-                        <p class="detailsLongText">Complete details to continue</p>
-                    }
-                </div>
-                <div class="form-group mb-0 col-xs-6">
-                    <button type="button" id="mealDetailsPrevious" class="btn btn-sm btn-mySelectedGray">
-                        <span class="fa fa-arrow-left fa-fw" aria-hidden="true"></span>Back
-                    </button>
-                    <button type="button" id="mealDetailsNext" class="btn btn-sm btn-secondary" disabled>
-                        Next<span class="fa fa-arrow-right fa-fw" aria-hidden="true"></span>
-                    </button>
-                </div>
-            </div>
-            <br />
-            <form asp-controller="Logger" asp-action="ConfirmMeal" id="ConfirmMealForm">
-                @Html.HiddenFor(model => Model.MealId,
-                                    new { id = "mealID" })
-                @Html.HiddenFor(model => Model.UserId,
-                                    new { id = "userID" })
-                @Html.HiddenFor(model => Model.UserEmail)
-                @Html.HiddenFor(model => Model.ReLogged)
-                @Html.HiddenFor(model => Model.Edited,
-                                    new { id = "edited" })
-                <div class="form-row ml-2 mr-2">
-                    <div class="form-group col-md-6">
-                        <div class="d-flex">
-                            <label asp-for="Title" class="control-label" style="font-weight:bold"></label>
-                            @if (Model.MealId == 0)
-                            {
-                                <input type="checkbox" id="autoNameCheckbox" name="autoTitle" style="height:25px; margin-left:20px;" />
-                                <label for="autoNameCheckbox" style="margin-left:5px;">Auto-name</label>
-                            }
-                        </div>
-                        <input asp-for="Title" class="form-control" id="mealTitleInput" />
-                        <span asp-validation-for="Title" class="text-danger"></span>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="softBack">
+                <div class="Box-header form-row d-flex justify-content-between">
+
+                    <div class="form-group blueTextColor mb-0 col-xs-6">
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <p class="detailsShortText">Changes for @Model.UserEmail</p>
+                            <p class="detailsLongText">Please complete changes for @Model.UserEmail</p>
+                        }
+                        else
+                        {
+                            <p class="detailsShortText">Details</p>
+                            <p class="detailsLongText">Complete details to continue</p>
+                        }
                     </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="MealDate" class="control-label" style="font-weight:bold"></label>
-                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                            <input asp-for="MealDate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
-                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
-                        </div>
-                        <span asp-validation-for="MealDate" class="text-danger"></span>
+                    <div class="form-group mb-0 col-xs-6">
+                        <button type="button" id="mealDetailsPrevious" class="btn btn-sm btn-mySelectedGray">
+                            <span class="fa fa-arrow-left fa-fw" aria-hidden="true"></span>Back
+                        </button>
+                        <button type="button" id="mealDetailsNext" class="btn btn-sm btn-secondary" disabled>
+                            Next<span class="fa fa-arrow-right fa-fw" aria-hidden="true"></span>
+                        </button>
                     </div>
-                </div>
-                <div class="form-row ml-2 mr-2">
-                    <div class="form-group col-12" style="margin-bottom:5px;">
-                        <label asp-for="MealType" class="control-label" style="font-weight:bold"></label>
-                        <label style="margin-left:10px; margin-right:10px;">@Html.RadioButtonFor(model => Model.MealType, "Breakfast", new { id = "Breakfast", name = "typeRadio" }) Breakfast</label>
-                        <label style="margin-right:10px;">@Html.RadioButtonFor(model => Model.MealType, "Lunch", new { id = "Lunch", name = "typeRadio" }) Lunch</label>
-                        <label style="margin-right:10px;">@Html.RadioButtonFor(model => Model.MealType, "Dinner", new { id = "Dinner", name = "typeRadio" }) Dinner</label>
-                        <label>@Html.RadioButtonFor(model => Model.MealType, "Snack", new { id = "Snack", name = "typeRadio" }) Snack</label>
-                    </div>
-                    <span asp-validation-for="MealType" class="text-danger"></span>
                 </div>
                 <br />
-                <div class="form-row ml-4 mr-4">
-                    <div class="form-group col-md-6">
-                        <label class="control-label" style="font-weight:bold">Food Name</label>
+                <form asp-controller="Logger" asp-action="ConfirmMeal" id="ConfirmMealForm">
+                    @Html.HiddenFor(model => Model.MealId,
+                                        new { id = "mealID" })
+                    @Html.HiddenFor(model => Model.UserId,
+                                        new { id = "userID" })
+                    @Html.HiddenFor(model => Model.UserEmail)
+                    @Html.HiddenFor(model => Model.ReLogged)
+                    @Html.HiddenFor(model => Model.Edited,
+                                        new { id = "edited" })
+                    <div class="form-row ml-2 mr-2">
+                        <div class="form-group col-md-6">
+                            <div class="d-flex">
+                                <label asp-for="Title" class="control-label" style="font-weight:bold"></label>
+                                @if (Model.MealId == 0)
+                                {
+                                    <input type="checkbox" id="autoNameCheckbox" name="autoTitle" style="height:25px; margin-left:20px;" />
+                                    <label for="autoNameCheckbox" style="margin-left:5px;">Auto-name</label>
+                                }
+                            </div>
+                            <input asp-for="Title" class="form-control" id="mealTitleInput" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="MealDate" class="control-label" style="font-weight:bold"></label>
+                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                <input asp-for="MealDate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
+                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="MealDate" class="text-danger"></span>
+                        </div>
                     </div>
-                    @*<div class="form-group col-md-2">
-                <label class="control-label" style="font-weight:bold">Servings</label>
-            </div>
-            <div class="form-group col-md-4">
-                <label class="control-label" style="font-weight:bold">Portion</label>
-            </div>*@
-                </div>
-                @for (int i = 0; i < Model.Foods.Count; i++)
-                {
+                    <div class="form-row ml-2 mr-2">
+                        <div class="form-group col-12" style="margin-bottom:5px;">
+                            <label asp-for="MealType" class="control-label" style="font-weight:bold"></label>
+                            <label style="margin-left:10px; margin-right:10px;">@Html.RadioButtonFor(model => Model.MealType, "Breakfast", new { id = "Breakfast", name = "typeRadio" }) Breakfast</label>
+                            <label style="margin-right:10px;">@Html.RadioButtonFor(model => Model.MealType, "Lunch", new { id = "Lunch", name = "typeRadio" }) Lunch</label>
+                            <label style="margin-right:10px;">@Html.RadioButtonFor(model => Model.MealType, "Dinner", new { id = "Dinner", name = "typeRadio" }) Dinner</label>
+                            <label>@Html.RadioButtonFor(model => Model.MealType, "Snack", new { id = "Snack", name = "typeRadio" }) Snack</label>
+                        </div>
+                        <span asp-validation-for="MealType" class="text-danger"></span>
+                    </div>
+                    <br />
                     <div class="form-row ml-4 mr-4">
                         <div class="form-group col-md-6">
-                            @Html.DisplayFor(model => Model.Foods[i].Name)
+                            <label class="control-label" style="font-weight:bold">Food Name</label>
                         </div>
-                        <div class="form-group col-md-6">
-                            <button type="button" id="finishFoodDetailsButton_@i" data-toggle="modal" data-target="#foodDetailModal_@i" class="btn btn-sm btn-myGreen">
-                                Complete Details
-                            </button>
+                        @*<div class="form-group col-md-2">
+                    <label class="control-label" style="font-weight:bold">Servings</label>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label" style="font-weight:bold">Portion</label>
+                </div>*@
+                    </div>
+                    @for (int i = 0; i < Model.Foods.Count; i++)
+                    {
+                        <div class="form-row ml-4 mr-4">
+                            <div class="form-group col-md-6">
+                                @Html.DisplayFor(model => Model.Foods[i].Name)
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button type="button" id="finishFoodDetailsButton_@i" data-toggle="modal" data-target="#foodDetailModal_@i" class="btn btn-sm btn-myGreen">
+                                    Complete Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="foodDetailModalContainer_@i">
+                            <div class="modal fade" id="foodDetailModal_@i" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content fAModal">
+
+                                        <div class="standardSoftBack">
+                                            <p class="text-center" id="notCompleteMessage_@i" style="color:red;">
+
+                                            </p>
+                                            @*<div class="form-row ml-4 mr-4">
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label" style="font-weight:bold">Food Name</label>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label class="control-label" style="font-weight:bold">Servings</label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label" style="font-weight:bold">Portion</label>
+                                        </div>
+                                    </div>*@
+
+                                            @Html.HiddenFor(model => Model.Foods[i].Ndbno)
+                                            <hidden id="Total_@i" class="FoodValue"></hidden>
+                                            <div class="ml-4 mr-4">
+                                                <div class="form-group" style="margin-top:10px;">
+                                                    <label class="control-label" style="font-weight:bold">Food Name</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    @Html.DisplayFor(model => Model.Foods[i].Name)
+                                                    @Html.HiddenFor(model => Model.Foods[i].Name)
+                                                    @Html.HiddenFor(model => Model.Foods[i].Unit)
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label" style="font-weight:bold">Servings</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input asp-for="@Model.Foods[i].NumberOfServings" data-foodIndex="@i" type="number" step=".25" min="0" class="servingSize form-control" />
+                                                    <span asp-validation-for="@Model.Foods[i].NumberOfServings" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label" style="font-weight:bold">Portion</label>
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <select asp-for="@Model.Foods[i].Value"
+                                                            id="portionSelectBox_@i"
+                                                            class="portionBox form-control"
+                                                            data-foodIndex="@i"
+                                                            data-portionIndex="@Model.Foods[i].PortionIndex">
+                                                        <option>Choose Portion</option>
+
+                                                        @{
+                                                            int counter = 0;
+
+                                                            if (Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Measures.Count == 0)
+                                                            {
+                                                                <option value="@Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Value"
+                                                                        data-proteinVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "203").FirstOrDefault().Value
+                                                                        data-fatVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "204").FirstOrDefault().Value
+                                                                        data-carbVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "205").FirstOrDefault().Value>
+                                                                    100 g (@Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Value kcal)
+                                                                </option>
+                                                            }
+
+                                                            foreach (Measure x in Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Measures)
+                                                            {
+                                                                <option value="@x.Value"
+                                                                        data-proteinVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "203").FirstOrDefault().Measures[counter].Value
+                                                                        data-fatVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "204").FirstOrDefault().Measures[counter].Value
+                                                                        data-carbVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "205").FirstOrDefault().Measures[counter].Value>
+                                                                    @x.DisplayName
+                                                                </option>
+                                                                counter += 1;
+                                                            }
+                                                        }
+
+                                                    </select>
+                                                    <span asp-validation-for="@Model.Foods[i].Value" class="text-danger"></span>
+                                                    @Html.HiddenFor(model => Model.Foods[i].PortionIndex,
+                                                            new { id = "portionChoiceIndex" + $"{i}" })
+
+                                                    @Html.HiddenFor(model => Model.Foods[i].FoodTotalProtein,
+                                                    new { @class = "selectedPortionProtein", id = "selectedPortionProtein" + $"{i}", Value = "null" })
+                                                    @Html.HiddenFor(model => Model.Foods[i].FoodTotalFat,
+                                                        new { @class = "selectedPortionFat", id = "selectedPortionFat" + $"{i}", Value = "null" })
+                                                    @Html.HiddenFor(model => Model.Foods[i].FoodTotalCarb,
+                                                        new { @class = "selectedPortionCarb", id = "selectedPortionCarb" + $"{i}", Value = "null" })
+
+                                                </div>
+                                            </div>
+
+                                            @for (int j = 0; j < Model.Foods[i].Nutrients.Count; j++)
+                                            {
+                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].NId)
+                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Name)
+                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Group)
+                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Unit)
+                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Value)
+
+                                                for (int k = 0; k < Model.Foods[i].Nutrients[j].Measures.Count; k++)
+                                                {
+                                                    @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Label)
+                                                    @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Eqv)
+                                                    @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Eunit)
+                                                    @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Qty)
+                                                    @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Value)
+                                                    @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].DisplayName)
+                                                }
+                                            }
+
+                                            <div class="d-flex justify-content-around" style="margin:10px 0 10px 0;">
+                                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#foodDetailModal_@i">
+                                                    Cancel
+                                                </button>
+                                                <button type="button" id="checkDetailsCompleteButton_@i" onclick="checkDetailsComplete(@i)" data-totalButtonsNumber="@Model.Foods.Count" class="btn btn-sm btn-myGreen">
+                                                    Done
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    }
+
+                    @Html.HiddenFor(model => Model.ProteinTotal,
+                        new { id = "mealTotalProtein", Value = "0" })
+                    @Html.HiddenFor(model => Model.FatTotal,
+                        new { id = "mealTotalFat", Value = "0" })
+                    @Html.HiddenFor(model => Model.CarbTotal,
+                        new { id = "mealTotalCarb", Value = "0" })
+
+                    <div class="form-row ml-2 mr-2">
+                        <div class="form-group col-md-8">
+
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="CalorieTotal" class="control-label" style="font-weight:bold"></label>
+                            <input asp-for="CalorieTotal" class="form-control cal" readonly="readonly" />
                         </div>
                     </div>
+                </form>
+                <div id="confirmWaitSpinnerContainer">
 
-                    <div id="foodDetailModalContainer_@i">
-                        <div class="modal fade" id="foodDetailModal_@i" role="dialog">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content fAModal">
-
-                                    <div class="standardSoftBack">
-                                        <p class="text-center" id="notCompleteMessage_@i" style="color:red;">
-
-                                        </p>
-                                        @*<div class="form-row ml-4 mr-4">
-            <div class="form-group col-md-6">
-                <label class="control-label" style="font-weight:bold">Food Name</label>
-            </div>
-            <div class="form-group col-md-2">
-                <label class="control-label" style="font-weight:bold">Servings</label>
-            </div>
-            <div class="form-group col-md-4">
-                <label class="control-label" style="font-weight:bold">Portion</label>
-            </div>
-        </div>*@
-
-                                        @Html.HiddenFor(model => Model.Foods[i].Ndbno)
-                                        <hidden id="Total_@i" class="FoodValue"></hidden>
-                                        <div class="ml-4 mr-4">
-                                            <div class="form-group">
-                                                <label class="control-label" style="font-weight:bold">Food Name</label>
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.DisplayFor(model => Model.Foods[i].Name)
-                                                @Html.HiddenFor(model => Model.Foods[i].Name)
-                                                @Html.HiddenFor(model => Model.Foods[i].Unit)
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" style="font-weight:bold">Servings</label>
-                                            </div>
-                                            <div class="form-group">
-                                                <input asp-for="@Model.Foods[i].NumberOfServings" data-foodIndex="@i" type="number" step=".25" min="0" class="servingSize form-control" />
-                                                <span asp-validation-for="@Model.Foods[i].NumberOfServings" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" style="font-weight:bold">Portion</label>
-                                            </div>
-                                            <div class="form-group">
-
-                                                <select asp-for="@Model.Foods[i].Value"
-                                                        id="portionSelectBox_@i"
-                                                        class="portionBox form-control"
-                                                        data-foodIndex="@i"
-                                                        data-portionIndex="@Model.Foods[i].PortionIndex">
-                                                    <option>Choose Portion</option>
-
-                                                    @{
-                                                        int counter = 0;
-
-                                                        if (Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Measures.Count == 0)
-                                                        {
-                                                            <option value="@Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Value"
-                                                                    data-proteinVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "203").FirstOrDefault().Value
-                                                                    data-fatVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "204").FirstOrDefault().Value
-                                                                    data-carbVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "205").FirstOrDefault().Value>
-                                                                100 g (@Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Value kcal)
-                                                            </option>
-                                                        }
-
-                                                        foreach (Measure x in Model.Foods[i].Nutrients.Where(n => n.NId == "208").FirstOrDefault().Measures)
-                                                        {
-                                                            <option value="@x.Value"
-                                                                    data-proteinVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "203").FirstOrDefault().Measures[counter].Value
-                                                                    data-fatVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "204").FirstOrDefault().Measures[counter].Value
-                                                                    data-carbVal=@Model.Foods[i].Nutrients.Where(n => n.NId == "205").FirstOrDefault().Measures[counter].Value>
-                                                                @x.DisplayName
-                                                            </option>
-                                                            counter += 1;
-                                                        }
-                                                    }
-
-                                                </select>
-                                                <span asp-validation-for="@Model.Foods[i].Value" class="text-danger"></span>
-                                                @Html.HiddenFor(model => Model.Foods[i].PortionIndex,
-                                                        new { id = "portionChoiceIndex" + $"{i}" })
-
-                                                @Html.HiddenFor(model => Model.Foods[i].FoodTotalProtein,
-                                                new { @class = "selectedPortionProtein", id = "selectedPortionProtein" + $"{i}", Value = "null" })
-                                                @Html.HiddenFor(model => Model.Foods[i].FoodTotalFat,
-                                                    new { @class = "selectedPortionFat", id = "selectedPortionFat" + $"{i}", Value = "null" })
-                                                @Html.HiddenFor(model => Model.Foods[i].FoodTotalCarb,
-                                                    new { @class = "selectedPortionCarb", id = "selectedPortionCarb" + $"{i}", Value = "null" })
-
-                                            </div>
-                                        </div>
-
-                                        @for (int j = 0; j < Model.Foods[i].Nutrients.Count; j++)
-                                        {
-                                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].NId)
-                                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Name)
-                                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Group)
-                                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Unit)
-                                            @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Value)
-
-                                            for (int k = 0; k < Model.Foods[i].Nutrients[j].Measures.Count; k++)
-                                            {
-                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Label)
-                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Eqv)
-                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Eunit)
-                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Qty)
-                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].Value)
-                                                @Html.HiddenFor(model => Model.Foods[i].Nutrients[j].Measures[k].DisplayName)
-                                            }
-                                        }
-
-                                        <div class="d-flex justify-content-around" style="margin:10px 0 10px 0;">
-                                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#foodDetailModal_@i">
-                                                Cancel
-                                            </button>
-                                            <button type="button" id="checkDetailsCompleteButton_@i" onclick="checkDetailsComplete(@i)" data-totalButtonsNumber="@Model.Foods.Count" class="btn btn-sm btn-myGreen">
-                                                Done
-                                            </button>
+                    <div class="modal" id="confirmWaitSpinnerModal">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <strong class="modalTitle">Working, please wait</strong>
+                                        <p class="modalMessage"></p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="spinner-border text-primary" style="margin-top:15px;">
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div id="logWaitSpinnerContainer">
 
-
-
-
-
-                }
-
-                @Html.HiddenFor(model => Model.ProteinTotal,
-                    new { id = "mealTotalProtein", Value = "0" })
-                @Html.HiddenFor(model => Model.FatTotal,
-                    new { id = "mealTotalFat", Value = "0" })
-                @Html.HiddenFor(model => Model.CarbTotal,
-                    new { id = "mealTotalCarb", Value = "0" })
-
-                <div class="form-row ml-2 mr-2">
-                    <div class="form-group col-md-8">
-
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="CalorieTotal" class="control-label" style="font-weight:bold"></label>
-                        <input asp-for="CalorieTotal" class="form-control cal" readonly="readonly" />
+                    <div class="modal" id="logWaitSpinnerModal">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <strong class="modalTitle">Working, please wait</strong>
+                                        <p class="modalMessage"></p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="spinner-border text-primary" style="margin-top:15px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
 
 <script>
     function checkDetailsComplete(foodNumber) {

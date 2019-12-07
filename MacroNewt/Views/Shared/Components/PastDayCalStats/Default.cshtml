@@ -1,0 +1,296 @@
+﻿@model CurrentDayCalStatsViewModel
+
+@*<div class="modal fade" id="pastDayStatsModal" role="dialog">
+    <div class="modal-dialog vertical-align-center">
+        <div class="modal-content confirmModalSizing">
+
+            
+
+        </div>
+    </div>
+</div>*@
+
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div>
+                @*<div class="Box-header form-row justify-content-around">
+                    <div class="blueDark col-6">
+                        This Day's Stats
+                    </div>
+                    <div class="col-2 col-md-3">
+                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#pastDayStatsModal" style="float:right;">
+                            Close
+                        </button>
+                    </div>
+                </div>*@
+
+                <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
+                    <p class="dailyTargetHeaders">
+                        Daily Target Calories: @Model.TargetCalories <br />
+                        <span style="font-weight:lighter;">
+                            <span id="calConsumedSpan" style="color:green;">@Model.CurrentDayCalories</span>
+                            calories consumed today <br />
+                            <span id="percentCalSpan" style="color:green;">@Model.PercentageCaloriesConsumed</span>
+                            % of target calories consumed
+                        </span>
+                        @*<span class="dailyTargetHeaders" id="dailyTargetCalOver"></span>*@
+                    </p>
+                </div>
+                <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
+                    @if (Model.CurrentDayCalories > Model.TargetCalories)
+                    {
+                        <div class="progress-bar progress-bar-striped" style="background-color:#F01E1E; width:67%; border-right:5px dotted black">@Model.CurrentDayCalories</div>
+                        if (Model.TotalCaloriesSurplusDisplayPercent < 10)
+                        {
+                            <div class="progress-bar progress-bar-striped" style="background-color:#F01E1E; width:@Model.TotalCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div style="display:flex; justify-content:center; flex-direction:column; color:#F01E1E; margin-left:20px;">@Model.TotalCaloriesSurplusPercent%</div>
+                        }
+                        else if (Model.TotalCaloriesSurplusDisplayPercent > 33)
+                        {
+                            <div class="progress-bar progress-bar-striped" style="background-color:#F01E1E; width:@Model.TotalCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-60px;">@Model.TotalCaloriesSurplusPercent%</div>
+                        }
+                        else
+                        {
+                            <div class="progress-bar progress-bar-striped" style="background-color:#F01E1E; width:@Model.TotalCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-40px;">@Model.TotalCaloriesSurplusPercent%</div>
+                        }
+
+                    }
+                    else
+                    {
+                        <div class="progress-bar progress-bar-striped" style="width:@Model.CurrentDayCaloriesPercent%; background-color:#8CB1D8;">@Model.CurrentDayCalories</div>
+                        <div class="progress-bar progress-bar-striped" style="background-color:#d3d3d3; border-right:5px dotted black; width:@(Model.CaloriesRemainingPercent)%;" aria-valuemin="0" aria-valuemax="100"></div>
+                    }
+
+                </div>
+
+                <div class="col-12 form-row justify-content-around" style="margin-top: -20px;">
+                    <div class="col-4">
+                        0<span style="font-size:10px;">%</span>
+                    </div>
+                    <div class="col-4">
+                        50<span style="font-size:10px;">%</span>
+                    </div>
+                    <div class="col-3">
+                        100<span style="font-size:10px;">%</span>
+                    </div>
+                    <div class="col-1">
+                        150<span style="font-size:10px;">%</span>
+                    </div>
+                </div>
+
+
+                @if (!Model.ShowMacros)
+                {
+                    <div class="col-12" style="margin:20px 0px 20px 0px; text-align:center;">
+                        <a asp-area="Identity" asp-page="/Account/Manage/UserGoals" id="setUpMacros" class="btn btn-sm btn-myBlue">Macro Setup</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
+                        <p class="dailyTargetHeaders">
+                            Daily Target Protein Calories: @Model.TargetProteinCalories <br />
+                            <span style="font-weight:lighter;">
+                                <span id="proteinCalConsumedSpan" style="color:green;">@Model.CurrentDayProteinCalories</span>
+                                calories from protein consumed today <br />
+                                <span id="percentProteinCalSpan" style="color:green;">@Model.PercentageProteinCaloriesConsumed</span>
+                                % of target protein calories consumed
+                            </span>
+                            @*<span class="dailyTargetHeaders" id="dailyTargetProteinOver"></span>*@
+                        </p>
+                    </div>
+                    <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
+                        @if (Model.CurrentDayProteinCalories > Model.TargetProteinCalories)
+                        {
+                            <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:67%; border-right:5px dotted black">@Model.CurrentDayProteinCalories</div>
+                            if (Model.TotalProteinCaloriesSurplusDisplayPercent < 10)
+                            {
+                                <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalProteinCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div style="display:flex; justify-content:center; flex-direction:column; color:#FFC05B; margin-left:20px;">@Model.TotalProteinCaloriesSurplusPercent%</div>
+                            }
+                            else if (Model.TotalProteinCaloriesSurplusDisplayPercent > 33)
+                            {
+                                <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalProteinCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-60px;">@Model.TotalProteinCaloriesSurplusPercent%</div>
+                            }
+                            else
+                            {
+                                <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalProteinCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-40px;">@Model.TotalProteinCaloriesSurplusPercent%</div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="progress-bar progress-bar-striped" style="width:@Model.CurrentDayProteinCaloriesPercent%; background-color:#8CB1D8;">@Model.CurrentDayProteinCalories</div>
+                            <div class="progress-bar progress-bar-striped" style="background-color:#d3d3d3; border-right:5px dotted black; width:@(Model.CurrentDayProteinCaloriesRemainingPercent)%;" aria-valuemin="0" aria-valuemax="100"></div>
+                        }
+                    </div>
+
+                    <div class="col-12 form-row justify-content-around" style="margin-top: -20px;">
+                        <div class="col-4">
+                            0<span style="font-size:10px;">%</span>
+                        </div>
+                        <div class="col-4">
+                            50<span style="font-size:10px;">%</span>
+                        </div>
+                        <div class="col-3">
+                            100<span style="font-size:10px;">%</span>
+                        </div>
+                        <div class="col-1">
+                            150<span style="font-size:10px;">%</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
+                        <p class="dailyTargetHeaders">
+                            Daily Target Fat Calories: @Model.TargetFatCalories <br />
+                            <span style="font-weight:lighter;">
+                                <span id="fatCalConsumedSpan" style="color:green;">@Model.CurrentDayFatCalories</span>
+                                calories from fat consumed today <br />
+                                <span id="percentFatCalSpan" style="color:green;">@Model.PercentageFatCaloriesConsumed</span>
+                                % of target fat calories consumed
+                            </span>
+                            @*<span class="dailyTargetHeaders" id="dailyTargetFatOver"></span>*@
+                        </p>
+                    </div>
+                    <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
+                        @if (Model.CurrentDayFatCalories > Model.TargetFatCalories)
+                        {
+                            <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:67%; border-right:5px dotted black">@Model.CurrentDayFatCalories</div>
+
+                            if (Model.TotalFatCaloriesSurplusDisplayPercent < 10)
+                            {
+                                <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalFatCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div style="display:flex; justify-content:center; flex-direction:column; color:#FFC05B; margin-left:20px;">@Model.TotalFatCaloriesSurplusPercent%</div>
+                            }
+                            else if (Model.TotalFatCaloriesSurplusDisplayPercent > 33)
+                            {
+                                <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalFatCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-60px;">@Model.TotalFatCaloriesSurplusPercent%</div>
+                            }
+                            else
+                            {
+                                <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalFatCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-40px;">@Model.TotalFatCaloriesSurplusPercent%</div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="progress-bar progress-bar-striped" style="width:@Model.CurrentDayFatCaloriesPercent%; background-color:#8CB1D8;">@Model.CurrentDayFatCalories</div>
+                            <div class="progress-bar progress-bar-striped" style="background-color:#d3d3d3; border-right:5px dotted black; width:@(Model.CurrentDayFatCaloriesRemainingPercent)%;" aria-valuemin="0" aria-valuemax="100"></div>
+                        }
+                    </div>
+
+                    <div class="col-12 form-row justify-content-around" style="margin-top: -20px;">
+                        <div class="col-4">
+                            0<span style="font-size:10px;">%</span>
+                        </div>
+                        <div class="col-4">
+                            50<span style="font-size:10px;">%</span>
+                        </div>
+                        <div class="col-3">
+                            100<span style="font-size:10px;">%</span>
+                        </div>
+                        <div class="col-1">
+                            150<span style="font-size:10px;">%</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
+                        <p class="dailyTargetHeaders">
+                            Daily Target Carb Calories: @Model.TargetCarbCalories <br />
+                            <span style="font-weight:lighter;">
+                                <span id="carbCalConsumedSpan" style="color:green;">@Model.CurrentDayCarbCalories</span>
+                                calories from carbs consumed today <br />
+                                <span id="percentCarbCalSpan" style="color:green;">@Model.PercentageCarbCaloriesConsumed</span>
+                                % of target carb calories consumed
+                            </span>
+                            @*<span class="dailyTargetHeaders" id="dailyTargetCarbOver"></span>*@
+                        </p>
+                    </div>
+                    <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
+                        @if (Model.CurrentDayCarbCalories > Model.TargetCarbCalories)
+                        {
+                            <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:67%; border-right:5px dotted black">@Model.CurrentDayCarbCalories</div>
+
+                            if (Model.TotalCarbCaloriesSurplusDisplayPercent < 10)
+                            {
+                                <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalCarbCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div style="display:flex; justify-content:center; flex-direction:column; color:#FFC05B; margin-left:20px;">@Model.TotalCarbCaloriesSurplusPercent%</div>
+                            }
+                            else if (Model.TotalCarbCaloriesSurplusDisplayPercent > 33)
+                            {
+                                <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalCarbCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-60px;">@Model.TotalCarbCaloriesSurplusPercent%</div>
+                            }
+                            else
+                            {
+                                <div class="progress-bar progress-bar-striped" style="background-color:#FFC05B; width:@Model.TotalCarbCaloriesSurplusDisplayPercent%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div style="display:flex; justify-content:center; flex-direction:column; margin-left:-40px;">@Model.TotalCarbCaloriesSurplusPercent%</div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="progress-bar progress-bar-striped" style="width:@Model.CurrentDayCarbCaloriesPercent%; background-color:#8CB1D8;">@Model.CurrentDayCarbCalories</div>
+                            <div class="progress-bar progress-bar-striped" style="background-color:#d3d3d3; border-right:5px dotted black; width:@(Model.CurrentDayCarbCaloriesRemainingPercent)%;" aria-valuemin="0" aria-valuemax="100"></div>
+                        }
+                    </div>
+
+                    <div class="col-12 form-row justify-content-around" style="margin-top:-20px; margin-bottom:20px;">
+                        <div class="col-4">
+                            0<span style="font-size:10px;">%</span>
+                        </div>
+                        <div class="col-4">
+                            50<span style="font-size:10px;">%</span>
+                        </div>
+                        <div class="col-3">
+                            100<span style="font-size:10px;">%</span>
+                        </div>
+                        <div class="col-1">
+                            150<span style="font-size:10px;">%</span>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+<script>
+    $(document).ready(function () {
+        @if (Model.CurrentDayCalories > Model.TargetCalories)
+        {
+            <text>
+                document.getElementById("percentCalSpan").style.color = "red";
+                document.getElementById("calConsumedSpan").style.color = "red";
+            </text>
+        }
+        @if (Model.CurrentDayProteinCalories > Model.TargetProteinCalories)
+        {
+            <text>
+                document.getElementById("percentProteinCalSpan").style.color = "red";
+                document.getElementById("proteinCalConsumedSpan").style.color = "red";
+            </text>
+        }
+        @if (Model.CurrentDayFatCalories > Model.TargetFatCalories)
+        {
+            <text>
+                document.getElementById("percentFatCalSpan").style.color = "red";
+                document.getElementById("fatCalConsumedSpan").style.color = "red";
+            </text>
+        }
+        @if (Model.CurrentDayCarbCalories > Model.TargetCarbCalories)
+        {
+            <text>
+                document.getElementById("percentCarbCalSpan").style.color = "red";
+                document.getElementById("carbCalConsumedSpan").style.color = "red";
+            </text>
+        }
+    });
+</script>

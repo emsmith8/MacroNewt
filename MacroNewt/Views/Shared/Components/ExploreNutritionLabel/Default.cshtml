@@ -13,10 +13,13 @@
             {
                 <section class="performance-facts">
                     <header class="performance-facts__header">
-                        <button type="button" class="close" data-dismiss="modal" data-target="#exploreNutritionModal">
-                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                        </button>
-                        <h1 class="performance-facts__title">Nutrition Facts</h1>
+                        <div class="d-flex justify-content-between">
+                            <h1 class="performance-facts__title">Nutrition Facts</h1>
+                            <button type="button" class="btn btn-sm btn-mySelectedGray" data-dismiss="modal" data-target="#exploreNutritionModal" style="height:60%;">
+                                @*<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>*@
+                                Close
+                            </button>
+                        </div>
                         <div class="d-flex justify-content-between">
                             <p>
                                 Serving Size @($"{String.Format("{0:0.##}", (Model.NumberOfServings * Convert.ToDecimal(selectedMeasure.Qty)))} {selectedMeasure.Label} " +

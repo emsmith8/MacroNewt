@@ -149,12 +149,12 @@ namespace MacroNewt
 
             var powerUser = new MacroNewtUser
             {
-                UserName = Configuration["AppSettings:UserName"],
-                Email = Configuration["AppSettings:UserEmail"]
+                UserName = Configuration["MacroNewtUserName"],
+                Email = Configuration["MacroNewtUserEmail"]
             };
 
-            string userPWD = Configuration["AppSettings:Password"];
-            var _user = await _userManager.FindByEmailAsync(Configuration["AppSettings:UserEmail"]);
+            string userPWD = Configuration["MacroNewtPassword"];
+            var _user = await _userManager.FindByEmailAsync(Configuration["MacroNewtUserEmail"]);
 
             if (_user == null)
             {

@@ -50,8 +50,8 @@
                                     foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td class="mealTable-buttonCell">
-                                                <a class="btn btn-sm btn-myBlueDark" style="width:100%; font-size:0.6em;" asp-action="Edit" asp-controller="Meals" asp-route-id="@item.Id" asp-route-relog="true">Re-Log</a>
+                                            <td class="mealTable-buttonCell text-center">
+                                                <a class="btn btn-sm btn-myBlueDark" style="width:75%; font-size:0.6em;" asp-action="Edit" asp-controller="Meals" asp-route-id="@item.Id" asp-route-relog="true">Re-Log</a>
                                             </td>
                                             <td style="vertical-align:inherit;">
                                                 @Html.DisplayFor(modelItem => item.Title)

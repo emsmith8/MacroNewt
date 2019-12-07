@@ -123,8 +123,26 @@
 
                 </div>
 
+                <div id="getDetailWaitSpinnerContainer">
 
-                
+                    <div class="modal" id="getDetailWaitSpinnerModal">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <strong class="modalTitle">Working, please wait</strong>
+                                        <p class="modalMessage"></p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="spinner-border text-primary" style="margin-top:15px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <div id="foodAddedModalContainer">
                     <div class="modal fade" id="foodAddedModal" role="dialog">
@@ -139,8 +157,8 @@
                                         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#foodAddedModal">
                                             Keep browsing
                                         </button>
-                                        <button type="button" id="returnToTopButton" class="btn btn-sm btn-myBlueDark" data-dismiss="modal" data-target="#foodAddedModal">
-                                            Back to Top
+                                        <button type="button" id="newSearchButton" class="btn btn-sm btn-myBlueDark" data-dismiss="modal" data-target="#foodAddedModal">
+                                            New Search
                                         </button>
                                         <button type="button" id="nextStepButton" class="btn btn-sm btn-myGreen" data-dismiss="modal" data-target="#foodAddedModal">
                                             Next Step
@@ -153,8 +171,10 @@
                     </div>
                 </div>
 
+
                 <div id="backToTopCell">
                     <button onclick="backToTop()" id="backToTopButton">Back to Top</button>
+                    <button onclick="newSearch()" id="newSearchFloatingButton">New Search</button>
                 </div>
 
                 <div class="row justify-content-center">
@@ -204,7 +224,7 @@
             }
         });
 
-        $('#returnToTopButton').click(backToTop);
+        $('#newSearchButton').click(newSearch);
 
         $('#nextStepButton').click(handleAddFoodsNextClick);
 
@@ -218,6 +238,8 @@
             }
         });
     })
+
+    
 
     window.onscroll = function () { scrollFunction() };
 

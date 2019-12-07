@@ -5,6 +5,7 @@
         return;
     }
     else {
+        $('#getDetailWaitSpinnerModal').modal('toggle');
         handleSubmitMealClick();
     }
 }
@@ -14,6 +15,7 @@ function handleMealDetailsPreviousClick() {
 }
 
 function handleMealDetailsNextClick() {
+    $('#confirmWaitSpinnerModal').modal('toggle');
     handleSubmitMealLogClick();
 }
 
@@ -236,6 +238,8 @@ function handleSubmitMealClick() {
         detailPrevButton.addEventListener('click', handleMealDetailsPreviousClick, false);
         detailNextButton.addEventListener('click', handleMealDetailsNextClick, false);
         $("#smartwizard").smartWizard('goToStep', 1);
+
+        $('#getDetailWaitSpinnerModal').modal('hide');
     });
 
 }
@@ -383,6 +387,7 @@ function removeFoodFromMeal(e) {
 }
 
 function handleSubmitMealLogClick() {
+    
     var getUrl = window.location;
     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
@@ -424,6 +429,7 @@ function handleSubmitMealLogClick() {
         type: 'POST',
         data: form.serialize(),
         success: function (data, status, xhr) {
+            $('#confirmWaitSpinnerModal').modal('hide');
             if (xhr.getResponseHeader("vstatus") == "pass") {
                 var container = $("#confirmContainer").empty();
                 container.html(data);
@@ -478,6 +484,9 @@ function handleSubmitMealLogClick() {
 }
 
 function confirmAndLogMeal() {
+    $('#confirmMealModal').modal("hide");
+    $('#logWaitSpinnerModal').modal('toggle');
+
     var getUrl = window.location;
     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
@@ -492,6 +501,7 @@ function confirmAndLogMeal() {
         type: 'POST',
         data: form.serialize(),
         success: function (response) {
+            $('#logWaitSpinnerModal').modal('hide');
             if (response.success == true) {
                 $("#smartwizard").smartWizard('goToStep', 2);
 
@@ -523,7 +533,7 @@ function handleExploreSearchFoods(e) {
     }
     else {
         var container = $("#searchContainer").empty();
-
+        $('#waitSpinnerModal').modal('toggle');
         //$.get('/Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
         $.get(baseUrl + 'Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
             container.html(data);
@@ -545,7 +555,7 @@ function handleExploreSearchFoods(e) {
                     null
                 ]
             });
-
+            $('#waitSpinnerModal').modal('hide');
         });
     }
 
@@ -582,16 +592,39 @@ function refreshUserInfo() {
 
 function scrollFunction() {
 
-    var myButton = document.getElementById("backToTopButton");
+    var myBacktoTopButton = document.getElementById("backToTopButton");
+    var myNewSearchButton = document.getElementById("newSearchFloatingButton");
 
     if (document.body.scrollTop > 480 || document.documentElement.scrollTop > 480) {
-        myButton.style.display = "block";
+        myBacktoTopButton.style.display = "block";
+        myNewSearchButton.style.display = "block";
     }
     else {
-        myButton.style.display = "none";
+        myBacktoTopButton.style.display = "none";
+        myNewSearchButton.style.display = "none";
     }
 }
 
 function backToTop() {
     $(window).scrollTop(0);
+}
+
+function newSearch() {
+    $('#searchString').val('');
+    $('#searchString').attr("placeholder", "type food here")
+    $('#searchString').focus();
+    $('#searchContainer').empty();
+    backToTop();
+}
+
+function deleteMeal(itemId) {
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+    //$.get('/Meals/Delete', { id: itemId }, function (response) {
+    $.get(baseUrl + 'Meals/Delete', { id: itemId }, function (response) {
+        var container = $("#deleteMealContainer").empty();
+        container.html(response);
+    });
+
 }

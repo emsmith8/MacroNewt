@@ -67,6 +67,32 @@
                         </div>
                     </div>
 
+                    <div id="backToTopCell">
+                        <button onclick="backToTop()" id="backToTopButton">Back to Top</button>
+                        <button onclick="newSearch()" id="newSearchFloatingButton">New Search</button>
+                    </div>
+
+                    <div id="waitSpinnerContainer">
+
+                        <div class="modal" id="waitSpinnerModal">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="text-center">
+                                            <strong class="modalTitle">Fetching results, please wait</strong>
+                                            <p class="modalMessage"></p>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="spinner-border text-primary" style="margin-top:15px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
                 <div class="col-12 col-md-10 col-lg-8">
                     <div id="searchContainer">
@@ -101,6 +127,8 @@
             }
         });
     })
+
+    window.onscroll = function () { scrollFunction() };
     
 
 </script>

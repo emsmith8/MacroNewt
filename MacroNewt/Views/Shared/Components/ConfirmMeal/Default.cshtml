@@ -27,7 +27,7 @@
                                 <button type="button" id="confirmMealLog" class="btn btn-sm btn-myBlue" style="width:100px;">
                                     @if (Model.EditingMeal)
                                     {
-                                        <span>Edit Meal</span>
+                                        <span>Confirm</span>
                                     }
                                     else
                                     {
@@ -45,7 +45,7 @@
                                     <span id="calConsumedSpan" style="color:#2CB32C;">@Model.CurrentDayCalories</span>
                                     calories already consumed today <br />
                                     @Model.MealCalories calories from this meal <br />
-                                    <span  id="percentCalSpan" style="color:green;">@Model.PercentageCaloriesConsumed</span>
+                                    <span id="percentCalSpan" style="color:green;">@Model.PercentageCaloriesConsumed</span>
                                     % of target calories consumed after this meal
                                 </span>
                                 @*<span class="dailyTargetHeaders" id="dailyTargetCalOver"></span>*@
@@ -131,8 +131,8 @@
                         @if (!Model.ShowMacros)
                         {
                             @*<div class="col-12" style="margin:20px 0px 20px 0px; text-align:center;">
-                                <a asp-area="Identity" asp-page="/Account/Manage/UserGoals" id="setUpMacros" class="btn btn-sm btn-myBlue">Macro Setup</a>
-                            </div>*@
+                            <a asp-area="Identity" asp-page="/Account/Manage/UserGoals" id="setUpMacros" class="btn btn-sm btn-myBlue">Macro Setup</a>
+                        </div>*@
                             <div style="text-align:center; padding-top:10px;">
                                 <span class="AsteriskNote">Remember to set up your goals in order to see macronutrient details</span>
                             </div>
