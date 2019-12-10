@@ -14,17 +14,18 @@
                         }
                         else
                         {
-                            <p class="detailsShortText">Details</p>
-                            <p class="detailsLongText">Complete details to continue</p>
+                            <p class="detailsShortText" id="detailsShortText" style="color:#FF3232;">Incomplete details</p>
+                            <p class="detailsLongText" id="detailsLongText" style="color:#FF3232;">Complete details to continue</p>
                         }
                     </div>
                     <div class="form-group mb-0 col-xs-6">
                         <button type="button" id="mealDetailsPrevious" class="btn btn-sm btn-mySelectedGray">
                             <span class="fa fa-arrow-left fa-fw" aria-hidden="true"></span>Back
                         </button>
-                        <button type="button" id="mealDetailsNext" class="btn btn-sm btn-secondary" disabled>
-                            Next<span class="fa fa-arrow-right fa-fw" aria-hidden="true"></span>
+                        <button type="button" id="mealDetailsNext" class="btn btn-sm btn-myRed noProceedButton">
+                            <span id="nextStepButtonText">Next<span class="fa fa-arrow-right fa-fw" aria-hidden="true"></span></span>
                         </button>
+                        <span class="proceedTooltip text-center" id="tooltipMessage">Please complete all details</span>
                     </div>
                 </div>
                 <br />
@@ -40,6 +41,7 @@
                     <div class="form-row ml-2 mr-2">
                         <div class="form-group col-md-6">
                             <div class="d-flex">
+                                <span class="fa fa-times-circle" id="titleStatusSymbol" style="padding-top:4px; margin-right:5px;"></span>
                                 <label asp-for="Title" class="control-label" style="font-weight:bold"></label>
                                 @if (Model.MealId == 0)
                                 {
@@ -51,9 +53,10 @@
                             <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
+                            <span class="fa fa-check-circle" id="dateStatusSymbol"></span>
                             <label asp-for="MealDate" class="control-label" style="font-weight:bold"></label>
                             <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                <input asp-for="MealDate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
+                                <input asp-for="MealDate" type="text" onkeydown="return false" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
                                 <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
@@ -63,6 +66,7 @@
                     </div>
                     <div class="form-row ml-2 mr-2">
                         <div class="form-group col-12" style="margin-bottom:5px;">
+                            <span class="fa fa-times-circle" id="typeStatusSymbol"></span>
                             <label asp-for="MealType" class="control-label" style="font-weight:bold"></label>
                             <label style="margin-left:10px; margin-right:10px;">@Html.RadioButtonFor(model => Model.MealType, "Breakfast", new { id = "Breakfast", name = "typeRadio" }) Breakfast</label>
                             <label style="margin-right:10px;">@Html.RadioButtonFor(model => Model.MealType, "Lunch", new { id = "Lunch", name = "typeRadio" }) Lunch</label>
@@ -74,7 +78,7 @@
                     <br />
                     <div class="form-row ml-4 mr-4">
                         <div class="form-group col-md-6">
-                            <label class="control-label" style="font-weight:bold">Food Name</label>
+                            <label class="control-label" style="font-weight:bold">Food Details</label>
                         </div>
                         @*<div class="form-group col-md-2">
                     <label class="control-label" style="font-weight:bold">Servings</label>
@@ -87,10 +91,11 @@
                     {
                         <div class="form-row ml-4 mr-4">
                             <div class="form-group col-md-6">
+                                <span class="fa fa-times-circle" id="food_@(i)_StatusSymbol"></span>
                                 @Html.DisplayFor(model => Model.Foods[i].Name)
                             </div>
                             <div class="form-group col-md-6">
-                                <button type="button" id="finishFoodDetailsButton_@i" data-toggle="modal" data-target="#foodDetailModal_@i" class="btn btn-sm btn-myGreen">
+                                <button type="button" id="finishFoodDetailsButton_@i" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#foodDetailModal_@i" data-totalFoodsNumber="@Model.Foods.Count" class="btn btn-sm btn-myGreen">
                                     Complete Details
                                 </button>
                             </div>
@@ -244,6 +249,11 @@
                         </div>
                     </div>
                 </form>
+                <div class="col-12 d-flex justify-content-between" style="border:1px solid #d1d5da; padding:5px;">
+                    <span class="fa fa-times-circle spanFooter" style="color:#FF3232;"><span style="font-weight:bold; margin-left:5px;">Incomplete</span></span>
+                    <span class="fa fa-check-circle spanFooter" style="color:green;"><span style="font-weight:bold; margin-left:5px;">Complete</span></span>
+                    <span class="spanFooter" style="color:red;">*<span style="color:black; font-weight:lighter; margin-left:5px;">all fields required</span></span>
+                </div>
                 <div id="confirmWaitSpinnerContainer">
 
                     <div class="modal" id="confirmWaitSpinnerModal">
@@ -287,55 +297,6 @@
     </div>
 
 <script>
-    function checkDetailsComplete(foodNumber) {
-        var completeCount = 0;
-        var servingSize = $('#Foods_' + foodNumber + '__NumberOfServings').val();
-        console.log("The serving size is " + servingSize);
-        var portion = $('#portionSelectBox_' + foodNumber).children('option:selected').attr('value');
-        console.log("The portion is " + portion);
-        var buttonCount = $('#checkDetailsCompleteButton_' + foodNumber).attr('data-totalButtonsNumber');
-
-   //     var buttons = document.getElementsByClassName('checkComplete');
-
-
-        if (servingSize < 0.25 || portion == null) {
-            $("#notCompleteMessage_" + foodNumber).text("Please make sure to provide both the number of servings and the portion type");
-        }
-        else {
-            $('#notCompleteMessage').empty();
-            $('#finishFoodDetailsButton_' + foodNumber).text("Edit");
-            $('#finishFoodDetailsButton_' + foodNumber).addClass('btn-myBlueDark').removeClass('btn-myGreen');
-
-            console.log("button count is " + buttonCount);
-
-            for (var i = 0; i < buttonCount; i++) {
-                if ($('#finishFoodDetailsButton_' + i).text() == "Edit") {
-                    completeCount++;
-                    console.log("The new completeCount is " + completeCount);
-                }
-                else {
-                    console.log("wasn't edit i guess");
-                }
-                if (completeCount == buttonCount) {
-                    $('#mealDetailsNext').prop("disabled", false);
-                    $('#mealDetailsNext').addClass('btn-myGreen').removeClass('btn-secondary');
-                }
-            }
-
-            //[].forEach.call(buttons, function (button) {
-            //    console.log("I'm heeeeeeeeeeeeeere and button text is " + button.text());
-            //    if (button.value == "Edit") {
-            //        completeCount++;
-            //        console.log("The new completeCount is " + completeCount);
-            //    }
-            //})
-            //if (completeCount == buttonCount) {
-            //    alert("all buttons good to go");
-            //}
-            $('#foodDetailModal_' + foodNumber).modal('toggle');
-        }
-    }
-
     $(document).ready(function () {
         if (@Model.MealId != 0)
         {
@@ -357,11 +318,110 @@
             if ($(this).is(':checked')) {
                 $("#mealTitleInput").val("Auto");
                 $("#mealTitleInput").prop("readonly", true);
+                $('#titleStatusSymbol').addClass('fa-check-circle').removeClass('fa-times-circle');
             }
             else {
                 $("#mealTitleInput").val(null);
                 $("#mealTitleInput").prop("readonly", false);
+                $('#titleStatusSymbol').addClass('fa-times-circle').removeClass('fa-check-circle');
             }
         });
     });
+
+    function checkDetailsComplete(foodNumber) {
+        var completeCount = 0;
+        var servingSize = $('#Foods_' + foodNumber + '__NumberOfServings').val();
+        console.log("The serving size is " + servingSize);
+        var portion = $('#portionSelectBox_' + foodNumber).children('option:selected').attr('value');
+        console.log("The portion is " + portion);
+        var buttonCount = $('#checkDetailsCompleteButton_' + foodNumber).attr('data-totalButtonsNumber');
+
+        if (servingSize < 0.25 || portion == null) {
+            $("#notCompleteMessage_" + foodNumber).text("Please make sure to provide both the number of servings and the portion type");
+        }
+        else {
+            $('#notCompleteMessage').empty();
+            $('#finishFoodDetailsButton_' + foodNumber).text("Edit");
+            $('#finishFoodDetailsButton_' + foodNumber).addClass('btn-myBlueDark').removeClass('btn-myGreen');
+            $('#finishFoodDetailsButton_' + foodNumber).attr("data-finished", true);
+
+            $('#food_' + foodNumber + '_StatusSymbol').addClass('fa-check-circle').removeClass('fa-times-circle');
+
+            console.log("button count is " + buttonCount);
+
+            for (var i = 0; i < buttonCount; i++) {
+                if ($('#finishFoodDetailsButton_' + i).text() == "Edit") {
+                    completeCount++;
+                    console.log("The new completeCount is " + completeCount);
+                }
+                else {
+                    console.log("wasn't edit i guess");
+                }
+                if (completeCount == buttonCount) {
+                    checkAllDetailsComplete();
+                }
+            }
+
+            $('#foodDetailModal_' + foodNumber).modal('toggle');
+        }
+    }
+
+    function checkAllDetailsComplete() {
+        console.log("I'm checking everything");
+        var buttonCount = $('#finishFoodDetailsButton_0').attr('data-totalFoodsNumber');
+
+        for (var i = 0; i < buttonCount; i++) {
+            if (!$('#finishFoodDetailsButton_' + i).attr('data-finished')) {
+                return;
+            }
+        }
+
+        if ($('#mealTitleInput').val() == "") {
+            return;
+        }
+        else if (!$('input:radio[name=MealType]').is(":checked")) {
+            return;
+        }
+        else {
+            //$('#mealDetailsNext').prop("disabled", false);
+            $('#mealDetailsNext').addClass('btn-myGreen').removeClass('btn-myRed');
+            $('#detailsShortText').text("Details complete");
+            $('#detailsShortText').css("color", "green");
+            $('#detailsLongText').text("Details complete");
+            $('#detailsLongText').css("color", "green");
+        }
+
+    }
+
+    $('#mealDetailsNext').click(checkNextButtonStatus).hover(nextHoverOrClick);
+
+    function nextHoverOrClick() {
+        if (!$('#mealDetailsNext').hasClass('btn-myGreen')) {
+            $('#tooltipMessage').css('display', 'block');
+            setTimeout(function () {
+                $('#tooltipMessage').css('display', 'none');
+            }, 3000);
+        }
+    }
+
+    function checkNextButtonStatus() {
+        console.log("Well I'm here");
+        if ($('#mealDetailsNext').hasClass("btn-myGreen")) {
+            handleMealDetailsNextClick();
+        }
+        else {
+            nextHoverOrClick();
+        }
+    }
+
+    $('#mealTitleInput').on("input", function () {
+        checkAllDetailsComplete();
+        $('#titleStatusSymbol').addClass('fa-check-circle').removeClass('fa-times-circle');
+    });
+
+    $('input:radio[name=MealType]').change(function () {
+        checkAllDetailsComplete();
+        $('#typeStatusSymbol').addClass('fa-check-circle').removeClass('fa-times-circle');
+    });
+
 </script>

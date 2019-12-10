@@ -105,6 +105,10 @@
 
         table.className = 'table table-bordered';
 
+        tr = document.createElement('tr');
+
+        tbody.appendChild(tr)
+
         var week = 0, i;
         while (week < 6) {
             tr = document.createElement('tr');

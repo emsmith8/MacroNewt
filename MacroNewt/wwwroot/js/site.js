@@ -236,7 +236,8 @@ function handleSubmitMealClick() {
         var detailPrevButton = document.querySelector("#mealDetailsPrevious");
         var detailNextButton = document.querySelector("#mealDetailsNext");
         detailPrevButton.addEventListener('click', handleMealDetailsPreviousClick, false);
-        detailNextButton.addEventListener('click', handleMealDetailsNextClick, false);
+        //detailNextButton.addEventListener('click', checkNextButtonStatus, false);
+        //detailNextButton.addEventListener('hover', checkNextButtonStatus, false);
         $("#smartwizard").smartWizard('goToStep', 1);
 
         $('#getDetailWaitSpinnerModal').modal('hide');
@@ -355,6 +356,7 @@ function addFoodToMeal(e) {
     }
     document.getElementById("searchResult-" + ndbno).style.display = "none";
 
+    $('#foodAddedModal').modal({ backdrop: 'static', keyboard: false });
     $('#foodAddedModal').modal('toggle');
 }
 
@@ -433,6 +435,7 @@ function handleSubmitMealLogClick() {
             if (xhr.getResponseHeader("vstatus") == "pass") {
                 var container = $("#confirmContainer").empty();
                 container.html(data);
+                $('#confirmMealModal').modal({ backdrop: 'static', keyboard: false });
                 $('#confirmMealModal').modal('toggle');
                 document.getElementById("confirmMealLog").addEventListener('click', confirmAndLogMeal, false);
             }
@@ -469,7 +472,7 @@ function handleSubmitMealLogClick() {
 
 
                 $('#mealDetailsNext').prop("disabled", false);
-                $('#mealDetailsNext').addClass('btn-myGreen').removeClass('btn-secondary');
+                $('#mealDetailsNext').addClass('btn-myGreen').removeClass('btn-myDisabledGreen');
                 
                 var detailPrevButton = document.querySelector("#mealDetailsPrevious");
                 var detailNextButton = document.querySelector("#mealDetailsNext");
@@ -570,6 +573,8 @@ function exploreFood(targetNdbno) {
     //$.get('/Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: 1}, function (response) {
     $.get(baseUrl + 'Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: 1 }, function (response) {
         container.html(response);
+
+        $('#exploreNutritionModal').modal({ backdrop: 'static', keyboard: false });
         $('#exploreNutritionModal').modal('toggle');
     });
 
@@ -627,4 +632,13 @@ function deleteMeal(itemId) {
         container.html(response);
     });
 
+}
+
+function triggerSpinner() {
+    $('#waitSpinnerModal').modal('toggle');
+}
+
+function triggerDelete() {
+    $('#waitSpinnerModal').modal('toggle');
+    $('#calendarDaysMealsModal').modal('hide');
 }

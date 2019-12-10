@@ -347,6 +347,7 @@
         //$.get('/Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: targetIndex }, function (response) {
         $.get(baseUrl + 'Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: targetIndex }, function (response) {
             container.html(response);
+            $('#exploreNutritionModal').modal({ backdrop: 'static', keyboard: false });
             $('#exploreNutritionModal').modal('toggle');
         });
     });

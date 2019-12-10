@@ -34,9 +34,12 @@
                     
                 </div>
                 <div>
-                    <a asp-action="Index" asp-controller="Home" id="logFinishReturnHome" class="btn btn-sm btn-myGreen">
-                        Home <span class="fa fa-home"></span>
-                    </a>
+                    <div>
+                        <a class="btn btn-sm btn-myBlueDark" style="width:136px;" asp-controller="Logger" asp-action="Index">Log Another Meal</a>
+                        <a asp-action="Index" asp-controller="Home" id="logFinishReturnHome" class="btn btn-sm btn-myGreen">
+                            Home <span class="fa fa-home"></span>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="mealSummaryFoodBox">
@@ -130,10 +133,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $(".successAlert").fadeOut(8000);
-    });
-</script>
 

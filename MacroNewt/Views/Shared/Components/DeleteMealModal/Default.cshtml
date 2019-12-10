@@ -48,7 +48,7 @@
 
                             </div>
                             <div class="col-2" style="margin-right:8px;">
-                                <button type="button" class="btn btn-secondary" style="line-height:18px;" data-dismiss="modal" data-target="#deleteMealModal">
+                                <button type="button" onclick="showPreviousModal()" class="btn btn-secondary" style="line-height:18px;">
                                     <span>Cancel</span>
                                 </button>
                             </div>
@@ -71,6 +71,26 @@
 
 <script>
     $(document).ready(function () {
-        $('#deleteMealModal').modal('toggle');
+        $('#waitSpinnerModal').modal('hide');
+        //$('#calendarDaysMealsModal').modal('hide');
+        //$('#deleteMealModal').modal({ backdrop: 'static', keyboard: false });
+        $('#deleteMealModal').modal('show');
     });
+
+    function showPreviousModal() {
+
+        $('#deleteMealModal').modal('hide');
+        $('#calendarDaysMealsModal').modal('toggle');
+
+        //if ($('#calHistoryTab').hasClass("active")) {
+        //    console.log("guess length blah blah");
+        //    $('#deleteMealModal').modal('hide');
+        //    $('#calendarDaysMealsModal').modal('toggle');
+        //}
+        //else {
+        //    //$('#deleteMealModal').data('modal', null);
+        //    $('#deleteMealModal').modal('hide');
+        //    console.log("I'm HEEEEEEEEEEEEEEEEEERE");
+        //}
+    }
 </script>

@@ -67,7 +67,17 @@
                                 }
                             </tbody>
                         </table>
+                        <div class="text-center" style="margin-top:10px;">
+                            <button type="button" class="btn btn-sm btn-secondary" style="line-height:18px;" data-dismiss="modal" data-target="#oldMealsModal">
+                                <span>Cancel</span>
+                            </button>
+                        </div>
                     </div>
+
+                    <div id="backToTopCell">
+                        <button onclick="oldMealsBackToTop()" id="oldMealsBackToTopButton">Back to Top</button>
+                    </div>
+
                 </div>
 
             </div>
@@ -78,6 +88,24 @@
 
 <script>
     $(document).ready(function () {
+        $('#oldMealsModal').modal({ backdrop: 'static', keyboard: false });
         $("#oldMealsModal").modal('toggle');
     });
+
+    $('#oldMealsModal').on("scroll", function () {
+        var oldMealsBacktoTopButton = document.getElementById("oldMealsBackToTopButton");
+
+        console.log("scroll top is " + $('#oldMealsModal').scrollTop());
+
+        if ($('#oldMealsModal').scrollTop() > 480) {
+            oldMealsBacktoTopButton.style.display = "block";
+        }
+        else {
+            oldMealsBacktoTopButton.style.display = "none";
+        }
+    });
+
+    function oldMealsBackToTop() {
+        $('#oldMealsModal').scrollTop(0);
+    }
 </script>

@@ -48,6 +48,23 @@
     }
 }
 
+/* iPhone 11 Pro Max, Xs Max */
+@media screen and (device-aspect-ratio: 9/19.5) {
+    select, textarea, input[type="text"], input[type="search"], input[type="password"],
+    input[type="datetime"], input[type="datetime-local"],
+    input[type="date"], input[type="month"], input[type="time"],
+    input[type="week"], input[type="number"], input[type="email"],
+    input[type="url"] {
+        font-size: 16px;
+    }
+}
+
+.mealBlock {
+    border: 3px groove #E3E3E3;
+    border-radius: 5px;
+    margin: 0px;
+    padding: 3px;
+}
 
 .fAModal {
     width: 75%;
@@ -59,6 +76,19 @@
     position: fixed;
     top: 60px;
     right: 10px;
+    z-index: 10;
+    border: none;
+    outline: none;
+    background-color: #8DE48D;
+    color: white;
+    cursor: pointer;
+}
+
+#oldMealsBackToTopButton {
+    display: none;
+    position: fixed;
+    top: 10px;
+    right: 20%;
     z-index: 10;
     border: none;
     outline: none;
@@ -80,7 +110,14 @@
     cursor: pointer;
 }
 
-@media (max-width: 768px){
+.calToolbar {
+    border: 1px solid #DEE2E6;
+    margin-bottom: -1px !important;
+    margin-top: 10px;
+    min-width: 295px;
+}
+
+@media (max-width: 768px) {
     #backToTopButton {
         top: 70px;
     }
@@ -94,10 +131,12 @@
     #backToTopButton {
         top: 50px;
     }
-
     #newSearchFloatingButton {
         top: 50px;
-        right: 95px;
+        right: 100px;
+    }
+    #oldMealsBackToTopButton {
+        right: 5%;
     }
 }
 
@@ -543,11 +582,15 @@ table.dataTable tbody td {
         #28a745 90%);
 }
 
+.btn-myDisabledGreen {
+    color: #fff;
+    background: repeating-linear-gradient(135deg, #808080, #808080 3px, #34d058 3px, #34d058 8px);
+}
+
 .btn-myBlueDark {
     color: #fff !important;
     background-color: #74B9D3;
-    background-image: linear-gradient(to bottom, #A3D6E9,
-        #74B9D3 90%);
+    background-image: linear-gradient(to bottom, #A3D6E9, #74B9D3 90%);
 }
 
 .btn-myBlueDarker {
@@ -575,6 +618,11 @@ table.dataTable tbody td {
     line-height: 31px;
 }
 
+.blueDateTextColor {
+    color: #5bc0de;
+    line-height: 31px;
+}
+
 .blueLinks {
     color: #48A4BE;
 }
@@ -589,6 +637,11 @@ table.dataTable tbody td {
 
 .short-text {
     display: none;
+}
+
+.spanFooter {
+    display: inline-flex;
+    align-items: center;
 }
 
 .btn-myRed {
@@ -1058,9 +1111,47 @@ h5 .text {
     font-size: 20px;
     font-weight: bold;
     text-align: center;
+    margin-top: -15px;
 }
 
 
 .highlighted-cal-dates {
     background-color: red;
+}
+
+.proceedTooltip {
+    display: none;
+    color: red;
+    height: 50px;
+    width: 110px;
+    background: #fff2f2;
+    position: relative;
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-left: 6px;
+    z-index: 1;
+}
+
+    .proceedTooltip:before {
+        content: "";
+        position: absolute;
+        top: 0%;
+        left: 75px;
+        height: 20px;
+        width: 20px;
+        background: #fff2f2;
+        box-sizing: border-box;
+        transform: rotate(45deg) translate(-75%);
+        border-top: inherit;
+        border-left: inherit;
+        z-index: -1;
+    }
+
+.fa-check-circle {
+    color: green;
+}
+
+.fa-times-circle {
+    color: #FF3232;
 }
