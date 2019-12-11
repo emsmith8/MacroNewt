@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MacroNewt.Controllers
 {
+    /// <summary>
+    /// Controller that displays views that support application administration tasks.
+    /// </summary>
     public class AdminController : Controller
     {
         private readonly MacroNewtContext _context;

@@ -13,7 +13,7 @@
 .calendar-current-date {
     text-align: center;
     display: inline-block;
-    width: 115px;
+    /*width: 115px;*/
 }
 
 .calendar-month-row td.overCal {
