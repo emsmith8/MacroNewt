@@ -13,7 +13,7 @@
                             </div>
                             <div>
                                 <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#updateProfileModal">
-                                    <span>Close</span>
+                                    <span>Cancel</span>
                                 </button>
                             </div>
                         </div>
@@ -88,6 +88,7 @@
 
 <script>
     $(document).ready(function () {
+        $('#updateProfileModal').modal({ backdrop: 'static', keyboard: false });
         $('#updateProfileModal').modal('toggle');
 
         document.getElementById("confirmUpdateProfileButton").addEventListener('click', function () {

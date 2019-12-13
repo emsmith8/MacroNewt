@@ -155,13 +155,14 @@ function handleSubmitMealClick() {
     //$.get('/Logger/GetMealDetailViewComponent', { formData: JSON.stringify(foodItems), mId: mID, reLogged: reLogged }, function (result) {
     $.get(baseUrl + 'Logger/GetMealDetailViewComponent', { formData: JSON.stringify(foodItems), mId: mID, reLogged: reLogged }, function (result) {
         container.html(result);
-        
+        console.log("LISTEN UP LISTEN UP HERE YE HERE YE, the mId is " + mID);
         console.log("The length of servings is " + servings.length);
 
-        
-        
+        var md = new Date();
+
         $('#datetimepicker1').datetimepicker({
             sideBySide: true,
+            maxDate: md,
             buttons: {
                 showToday: true
             }
@@ -384,7 +385,9 @@ function removeFoodFromMeal(e) {
     if (tableRef.rows.length == 1) {
         document.getElementById("NoFoodsRow").style.display = "table-row";
         document.getElementById("addFoodsNext").style.display = "none";
-        document.getElementById("relogPreviousMeal").style.display = "block";
+        if ($('#relogPreviousMeal').length) {
+            document.getElementById("relogPreviousMeal").style.display = "block";
+        }
     }
 }
 
@@ -559,6 +562,7 @@ function handleExploreSearchFoods(e) {
                 ]
             });
             $('#waitSpinnerModal').modal('hide');
+            $("html, body").animate({ scrollTop: "350px" }, 1000);
         });
     }
 

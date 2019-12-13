@@ -6,9 +6,9 @@
 
             <div class="row justify-content-center">
                 <div class="col-12">
-                    <div class="deleteSoftBack">
-                        <div class="Box-header form-row justify-content-between">
-                            <div class="blueTextColor">
+                    <div class="dailyGoalSoftBack">
+                        <div class="blueBoxHeader form-row justify-content-between">
+                            <div class="blackHeaderFont">
                                 Meals for this day
                             </div>
                             <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#calendarDaysMealsModal">
@@ -78,6 +78,10 @@
                             </div>
                         </div>
 
+                        <div id="backToTopCell">
+                            <button onclick="mealHistoryListBackToTop()" id="mealHistoryListBackToTopButton">Back to Top</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -118,4 +122,19 @@
             });
         }
     });
+
+    $('#calendarDaysMealsModal').on("scroll", function () {
+        var mealHistoryListBackToTopButton = document.getElementById("mealHistoryListBackToTopButton");
+
+        if ($('#calendarDaysMealsModal').scrollTop() > 480) {
+            mealHistoryListBackToTopButton.style.display = "block";
+        }
+        else {
+            mealHistoryListBackToTopButton.style.display = "none";
+        }
+    });
+
+    function mealHistoryListBackToTop() {
+        $('#calendarDaysMealsModal').scrollTop(0);
+    }
 </script>

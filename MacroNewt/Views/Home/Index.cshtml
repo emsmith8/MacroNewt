@@ -11,18 +11,20 @@
         <div class="row justify-content-around">
             @if (!Model.UserEmailConfirmed)
             {
-            <div class="card" style="margin:5px 15px 10px 15px;">
-                <div class="card-body">
-                    <h5 class="card-title" style="color: red;">Notice</h5>
-                    <p class="card-text">A verification link has been sent to your email account. Please click the link to verify your email and finalize your account registration. 
-                    Please note meal logging is only available once account registration is complete. Use the button below if you need another confirmation email to be sent to your address.</p>
-                </div>
-                <div class="row justify-content-around" style="margin:10px 0 10px 0;">
-                    <div style="margin:10px 0 10px 0;">
-                        <a class="btn btn-sm btn-myBlueDarker" style="cursor:pointer;" id="resendConfirmation">Resend confirmation</a>
+                <div class="card" style="margin:5px 15px 10px 15px;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: red;">Notice</h5>
+                        <p class="card-text">
+                            A verification link has been sent to your email account. Please click the link to verify your email and finalize your account registration.
+                            Please note meal logging is only available once account registration is complete. Use the button below if you need another confirmation email to be sent to your address.
+                        </p>
+                    </div>
+                    <div class="row justify-content-around" style="margin:10px 0 10px 0;">
+                        <div style="margin:10px 0 10px 0;">
+                            <a class="btn btn-sm btn-myBlueDarker" style="cursor:pointer;" id="resendConfirmation">Resend confirmation</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             }
             else
             {
@@ -35,6 +37,9 @@
                         </div>
                     </div>
                 </div>
+                <div style="margin:10px 0 10px 0;">
+                    <a class="btn btn-sm btn-myBlueDarker" style="cursor:pointer;" id="sendTestEmailButton">Send test email</a>
+                </div>
             }
         </div>
 
@@ -42,34 +47,46 @@
             <div class="row">
                 <div class="card-deck">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
                             <h5 class="card-title">Log a Meal</h5>
-                            <p class="card-text">Log a new meal or re-log a meal from your history.</p>
-                            <div class="text-center" style="margin-top:10px;">
-                                <a class="btn btn-sm btn-myGreen" style="width:136px;" asp-controller="Logger" asp-action="Index">Log</a>
+                            <p class="card-text" style="margin-bottom:15px;">Log a new meal or re-log a meal from your history.</p>
+                            <div class="text-center mt-auto" style="margin-top:10px;">
+                                <a class="btn btn-sm btn-myGreen" style="width:120px;" asp-controller="Logger" asp-action="Index">Log</a>
                             </div>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
                             <h5 class="card-title">Check Today's Stats</h5>
-                            <p class="card-text">View your calories for today and check on or set up your macronutrient balance.</p>
-                            <div class="text-center" style="margin-top:10px;">
-                                <button class="btn btn-sm btn-myBlueDarker" id="showDailyStatsButton" style="width:136px;">Stats</button>
+                            <p class="card-text" style="margin-bottom:15px;">View your calories for today and check on or set up your macronutrient balance.</p>
+                            <div class="text-center mt-auto" style="margin-top:10px;">
+                                <button class="btn btn-sm btn-myBlueDarker" id="showDailyStatsButton" style="width:120px;">Stats</button>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Meal Analytics</h5>
-                            <p class="card-text">Take a look at the meals from the previous two weeks in chart and graph form.</p>
-                            <div class="text-center" style="margin-top:10px;">
-                                <button class="btn btn-sm btn-myBlueDarker" id="showMealAnalytics" style="width:136px;">Analytics</button>
+                    <div class="row" style="margin:0 0 20px 0;">
+                        <div class="card myLeftCardSpacing">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Meal History</h5>
+                                <p class="card-text" style="margin-bottom:15px;">View a calendar with all your previously logged meals and view details, edit, or delete.</p>
+                                <div class="text-center mt-auto" style="margin-top:10px;">
+                                    <a class="btn btn-sm btn-mySlateGray" style="width: 120px;" asp-controller="Meals" asp-action="Index">History</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card myRightCardSpacing">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Meal Analytics</h5>
+                                <p class="card-text" style="margin-bottom:15px;">Take a look at the meals from the previous two weeks in chart and graph form.</p>
+                                <div class="text-center mt-auto" style="margin-top:10px;">
+                                    <button class="btn btn-sm btn-mySlateGray" id="showMealAnalytics" style="width:120px;">Analytics</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </div>
 
         <div id="mealAnalyticsModalContainer">
@@ -103,6 +120,17 @@
             var container = $('#noticeContainer');
 
             $.get(baseUrl + 'Home/ResendConfirmationEmail', function(response) {
+                container.html(response);
+            });
+        });
+
+        $('#sendTestEmailButton').click(function () {
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+            var container = $('#noticeContainer');
+
+            $.get(baseUrl + 'Home/SendTestEmail', function(response) {
                 container.html(response);
             });
         });

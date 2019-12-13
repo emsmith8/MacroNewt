@@ -10,6 +10,7 @@
     <Compile Remove="Data\**" />
     <Compile Remove="obj\**" />
     <Compile Remove="Views\Shared\Components\AdminConfirmMeal\**" />
+    <Compile Remove="Views\Shared\Components\DateRangeHistory\**" />
     <Compile Remove="Views\Shared\Components\EditFoodSearchResult\**" />
     <Compile Remove="Views\Shared\Components\FoodReport\**" />
     <Compile Remove="Views\Shared\Components\MealCalendarHistory\**" />
@@ -17,6 +18,7 @@
     <Content Remove="Data\**" />
     <Content Remove="obj\**" />
     <Content Remove="Views\Shared\Components\AdminConfirmMeal\**" />
+    <Content Remove="Views\Shared\Components\DateRangeHistory\**" />
     <Content Remove="Views\Shared\Components\EditFoodSearchResult\**" />
     <Content Remove="Views\Shared\Components\FoodReport\**" />
     <Content Remove="Views\Shared\Components\MealCalendarHistory\**" />
@@ -24,6 +26,7 @@
     <EmbeddedResource Remove="Data\**" />
     <EmbeddedResource Remove="obj\**" />
     <EmbeddedResource Remove="Views\Shared\Components\AdminConfirmMeal\**" />
+    <EmbeddedResource Remove="Views\Shared\Components\DateRangeHistory\**" />
     <EmbeddedResource Remove="Views\Shared\Components\EditFoodSearchResult\**" />
     <EmbeddedResource Remove="Views\Shared\Components\FoodReport\**" />
     <EmbeddedResource Remove="Views\Shared\Components\MealCalendarHistory\**" />
@@ -31,6 +34,7 @@
     <None Remove="Data\**" />
     <None Remove="obj\**" />
     <None Remove="Views\Shared\Components\AdminConfirmMeal\**" />
+    <None Remove="Views\Shared\Components\DateRangeHistory\**" />
     <None Remove="Views\Shared\Components\EditFoodSearchResult\**" />
     <None Remove="Views\Shared\Components\FoodReport\**" />
     <None Remove="Views\Shared\Components\MealCalendarHistory\**" />
@@ -52,6 +56,7 @@
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
     <Content Remove="compilerconfig.json" />
+    <Content Remove="docfx.json" />
     <Content Remove="Views\Admin\UserDetails.cshtml" />
     <Content Remove="Views\Logger\SearchFoods.cshtml" />
     <Content Remove="Views\Meals\Create.cshtml" />
@@ -61,15 +66,21 @@
     <Content Remove="Views\Meals\FoodViewModel.cshtml" />
     <Content Remove="Views\Meals\ReviewMealModel.cshtml" />
     <Content Remove="Views\Shared\_LoginPartial.cshtml" />
+    <Content Remove="wwwroot\images\fullLogoTest.svg" />
+    <Content Remove="wwwroot\images\MacroNewtLogoTest.png" />
     <Content Remove="wwwroot\js\fSearch.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove=".gitignore" />
+    <None Remove="Docfx-netcoreapp2.2.log" />
+    <None Remove="index.md" />
+    <None Remove="log.txt" />
+    <None Remove="toc.yml" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <PackageReference Include="docfx.console" Version="2.48.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.3" />

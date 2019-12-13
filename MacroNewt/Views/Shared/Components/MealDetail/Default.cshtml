@@ -298,6 +298,8 @@
 
 <script>
     $(document).ready(function () {
+        $("html, body").animate({ scrollTop: "150px" }, 500);
+
         if (@Model.MealId != 0)
         {
             for (var x = 0; x < @Model.Foods.Count; x++){
@@ -307,25 +309,28 @@
             }
         }
 
-        
-
-        //$("#checkDetailsCompleteButton").click(function () {
-        //    var ss = $('#Foods[].NumberOfServings').val();
-        //    console.log("The serving size is " + ss);
-        //});
-
         $('input[name=autoTitle]').change(function () {
             if ($(this).is(':checked')) {
                 $("#mealTitleInput").val("Auto");
                 $("#mealTitleInput").prop("readonly", true);
                 $('#titleStatusSymbol').addClass('fa-check-circle').removeClass('fa-times-circle');
+                checkAllDetailsComplete();
             }
             else {
                 $("#mealTitleInput").val(null);
                 $("#mealTitleInput").prop("readonly", false);
                 $('#titleStatusSymbol').addClass('fa-times-circle').removeClass('fa-check-circle');
+                $('#mealDetailsNext').addClass('btn-myRed').removeClass('btn-myGreen');
             }
         });
+
+        if ($('#mealTitleInput').val() != "") {
+            $('#titleStatusSymbol').addClass('fa-check-circle').removeClass('fa-times-circle');
+        }
+
+        if ($('input:radio[name=MealType]').is(":checked")) {
+            $('#typeStatusSymbol').addClass('fa-check-circle').removeClass('fa-times-circle');
+        }
     });
 
     function checkDetailsComplete(foodNumber) {
@@ -418,6 +423,7 @@
         checkAllDetailsComplete();
         $('#titleStatusSymbol').addClass('fa-check-circle').removeClass('fa-times-circle');
     });
+
 
     $('input:radio[name=MealType]').change(function () {
         checkAllDetailsComplete();

@@ -16,7 +16,9 @@
         <button href="#" type="button" id="showBMRModal" class="btn btn-sm bmrModalButton">Find BMR</button>
     </div>
 
-    <partial name="_StatusMessage" for="StatusMessage" />
+    <div style="margin-top:5px;">
+        <partial name="_StatusMessage" for="StatusMessage" />
+    </div>
     <div id="bannerContainer">
 
     </div>
@@ -24,11 +26,13 @@
         <div class="col-md-10" style="padding-bottom:10px;">
             <form id="profile-form" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
-
+                <span id="unSavedChangesMessage" class="text-danger font-weight-light" style="display:none;">Click the save button to have changes remembered
+                    <span id="macroWarningMessage" style="display:none;">* make sure the three macro sliders add up to 100</span>
+                </span>
                 <div class="form-group">
                     <label asp-for="Input.BaseCalorieTarget"></label>
                     <div class="d-flex">
-                        <input asp-for="Input.BaseCalorieTarget" id="calTargetPicker" class="form-control col-3" style="min-width:80px;"/>
+                        <input asp-for="Input.BaseCalorieTarget" id="calTargetPicker" class="form-control col-3" style="min-width:80px;" />
                         <button type="button" id="updateBaseCaloriesButton" class="btn btn-sm btn-myBlueDark updateCalBaseButton">Use as base</button>
                     </div>
                 </div>
@@ -75,7 +79,7 @@
                     <div>
                         <button type="submit" class="btn btn-myBlueDark" style="line-height:1;">Adjust Goals</button>
                     </div>
-                    <input type="hidden" id="hiddenTargetVal"/>
+                    <input type="hidden" id="hiddenTargetVal" />
                 </div>
 
                 <div class="d-flex" id="recommendationLegendDiv" style="display:none !important;">
@@ -142,7 +146,11 @@
                     <label asp-for="Input.PercentTotal" class="macroPercentageSign"></label>
                 </div>
 
-                <button id="update-profile-button" type="submit" class="btn btn-myBlueDark">Save</button>
+                <div class="d-flex justify-content-between">
+                    <button id="update-profile-button" type="submit" class="btn btn-myBlueDark">Save</button>
+                    <button id="cancelChangesButton" type="button" class="btn btn-sm btn-mySelectedGray" style="display:none;">Cancel</button>
+                </div>
+                <span class="changesWarningTooltip text-center" id="changesWarningTooltipMessage" style="display:none;">Macro balance must equal 100</span>
             </form>
         </div>
     </div>
@@ -161,6 +169,15 @@
 <script>
     $(document).ready(function () {
         $('#updateBaseCaloriesButton').hide();
+
+        $('#profile-form').on('change keyup', function () {
+            $('#unSavedChangesMessage').show();
+            $('#cancelChangesButton').css('display', 'inline-block');
+        });
+
+        $('#cancelChangesButton').click(function () {
+            window.location.reload(true);
+        });
 
         if ($('#goalSelection').val() == null) {
             $('#paceDiv').hide();
@@ -222,8 +239,9 @@
 
         //$.post('/Home/UpdateCalorieTarget', { calTarget: target }, function (data) {
         $.post(baseUrl + 'Home/UpdateCalorieTarget', { calTarget: target }, function (data) {
-            $('#bannerContainer').empty().append("<div class='updateAlert'><span>Target Updated</span></div > ");
+            $('#bannerContainer').empty().append("<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert'<span>×</span></button>Target updated</div > ");
             $('#updateBaseCaloriesButton').hide();
+            $('#unSavedChangesMessage').hide();
 
             var currentBase = $('#calTargetPicker').val();
             var targetVal = $('#hiddenTargetVal').val();
@@ -413,9 +431,16 @@
         $('#percentTotal').val(total);
         if (total == 100) {
             $('#percentTotal').css('background', 'rgb(87, 214, 130, 0.3)');
+            $('#update-profile-button').prop('disabled', false);
+            $('#update-profile-button').css('background-image', 'linear-gradient(to bottom, #A3D6E9, #74B9D3 90%)');
+            $('#changesWarningTooltipMessage').css('display', 'none');
         }
         else {
             $('#percentTotal').css('background', 'rgb(255, 199, 199, 0.3)');
+            $('#update-profile-button').css('background-image', 'linear-gradient(to bottom, #FF000080, #FF3232 90%)')
+            $('#macroWarningMessage').css('display', 'block');
+            $('#update-profile-button').prop('disabled', true);
+            $('#changesWarningTooltipMessage').css('display', 'block');
         }
     }
 

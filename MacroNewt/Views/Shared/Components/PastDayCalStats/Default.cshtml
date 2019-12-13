@@ -271,21 +271,21 @@
                 document.getElementById("calConsumedSpan").style.color = "red";
             </text>
         }
-        @if (Model.CurrentDayProteinCalories > Model.TargetProteinCalories)
+        @if (Model.CurrentDayProteinCalories > Model.TargetProteinCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("percentProteinCalSpan").style.color = "red";
                 document.getElementById("proteinCalConsumedSpan").style.color = "red";
             </text>
         }
-        @if (Model.CurrentDayFatCalories > Model.TargetFatCalories)
+        @if (Model.CurrentDayFatCalories > Model.TargetFatCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("percentFatCalSpan").style.color = "red";
                 document.getElementById("fatCalConsumedSpan").style.color = "red";
             </text>
         }
-        @if (Model.CurrentDayCarbCalories > Model.TargetCarbCalories)
+        @if (Model.CurrentDayCarbCalories > Model.TargetCarbCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("percentCarbCalSpan").style.color = "red";

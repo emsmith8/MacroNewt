@@ -8,7 +8,7 @@
                 <div class="col-12">
                     <div class="dailyGoalSoftBack">
                         <div class="Box-header form-row justify-content-around">
-                            <div class="blueTextColor col-6">
+                            <div class="blackHeaderFont col-6">
                                 @if (Model.Admin)
                                 {
                                     <text>@Model.UserEmail</text>
@@ -437,39 +437,39 @@
             </text>
         }
 
-        @if (Model.CurrentDayProteinCalories > Model.TargetProteinCalories)
+        @if (Model.CurrentDayProteinCalories > Model.TargetProteinCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("proteinCalConsumedSpan").style.color = "red";
             </text>
         }
-        @if (Model.CurrentDayProteinCalories + Model.MealProteinCalories > Model.TargetProteinCalories)
+        @if (Model.CurrentDayProteinCalories + Model.MealProteinCalories > Model.TargetProteinCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("percentProteinCalSpan").style.color = "red";
             </text>
         }
 
-        @if (Model.CurrentDayFatCalories > Model.TargetFatCalories)
+        @if (Model.CurrentDayFatCalories > Model.TargetFatCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("fatCalConsumedSpan").style.color = "red";
             </text>
         }
-        @if (Model.CurrentDayFatCalories + Model.MealFatCalories > Model.TargetFatCalories)
+        @if (Model.CurrentDayFatCalories + Model.MealFatCalories > Model.TargetFatCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("percentFatCalSpan").style.color = "red";
             </text>
         }
 
-        @if (Model.CurrentDayCarbCalories > Model.TargetCarbCalories)
+        @if (Model.CurrentDayCarbCalories > Model.TargetCarbCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("carbCalConsumedSpan").style.color = "red";
             </text>
         }
-        @if (Model.CurrentDayCarbCalories + Model.MealCarbCalories > Model.TargetCarbCalories)
+        @if (Model.CurrentDayCarbCalories + Model.MealCarbCalories > Model.TargetCarbCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("percentCarbCalSpan").style.color = "red";

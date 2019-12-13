@@ -203,6 +203,10 @@
 
 <script>
     $(document).ready(function () {
+        console.log("url is " + window.location); 
+
+        checkProperPageLoad();
+
         $('#smartwizard').smartWizard({
             theme: 'circles',
             keyNavigation: false,
@@ -214,6 +218,7 @@
                 toolbarPosition: 'none',                
             }
         });
+
         document.getElementById("searchFoods").addEventListener('click', handleSearchFoodsClick, false);
         document.getElementById("relogPreviousMeal").addEventListener('click', showOldMealsModal, false);
         document.getElementById("addFoodsNext").addEventListener('click', handleAddFoodsNextClick, false);
@@ -239,9 +244,19 @@
         });
     })
 
-    
 
     window.onscroll = function () { scrollFunction() };
+
+    function checkProperPageLoad() {
+        var getUrl = window.location;
+        var getUrlString = getUrl.href;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+        var arr = getUrlString.split("Logger");
+        
+        if (arr[1] == "#MealDetails" || arr[1] == "#ReviewMeal") {
+            window.location.replace(baseUrl + "Logger");
+        }
+    }
 
     function showOldMealsModal() {
         $('#waitSpinnerModal').modal('toggle');

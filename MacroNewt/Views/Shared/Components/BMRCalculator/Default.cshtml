@@ -8,7 +8,7 @@
                 <div class="col-12">
                     <div class="standardSoftBack">
                         <div class="Box-header form-row justify-content-around">
-                            <div class="blueDark">
+                            <div class="blackHeaderFont">
                                BMR and Calorie Needs
                             </div>
                             <div>
@@ -149,7 +149,7 @@
             updateCalorieTarget(@Math.Round((Model.BMR * 1.9)));
         });
 
-        
+        $('#bmrModal').modal({ backdrop: 'static', keyboard: false });
         $('#bmrModal').modal('toggle');
 
         document.getElementById('closeBMRModalButton').addEventListener('click', function () {

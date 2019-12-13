@@ -13,6 +13,8 @@ using System.Security.Claims;
 using MacroNewt.Models.ViewModels;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Text.Encodings.Web;
+using System.Net.Mail;
+using System.Net.Mime;
 
 namespace MacroNewt.Controllers
 {
@@ -127,6 +129,8 @@ namespace MacroNewt.Controllers
                 .Where(u => u.Id == userID)
                 .FirstOrDefault();
 
+            var userNm = user.UserName;
+
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             var callbackUrl = Url.Page(
                 "/Account/ConfirmEmail",
@@ -135,7 +139,25 @@ namespace MacroNewt.Controllers
                 protocol: Request.Scheme);
 
             await _emailSender.SendEmailAsync(user.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        $"<h1>{userNm}</h1><div>Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.</div>");
+
+            return ViewComponent("ResendConfirmationEmail");
+        }
+
+        public async Task<IActionResult> SendTestEmail()
+        {
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var user = _context.Users
+                .Where(u => u.Id == userID)
+                .FirstOrDefault();
+
+            var userNm = user.Name;
+
+           
+
+            await _emailSender.SendEmailAsync(user.Email, "Testing inline image",
+                $"<div><img src='cid:LogoImage' alt='siteLogo' title='Logo' style='display:block' height='15%' width='60%' /></div><p class='text-center'>{userNm},<p><div>Please confirm your account by <a href='fakeLink'>clicking here</a>.</div>");
 
             return ViewComponent("ResendConfirmationEmail");
         }

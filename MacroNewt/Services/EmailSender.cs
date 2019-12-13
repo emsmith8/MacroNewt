@@ -4,6 +4,7 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,6 +36,22 @@ namespace MacroNewt.Services
             };
             msg.AddTo(new EmailAddress(email));
 
+
+            string _b64 = Convert.ToBase64String(File.ReadAllBytes("wwwroot/images/fullLogoCenteringTest.png"));
+
+            Attachment inlineLogo = new Attachment()
+            {
+                Content = _b64,
+                Type = "image/png",
+                Filename = "~/images/fullLogoCenteringTest.png",
+                Disposition = "inline",
+                ContentId = "LogoImage"
+            };
+
+            msg.AddAttachment(inlineLogo);
+
+            
+
             msg.SetClickTracking(false, false);
 
             return client.SendEmailAsync(msg);
@@ -42,3 +59,16 @@ namespace MacroNewt.Services
 
     }
 }
+
+//var contentID = "LogoImage";
+//var inlineLogo = new Attachment("~/images/fullLogoCenteringTest.svg");
+//inlineLogo.ContentId = contentID;
+//            inlineLogo.ContentDisposition.Inline = true;
+//            inlineLogo.ContentDisposition.DispositionType = DispositionTypeNames.Inline;
+
+//            MailMessage msg = new MailMessage();
+
+//msg.IsBodyHtml = true;
+//            msg.Attachments.Add(inlineLogo);
+//            msg.Body = "<div><img src=\"cid:" + contentID + "\"> alt='siteLogo' title='Logo' style='display:block' height='300' width='600' /></div>" +
+//                "<h1>{userNm}</h1><div>Please confirm your account by <a href='fakeLink'>clicking here</a>.</div>";

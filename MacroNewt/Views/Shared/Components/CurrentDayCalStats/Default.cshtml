@@ -7,8 +7,8 @@
             <div class="row justify-content-center">
                 <div class="col-12">
                     <div class="dailyGoalSoftBack">
-                        <div class="Box-header form-row justify-content-around">
-                            <div class="blueDark col-6">
+                        <div class="blueBoxHeader form-row justify-content-around">
+                            <div class="blackHeaderFont col-6">
                                 Today's Stats
                             </div>
                             <div class="col-2 col-md-3">
@@ -262,28 +262,28 @@
 
 <script>
     $(document).ready(function () {
-        @if (Model.CurrentDayCalories > Model.TargetCalories)
+        @if (Model.CurrentDayCalories > Model.TargetCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("percentCalSpan").style.color = "red";
                 document.getElementById("calConsumedSpan").style.color = "red";
             </text>
         }
-        @if (Model.CurrentDayProteinCalories > Model.TargetProteinCalories)
+        @if (Model.CurrentDayProteinCalories > Model.TargetProteinCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("percentProteinCalSpan").style.color = "red";
                 document.getElementById("proteinCalConsumedSpan").style.color = "red";
             </text>
         }
-        @if (Model.CurrentDayFatCalories > Model.TargetFatCalories)
+        @if (Model.CurrentDayFatCalories > Model.TargetFatCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("percentFatCalSpan").style.color = "red";
                 document.getElementById("fatCalConsumedSpan").style.color = "red";
             </text>
         }
-        @if (Model.CurrentDayCarbCalories > Model.TargetCarbCalories)
+        @if (Model.CurrentDayCarbCalories > Model.TargetCarbCalories && Model.ShowMacros)
         {
             <text>
                 document.getElementById("percentCarbCalSpan").style.color = "red";

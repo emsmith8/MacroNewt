@@ -57,7 +57,7 @@ namespace MacroNewt
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 0;
-                //options.SignIn.RequireConfirmedEmail = true;
+                //options.SignIn.RequireConfirmedEmail = true; /* allow user to still sign in but not log meals */
             });
 
             services.AddDbContext<MacroNewtContext>(options =>
@@ -150,7 +150,9 @@ namespace MacroNewt
             var powerUser = new MacroNewtUser
             {
                 UserName = Configuration["MacroNewtUserName"],
-                Email = Configuration["MacroNewtUserEmail"]
+                Email = Configuration["MacroNewtUserEmail"],
+                Name = "Admin",
+                ProfileName = "Admin"
             };
 
             string userPWD = Configuration["MacroNewtPassword"];

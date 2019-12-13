@@ -9,6 +9,7 @@
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
     <div class="col-md-10" style="padding-bottom:10px;">
+        <span id="unSavedChangesMessage" class="text-danger font-weight-light" style="display:none;">Click the save button to have changes remembered</span>
         <form id="profile-form" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -19,9 +20,9 @@
                 <label asp-for="Input.Email"></label>
                 @if (Model.IsEmailConfirmed)
                 {
+                    <span class="input-group-addon" aria-hidden="true"><span class="fa fa-check-circle"></span></span>
                     <div class="input-group">
                         <input asp-for="Input.Email" class="form-control" />
-                        <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
                     </div>
                 }
                 else
@@ -83,36 +84,28 @@
                     <input asp-for="Input.Weight" type="number" step="1" min="0" class="form-control" />
                 </div>
                 @*<div class="form-group">
-                    <label asp-for="Input.DailyCalorieTarget"></label>
-                    <input asp-for="Input.DailyCalorieTarget" class="form-control" />
-                </div>*@
+                <label asp-for="Input.DailyCalorieTarget"></label>
+                <input asp-for="Input.DailyCalorieTarget" class="form-control" />
+            </div>*@
             </div>
             <button id="update-profile-button" type="submit" class="btn btn-myBlueDark">Save</button>
+            <button id="cancelChangesButton" type="button" class="btn btn-sm btn-mySelectedGray" style="display:none;">Cancel</button>
         </form>
     </div>
 </div>
 
 <script>
 
-    //function updateSelect() {
-    //    if ($("#feetSelect option:selected").val() == -1) {
-    //        alert("It was -1");
-    //        $("#feetSelect").val(-1);
-    //    }
-    //    if ($("#inchSelect option:selected").val() == -1) {
-    //        $("#inchSelect").val(-1);
-    //    }
-    //}
+    $(document).ready(function() {
+        $('#profile-form').on('change keyup', function () {
+            $('#unSavedChangesMessage').show();
+            $('#cancelChangesButton').css('display', 'inline-block');
+        });
 
-    //$(document).on('submit', 'form', function () {
-    //    if ($("#feetSelect option:selected").val() == -1) {
-    //        alert("It was -1");
-    //          $("#feetSelect").val(-1);
-    //    }
-    //    if ($("#inchSelect option:selected").val() == -1) {
-    //        $("#inchSelect").val(-1);
-    //    }
-    //});
+        $('#cancelChangesButton').click(function () {
+            window.location.reload(true);
+        });
+    });
 
 </script>
 

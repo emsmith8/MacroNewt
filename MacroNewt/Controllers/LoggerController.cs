@@ -132,6 +132,16 @@ namespace MacroNewt.Areas.Identity.Data
                     .Select(m => m.UserId)
                     .FirstOrDefault();
 
+                vm.Title = _context.Meal
+                    .Where(m => m.Id == mId)
+                    .Select(m => m.Title)
+                    .FirstOrDefault();
+
+                vm.MealDate = _context.Meal
+                    .Where(m => m.Id == mId)
+                    .Select(m => m.MealDate)
+                    .FirstOrDefault();
+
                 vm.Edited = "edited";
 
                 vm.MealType = _context.Meal

@@ -174,6 +174,16 @@ namespace MacroNewt.Controllers
             
             await _context.SaveChangesAsync();
 
+            var userGoals = _context.UserGoals
+                .Where(g => g.Id == id);
+
+            foreach (UserGoals goal in userGoals)
+            {
+                _context.UserGoals.Remove(goal);
+            }
+
+            await _context.SaveChangesAsync();
+
             return RedirectToAction("ManageUsers", "Admin");
         }
 

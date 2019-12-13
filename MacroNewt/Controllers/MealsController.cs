@@ -79,25 +79,27 @@ namespace MacroNewt.Areas.Identity.Data
             return ViewComponent("ExploreNutritionLabel", epc);
         }
 
-        public IActionResult BuildMealCalendarModal()
-        {
-            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //public IActionResult BuildMealCalendarModal()
+        //{
+        //    string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var mealList = _context.Meal
-                    .Where(m => m.UserId == userID)
-                    .ToList();
+        //    var mealList = _context.Meal
+        //            .Where(m => m.UserId == userID)
+        //            .OrderBy(m => m.MealDate)
+        //            .ThenBy(m => m.MealDate.TimeOfDay)
+        //            .ToList();
 
             
             
-            //foreach (Meal meal in mealList)
-            //{
-            //    string mealTitle = meal.Title;
-            //    DateTime mealDate = meal.MealDate.Date;
-            //    int mealCalories = meal.Calories;
-            //}
+        //    //foreach (Meal meal in mealList)
+        //    //{
+        //    //    string mealTitle = meal.Title;
+        //    //    DateTime mealDate = meal.MealDate.Date;
+        //    //    int mealCalories = meal.Calories;
+        //    //}
 
-            return ViewComponent("MealCalendarHistory", mealList);
-        }
+        //    return ViewComponent("MealCalendarHistory", mealList);
+        //}
 
 
 
@@ -131,51 +133,51 @@ namespace MacroNewt.Areas.Identity.Data
         }
         
 
-        public IActionResult GetDateRangeHistoryViewComponent(DateTime startDate, DateTime endDate)
-        {
-            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //public IActionResult GetDateRangeHistoryViewComponent(DateTime startDate, DateTime endDate)
+        //{
+        //    string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            List<Meal> meals = new List<Meal>();
+        //    List<Meal> meals = new List<Meal>();
 
-            if (startDate.Date == endDate.Date)
-            {
-                meals = _context.Meal
-                    .Where(m => (m.UserId == userID) && (m.MealDate.Date == startDate.Date))
-                    .ToList();
-            }
-            else
-            {
-                meals = _context.Meal
-                    .Where(m => (m.UserId == userID) && ((m.MealDate.Date >= startDate.Date) && (m.MealDate.Date <= endDate.Date)))
-                    .ToList();
-            }
+        //    if (startDate.Date == endDate.Date)
+        //    {
+        //        meals = _context.Meal
+        //            .Where(m => (m.UserId == userID) && (m.MealDate.Date == startDate.Date))
+        //            .ToList();
+        //    }
+        //    else
+        //    {
+        //        meals = _context.Meal
+        //            .Where(m => (m.UserId == userID) && ((m.MealDate.Date >= startDate.Date) && (m.MealDate.Date <= endDate.Date)))
+        //            .ToList();
+        //    }
 
-            HistoryDataViewModel hd = new HistoryDataViewModel()
-            {
-                Meals = meals,
-                StartDate = startDate,
-                EndDate = endDate
-            };
+        //    HistoryDataViewModel hd = new HistoryDataViewModel()
+        //    {
+        //        Meals = meals,
+        //        StartDate = startDate,
+        //        EndDate = endDate
+        //    };
 
-            return ViewComponent("DateRangeHistory", hd);
+        //    return ViewComponent("DateRangeHistory", hd);
             
-        }
+        //}
         
 
-        public IActionResult GetNutritionLabelViewComponent(string ndbno)
-        {
-            var food = _context.Food
-                .Include(x => x.Nutrients)
-                    .ThenInclude(x => x.Measures)
-                    .FirstOrDefault(f => f.Ndbno == ndbno);
+        //public IActionResult GetNutritionLabelViewComponent(string ndbno)
+        //{
+        //    var food = _context.Food
+        //        .Include(x => x.Nutrients)
+        //            .ThenInclude(x => x.Measures)
+        //            .FirstOrDefault(f => f.Ndbno == ndbno);
 
-            if (food == null)
-            {
-                return NotFound();
-            }
+        //    if (food == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View();
-        }
+        //    return View();
+        //}
 
         // GET: Meals/Details/5
         [Authorize]
@@ -342,6 +344,7 @@ namespace MacroNewt.Areas.Identity.Data
 
             var dayInfo = await _context.Meal
                 .Where(m => (m.UserId == userID) && (m.MealDate.Month == month) && (m.MealDate.Day == day) && (m.MealDate.Year == year))
+                .OrderBy(m => m.MealDate)
                 .ToListAsync();
 
             return ViewComponent("CalendarMealModal", dayInfo);

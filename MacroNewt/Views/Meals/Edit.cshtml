@@ -191,6 +191,9 @@
                 toolbarPosition: 'none',
             }
         });
+
+        checkProperPageLoad();
+
         document.getElementById("searchFoods").addEventListener('click', handleSearchFoodsClick, false);
         document.getElementById("addFoodsNext").addEventListener('click', handleAddFoodsNextClick, false);
         document.getElementById("visContainer").style.visibility = "visible";
@@ -216,6 +219,19 @@
             }
         }
     })
+
+    function checkProperPageLoad() {
+        var getUrl = window.location;
+        var getUrlString = getUrl.href;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+        console.log("base string is " + getUrlString);
+        var arr = getUrlString.split("#");
+        console.log("The string in question is " + arr[1]);
+        if (arr[1] == "MealDetails" || arr[1] == "ReviewMeal") {
+            console.log("I got here");
+            window.location.replace(baseUrl + "Logger");
+        }
+    }
 
     window.onscroll = function () { scrollFunction() };
 

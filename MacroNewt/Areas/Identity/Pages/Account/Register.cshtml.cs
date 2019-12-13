@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using MacroNewt.Areas.Identity.Data;
@@ -146,7 +147,16 @@ namespace MacroNewt.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    if (error.Description.StartsWith("User name"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Email address '" + Input.Email + "' is already taken");
+                        error.Description.Replace("User name", "Email address");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    
                 }
             }
 

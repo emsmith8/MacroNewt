@@ -59,7 +59,31 @@
     }
 }
 
+
+.myLeftCardSpacing {
+    width: 49%;
+    margin-right: 3px;
+}
+
+.myRightCardSpacing {
+    width: 49%;
+    margin-left: 3px;
+}
+
+@media (min-width: 576px) {
+    .myLeftCardSpacing {
+        margin-right: 0px;
+        margin-top: 15px;
+    }
+    .myRightCardSpacing {
+        margin-left: 0px;
+        margin-top: 15px;
+    }
+}
+
 .mealBlock {
+    background: rgb(151,143,191);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(241,249,255,1) 66%);
     border: 3px groove #E3E3E3;
     border-radius: 5px;
     margin: 0px;
@@ -85,6 +109,19 @@
 }
 
 #oldMealsBackToTopButton {
+    display: none;
+    position: fixed;
+    top: 10px;
+    right: 20%;
+    z-index: 10;
+    border: none;
+    outline: none;
+    background-color: #8DE48D;
+    color: white;
+    cursor: pointer;
+}
+
+#mealHistoryListBackToTopButton {
     display: none;
     position: fixed;
     top: 10px;
@@ -133,9 +170,12 @@
     }
     #newSearchFloatingButton {
         top: 50px;
-        right: 100px;
+        right: 110px;
     }
     #oldMealsBackToTopButton {
+        right: 5%;
+    }
+    #mealHistoryListBackToTopButton {
         right: 5%;
     }
 }
@@ -435,7 +475,7 @@ body {
     display:block;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 768px) {
     .foodAddButton {
         display: block;
         width: 100%;
@@ -491,6 +531,22 @@ table.dataTable tbody td {
     padding-right: 0px;
 }
 
+.topMargin {
+    margin-top: 70px;
+}
+
+@media (max-width: 767px) {
+    .topMargin {
+        margin-top: 90px;
+    }
+}
+
+@media (max-width: 575px) {
+    .topMargin {
+        margin-top: 55px;
+    }
+}
+
 .mealSummaryFoodBox {
     padding: 10px;
 }
@@ -499,7 +555,6 @@ table.dataTable tbody td {
         background-color: #fcfdff;
         border: none;
         padding: 0;
-        font-weight: bold;
         color: #48A4BE;
     }
 
@@ -548,7 +603,8 @@ table.dataTable tbody td {
 }
 
 .summaryHeader {
-    color: #48A4BE;
+    /*color: #48A4BE;*/
+    color: black;
     font-size: 1.1em;
     font-weight: bold;
 }
@@ -605,6 +661,12 @@ table.dataTable tbody td {
     background-image: linear-gradient(to bottom, #CECECE, #A2A0A0 90%);
 }
 
+.btn-mySlateGray {
+    color: #fff !important;
+    background-color: #BAB1BA;
+    background: linear-gradient(rgb(237, 237, 237) 5%, rgb(186, 177, 186) 100%) rgb(237, 237, 237);
+}
+
 .btn-myBlueLight {
     color: #fff;
     background-color: #84D2F0;
@@ -614,6 +676,12 @@ table.dataTable tbody td {
 
 .blueTextColor {
     color: #5bc0de;
+    font-weight: bold;
+    line-height: 31px;
+}
+
+.greenTextColor {
+    color: #43A919;
     font-weight: bold;
     line-height: 31px;
 }
@@ -855,7 +923,7 @@ table.dataTable tbody td {
 .dailyGoalSoftBack {
     box-shadow: inset 0 0 10px rgba(27,31,35,.05);
     border-radius: 3px;
-    background-color: #fcfdff;
+    background-color: #f6f9ff;
     border: 1px solid #d1d5da;
     padding-left: 0px;
     padding-right: 0px;
@@ -888,6 +956,12 @@ table.dataTable tbody td {
 
 .blueDark {
     color: #5BC0DE;
+    font-weight: bold;
+    line-height: 31px;
+}
+
+.blackHeaderFont {
+    color: black;
     font-weight: bold;
     line-height: 31px;
 }
@@ -930,6 +1004,16 @@ h5 .text {
     z-index: 2;
     padding: 10px;
     display: inline-block;
+}
+
+.blueBoxHeader {
+    background: rgb(201,227,247);
+    background: linear-gradient(90deg, rgba(232,251,227,1) 0%,rgba(201,227,247,1) 66%);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    margin: -1px -1px 0px 0px;
+    padding: 10px;
+    height: 51px;
 }
 
 .Box-header {
@@ -1143,6 +1227,35 @@ h5 .text {
         background: #fff2f2;
         box-sizing: border-box;
         transform: rotate(45deg) translate(-75%);
+        border-top: inherit;
+        border-left: inherit;
+        z-index: -1;
+    }
+
+.changesWarningTooltip {
+    display: none;
+    color: red;
+    height: 50px;
+    width: 110px;
+    background: #fff2f2;
+    position: relative;
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin-top: -40px;
+    margin-left: 70px;
+    z-index: 1;
+}
+
+    .changesWarningTooltip:before {
+        content: "";
+        position: absolute;
+        top: 20%;
+        right: 96px;
+        height: 20px;
+        width: 20px;
+        background: #fff2f2;
+        box-sizing: border-box;
+        transform: rotate(-45deg) translate(-15%);
         border-top: inherit;
         border-left: inherit;
         z-index: -1;

@@ -18,7 +18,12 @@ p {
 .modal-dialog.nutritionLabelWidth {
     max-width: 360px;
     min-width: 300px;
-    transform: translateX(5%) !important;
+}
+
+@media (max-width: 575px) {
+    .modal-dialog.nutritionLabelWidth {
+        transform: translateX(5%) !important;
+    }
 }
 
 .modal-open .modal {
