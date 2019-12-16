@@ -37,10 +37,11 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin:10px 0 10px 0;">
+                @*<div style="margin:10px 0 10px 0;">
                     <a class="btn btn-sm btn-myBlueDarker" style="cursor:pointer;" id="sendTestEmailButton">Send test email</a>
-                </div>
+                </div>*@
             }
+
         </div>
 
         <div class="container">
@@ -124,16 +125,16 @@
             });
         });
 
-        $('#sendTestEmailButton').click(function () {
-            var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+        //$('#sendTestEmailButton').click(function () {
+        //    var getUrl = window.location;
+        //    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
-            var container = $('#noticeContainer');
+        //    var container = $('#noticeContainer');
 
-            $.get(baseUrl + 'Home/SendTestEmail', function(response) {
-                container.html(response);
-            });
-        });
+        //    $.get(baseUrl + 'Home/SendTestEmail', function(response) {
+        //        container.html(response);
+        //    });
+        //});
     });
     
 </script>

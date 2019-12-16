@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Text.Encodings.Web;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.Text;
 
 namespace MacroNewt.Controllers
 {
@@ -138,29 +139,85 @@ namespace MacroNewt.Controllers
                 values: new { area = "Identity", userId = user.Id, code },
                 protocol: Request.Scheme);
 
-            await _emailSender.SendEmailAsync(user.Email, "Confirm your email",
-                        $"<h1>{userNm}</h1><div>Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.</div>");
+            EmailBuildHandler ebh = new EmailBuildHandler();
+
+            string finalEmail = ebh.BuildVerificationEmailHtml(user.Name, user.Email, callbackUrl);
+
+            await _emailSender.SendEmailAsync(user.Email, "Confirm your email", finalEmail);
+
+            //await _emailSender.SendEmailAsync(user.Email, "Confirm your email",
+            //            $"<h1>{userNm}</h1><div>Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.</div>");
 
             return ViewComponent("ResendConfirmationEmail");
         }
 
-        public async Task<IActionResult> SendTestEmail()
-        {
-            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //public string BuildVerificationEmailHtml(string userName, string userEmail, string callbackUrl)
+        //{
+        //    string emailHtml = System.IO.File.ReadAllText("Views/Shared/VerificationEmail.cshtml");
 
-            var user = _context.Users
-                .Where(u => u.Id == userID)
-                .FirstOrDefault();
+        //    StringBuilder sb = new StringBuilder(emailHtml);
 
-            var userNm = user.Name;
+        //    sb.Replace("{userName}", userName);
+        //    sb.Replace("{userEmail}", userEmail);
+        //    sb.Replace("{callbackUrl}", callbackUrl);
 
-           
+        //    string emailHtmlResult = sb.ToString();
 
-            await _emailSender.SendEmailAsync(user.Email, "Testing inline image",
-                $"<div><img src='cid:LogoImage' alt='siteLogo' title='Logo' style='display:block' height='15%' width='60%' /></div><p class='text-center'>{userNm},<p><div>Please confirm your account by <a href='fakeLink'>clicking here</a>.</div>");
+        //    return emailHtmlResult;
+        //}
 
-            return ViewComponent("ResendConfirmationEmail");
-        }
+        //public async Task<IActionResult> SendTestEmail()
+        //{
+        //    string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        //    var user = _context.Users
+        //        .Where(u => u.Id == userID)
+        //        .FirstOrDefault();
+
+        //    //     var userNm = user.Name;
+
+        //    //string path = "Views/Shared/VerificationEmail.cshtml";
+
+
+
+
+
+        //    //            string emailHtml = "<div style ='width:350px;' ><div class='text-center'><span style ='background-color:#ebebeb; padding:10px; display:block; text-align:left; font-weight:lighter;'> Your MacroNewt email verification</span>"
+        //    //                + "<img src = 'cid:LogoImage' alt='siteLogo' title='Logo' style='max-width:150px; width:100%; margin:10px;' /></div><div style = 'padding:10px;' >< p >" + ${user.Name} + ",<br />
+        //    //            Your MacroNewt account email is:<br />
+        //    //            ${user.Email
+        //    //}
+        //    //        </p>
+        //    //        <div style = "margin:10px 0 10px 0;" >
+        //    //            < a class="btn btn-sm btn-myBlueDarker" id="confirmEmailButton" href="${HtmlEncoder.Default.Encode(callbackUrl)}">Confirm email</a>
+        //    //         </div>
+        //    //        <p>
+        //    //            <br />
+
+        //    //             This link will expire in 3 hours.
+        //    //             <br />
+        //    //        </p>
+        //    //        <p>
+
+        //    //             Can't click the button? Copy and past this into your browser:<br />
+        //    //            ${ HtmlEncoder.Default.Encode(callbackUrl)}
+        //    //        </p>
+        //    //    </div>
+        //    //</div>"
+
+
+        //    //string emailContent = GetVerificationEmailHtml(user.Name, user.Email, HtmlEncoder.Default.Encode(callbackUrl)).ToString();
+        //    //string emailContent = GetVerificationEmailHtml(user.Name, user.Email, "callbackUrlPlaceholder").ToString();
+
+        //    string finalEmail = BuildVerificationEmailHtml(user.Name, user.Email, "placeholderCallbackUrl");
+
+        //    await _emailSender.SendEmailAsync(user.Email, "Testing inline image", finalEmail);
+
+        //  //  await _emailSender.SendEmailAsync(user.Email, "Testing inline image",
+        //   //     $"<div><img src='cid:LogoImage' alt='siteLogo' title='Logo' style='max-width:300px; width:100%' /></div><p class='text-center'>{userNm},<p><div>Please confirm your account by <a href='fakeLink'>clicking here</a>.</div>");
+
+        //    return ViewComponent("ResendConfirmationEmail");
+        //}
 
         public IActionResult RefreshUserInfo()
         {

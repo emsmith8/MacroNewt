@@ -71,6 +71,9 @@ namespace MacroNewt
 
             services.AddTransient<IEmailSender, EmailSender>();
 
+            services.Configure<DataProtectionTokenProviderOptions>(o =>
+                o.TokenLifespan = TimeSpan.FromHours(3));
+
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using MacroNewt.Areas.Identity.Data;
+using MacroNewt.Models.LogicModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -124,7 +125,8 @@ namespace MacroNewt.Areas.Identity.Pages.Account
                     DailyTargetCalories = 2000,
                     UserName = Input.Email,
                     ProfileName = Input.ProfileName,
-                    Email = Input.Email };
+                    Email = Input.Email 
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -139,8 +141,14 @@ namespace MacroNewt.Areas.Identity.Pages.Account
                         values: new { userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    EmailBuildHandler ebh = new EmailBuildHandler();
+
+                    string finalEmail = ebh.BuildVerificationEmailHtml(user.Name, user.Email, callbackUrl);
+
+                    await _emailSender.SendEmailAsync(user.Email, "Confirm your email", finalEmail);
+
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);

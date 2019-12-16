@@ -36,7 +36,6 @@ namespace MacroNewt.Services
             };
             msg.AddTo(new EmailAddress(email));
 
-
             string _b64 = Convert.ToBase64String(File.ReadAllBytes("wwwroot/images/fullLogoCenteringTest.png"));
 
             Attachment inlineLogo = new Attachment()

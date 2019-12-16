@@ -9,6 +9,7 @@
             crossorigin="anonymous"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
     </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
@@ -51,7 +52,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    @RenderSection("Head", required:false)
+    @RenderSection("Head", required: false)
 </head>
 <body>
     <header>
@@ -62,7 +63,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex">
+                <div class="navbar-collapse collapse d-sm-inline-flex" id="mainNavbar">
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.IsInRole("Admin"))
                         {
@@ -112,3 +113,25 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+<script>
+    $(document).ready(function () {
+        //$('#mainNavbar').on('touchmove', function (e) {
+        //    alert("I saw that move from " + e.target);
+        //});
+
+        var swipeStart;
+        $('#mainNavbar').on('touchstart', function (e) {
+            swipeStart = e.originalEvent.touches[0].clientY;
+        });
+
+        $('#mainNavbar').on('touchend', function (e) {
+            var swipeEnd = e.originalEvent.changedTouches[0].clientY;
+            if (swipeStart > swipeEnd + 10) {
+                $('.navbar-toggler-icon').click();
+            }
+        });
+
+    });
+
+</script>
