@@ -1268,3 +1268,11 @@ h5 .text {
 .fa-times-circle {
     color: #FF3232;
 }
+
+.fixedContent {
+    position: fixed;
+}
+
+.hiddenFooter {
+    display: none;
+}

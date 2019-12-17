@@ -59,7 +59,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3 fixed-top">
             <div class="container">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index" style="margin-top:-12px;"><img src="~/images/fullLogoCenteringTest.svg"  /></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <button class="navbar-toggler" id="navbarToggleButton" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -96,7 +96,7 @@
             </div>
         </nav>
     </header>
-    <div class="container-fluid topMargin">
+    <div class="container-fluid topMargin" id="mainContentContainer">
         @RenderBody()
     </div>
 
@@ -104,7 +104,7 @@
 
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" id="mainContentFooter">
         <div class="container">
             &copy; 2019 - MacroNewt - &nbsp; <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> &nbsp; - &nbsp; <a asp-area="" asp-controller="Home" asp-action="About">About</a>
         </div>
@@ -116,11 +116,27 @@
 
 <script>
     $(document).ready(function () {
-        //$('#mainNavbar').on('touchmove', function (e) {
-        //    alert("I saw that move from " + e.target);
-        //});
+
+        $('#navbarToggleButton').click(function () {
+            if ($('#mainNavbar').hasClass("show")) {
+                var previousScroll = $('#mainContentContainer').css("top");
+
+                $('#mainContentContainer').removeClass("fixedContent");
+                $('#mainContentFooter').removeClass("hiddenFooter");
+                $('#mainContentContainer').css("top", "");
+                $(window).scrollTop(-parseInt(previousScroll));
+            }
+            else {
+                var scrollPosition = $(window).scrollTop();
+
+                $('#mainContentContainer').css('top', -scrollPosition);
+                $('#mainContentContainer').addClass("fixedContent");
+                $('#mainContentFooter').addClass("hiddenFooter");
+            }
+        });
 
         var swipeStart;
+
         $('#mainNavbar').on('touchstart', function (e) {
             swipeStart = e.originalEvent.touches[0].clientY;
         });

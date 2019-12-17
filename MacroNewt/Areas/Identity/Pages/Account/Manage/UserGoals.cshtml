@@ -207,10 +207,10 @@
 
             $('#recommendationLegendDiv').show();
             if ($('#percentTotal').val() == 100) {
-                $('#percentTotal').css('background', 'rgb(87, 214, 130, 0.3)');
+                $('#percentTotal').css('background', 'rgba(87, 214, 130, 0.3)');
             }
             else {
-                $('#percentTotal').css('background', 'rgb(255, 199, 199, 0.3)');
+                $('#percentTotal').css('background', 'rgba(255, 199, 199, 0.3)');
             }
         }
 
@@ -430,13 +430,13 @@
 
         $('#percentTotal').val(total);
         if (total == 100) {
-            $('#percentTotal').css('background', 'rgb(87, 214, 130, 0.3)');
+            $('#percentTotal').css('background', 'rgba(87, 214, 130, 0.3)');
             $('#update-profile-button').prop('disabled', false);
             $('#update-profile-button').css('background-image', 'linear-gradient(to bottom, #A3D6E9, #74B9D3 90%)');
             $('#changesWarningTooltipMessage').css('display', 'none');
         }
         else {
-            $('#percentTotal').css('background', 'rgb(255, 199, 199, 0.3)');
+            $('#percentTotal').css('background', 'rgba(255, 199, 199, 0.3)');
             $('#update-profile-button').css('background-image', 'linear-gradient(to bottom, #FF000080, #FF3232 90%)')
             $('#macroWarningMessage').css('display', 'block');
             $('#update-profile-button').prop('disabled', true);

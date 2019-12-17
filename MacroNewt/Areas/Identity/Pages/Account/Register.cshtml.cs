@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MacroNewt.Areas.Identity.Data;
 using MacroNewt.Models.LogicModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;

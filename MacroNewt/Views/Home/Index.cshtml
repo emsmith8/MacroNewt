@@ -99,7 +99,12 @@
 
 <script>
     $(document).ready(function () {
-        
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+        console.log("the baseUrl is " + baseUrl);
+
+
         $('#showDailyStatsButton').click(function () {
             showCurrentCalModal();
         });

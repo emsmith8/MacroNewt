@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,9 +15,13 @@ namespace MacroNewt.Models.LogicModels
     {
         public string BuildVerificationEmailHtml(string userName, string userEmail, string callbackUrl)
         {
-            string emailHtml = System.IO.File.ReadAllText("Views/Shared/VerificationEmail.cshtml");
+            string htmlContent = File.ReadAllText("wwwroot/EmailTemplates/VerificationEmail.html");
 
-            StringBuilder sb = new StringBuilder(emailHtml);
+            //string emailContentPath = "C:/Users/evanm/source/repos/MacroNewt/MacroNewt/Views/Shared/VerificationEmail.cshtml";
+
+            //string emailHtml = File.ReadAllText(emailContentPath);
+
+            StringBuilder sb = new StringBuilder(htmlContent);
 
             sb.Replace("{userName}", userName);
             sb.Replace("{userEmail}", userEmail);
