@@ -26,6 +26,16 @@ p {
     }
 }
 
+.nutritionLabelContentWidth {
+
+}
+
+@media (max-width: 400px) {
+    .nutritionLabelContentWidth {
+        width: 95%;
+    }
+}
+
 .modal-open .modal {
      padding-right: 0px !important;
 }

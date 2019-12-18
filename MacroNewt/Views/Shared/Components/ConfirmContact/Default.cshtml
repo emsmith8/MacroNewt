@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Message sent";
+}
+
+<div class="modal fade" id="contactConfirmedModal" role="dialog">
+    <div class="modal-dialog vertical-align-center">
+        <div class="modal-content confirmModalSizing">
+
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="standardSoftBack">
+                        <div class="standardHeader form-row justify-content-around">
+                            <div class="blackHeaderFont">
+                                @ViewData["Title"]
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <p style="margin:15px 0;">
+                                Your message was sent successfully.
+                            </p>
+                            <div style="text-align:center;">
+                                <button type="button" class="btn btn-sm btn-myBlueDark" id="confirmContactDoneButton" style="margin-bottom:10px;">Done</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#contactConfirmedModal').modal({ backdrop: 'static', keyboard: false });
+        $('#contactConfirmedModal').modal('toggle');
+
+        $('#contactConfirmedModal').click(function () {
+            $('#contactConfirmedModal').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+        });
+    });
+</script>

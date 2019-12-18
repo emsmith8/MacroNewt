@@ -14,7 +14,7 @@
                         }
                         else
                         {
-                            <p class="detailsShortText" id="detailsShortText" style="color:#FF3232;">Incomplete details</p>
+                            <p class="detailsShortText" id="detailsShortText" style="color:#FF3232;">Incomplete</p>
                             <p class="detailsLongText" id="detailsLongText" style="color:#FF3232;">Complete details to continue</p>
                         }
                     </div>
@@ -390,9 +390,9 @@
         else {
             //$('#mealDetailsNext').prop("disabled", false);
             $('#mealDetailsNext').addClass('btn-myGreen').removeClass('btn-myRed');
-            $('#detailsShortText').text("Details complete");
+            $('#detailsShortText').text("Click next");
             $('#detailsShortText').css("color", "green");
-            $('#detailsLongText').text("Details complete");
+            $('#detailsLongText').text("Click next to continue");
             $('#detailsLongText').css("color", "green");
         }
 

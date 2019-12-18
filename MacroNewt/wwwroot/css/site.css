@@ -70,6 +70,17 @@
     margin-left: 3px;
 }
 
+@media (max-width: 350px) {
+    .myLeftCardSpacing {
+        margin-right: 0px;
+        width: 100%;
+    }
+    .myRightCardSpacing {
+        margin-left: 0px;
+        width: 100%;
+    }
+}
+
 @media (min-width: 576px) {
     .myLeftCardSpacing {
         margin-right: 0px;
@@ -1030,6 +1041,18 @@ h5 .text {
     display: none;
 }
 
+.shortReviewServings {
+    display: none;
+}
+
+.shortReviewCalPerServing {
+    display: none;
+}
+
+.shortReviewCalPerFood {
+    display: none;
+}
+
 @media (max-width: 400px){
     .detailsLongText {
         display: none;
@@ -1037,8 +1060,38 @@ h5 .text {
     .detailsShortText {
         display: inline-block;
     }
+
+    .longReviewServings {
+        display: none;
+    }
+    .shortReviewServings {
+        display: inline-block;
+    }
+
+    .longReviewCalPerServings {
+        display: none;
+    }
+    .shortReviewCalPerServing {
+        display: inline-block;
+    }
+
+    .longReviewCalPerFood {
+        display: none;
+    }
+    .shortReviewCalPerFood {
+        display: inline-block;
+    }
 }
 
+.logAnotherMealButton {
+    width: 136px;
+}
+
+@media (max-width: 400px) {
+    .logAnotherMealButton {
+        width: 115px;
+    }
+}
 
 .header-line-format {
     text-align: center;
@@ -1168,6 +1221,21 @@ h5 .text {
 .currentMealHeader {
     color: #5bc0de;
     line-height: 31px;
+}
+
+.currentMealShortHeader {
+    color: #5bc0de;
+    line-height: 31px;
+    display: none;
+}
+
+@media (max-width: 400px) {
+    #currentMealShortText {
+        display: block;
+    }
+    #currentMealLongText {
+        display: none;
+    }
 }
 
 .databaseNoticeHeaderFont {

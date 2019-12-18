@@ -1,0 +1,80 @@
+﻿@model ContactUsViewModel
+@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<div class="modal fade" id="contactUsModal" role="dialog">
+    <div class="modal-dialog vertical-align-center">
+        <div class="modal-content confirmModalSizing">
+
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="standardSoftBack">
+                        <div class="standardHeader form-row justify-content-around">
+                            <div class="blackHeaderFont">
+                                @ViewData["Title"]
+                            </div>
+                        </div>
+
+                        <form id="contactForm" method="post" style="padding:10px;">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label asp-for="UserEmail"></label>
+                                    <input asp-for="UserEmail" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ContactType"></label>
+                                    <select asp-for="ContactType" class="form-control">
+                                        <option disabled selected value="null"> -- Select -- </option>
+                                        <option value="Question">Question</option>
+                                        <option value="Feedback">Feedback</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Message"></label>
+                                    <textarea asp-for="Message" id="userMessage" class="form-control" style="height:150px;">@Model.Message</textarea>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button id="confirmContactButton" type="button" class="btn btn-sm btn-myBlueDark">Send</button>
+                                <button id="cancelContactButton" type="button" class="btn btn-sm btn-mySelectedGray" data-dismiss="modal" data-target="#contactUsModal">Cancel</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#contactUsModal').modal({ backdrop: 'static', keyboard: false });
+        $('#contactUsModal').modal('toggle');
+
+        $('#confirmContactButton').click(function () {
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+            var form = $('#contactForm');
+
+            $.ajax({
+                url: baseUrl + 'Home/ConfirmContact',
+                type: 'POST',
+                data: form.serialize(),
+                success: function (data) {
+                    $('#contactUsModal').modal('hide');
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+
+                    var container = $('#contactUsModalContainer').empty();
+                    container.html(data);
+                }
+            });
+        });
+    });
+</script>

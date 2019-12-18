@@ -8,7 +8,7 @@
                 <div class="col-12">
                     <div class="dailyGoalSoftBack">
                         <div class="Box-header form-row justify-content-around">
-                            <div class="blackHeaderFont col-6">
+                            <div class="blackHeaderFont col-6" style="margin-left: -1px;">
                                 @if (Model.Admin)
                                 {
                                     <text>@Model.UserEmail</text>
@@ -23,7 +23,7 @@
                                     Cancel
                                 </button>
                             </div>
-                            <div class="col-4 col-md-3">
+                            <div class="col-4 col-md-3" style="margin-right:1px;">
                                 <button type="button" id="confirmMealLog" class="btn btn-sm btn-myGreen" style="width:100px;">
                                     @if (Model.EditingMeal)
                                     {

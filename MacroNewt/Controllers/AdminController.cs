@@ -43,7 +43,14 @@ namespace MacroNewt.Controllers
         public async Task<IActionResult> ManageUsers()
         {
             ViewBag.Title = "Manage Users";
-            return View(await _context.Users.ToListAsync());
+
+            var userList = await _context.Users.ToListAsync();
+
+            var adminUser = userList.Single(u => u.Name == "Admin");
+
+            userList.Remove(adminUser);
+
+            return View(userList);
         }
 
         // GET

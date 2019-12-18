@@ -17,15 +17,41 @@ namespace MacroNewt.Models.LogicModels
         {
             string htmlContent = File.ReadAllText("wwwroot/EmailTemplates/VerificationEmail.html");
 
-            //string emailContentPath = "C:/Users/evanm/source/repos/MacroNewt/MacroNewt/Views/Shared/VerificationEmail.cshtml";
-
-            //string emailHtml = File.ReadAllText(emailContentPath);
-
             StringBuilder sb = new StringBuilder(htmlContent);
 
             sb.Replace("{userName}", userName);
             sb.Replace("{userEmail}", userEmail);
             sb.Replace("{callbackUrl}", callbackUrl);
+
+            string emailHtmlResult = sb.ToString();
+
+            return emailHtmlResult;
+        }
+
+        public string BuildForgotPasswordEmailHtml(string userEmail, string callbackUrl)
+        {
+            string htmlContent = File.ReadAllText("wwwroot/EmailTemplates/ForgotPasswordEmail.html");
+
+            StringBuilder sb = new StringBuilder(htmlContent);
+
+            sb.Replace("{userEmail}", userEmail);
+            sb.Replace("{callbackUrl}", callbackUrl);
+
+            string emailHtmlResult = sb.ToString();
+
+            return emailHtmlResult;
+        }
+
+        public string BuildContactUsEmailHtml(string userName, string userEmail, string contactType, string userMessage)
+        {
+            string htmlContent = File.ReadAllText("wwwroot/EmailTemplates/ContactUsEmail.html");
+
+            StringBuilder sb = new StringBuilder(htmlContent);
+
+            sb.Replace("{contactType}", contactType);
+            sb.Replace("{userName}", userName);
+            sb.Replace("{userEmail}", userEmail);
+            sb.Replace("{userMessage}", userMessage);
 
             string emailHtmlResult = sb.ToString();
 

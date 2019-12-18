@@ -104,9 +104,15 @@
 
     </div>
 
+    <div id="contactUsModalContainer">
+
+    </div>
+
     <footer class="border-top footer text-muted" id="mainContentFooter">
         <div class="container">
-            &copy; 2019 - MacroNewt - &nbsp; <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> &nbsp; - &nbsp; <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+            &copy; 2019 - MacroNewt - &nbsp; <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> 
+                &nbsp; - &nbsp; <a asp-area="" asp-controller="Home" asp-action="About">About</a> 
+                &nbsp; - &nbsp; <a href="" id="contactUsLink">Contact Us</a>
         </div>
     </footer>  
 
@@ -133,6 +139,17 @@
                 $('#mainContentContainer').addClass("fixedContent");
                 $('#mainContentFooter').addClass("hiddenFooter");
             }
+        });
+
+        $('#contactUsLink').click(function (e) {
+            e.preventDefault();
+
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+            $.get(baseUrl + 'Home/Contact', function (response) {
+                $('#contactUsModalContainer').html(response);
+            });
         });
 
         var swipeStart;

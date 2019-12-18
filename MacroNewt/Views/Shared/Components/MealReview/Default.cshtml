@@ -18,15 +18,9 @@
     <div class="col-12 col-md-10 col-lg-8">
         <div class="currentMeal">
             <div class="Box-header d-flex justify-content-between">
-                @*<div class="spaceHolderReview blueTextColor">
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <text>@Model.UserEmail</text>
-                    }
-                </div>*@
                 <div>
                     <p class="summaryHeader">
-                        Meal Summary @if (User.IsInRole("Admin"))
+                        Summary @if (User.IsInRole("Admin"))
                         {
                             <text> - @Model.UserEmail</text>
                         }
@@ -35,7 +29,7 @@
                 </div>
                 <div>
                     <div>
-                        <a class="btn btn-sm btn-myBlueDark" style="width:136px;" asp-controller="Logger" asp-action="Index">Log Another Meal</a>
+                        <a class="btn btn-sm btn-myBlueDark logAnotherMealButton" asp-controller="Logger" asp-action="Index">Log Another Meal</a>
                         <a asp-action="Index" asp-controller="Home" id="logFinishReturnHome" class="btn btn-sm btn-myGreen">
                             Home <span class="fa fa-home"></span>
                         </a>
@@ -96,13 +90,16 @@
                                 <strong>Food(s):</strong>
                             </td>
                             <td class="form-group col-3">
-                                <strong>Number of servings:</strong>
+                                <strong class="shortReviewServings"># of servings:</strong>
+                                <strong class="longReviewServings">Number of servings:</strong>
                             </td>
                             <td class="form-group col-3">
-                                <strong>Calories per serving:</strong>
+                                <strong class="shortReviewCalPerServing">Cal per serving:</strong>
+                                <strong class="longReviewCalPerServing">Calories per serving:</strong>
                             </td>
                             <td class="form-group col-2">
-                                <strong>Calories for food:</strong>
+                                <strong class="shortReviewCalPerFood">Cal for food:</strong>
+                                <strong class="longReviewCalPerFood">Calories for food:</strong>
                             </td>
                         </tr>
 

@@ -27,15 +27,27 @@ namespace MacroNewt.Services
         public Task Execute(string apiKey, string subject, string message, string email)
         {
             var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress("Accounts@MacroNewt.com", "MacroNewt Accounts"),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message
-            };
-            msg.AddTo(new EmailAddress(email));
+            var msg = new SendGridMessage();
 
+            if (subject.Equals("User message"))
+            {
+                msg.From = new EmailAddress(email, "MacroNewt User");
+                msg.Subject = subject;
+                msg.PlainTextContent = message;
+                msg.HtmlContent = message;
+
+                msg.AddTo(new EmailAddress("evan.matthew.smith@gmail.com"));
+            }
+            else
+            {
+                msg.From = new EmailAddress("Accounts@MacroNewt.com", "MacroNewt Accounts");
+                msg.Subject = subject;
+                msg.PlainTextContent = message;
+                msg.HtmlContent = message;
+
+                msg.AddTo(new EmailAddress(email));
+            }
+            
             string _b64 = Convert.ToBase64String(File.ReadAllBytes("wwwroot/images/fullLogoCenteringTest.png"));
 
             Attachment inlineLogo = new Attachment()
@@ -49,12 +61,12 @@ namespace MacroNewt.Services
 
             msg.AddAttachment(inlineLogo);
 
-            
 
             msg.SetClickTracking(false, false);
 
             return client.SendEmailAsync(msg);
         }
+
 
     }
 }
