@@ -29,9 +29,11 @@ namespace MacroNewt.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage();
 
-            if (subject.Equals("User message"))
+            List<string> subjectList = new List<string> { "User Question", "User Feedback", "User Other" };
+
+            if (subjectList.Contains(subject))
             {
-                msg.From = new EmailAddress(email, "MacroNewt User");
+                msg.From = new EmailAddress("Accounts@MacroNewt.com", "MacroNewt User");
                 msg.Subject = subject;
                 msg.PlainTextContent = message;
                 msg.HtmlContent = message;

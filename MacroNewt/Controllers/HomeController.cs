@@ -381,7 +381,9 @@ namespace MacroNewt.Controllers
 
                 string finalEmail = ebh.BuildContactUsEmailHtml(targetUser.Name, form.UserEmail, form.ContactType, form.Message);
 
-                await _emailSender.SendEmailAsync(form.UserEmail, "User message", finalEmail);
+                string contentString = "User " + form.ContactType;
+
+                await _emailSender.SendEmailAsync(form.UserEmail, contentString, finalEmail);
 
                 return ViewComponent("ConfirmContact");
             }
