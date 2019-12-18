@@ -95,9 +95,9 @@
 .mealBlock {
     background: rgb(151,143,191);
     background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(241,249,255,1) 66%);
-    border: 3px groove #E3E3E3;
+    border: 1px groove #E3E3E3;
     border-radius: 5px;
-    margin: 0px;
+    margin: 5px;
     padding: 3px;
 }
 
