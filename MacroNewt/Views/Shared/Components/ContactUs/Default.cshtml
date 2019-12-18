@@ -47,6 +47,25 @@
                 </div>
             </div>
 
+            <div id="contactWaitSpinnerContainer">
+                <div class="modal" id="contactWaitSpinnerModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="text-center">
+                                    <strong class="modalTitle">Working, please wait</strong>
+                                    <p class="modalMessage"></p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="spinner-border text-primary" style="margin-top:15px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -57,6 +76,8 @@
         $('#contactUsModal').modal('toggle');
 
         $('#confirmContactButton').click(function () {
+            $('#contactWaitSpinnerModal').modal('toggle');
+
             var getUrl = window.location;
             var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
@@ -67,6 +88,7 @@
                 type: 'POST',
                 data: form.serialize(),
                 success: function (data) {
+                    $('#contactWaitSpinnerModal').modal('hide');
                     $('#contactUsModal').modal('hide');
                     $('body').removeClass('modal-open');
                     $('.modal-backdrop').remove();

@@ -68,8 +68,6 @@
   <ItemGroup>
     <Compile Remove="Areas\Identity\Data\MacroNewtRole.cs" />
     <Compile Remove="Areas\Identity\Data\MacroNewtWebAppContext.cs" />
-    <Compile Remove="Areas\Identity\Pages\Account\Manage\DownloadPersonalData.cshtml.cs" />
-    <Compile Remove="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml.cs" />
     <Compile Remove="MacroNewtDbInitializer.cs" />
     <Compile Remove="Models\ViewModels\EmailContentViewModel.cs" />
     <Compile Remove="Models\ViewModels\FoodListViewModel.cs" />
@@ -82,8 +80,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Areas\Identity\Pages\Account\Manage\DownloadPersonalData.cshtml" />
-    <Content Remove="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml" />
     <Content Remove="bundleconfig.json" />
     <Content Remove="compilerconfig.json" />
     <Content Remove="docfx.json" />
