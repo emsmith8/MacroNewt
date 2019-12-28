@@ -90,7 +90,6 @@
         var getUrl = window.location;
         var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
-        //$.get('/Admin/Delete', { id: itemId }, function (response) {
         $.get(baseUrl + 'Admin/Delete', { id: itemId }, function (response) {
             var container = $("#deleteUserContainer").empty();
             container.html(response);

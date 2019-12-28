@@ -18,44 +18,51 @@ using Microsoft.AspNetCore.Identity;
 
 namespace MacroNewt.Areas.Identity.Data
 {
+    /*
+     *  The Meals controller
+     *  Handles history view of user meals and allows for editing, review, and deletion of past meals
+     */
+
+    /// <summary>
+    /// Controller that displays a calendar view of previous user meals and allows for editing/review/deletion of logged meals
+    /// </summary>
+    /// <seealso cref="Controller"/>
     public class MealsController : Controller
     {
         private readonly MacroNewtContext _context;
         private readonly UserManager<MacroNewtUser> _userManager;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MealsController"/> class.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="userManager"></param>
         public MealsController(MacroNewtContext context, UserManager<MacroNewtUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
         
-
+        /// <summary>
+        /// Returns the calendar meal history view
+        /// </summary>
+        /// <remarks>
+        /// Days are shown in either green or red if meals were logged, depending on whether user goals were met.
+        ///     Meals are queried from database when user clicks on a calendar day cell.
+        /// </remarks>
+        /// <returns>The Views/Meals/Index <see cref="ViewResult"/></returns>
         [Authorize]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             ViewBag.Title = "Meal History";
 
-            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            /* CAN GET RID OF */
-            HistoryDataViewModel hdv = new HistoryDataViewModel
-            {
-                Meals = await _context.Meal
-                    .Where(m => m.UserId == userID)
-                    .ToListAsync(),
-                DailyTotals = await _context.DailyCalTotal
-                    .Where(d => d.Id == userID)
-                    .ToListAsync()
-            };
-
-
-            return View(hdv);
-
-            //return View(await _context.Meal
-            //    .Where(m => m.UserId == userID)
-            //    .ToListAsync());
+            return View();
         }
 
+        /// <summary>
+        /// Returns the food explore view allowing user to browse food details without logging anything
+        /// </summary>
+        /// <returns>The Views/Meals/Explore <see cref="ViewResult"/></returns>
         [Authorize]
         public IActionResult Explore()
         {
@@ -63,11 +70,12 @@ namespace MacroNewt.Areas.Identity.Data
             return View();
         }
 
-        //public IActionResult BuildExplorePortionModal()
-        //{
-
-        //}
-
+        /// <summary>
+        /// Handles the proper display of a nutrition label for the selected portion, or <see cref="Measure"/>, of food
+        /// </summary>
+        /// <param name="ndbno"></param>
+        /// <param name="portionIndex"></param>
+        /// <returns>The ExploreNutritionLabel ViewComponent</returns>
         public IActionResult BuildExploreNutritionLabelModal(string ndbno, int portionIndex)
         {
             ExplorePortionChoiceViewModel epc = new ExplorePortionChoiceViewModel
@@ -79,30 +87,10 @@ namespace MacroNewt.Areas.Identity.Data
             return ViewComponent("ExploreNutritionLabel", epc);
         }
 
-        //public IActionResult BuildMealCalendarModal()
-        //{
-        //    string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        //    var mealList = _context.Meal
-        //            .Where(m => m.UserId == userID)
-        //            .OrderBy(m => m.MealDate)
-        //            .ThenBy(m => m.MealDate.TimeOfDay)
-        //            .ToList();
-
-            
-            
-        //    //foreach (Meal meal in mealList)
-        //    //{
-        //    //    string mealTitle = meal.Title;
-        //    //    DateTime mealDate = meal.MealDate.Date;
-        //    //    int mealCalories = meal.Calories;
-        //    //}
-
-        //    return ViewComponent("MealCalendarHistory", mealList);
-        //}
-
-
-
+        /// <summary>
+        /// Returns a view component with previously logged meals so that user can easily re-log meals
+        /// </summary>
+        /// <returns>The OldMealsModal ViewComponent</returns>
         public IActionResult GetOldMealsModal()
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -114,6 +102,10 @@ namespace MacroNewt.Areas.Identity.Data
             return ViewComponent("OldMealsModal", meals);
         }
 
+        /// <summary>
+        /// Retrieves and displays user's current daily stats in a view component
+        /// </summary>
+        /// <returns>The CurrentDayCalStats ViewComponent</returns>
         public IActionResult GetCurrentDayCalStats()
         {
             UserStatsHandler ush = new UserStatsHandler(_userManager, _context);
@@ -123,6 +115,11 @@ namespace MacroNewt.Areas.Identity.Data
             return ViewComponent("CurrentDayCalStats", ush.GetCurrentMacroTargets(user));
         }
 
+        /// <summary>
+        /// Retrieves and displays daily stats for a specific past date in a view component
+        /// </summary>
+        /// <param name="targetDate"></param>
+        /// <returns>The PastDayCalStats ViewComponent</returns>
         public IActionResult GetSpecificDayCalStats(string targetDate)
         {
             UserStatsHandler ush = new UserStatsHandler(_userManager, _context);
@@ -131,54 +128,15 @@ namespace MacroNewt.Areas.Identity.Data
 
             return ViewComponent("PastDayCalStats", ush.GetPastMacroTargets(user, targetDate));
         }
-        
 
-        //public IActionResult GetDateRangeHistoryViewComponent(DateTime startDate, DateTime endDate)
-        //{
-        //    string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        //    List<Meal> meals = new List<Meal>();
-
-        //    if (startDate.Date == endDate.Date)
-        //    {
-        //        meals = _context.Meal
-        //            .Where(m => (m.UserId == userID) && (m.MealDate.Date == startDate.Date))
-        //            .ToList();
-        //    }
-        //    else
-        //    {
-        //        meals = _context.Meal
-        //            .Where(m => (m.UserId == userID) && ((m.MealDate.Date >= startDate.Date) && (m.MealDate.Date <= endDate.Date)))
-        //            .ToList();
-        //    }
-
-        //    HistoryDataViewModel hd = new HistoryDataViewModel()
-        //    {
-        //        Meals = meals,
-        //        StartDate = startDate,
-        //        EndDate = endDate
-        //    };
-
-        //    return ViewComponent("DateRangeHistory", hd);
-            
-        //}
-        
-
-        //public IActionResult GetNutritionLabelViewComponent(string ndbno)
-        //{
-        //    var food = _context.Food
-        //        .Include(x => x.Nutrients)
-        //            .ThenInclude(x => x.Measures)
-        //            .FirstOrDefault(f => f.Ndbno == ndbno);
-
-        //    if (food == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View();
-        //}
-
+        /// <summary>
+        /// Returns the details page for a previously logged meal
+        /// </summary>
+        /// <remarks>
+        /// User can review meal information as well as view nutrition labels for foods and the entire meal
+        /// </remarks>
+        /// <param name="id"></param>
+        /// <returns>The Views/Meals/Details <see cref="ViewResult"/></returns>
         // GET: Meals/Details/5
         [Authorize]
         public async Task<IActionResult> Details(int? id)
@@ -221,6 +179,15 @@ namespace MacroNewt.Areas.Identity.Data
             return View(fvm);
         }
 
+        /// <summary>
+        /// Returns the edit view for a previously logged meal
+        /// </summary>
+        /// <remarks>
+        /// The edit procedure is the same as the logging procedure but has to be tied to existing data. Some redundancy exists.
+        /// </remarks>
+        /// <param name="id"></param>
+        /// <param name="relog"></param>
+        /// <returns>The Views/Meals/Edit <see cref="ViewResult"/></returns>
         // GET: Meals/Edit/5
         [Authorize]
         public async Task<IActionResult> Edit(int? id, bool relog = false)
@@ -251,6 +218,11 @@ namespace MacroNewt.Areas.Identity.Data
             return View(meal);
         }
 
+        /// <summary>
+        /// Returns a meal deletion view component
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The DeleteMealModal ViewComponent</returns>
         // GET: Meals/Delete/5
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
@@ -270,6 +242,11 @@ namespace MacroNewt.Areas.Identity.Data
             return ViewComponent("DeleteMealModal", meal);
         }
 
+        /// <summary>
+        /// Confirms deletion of a previous meal and updates user stats
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>A redirect to last location</returns>
         // POST: Meals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -300,11 +277,13 @@ namespace MacroNewt.Areas.Identity.Data
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MealExists(int id)
-        {
-            return _context.Meal.Any(e => e.Id == id);
-        }
-
+        /// <summary>
+        /// Queries database for all meals in currently shown calendar month and displays red or green if user
+        ///     exceeded or met daily goals
+        /// </summary>
+        /// <param name="month"></param>
+        /// <param name="year"></param>
+        /// <returns>A Json object containing month's meal statuses</returns>
         public async Task<JsonResult> GetMonthMealStatus(int month, int year)
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -338,6 +317,14 @@ namespace MacroNewt.Areas.Identity.Data
             return Json(results);
         }
 
+        /// <summary>
+        /// Queries database for all meals on chosen day in the past and displays view component with that day's stats
+        ///     and the options to edit, review, or delete any shown meal
+        /// </summary>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        /// <param name="year"></param>
+        /// <returns>The CalendarMealModal ViewComponent</returns>
         public async Task<IActionResult> GetDayMealInfo(int month, int day, int year)
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -348,6 +335,11 @@ namespace MacroNewt.Areas.Identity.Data
                 .ToListAsync();
 
             return ViewComponent("CalendarMealModal", dayInfo);
+        }
+
+        private bool MealExists(int id)
+        {
+            return _context.Meal.Any(e => e.Id == id);
         }
     }
 }

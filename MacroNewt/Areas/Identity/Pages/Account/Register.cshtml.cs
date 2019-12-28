@@ -62,20 +62,6 @@ namespace MacroNewt.Areas.Identity.Pages.Account
             [DataType(DataType.Text)]
             [Display(Name = "Username")]
             public string ProfileName { get; set; }
-            
-            //[DataType(DataType.Text)]
-            //[Display(Name = "Gender")]
-            //public string Gender { get; set; }
-            
-            //[Display(Name = "Height")]
-            //public int HeightFeet { get; set; }
-            //public int HeightInches { get; set; }
-
-            //[Display(Name = "Weight (lbs)")]
-            //public int Weight { get; set; }
-
-            //[Display(Name = "Daily Calorie Target")]
-            //public int DailyCalorieTarget { get; set; }
 
             [Required]
             [EmailAddress]
@@ -118,7 +104,6 @@ namespace MacroNewt.Areas.Identity.Pages.Account
                 var user = new MacroNewtUser {
                     Name = Input.Name,
                     DOB = Input.DOB,
-                    //Gender = Input.Gender,
                     Age = age,
                     HeightFeet = -1,
                     HeightInches = -1,
@@ -147,9 +132,6 @@ namespace MacroNewt.Areas.Identity.Pages.Account
                     string finalEmail = ebh.BuildVerificationEmailHtml(user.Name, user.Email, callbackUrl);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", finalEmail);
-
-                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);

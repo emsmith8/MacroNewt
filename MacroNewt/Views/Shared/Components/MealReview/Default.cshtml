@@ -109,15 +109,12 @@
                         <tr class="form-row ml-4">
                             <td class="form-group col-4">
                                 @Model.Foods[i].Name
-                                @*@Html.DisplayFor(model => Model.Foods[i].Name)*@
                             </td>
                             <td class="form-group col-3" align="center">
                                 @String.Format("{0:0.##}", Model.Foods[i].NumberOfServings)
-                                @*@Html.ValueFor(model => Model.Foods[i].NumberOfServings, "{0:0.##}")*@
                             </td>
                             <td class="form-group col-3" align="center">
                                 @Model.Foods[i].Value
-                                @*@Html.DisplayFor(model => Model.Foods[i].Value)*@
                             </td>
                             <td class="form-group col-2" align="center">
                                 @String.Format("{0:0}", (Model.Foods[i].Value * Model.Foods[i].NumberOfServings))

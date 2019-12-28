@@ -10,9 +10,26 @@ using System.Net.Http;
 
 namespace MacroNewt.Models.LogicModels
 {
+    /*
+     *  The SearchHandler class
+     *  Handles the semantics of sending API calls and properly organizing and storing response data.
+     *  ** This class will need to change when the USDA API is permanently migrated to new database **
+     */
+
+    /// <summary>
+    /// This class is used to organize API calls and store responses
+    /// </summary>
+    /// <remarks>
+    /// Searching for foods and requesting additional information are separate API calls thus require different string parameters.
+    /// </remarks>
     public class SearchHandler
     {
-
+        /// <summary>
+        /// Combines the provided food name with the required syntax for an API food search of the specified database type
+        /// </summary>
+        /// <param name="foodName"></param>
+        /// <param name="database"></param>
+        /// <returns>The final string for API search request</returns>
         public string OrganizeSearchQ(string foodName, string database)
         {
             string urlParameters;
@@ -30,8 +47,11 @@ namespace MacroNewt.Models.LogicModels
             return urlParameters;
         }
 
-        //new key: UXnoHgyQ5paXS4ZUBmbcYJjglWrqe8deFVn9z82j
-
+        /// <summary>
+        /// Combines the provided food ndbno identifier with the required syntax for an API food report
+        /// </summary>
+        /// <param name="foodNdbno"></param>
+        /// <returns>The final string for API report request</returns>
         public string OrganizeReportQ(string foodNdbno)
         {
             string urlParameters = "reports/?format=json&ndbno=" + foodNdbno + "&type=b&api_key=5jOuzAkdWfOOH2x5yPgd2oWsyzGVkyrrkElAMSsl";
@@ -40,7 +60,11 @@ namespace MacroNewt.Models.LogicModels
         }
         
 
-
+        /// <summary>
+        /// Converts the string response from API food search into a list of <see cref="Food"/> objects
+        /// </summary>
+        /// <param name="APIData"></param>
+        /// <returns>A list of food objects from API response</returns>
         public List<Food> StoreSearchReturns(string APIData)
         {
             JObject joResponse = JObject.Parse(APIData);
@@ -52,7 +76,17 @@ namespace MacroNewt.Models.LogicModels
             return availableFoods;
         }
 
-
+        /// <summary>
+        /// Parses and stores both the <see cref="Nutrient"/> and <see cref="Measure"/> details of a food from API response
+        /// </summary>
+        /// <remarks>
+        /// Food nutrient and measure details aren't available in food searches, only in specific food report requests from API.
+        ///     To avoid unnecessary overhead, details are only obtained for the foods specifically selected during meal logging.
+        /// </remarks>
+        /// <param name="f"></param>
+        /// <param name="dataObject"></param>
+        /// <param name="detailType"></param>
+        /// <returns>A <see cref="Food"/> object with details included</returns>
         public Food StoreMealNutrientDetails(Food f, JObject dataObject, string detailType)
         {
             f.Ndbno = dataObject["report"]["food"]["ndbno"].ToString();

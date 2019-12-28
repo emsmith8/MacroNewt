@@ -266,7 +266,6 @@
         var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
         var container = $("#oldMealsModalContainer").empty();
-        //$.get('/Meals/GetOldMealsModal', function (result) {
         $.get(baseUrl + 'Meals/GetOldMealsModal', function (result) {
             container.html(result);
             $('#waitSpinnerModal').modal('hide');

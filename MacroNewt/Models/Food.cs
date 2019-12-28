@@ -8,6 +8,17 @@ using System.Diagnostics;
 
 namespace MacroNewt.Models
 {
+    /*
+     *  The Food class
+     *  Has public members for all relevant food information
+     */
+
+    /// <summary>
+    /// A Food object includes all information relevant to a paticular food, including a list of <see cref="Nutrient"/> in that food
+    /// </summary>
+    /// <remarks>
+    /// Relevant information includes identifiers like name and database NDBNO, user selected portion and number of servings, and overall macronutrient contents
+    /// </remarks>
     public class Food
     {
         [Key]
@@ -33,11 +44,18 @@ namespace MacroNewt.Models
         public int MealId {get; set;}
         public virtual Meal Meal { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Food"/> class.
+        /// </summary>
         public Food()
         {
             Nutrients = new List<Nutrient>();
         }
 
+        /// <summary>
+        /// Used to determine the variable measure label of a selected food and create a meaningful object as a result
+        /// </summary>
+        /// <returns>A <see cref="Measure"/> object</returns>
         public Measure SelectedMeasure()
         {
             if ((Nutrients != null && Nutrients.Count > 0) && PortionIndex != 0)
@@ -56,9 +74,6 @@ namespace MacroNewt.Models
                                     .Where(f => (f.Label == SelectedPortionLabel) && (f.Qty == SelectedPortionQty)).First();
                 }
 
-                
-                                    
-
                 return whatever;
             }
             else
@@ -68,6 +83,11 @@ namespace MacroNewt.Models
 
         }
 
+        /// <summary>
+        /// Used to determine and retrieve the calories in a food based on portion type and quantity
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>A double value representing total food calories</returns>
         public double GetCalories(string type)
         {
             if (Nutrients == null || Nutrients.Count == 0)
@@ -100,7 +120,15 @@ namespace MacroNewt.Models
             }
         }
         
-
+        /// <summary>
+        /// Used to determine and retrieve the specified nutrient content in a food based on target nutrient, portion type, and quantity
+        /// </summary>
+        /// <remarks>
+        /// Unlike <see cref="GetNutrientDisplayValue(string, string)"/>, this method is used during the meal logging process
+        /// </remarks>
+        /// <param name="nutrientId"></param>
+        /// <param name="type"></param>
+        /// <returns>A double value representing total content of specified nutrient</returns>
         public double GetNutrientValue(string nutrientId, string type)
         {
             if (Nutrients == null || Nutrients.Count == 0)
@@ -133,6 +161,15 @@ namespace MacroNewt.Models
             }
         }
         
+        /// <summary>
+        /// Returns a string of nutrient content information for display purposes
+        /// </summary>
+        /// <remarks>
+        /// Simliar to <see cref="GetNutrientValue(string, string)"/>, but instead of returning a double this method returns a string for display in nutrition labels
+        /// </remarks>
+        /// <param name="nutrientId"></param>
+        /// <param name="type"></param>
+        /// <returns>A string representinng specified nutrition content</returns>
         public string GetNutrientDisplayValue(string nutrientId, string type)
         {
             if (Nutrients == null || Nutrients.Count == 0)
@@ -165,32 +202,50 @@ namespace MacroNewt.Models
             }
         }
 
+        /// <summary>
+        /// Used to retrive <see cref="Nutrient"/> information for a food when a measure isn't available
+        /// </summary>
+        /// <remarks>
+        /// Some foods in the database don't include <see cref="Measure"/>, which breaks other code. This method handles foods without measures.
+        /// </remarks>
+        /// <param name="food"></param>
+        /// <returns>A populated <see cref="NoMeasureFood"/> object</returns>
         public static NoMeasureFood GetNoMeasureNutrients(Food food)
         {
-            NoMeasureFood nmf = new NoMeasureFood();
-
-            nmf.FoodId = food.FoodId;
-            nmf.Mass = 100 * (double)food.NumberOfServings;
-            nmf.Calories = food.GetCalories("noMeasure") * (double)food.NumberOfServings;
-            nmf.Fat = food.GetNutrientValue("204", "noMeasure") * (double)food.NumberOfServings;
-            nmf.TransFat = food.GetNutrientValue("605", "noMeasure") * (double)food.NumberOfServings;
-            nmf.SatFat = food.GetNutrientValue("606", "noMeasure") * (double)food.NumberOfServings;
-            nmf.PolyFat = food.GetNutrientValue("646", "noMeasure") * (double)food.NumberOfServings;
-            nmf.MonoFat = food.GetNutrientValue("645", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Cholesterol = food.GetNutrientValue("601", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Sodium = food.GetNutrientValue("307", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Carbs = food.GetNutrientValue("205", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Fiber = food.GetNutrientValue("291", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Sugar = food.GetNutrientValue("269", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Protein = food.GetNutrientValue("203", "noMeasure") * (double)food.NumberOfServings;
-            nmf.VitA = food.GetNutrientValue("320", "noMeasure") * (double)food.NumberOfServings;
-            nmf.VitC = food.GetNutrientValue("401", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Calcium = food.GetNutrientValue("301", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Iron = food.GetNutrientValue("303", "noMeasure") * (double)food.NumberOfServings;
+            NoMeasureFood nmf = new NoMeasureFood
+            {
+                FoodId = food.FoodId,
+                Mass = 100 * (double)food.NumberOfServings,
+                Calories = food.GetCalories("noMeasure") * (double)food.NumberOfServings,
+                Fat = food.GetNutrientValue("204", "noMeasure") * (double)food.NumberOfServings,
+                TransFat = food.GetNutrientValue("605", "noMeasure") * (double)food.NumberOfServings,
+                SatFat = food.GetNutrientValue("606", "noMeasure") * (double)food.NumberOfServings,
+                PolyFat = food.GetNutrientValue("646", "noMeasure") * (double)food.NumberOfServings,
+                MonoFat = food.GetNutrientValue("645", "noMeasure") * (double)food.NumberOfServings,
+                Cholesterol = food.GetNutrientValue("601", "noMeasure") * (double)food.NumberOfServings,
+                Sodium = food.GetNutrientValue("307", "noMeasure") * (double)food.NumberOfServings,
+                Carbs = food.GetNutrientValue("205", "noMeasure") * (double)food.NumberOfServings,
+                Fiber = food.GetNutrientValue("291", "noMeasure") * (double)food.NumberOfServings,
+                Sugar = food.GetNutrientValue("269", "noMeasure") * (double)food.NumberOfServings,
+                Protein = food.GetNutrientValue("203", "noMeasure") * (double)food.NumberOfServings,
+                VitA = food.GetNutrientValue("320", "noMeasure") * (double)food.NumberOfServings,
+                VitC = food.GetNutrientValue("401", "noMeasure") * (double)food.NumberOfServings,
+                Calcium = food.GetNutrientValue("301", "noMeasure") * (double)food.NumberOfServings,
+                Iron = food.GetNutrientValue("303", "noMeasure") * (double)food.NumberOfServings
+            };
 
             return nmf;
         }
 
+        /// <summary>
+        /// Used in the creation of nutrition labels for complete meals
+        /// </summary>
+        /// <remarks>
+        /// The method loops through each food included in a meal and combines all calorie and nutrient information in order to 
+        ///     provide a nutrition label for entire meal.
+        /// </remarks>
+        /// <param name="foods"></param>
+        /// <returns>A populated <see cref="MealTotalNutrient"/> object</returns>
         public static MealTotalNutrient GetTotalMealNutrients(List<Food> foods)
         {
             MealTotalNutrient mt = new MealTotalNutrient();
@@ -245,8 +300,18 @@ namespace MacroNewt.Models
 
 
     }
-    
-    
+
+    /*
+     *  The Nutrient class
+     *  Has public members for all nutrient details of a particular food
+     */
+
+    /// <summary>
+    /// A Nutrient object includes all information relevant to the nutritional data of a particular food, including a list of associated <see cref="Measure"/>
+    /// </summary>
+    /// <remarks>
+    /// Relevant information includes identifiers like name and database NID, value of the particular nutrient, and the <see cref="Food"/> it is associated with
+    /// </remarks>
     public class Nutrient
     {
         [Key]
@@ -261,12 +326,27 @@ namespace MacroNewt.Models
         public int FoodId { get; set; }
         public virtual Food Food { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Nutrient"/> class.
+        /// </summary>
         public Nutrient()
         {
             Measures = new List<Measure>();
         }
     }
 
+    /*
+     *  The Measure class
+     *  Has public members for all measure details of a particular nutrient
+     */
+
+    /// <summary>
+    /// A Measure object includes all information relevant to the portion of a particular <see cref="Food"/>
+    /// </summary>
+    /// <remarks>
+    /// The portion of a Food dictates the values of all nutrients. Relevant information includes identifiers like label and MeasureId, value of
+    ///     a particular measure, and the <see cref="Nutrient"/> it is associated with
+    /// </remarks>
     public class Measure
     {
         [Key]
@@ -282,7 +362,14 @@ namespace MacroNewt.Models
         public virtual Nutrient Nutrient { get; set; }
            
     }
+    /*
+     *  The MealTotalNutrient class
+     *  Has public members for all nutrient details of an entire meal
+     */
 
+    /// <summary>
+    /// A MealTotalNutrient object includes total values of all nutrients from all <see cref="Food"/> items in the meal 
+    /// </summary>
     public class MealTotalNutrient
     {
         public double Mass { get; set; }
@@ -304,6 +391,14 @@ namespace MacroNewt.Models
         public double Iron { get; set; }
     }
 
+    /*
+     *  The NoMeasureFood class
+     *  Has public members for all nutrient details of a food without any associated measures 
+     */
+
+    /// <summary>
+    /// A NoMeasureFood object includes all nutrient data of a food without having any inherently associated measure
+    /// </summary>
     public class NoMeasureFood
     {
         public int FoodId { get; set; }

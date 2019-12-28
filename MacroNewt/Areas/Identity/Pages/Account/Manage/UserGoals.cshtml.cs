@@ -116,16 +116,11 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            //if (Input.CalAdjustment != 0)
-            //{
-                var adjustedCals = Input.BaseCalorieTarget + Input.CalAdjustment;
+            var adjustedCals = Input.BaseCalorieTarget + Input.CalAdjustment;
 
-           //     Input.BaseCalorieTarget += Input.CalAdjustment;
+            user.DailyTargetCalories = adjustedCals;
 
-                user.DailyTargetCalories = adjustedCals;
-
-                _context.Users.Update(user);
-            //}
+            _context.Users.Update(user);
 
             var userGoal = await _context.UserGoals
                 .Where(u => u.Id == user.Id)

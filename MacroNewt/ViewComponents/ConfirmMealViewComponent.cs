@@ -10,12 +10,6 @@ namespace MacroNewt.ViewComponents
 {
     public class ConfirmMealViewComponent : ViewComponent
     {
-        //private MacroNewtContext _context { get; set; }
-
-        //public ConfirmMealViewComponent(MacroNewtContext context)
-        //{
-        //    _context = context;
-        //}
 
         public IViewComponentResult Invoke(ConfirmMealViewModel cmvm)
         {

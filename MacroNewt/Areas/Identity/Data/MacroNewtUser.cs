@@ -10,7 +10,6 @@ namespace MacroNewt.Areas.Identity.Data
 {
     public class MacroNewtUser : IdentityUser
     {
- //       public Guid UserId { get; set; }
 
         [PersonalData]
         public string Name { get; set; }

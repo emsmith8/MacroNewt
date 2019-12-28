@@ -12,26 +12,45 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MacroNewt.Controllers
 {
+    /* 
+     *  The Admin controller
+     *  Handles administrative interactions with database for managing meals and users and returns appropriate views
+    */
+
     /// <summary>
     /// Controller that displays views that support application administration tasks.
     /// </summary>
+    /// <seealso cref="Controller"/>
     public class AdminController : Controller
     {
         private readonly MacroNewtContext _context;
         private readonly UserManager<MacroNewtUser> _userManager;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdminController"/> class.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="userManager"></param>
         public AdminController(MacroNewtContext context, UserManager<MacroNewtUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Returns the admin homepage view
+        /// </summary>
+        /// <returns>The Views/Admin/Index <see cref="ViewResult"/></returns>
         [Authorize(Policy = "RequireAdministrator")]
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Returns a view containing a list of all logged user meals
+        /// </summary>
+        /// <returns>The Views/Admin/ManageMeals <see cref="ViewResult"/></returns>
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> ManageMeals()
         {
@@ -39,6 +58,10 @@ namespace MacroNewt.Controllers
             return View(await _context.Meal.ToListAsync());
         }
 
+        /// <summary>
+        /// Returns a view containing a list of all <see cref="MacroNewtUser"/> accounts
+        /// </summary>
+        /// <returns>The Admin/ManageUsers <see cref="ViewResult"/></returns>
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> ManageUsers()
         {
@@ -53,6 +76,11 @@ namespace MacroNewt.Controllers
             return View(userList);
         }
 
+        /// <summary>
+        /// Returns a view with specified <see cref="MacroNewtUser"/> details ready for editing
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The Views/Admin/EditUserDetails <see cref="ViewResult"/></returns>
         // GET
         public IActionResult EditUserDetails(string id)
         {
@@ -69,6 +97,11 @@ namespace MacroNewt.Controllers
             
         }
 
+        /// <summary>
+        /// Returns a view with specified <see cref="MacroNewtUser"/> details for review
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The Views/Admin/ReviewUserDetails <see cref="ViewResult"/></returns>
         // GET
         public IActionResult ReviewUserDetails(string id)
         {
@@ -84,6 +117,11 @@ namespace MacroNewt.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// Edits target <see cref="MacroNewtUser"/> account details as provided by admin
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>A redirect to previous location if post is valid</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditUserDetails([Bind("ProfileName,Name,DOB,Gender,Weight,DailyTargetCalories,Id")] MacroNewtUser user)
@@ -128,6 +166,11 @@ namespace MacroNewt.Controllers
             return View(user);
         }
         
+        /// <summary>
+        /// Gets the user delete view component
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The DeleteUserModal ViewComponent</returns>
         // GET
         [Authorize]
         public async Task<IActionResult> Delete(string id)
@@ -149,6 +192,11 @@ namespace MacroNewt.Controllers
             return ViewComponent("DeleteUserModal", user);
         }
 
+        /// <summary>
+        /// Deletes target <see cref="MacroNewtUser"/> with specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>A redirect to previous location</returns>
         // POST
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

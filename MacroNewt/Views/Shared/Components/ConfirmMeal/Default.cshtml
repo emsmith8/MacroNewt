@@ -48,7 +48,6 @@
                                     <span id="percentCalSpan" style="color:green;">@Model.PercentageCaloriesConsumed</span>
                                     % of target calories consumed after this meal
                                 </span>
-                                @*<span class="dailyTargetHeaders" id="dailyTargetCalOver"></span>*@
                             </p>
                         </div>
                         <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
@@ -130,9 +129,6 @@
 
                         @if (!Model.ShowMacros)
                         {
-                            @*<div class="col-12" style="margin:20px 0px 20px 0px; text-align:center;">
-                            <a asp-area="Identity" asp-page="/Account/Manage/UserGoals" id="setUpMacros" class="btn btn-sm btn-myBlue">Macro Setup</a>
-                        </div>*@
                             <div style="text-align:center; padding-top:10px;">
                                 <span class="AsteriskNote">Remember to set up your goals in order to see macronutrient details</span>
                             </div>
@@ -149,7 +145,6 @@
                                         <span id="percentProteinCalSpan" style="color:green;">@Model.PercentageProteinCaloriesConsumed</span>
                                         % of target protein calories consumed after this meal
                                     </span>
-                                    @*<span class="dailyTargetHeaders" id="dailyTargetProteinOver"></span>*@
                                 </p>
                             </div>
                             <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
@@ -241,7 +236,6 @@
                                         <span id="percentFatCalSpan" style="color:green;">@Model.PercentageFatCaloriesConsumed</span>
                                         % of target fat calories consumed after this meal
                                     </span>
-                                    @*<span class="dailyTargetHeaders" id="dailyTargetFatOver"></span>*@
                                 </p>
                             </div>
                             <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
@@ -333,7 +327,6 @@
                                         <span id="percentCarbCalSpan" style="color:green;">@Model.PercentageCarbCaloriesConsumed</span>
                                         % of target carb calories consumed after this meal
                                     </span>
-                                    @*<span class="dailyTargetHeaders" id="dailyTargetCarbOver"></span>*@
                                 </p>
                             </div>
                             <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
@@ -476,33 +469,5 @@
             </text>
         }
 
-        @*if (@Model.CurrentDayCalories + @Model.MealCalories  > @Model.TargetCalories) {
-            $('#dailyTargetCalOver').text("(" + (@Model.CurrentDayCalories + @Model.MealCalories) + ")");
-            $('#dailyTargetCalOver').css('color', '#F01E1E');
-        }
-        else {
-            $('#dailyTargetCalOver').text("(" + (@Model.CurrentDayCalories + @Model.MealCalories) + ")");
-        }
-        if (@Model.CurrentDayProteinCalories  + @Model.MealProteinCalories  > @Model.TargetProteinCalories) {
-            $('#dailyTargetProteinOver').text("(" + (@Model.CurrentDayProteinCalories + @Model.MealProteinCalories) + ")");
-            $('#dailyTargetProteinOver').css('color', '#FFC05B');
-        }
-        else {
-            $('#dailyTargetProteinOver').text("(" + (@Model.CurrentDayProteinCalories + @Model.MealProteinCalories) + ")");
-        }
-        if (@Model.CurrentDayFatCalories + @Model.MealFatCalories > @Model.TargetFatCalories) {
-            $('#dailyTargetFatOver').text("(" + (@Model.CurrentDayFatCalories + @Model.MealFatCalories) + ")");
-            $('#dailyTargetFatOver').css('color', '#FFC05B');
-        }
-        else {
-            $('#dailyTargetFatOver').text("(" + (@Model.CurrentDayFatCalories + @Model.MealFatCalories) + ")");
-        }
-        if (@Model.CurrentDayCarbCalories + @Model.MealCarbCalories > @Model.TargetCarbCalories) {
-            $('#dailyTargetCarbOver').text("(" + (@Model.CurrentDayCarbCalories + @Model.MealCarbCalories) + ")");
-            $('#dailyTargetCarbOver').css('color', '#FFC05B');
-        }
-        else {
-            $('#dailyTargetCarbOver').text("(" + (@Model.CurrentDayCarbCalories + @Model.MealCarbCalories) + ")");
-        }*@
     });
 </script>

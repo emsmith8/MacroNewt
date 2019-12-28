@@ -72,9 +72,11 @@
     <Compile Remove="Models\ViewModels\EmailContentViewModel.cs" />
     <Compile Remove="Models\ViewModels\FoodListViewModel.cs" />
     <Compile Remove="Models\ViewModels\FoodNutrientViewModel.cs" />
+    <Compile Remove="Models\ViewModels\HistoryDataViewModel.cs" />
     <Compile Remove="Models\ViewModels\NutritionLabel.cs" />
     <Compile Remove="Services\IEmailSender.cs" />
     <Compile Remove="ViewComponents\AdminConfirmMealViewComponent.cs" />
+    <Compile Remove="ViewComponents\DateRangeHistoryViewComponent.cs" />
     <Compile Remove="ViewComponents\EditFoodSearchResultViewComponent.cs" />
     <Compile Remove="ViewComponents\VerificationEmailViewComponent.cs" />
   </ItemGroup>

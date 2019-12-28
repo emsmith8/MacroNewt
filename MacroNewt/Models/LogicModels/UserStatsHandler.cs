@@ -10,17 +10,42 @@ using System.Threading.Tasks;
 
 namespace MacroNewt.Models.LogicModels
 {
+    /*
+     *  The UserStatsHandler class
+     *  Handles the arithmetic involved in generating and displaying calorie and macronutrient progress bars
+     *  High volume of simple operations.
+     */
+
+    /// <summary>
+    /// This class performs the arithmetic required for displaying calorie and macronutrient progress bars for daily and past user meal stats.
+    /// </summary>
     public class UserStatsHandler
     {
         private readonly UserManager<MacroNewtUser> _userManager;
         private readonly MacroNewtContext _context;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserStatsHandler"/> class.
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="context"></param>
         public UserStatsHandler(UserManager<MacroNewtUser> userManager, MacroNewtContext context)
         {
             _userManager = userManager;
             _context = context;
         }
 
+        /// <summary>
+        /// Compares user's goals with daily intake to properly display progress bars
+        /// </summary>
+        /// <remarks>
+        /// Much of the arithmetic is conditional and based on whether or not the user has surpassed daily targets.
+        /// Conditions provide for a different progress bar appearance if user has failed to meet goals.
+        /// </remarks>
+        /// <param name="user"></param>
+        /// <param name="targetTotalCal"></param>
+        /// <param name="dct"></param>
+        /// <returns>A populated <see cref="CurrentDayCalStatsViewModel"/> object</returns>
         public CurrentDayCalStatsViewModel OrganizeCalStats(MacroNewtUser user, int targetTotalCal, DailyCalTotal dct)
         {
             if (dct == null)
@@ -57,26 +82,18 @@ namespace MacroNewt.Models.LogicModels
                 CurrentDayCaloriesPercent = Math.Round(((dct.TotalDailyCalories * 100) / (targetTotalCal * 1.5))),
                 PercentageCaloriesConsumed = Math.Round(dct.TotalDailyCalories * 100.0 / targetTotalCal),
                 TargetProteinCalories = Convert.ToInt32(proteinTar),
-                //TargetProteinCalories = (targetTotalCal / 5),
                 CurrentDayProteinCalories = dct.TotalDailyProteinCalories,
                 CurrentDayProteinCaloriesPercent = Math.Round(((dct.TotalDailyProteinCalories * 100) / (proteinTar * 1.5))),
                 PercentageProteinCaloriesConsumed = Math.Round(dct.TotalDailyProteinCalories * 100.0 / proteinTar),
-                //CurrentDayProteinCaloriesPercent = Math.Round(((dct.TotalDailyProteinCalories * 100) / (targetTotalCal * 1.5 / 5))),
                 TargetFatCalories = Convert.ToInt32(fatTar),
-                //TargetFatCalories = (targetTotalCal / 3),
                 CurrentDayFatCalories = dct.TotalDailyFatCalories,
                 CurrentDayFatCaloriesPercent = Math.Round(((dct.TotalDailyFatCalories * 100) / (fatTar * 1.5))),
                 PercentageFatCaloriesConsumed = Math.Round(dct.TotalDailyFatCalories * 100.0 / fatTar),
-                //CurrentDayFatCaloriesPercent = Math.Round(((dct.TotalDailyFatCalories * 100) / (targetTotalCal * 1.5 / 3))),
                 TargetCarbCalories = Convert.ToInt32(carbTar),
-                //TargetCarbCalories = (targetTotalCal / 2),
                 CurrentDayCarbCalories = dct.TotalDailyCarbCalories,
                 CurrentDayCarbCaloriesPercent = Math.Round(((dct.TotalDailyCarbCalories * 100) / (carbTar * 1.5))),
                 PercentageCarbCaloriesConsumed = Math.Round(dct.TotalDailyCarbCalories * 100.0 / carbTar)
-                //CurrentDayCarbCaloriesPercent = Math.Round(((dct.TotalDailyCarbCalories * 100) / (targetTotalCal * 1.5 / 2)))
             };
-
-
 
 
             if (showMacros != null)
@@ -143,6 +160,12 @@ namespace MacroNewt.Models.LogicModels
             return cdcsvm;
         }
 
+        /// <summary>
+        /// Retrieves user's daily target data for past dates
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="targetDate"></param>
+        /// <returns>A populated <see cref="CurrentDayCalStatsViewModel"/> object</returns>
         public CurrentDayCalStatsViewModel GetPastMacroTargets(MacroNewtUser user, string targetDate)
         {
 
@@ -151,6 +174,7 @@ namespace MacroNewt.Models.LogicModels
                 .Select(u => u.DailyTargetCalories)
                 .FirstOrDefault();
 
+            
             DailyCalTotal dct = _context.DailyCalTotal
                 .Where(d => (d.Id == user.Id) && (d.CalorieDay.Date == Convert.ToDateTime(targetDate)))
                 .FirstOrDefault();
@@ -158,6 +182,16 @@ namespace MacroNewt.Models.LogicModels
             return OrganizeCalStats(user, targetTotalCal, dct);
         }
 
+        /// <summary>
+        /// Retrieves user's daily target data for the current day
+        /// </summary>
+        /// <remarks>
+        /// This method is very redundant and a good example of 'if it ain't broke don't fix it'. Didn't want to mess with providing DateTime.Today as
+        ///     a parsed string and having something break, so left this and GetPastMacroTargets as separate methods. Additionally, GetCurrentMacroTargets is
+        ///     called indirectly from a block of javascript and wanted to avoid addressing multiple language date/time rules.
+        /// </remarks>
+        /// <param name="user"></param>
+        /// <returns>A populated <see cref="CurrentDayCalStatsViewModel"/> object</returns>
         public CurrentDayCalStatsViewModel GetCurrentMacroTargets(MacroNewtUser user)
         {
             int targetTotalCal = _context.Users
@@ -173,6 +207,21 @@ namespace MacroNewt.Models.LogicModels
 
         }
 
+        /// <summary>
+        /// Performs conditional arithmetic to provide progress bar displays for calories and macronutrients while logging meals.
+        /// </summary>
+        /// <remarks>
+        /// Similar to <see cref="OrganizeCalStats(MacroNewtUser, int, DailyCalTotal)"/> but has to account for the display of the pending meal about to be logged
+        /// </remarks>
+        /// <param name="user"></param>
+        /// <param name="admin"></param>
+        /// <param name="mealId"></param>
+        /// <param name="date"></param>
+        /// <param name="mealCalories"></param>
+        /// <param name="mealProtein"></param>
+        /// <param name="mealFat"></param>
+        /// <param name="mealCarb"></param>
+        /// <returns>A populated <see cref="ConfirmMealViewModel"/> object</returns>
         public ConfirmMealViewModel GetMacroTargets(MacroNewtUser user, Boolean admin, int mealId, DateTime date, int mealCalories, int mealProtein, int mealFat, int mealCarb)
         {
             string UserId = user.Id;
@@ -193,9 +242,6 @@ namespace MacroNewt.Models.LogicModels
                     Id = UserId
                 };
             }
-
-
-
 
             double proteinBal = 0.2;
             double proteinTar = 0;
@@ -220,8 +266,6 @@ namespace MacroNewt.Models.LogicModels
             }
 
 
-
-
             if (mealId != 0)
             {
                 var oldMeal = _context.Meal
@@ -243,38 +287,25 @@ namespace MacroNewt.Models.LogicModels
                 MealCalories = mealCalories,
                 MealCaloriesPercent = ((mealCalories * 100) / (targetTotalCal * 1.5)),
                 TargetProteinCalories = Convert.ToInt32(proteinTar),
-                //TargetProteinCalories = (targetTotalCal / 5),
                 CurrentDayProteinCalories = dct.TotalDailyProteinCalories,
                 CurrentDayProteinCaloriesPercent = Math.Round(((dct.TotalDailyProteinCalories * 100) / (proteinTar * 1.5))),
                 PercentageProteinCaloriesConsumed = Math.Round((dct.TotalDailyProteinCalories + (mealProtein * 4)) * 100.0 / proteinTar),
-                //CurrentDayProteinCaloriesPercent = Math.Round(((dct.TotalDailyProteinCalories * 100) / (targetTotalCal * 1.5 / 5))),
                 MealProteinCalories = (mealProtein * 4),
                 MealProteinCaloriesPercent = ((mealProtein * 4 * 100) / (proteinTar * 1.5)),
-                //MealProteinCaloriesPercent = ((mealProtein * 4 * 100) / (targetTotalCal * 1.5 / 5)),
                 TargetFatCalories = Convert.ToInt32(fatTar),
-                //TargetFatCalories = (targetTotalCal / 3),
                 CurrentDayFatCalories = dct.TotalDailyFatCalories,
                 CurrentDayFatCaloriesPercent = Math.Round(((dct.TotalDailyFatCalories * 100) / (fatTar * 1.5))),
                 PercentageFatCaloriesConsumed = Math.Round((dct.TotalDailyFatCalories + (mealFat * 9)) * 100.0 / fatTar),
-                //CurrentDayFatCaloriesPercent = Math.Round(((dct.TotalDailyFatCalories * 100) / (targetTotalCal * 1.5 / 3))),
                 MealFatCalories = (mealFat * 9),
                 MealFatCaloriesPercent = ((mealFat * 9 * 100) / (fatTar * 1.5)),
-                //MealFatCaloriesPercent = ((mealFat * 9 * 100) / (targetTotalCal * 1.5 / 3)),
                 TargetCarbCalories = Convert.ToInt32(carbTar),
-                //TargetCarbCalories = (targetTotalCal / 2),
                 CurrentDayCarbCalories = dct.TotalDailyCarbCalories,
                 CurrentDayCarbCaloriesPercent = Math.Round(((dct.TotalDailyCarbCalories * 100) / (carbTar * 1.5))),
                 PercentageCarbCaloriesConsumed = Math.Round((dct.TotalDailyCarbCalories + (mealCarb * 4)) * 100.0 / carbTar),
-                //CurrentDayCarbCaloriesPercent = Math.Round(((dct.TotalDailyCarbCalories * 100) / (targetTotalCal * 1.5 / 2))),
                 MealCarbCalories = (mealCarb * 4),
                 MealCarbCaloriesPercent = ((mealCarb * 4 * 100) / (carbTar * 1.5))
-                //MealCarbCaloriesPercent = ((mealCarb * 4 * 100) / (targetTotalCal * 1.5 / 2))
             };
 
-
-            //var showMacros = _context.UserGoals
-            //    .Where(g => g.Id == user.Id)
-            //    .FirstOrDefault();
 
             if (showMacros != null)
             {
@@ -408,6 +439,11 @@ namespace MacroNewt.Models.LogicModels
             return cmvm;
         }
 
+        /// <summary>
+        /// Updates user's <see cref="DailyCalTotal"/> stats after a meal is logged, edited, or deleted
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="date"></param>
         public void UpdateDailyCalories(string userId, DateTime date)
         {
 

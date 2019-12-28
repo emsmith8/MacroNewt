@@ -171,7 +171,6 @@
         var getUrl = window.location;
         var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
-        //$.post('/Home/UpdateCalorieTarget', { calTarget: target }, function (data) {
         $.post(baseUrl + 'Home/UpdateCalorieTarget', { calTarget: target }, function (data) {
             $('#BMRBannerContainer').empty().append("<div class='updateAlert'><span>Target Updated</span></div > ");
 

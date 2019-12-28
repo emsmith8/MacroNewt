@@ -32,7 +32,6 @@ function handleSearchFoodsClick(e) {
         var container = $("#searchContainer").empty();
         $('#waitSpinnerModal').modal('toggle');
         
-        //$.get('/Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
         $.get(baseUrl + 'Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
             console.log("Well, i got here");
             container.html(data);
@@ -152,7 +151,6 @@ function handleSubmitMealClick() {
         foodItems.push(foodItem);
     });
     var container = $("#componentContainer");
-    //$.get('/Logger/GetMealDetailViewComponent', { formData: JSON.stringify(foodItems), mId: mID, reLogged: reLogged }, function (result) {
     $.get(baseUrl + 'Logger/GetMealDetailViewComponent', { formData: JSON.stringify(foodItems), mId: mID, reLogged: reLogged }, function (result) {
         container.html(result);
         console.log("LISTEN UP LISTEN UP HERE YE HERE YE, the mId is " + mID);
@@ -237,8 +235,6 @@ function handleSubmitMealClick() {
         var detailPrevButton = document.querySelector("#mealDetailsPrevious");
         var detailNextButton = document.querySelector("#mealDetailsNext");
         detailPrevButton.addEventListener('click', handleMealDetailsPreviousClick, false);
-        //detailNextButton.addEventListener('click', checkNextButtonStatus, false);
-        //detailNextButton.addEventListener('hover', checkNextButtonStatus, false);
         $("#smartwizard").smartWizard('goToStep', 1);
 
         $('#getDetailWaitSpinnerModal').modal('hide');
@@ -429,7 +425,6 @@ function handleSubmitMealLogClick() {
     var portion = [];
     console.log("The title is " + title);
     $.ajax({
-        //url: '/Logger/ConfirmMeal',
         url: baseUrl + 'Logger/ConfirmMeal',
         type: 'POST',
         data: form.serialize(),
@@ -502,7 +497,6 @@ function confirmAndLogMeal() {
     var edited = $('#edited').val();
 
     $.ajax({
-        //url: '/Logger/LogMeal',
         url: baseUrl + 'Logger/LogMeal',
         type: 'POST',
         data: form.serialize(),
@@ -513,7 +507,6 @@ function confirmAndLogMeal() {
 
                 refreshUserInfo();
 
-                //$.get('/Logger/GetMealReviewViewComponent', { mealTitle: title, mealID: response.mealID, edited: edited }, function (response) {
                 $.get(baseUrl + 'Logger/GetMealReviewViewComponent', { mealTitle: title, mealID: response.mealID, edited: edited }, function (response) {
                     $('#confirmMealModal').modal('hide');
                     $("#reviewComponentContainer").html(response);
@@ -540,7 +533,6 @@ function handleExploreSearchFoods(e) {
     else {
         var container = $("#searchContainer").empty();
         $('#waitSpinnerModal').modal('toggle');
-        //$.get('/Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
         $.get(baseUrl + 'Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
             container.html(data);
             var exploreFoodButtons = document.querySelectorAll(".foodAddButton");
@@ -574,7 +566,6 @@ function exploreFood(targetNdbno) {
 
     var container = $("#modalArea");
 
-    //$.get('/Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: 1}, function (response) {
     $.get(baseUrl + 'Meals/BuildExploreNutritionLabelModal', { ndbno: targetNdbno, portionIndex: 1 }, function (response) {
         container.html(response);
 
@@ -590,7 +581,6 @@ function refreshUserInfo() {
 
     $.ajax({
         type: 'GET',
-        //url: '/Home/RefreshUserInfo',
         url: baseUrl + 'Home/RefreshUserInfo',
         success: function (result) {
             var loggedInContainer = $('#loggedInUserInfoContainer').empty();
@@ -630,7 +620,6 @@ function deleteMeal(itemId) {
     var getUrl = window.location;
     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
-    //$.get('/Meals/Delete', { id: itemId }, function (response) {
     $.get(baseUrl + 'Meals/Delete', { id: itemId }, function (response) {
         var container = $("#deleteMealContainer").empty();
         container.html(response);

@@ -7,6 +7,18 @@ using System.Threading.Tasks;
 
 namespace MacroNewt.Models
 {
+    /*
+     *  The Meal class
+     *  Has public members for all relevant meal information
+     */
+    
+    /// <summary>
+    /// A Meal object includes all information relevant to a user created meal, including a list of <see cref="Food"/> items in the meal
+    /// </summary>
+    /// <remarks>
+    /// Other relevant information includes the name and date of the meal, macronutrient totals, the ID and email of the user who logged the meal,
+    ///     and an indicator of whether the meal is being relogged for avoiding unnecessary API calls for information already in database.
+    /// </remarks>
     public class Meal
     {
         public int Id { get; set; }

@@ -1,6 +1,4 @@
-﻿@model HistoryDataViewModel
-
-@section  Head{ 
+﻿@section  Head{ 
     <link href="~/css/simpleCalendar.css" rel="stylesheet" />
 }
 
@@ -15,15 +13,6 @@
         Click on any day to see meal details, daily stats, and to edit or delete past meals. 
         Daily calorie goals were met on days in green and not met on days in red. 
     </p>
-
-    @*<ul class="nav nav-tabs justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" id="calHistoryTab" data-toggle="tab" href="#calHistory" role="tab">Calendar History</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="listHistoryTab" data-toggle="tab" href="#listHistory" role="tab">List History</a>
-            </li>
-        </ul>*@
 
     <div id="calHistory" class="tab-pane active">
         <div id="calendarContainer" class="row justify-content-center">
@@ -59,148 +48,6 @@
         </div>
     </div>
 
-    @*
-        <div class="tab-content" style="padding-top:10px">
-
-
-            <div id="listHistory" class="tab-pane">
-                <div class="row justify-content-around">
-
-                    <div class="justify-content-around pickerArea HistoryControlBox">
-                        <div id="dayPickBox">
-                            <div>
-                                <button id="chooseDayButton" class="btn btn-sm btn-mySelectedGray" style="margin:5px;">Day</button>
-                                <button id="chooseRangeButton" class="btn btn-sm btn-myBlueDark" style="margin:5px;">Range</button>
-                            </div>
-                            <div class="d-flex pickerBox" style="padding:0 10px;">
-                                <div class="historyDatePicker">
-                                    <strong>Choose:</strong>
-                                    <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
-                                        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-10">
-                                    <strong>Update day</strong>
-                                    <div>
-                                        <button id="updateDayButton" class="btn btn-sm btn-myBlueDark" style="min-width:60%;">Go</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div id="rangePickBox">
-                            <div>
-                                <button id="chooseDayButton2" class="btn btn-sm btn-myBlueDark" style="margin:5px;">Day</button>
-                                <button id="chooseRangeButton2" class="btn btn-sm btn-mySelectedGray" style="margin:5px;">Range</button>
-                            </div>
-                            <div class="d-flex pickerBox" style="padding:0 10px;">
-                                <div class="historyDatePicker">
-                                    <strong>Choose range: </strong>
-                                    <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3" />
-                                        <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" />
-                                        <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-10">
-                                    <strong>Update range</strong>
-                                    <div>
-                                        <button id="updateRangeButton" class="btn btn-sm btn-myBlueDark" style="min-width:60%;">Go</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-                <div class="row justify-content-around" style="margin: -10px 0 10px 0;">
-                        <div>
-                            <button id="chooseRangeButton" class="btn btn-sm btn-myBlueDark" style="line-height:16px;">Choose Range</button>
-                        </div>
-                    </div>
-                    <div class="row justify-content-around" style="margin: -10px 0 10px 0;">
-                        <div>
-                            <button id="chooseDayButton" class="btn btn-sm btn-myBlueDark" style="line-height:16px;">Choose Day</button>
-                        </div>
-                    </div>
-
-                <div class="row justify-content-center" id="fullHistoryBox">
-                    <div class="col-12 col-md-10 col-lg-8" style="margin:auto; padding:0px;">
-                        <div class="mealHistory">
-                            <div class="Box-header d-flex justify-content-between">
-                                <div>
-                                    <p class="summaryHeader">All Logged Meals</p>
-                                </div>
-                            </div>
-
-                            <div class="mealHistoryBox">
-                                <table class="table" style="margin-bottom:0px;">
-                                    <thead>
-                                        <tr class="d-flex">
-                                            <th class="col-4">
-                                                Title
-                                            </th>
-                                            <th class="col-3">
-                                                Meal Date
-                                            </th>
-                                            <th class="col-2">
-                                                <label class="longCalHeader">Calories</label>
-                                                <label class="shortCalHeader">Cal</label>
-                                            </th>
-                                            <th class="col-3">
-                                                Actions
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.Meals)
-                                        {
-                                            <tr class="d-flex">
-                                                <td class="col-4">
-                                                    @Html.DisplayFor(modelItem => item.Title) (@Html.DisplayFor(modelItem => item.MealType))
-                                                </td>
-                                                <td class="col-3">
-                                                    @Html.DisplayFor(modelItem => item.MealDate)
-                                                </td>
-                                                <td class="col-2">
-                                                    @Html.DisplayFor(modelItem => item.Calories)
-                                                </td>
-                                                <td class="col-3">
-                                                    <a class="btn btn-sm btn-myBlueDark" onclick="triggerSpinner()" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                                                    <a class="btn btn-sm btn-myBlueDark" onclick="triggerSpinner()" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                                                    <a class="btn btn-sm btn-myRed deleteMeal" onclick="triggerSpinner()" href="#" data-itemID="@item.Id">Delete</a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row justify-content-center" id="customHistoryContainer">
-
-                </div>
-            </div>
-
-    *@
-
     <div id="waitSpinnerContainer">
 
         <div class="modal" id="waitSpinnerModal">
@@ -228,8 +75,6 @@
 
 </div>
 
-</div>
-
 @section  scripts{ 
 <script src="~/js/simpleCalendar.js" type="text/javascript"></script>
 }
@@ -241,82 +86,6 @@
         var getUrl = window.location;
         var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
         $('#calendar').calendar();
-
-
-        //var deleteMealButtons = document.querySelectorAll(".deleteMeal");
-
-        //for (var i = 0; i < deleteMealButtons.length; i++) {
-        //    var btn = deleteMealButtons[i];
-
-        //    btn.addEventListener('click', function () {
-        //        deleteMeal(this.getAttribute('data-itemID'));
-        //    });
-        //}
-
-        //var updateDayButton = document.querySelector("#updateDayButton");
-        //var updateRangeButton = document.querySelector("#updateRangeButton");
-
-        //updateDayButton.addEventListener('click', updateDay, false);
-        //updateRangeButton.addEventListener('click', updateRange, false);
-
-        //$('#datetimepicker2').datetimepicker({
-        //    format: 'MM/DD/YYYY'
-        //    //format: 'MM/DD/YYYY',
-        //    //buttons: {
-        //    //    showToday: true,
-        //    //}
-        //});
-        //$('#datetimepicker3').datetimepicker({
-        //    format: 'MM/DD/YYYY'
-        //    //format: 'MM/DD/YYYY',
-        //    //buttons: {
-        //    //    showToday: true,
-        //    //}
-        //});
-        //$('#datetimepicker4').datetimepicker({
-        //    format: 'MM/DD/YYYY'
-        //    //format: 'MM/DD/YYYY',
-        //    //buttons: {
-        //    //    showToday: true,
-        //    //}
-        //});
-
-
-        ////$('#datetimepickerCal').datetimepicker({
-        ////    format: 'MM/DD/YYYY'
-        ////    //sideBySide: true,
-        ////    //buttons: {
-        ////    //    showToday: true
-        ////    //}
-        ////});
-
-
-        //$('#datetimepicker2').datetimepicker('viewDate', moment('01/01/2000', 'MM/DD/YYYY'));
-        //$('#datetimepicker3').datetimepicker('viewDate', moment('01/01/2000', 'MM/DD/YYYY'));
-        //$('#datetimepicker4').datetimepicker('viewDate', moment('01/01/2000', 'MM/DD/YYYY'));
-
-        //$('#rangePickBox').hide();
-        ////$('#chooseDayButton').hide();
-
-        //$('#chooseRangeButton').on('click', function () {
-        //    $('#dayPickBox').hide();
-        //    $('#rangePickBox').show();
-        //    //$('#chooseRangeButton').removeClass("btn-myBlueDark").addClass("btn-mySelectedGray");
-        //    //$('#chooseDayButton').removeClass("btn-mySelectedGray").addClass("btn-myBlueDark");
-        //    //$('#chooseRangeButton').hide();
-        //    //$('#chooseDayButton').show();
-        //});
-
-        //$('#chooseDayButton2').on('click', function () {
-        //    $('#rangePickBox').hide();
-        //    $('#dayPickBox').show();
-        //    //$('#chooseDayButton').removeClass("btn-myBlueDark").addClass("btn-mySelectedGray");
-        //    //$('#chooseRangeButton').removeClass("btn-mySelectedGray").addClass("btn-myBlueDark");
-        //    //$('#chooseDayButton').hide();
-        //    //$('#chooseRangeButton').show();
-        //});
-
-
     });
 
     function dayClick(e) {
@@ -330,52 +99,4 @@
             container.html(response);
         })
     }
-
-
-    //function updateDay(e) {
-    //    var getUrl = window.location;
-    //    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
-
-
-    //    var sDate = $('#datetimepicker2').datetimepicker('viewDate');
-
-    //    if (sDate.format('YYYY/MM/DD') == '2000/01/01') {
-    //        alert("no bueno");
-    //        return;
-    //    }
-
-    //    var eDate = sDate;
-
-    //    //$.get('/Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
-    //    $.get(baseUrl + 'Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
-    //        var container = $("#customHistoryContainer").empty();
-    //        container.html(response);
-    //    });
-
-    //    document.getElementById("customHistoryContainer").style.display = "block";
-    //    document.getElementById("fullHistoryBox").style.display = "none";
-    //}
-
-    //function updateRange(e) {
-    //    var getUrl = window.location;
-    //    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
-
-    //    var sDate = $('#datetimepicker3').datetimepicker('viewDate');
-    //    var eDate = $('#datetimepicker4').datetimepicker('viewDate');
-
-    //    if ((sDate.format('YYYY/MM/DD') == '2000/01/01') || (eDate.format('YYYY/MM/DD') == '2000/01/01')) {
-    //        alert("no bueno");
-    //        return;
-    //    }
-
-    //    //$.get('/Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
-    //    $.get(baseUrl + 'Meals/GetDateRangeHistoryViewComponent', { startDate: sDate.format('YYYY/MM/DD'), endDate: eDate.format('YYYY/MM/DD') }, function (response) {
-    //        var container = $("#customHistoryContainer").empty();
-    //        container.html(response);
-    //    });
-
-    //    document.getElementById("customHistoryContainer").style.display = "block";
-    //    document.getElementById("fullHistoryBox").style.display = "none";
-    //}
-
 </script>

@@ -1,10 +1,4 @@
-﻿/* Experimenting with gradient background to use but for the time being prefer white */
-/*.home-page-background {
-    background-image: linear-gradient(160deg, hsla(0, 10%, 100%, 0.5) 30%, #fff), linear-gradient(30deg, #a0d6e6 40%, #f0fafd);
-    margin: -20px;
-}*/
-
-/* iPhone < 5: */
+﻿/* iPhone < 5: */
 @media screen and (device-aspect-ratio: 2/3) {
     select, textarea, input[type="text"], input[type="password"],
     input[type="datetime"], input[type="datetime-local"],
@@ -270,11 +264,6 @@
 }
 
 
-/*.slider-rangeHighlight {
-    background: #D1D5DA;
-}*/
-
-
 .slider-rangeHighlight.recommendRange {
     background: rgba(133, 236, 186, 0.4);
 }
@@ -288,9 +277,6 @@
 }
 
 
-
-/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -357,17 +343,16 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  /* Set the fixed height of the footer here */
   height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px;
 }
 
 /* My side by side divs
@@ -614,7 +599,6 @@ table.dataTable tbody td {
 }
 
 .summaryHeader {
-    /*color: #48A4BE;*/
     color: black;
     font-size: 1.1em;
     font-weight: bold;
@@ -801,7 +785,6 @@ table.dataTable tbody td {
 }
 
 .confirmModalSizing {
-    /*width: 125%;*/
     width: 100%;
 }
 
@@ -996,7 +979,6 @@ h5 {
     text-align: center;
     position: relative;
     color: #5BC0DE;
-    /*background-color: #fff;*/
 }
 
 h5 .top-line {

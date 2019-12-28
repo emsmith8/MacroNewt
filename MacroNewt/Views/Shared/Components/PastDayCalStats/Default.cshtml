@@ -1,28 +1,8 @@
 ﻿@model CurrentDayCalStatsViewModel
 
-@*<div class="modal fade" id="pastDayStatsModal" role="dialog">
-    <div class="modal-dialog vertical-align-center">
-        <div class="modal-content confirmModalSizing">
-
-            
-
-        </div>
-    </div>
-</div>*@
-
     <div class="row justify-content-center">
         <div class="col-12">
             <div>
-                @*<div class="Box-header form-row justify-content-around">
-                    <div class="blueDark col-6">
-                        This Day's Stats
-                    </div>
-                    <div class="col-2 col-md-3">
-                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" data-target="#pastDayStatsModal" style="float:right;">
-                            Close
-                        </button>
-                    </div>
-                </div>*@
 
                 <div class="col-12" style="margin:10px 0px 10px 0px; text-align:center;">
                     <p class="dailyTargetHeaders">
@@ -33,7 +13,6 @@
                             <span id="percentCalSpan" style="color:green;">@Model.PercentageCaloriesConsumed</span>
                             % of target calories consumed
                         </span>
-                        @*<span class="dailyTargetHeaders" id="dailyTargetCalOver"></span>*@
                     </p>
                 </div>
                 <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
@@ -98,7 +77,6 @@
                                 <span id="percentProteinCalSpan" style="color:green;">@Model.PercentageProteinCaloriesConsumed</span>
                                 % of target protein calories consumed
                             </span>
-                            @*<span class="dailyTargetHeaders" id="dailyTargetProteinOver"></span>*@
                         </p>
                     </div>
                     <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
@@ -154,7 +132,6 @@
                                 <span id="percentFatCalSpan" style="color:green;">@Model.PercentageFatCaloriesConsumed</span>
                                 % of target fat calories consumed
                             </span>
-                            @*<span class="dailyTargetHeaders" id="dailyTargetFatOver"></span>*@
                         </p>
                     </div>
                     <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">
@@ -211,7 +188,6 @@
                                 <span id="percentCarbCalSpan" style="color:green;">@Model.PercentageCarbCaloriesConsumed</span>
                                 % of target carb calories consumed
                             </span>
-                            @*<span class="dailyTargetHeaders" id="dailyTargetCarbOver"></span>*@
                         </p>
                     </div>
                     <div class="progress" style="height: 35px; margin:0px 10px 20px 10px;">

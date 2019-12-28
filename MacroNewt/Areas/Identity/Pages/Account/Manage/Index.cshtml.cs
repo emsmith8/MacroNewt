@@ -76,9 +76,6 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
-
-            //[Display(Name = "Daily Calorie Target")]
-            //public int DailyCalorieTarget { get; set; }
             
         }
 
@@ -105,8 +102,7 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
                 HeightInches = user.HeightInches,
                 Weight = user.Weight,
                 Email = email,
-                PhoneNumber = phoneNumber,
-                //DailyCalorieTarget = user.DailyTargetCalories
+                PhoneNumber = phoneNumber
             };
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
@@ -173,11 +169,6 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
                 user.Weight = Input.Weight;
             }
 
-            //if (Input.DailyCalorieTarget != user.DailyTargetCalories)
-            //{
-            //    user.DailyTargetCalories = Input.DailyCalorieTarget;
-            //}
-
             var age = DateTime.Today.Year - Input.DOB.Year;
 
             if (Input.DOB.Date > DateTime.Today.AddYears(-age))
@@ -221,11 +212,6 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
             string finalEmail = ebh.BuildVerificationEmailHtml(user.Name, user.Email, callbackUrl);
 
             await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", finalEmail);
-
-            //await _emailSender.SendEmailAsync(
-            //    email,
-            //    "Confirm your email",
-            //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToPage();

@@ -80,12 +80,6 @@
                         <div class="form-group col-md-6">
                             <label class="control-label" style="font-weight:bold">Food Details</label>
                         </div>
-                        @*<div class="form-group col-md-2">
-                    <label class="control-label" style="font-weight:bold">Servings</label>
-                </div>
-                <div class="form-group col-md-4">
-                    <label class="control-label" style="font-weight:bold">Portion</label>
-                </div>*@
                     </div>
                     @for (int i = 0; i < Model.Foods.Count; i++)
                     {
@@ -110,17 +104,6 @@
                                             <p class="text-center" id="notCompleteMessage_@i" style="color:red;">
 
                                             </p>
-                                            @*<div class="form-row ml-4 mr-4">
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label" style="font-weight:bold">Food Name</label>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <label class="control-label" style="font-weight:bold">Servings</label>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label class="control-label" style="font-weight:bold">Portion</label>
-                                        </div>
-                                    </div>*@
 
                                             @Html.HiddenFor(model => Model.Foods[i].Ndbno)
                                             <hidden id="Total_@i" class="FoodValue"></hidden>
@@ -225,10 +208,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
 
                     }
 
@@ -388,7 +367,6 @@
             return;
         }
         else {
-            //$('#mealDetailsNext').prop("disabled", false);
             $('#mealDetailsNext').addClass('btn-myGreen').removeClass('btn-myRed');
             $('#detailsShortText').text("Click next");
             $('#detailsShortText').css("color", "green");

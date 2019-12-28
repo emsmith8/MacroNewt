@@ -21,12 +21,8 @@ namespace MacroNewt.Areas.Identity.Data
                         context.Configuration.GetConnectionString("MacroNewtContext")));
 
                 services.AddIdentity<MacroNewtUser, IdentityRole>()
-                   // .AddRoleManager<RoleManager<IdentityRole>>()
                     .AddEntityFrameworkStores<MacroNewtContext>()
                     .AddDefaultTokenProviders();
-
-             //   services.AddDefaultIdentity<MacroNewtUser>()
-             //       .AddEntityFrameworkStores<MacroNewtContext>();
             });
         }
 

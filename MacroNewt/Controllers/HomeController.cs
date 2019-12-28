@@ -20,6 +20,15 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace MacroNewt.Controllers
 {
+    /* 
+     *  The Home controller
+     *  Handles the bulk of retrieving user account details/stats and returns appropriate views
+     */
+
+    /// <summary>
+    /// Controller that updates and displays proper user details/stats
+    /// </summary>
+    /// <seealso cref="Controller"/>
     public class HomeController : Controller
     {
         private readonly UserManager<MacroNewtUser> _userManager;
@@ -27,6 +36,13 @@ namespace MacroNewt.Controllers
         private readonly SignInManager<MacroNewtUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HomeController"/> class.
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="context"></param>
+        /// <param name="signInManager"></param>
+        /// <param name="emailSender"></param>
         public HomeController(UserManager<MacroNewtUser> userManager, MacroNewtContext context, 
                                 SignInManager<MacroNewtUser> signInManager, IEmailSender emailSender)
         {
@@ -36,7 +52,10 @@ namespace MacroNewt.Controllers
             _emailSender = emailSender;
         }
 
-
+        /// <summary>
+        /// Returns the main homepage view, unless user is admin in which case returns admin homepage view
+        /// </summary>
+        /// <returns>The Views/Home/Index <see cref="ViewResult"/></returns>
         [Authorize]
         public IActionResult Index()
         {
@@ -45,7 +64,6 @@ namespace MacroNewt.Controllers
             UserStatsHandler ush = new UserStatsHandler(_userManager, _context);
 
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            // var user = User;
 
             UserConfirmedStatusViewModel ucs = new UserConfirmedStatusViewModel {
                 UserEmailConfirmed = _context.Users
@@ -67,6 +85,10 @@ namespace MacroNewt.Controllers
             return View(ucs);
         }
 
+        /// <summary>
+        /// Retrieves user's analytical stats and returns the graphical view component
+        /// </summary>
+        /// <returns>Theh MealAnalytics ViewComponent</returns>
         public IActionResult GetMealAnalytics()
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -87,10 +109,14 @@ namespace MacroNewt.Controllers
                 mav.ProteinMonthTotal += d.TotalDailyProteinCalories;
             }
 
-
             return ViewComponent("MealAnalytics", mav);
         }
 
+        /// <summary>
+        /// Determines if user account includes required details for finding BMR. Returns view component
+        ///     for providing those details if not present, otherwise returns BMR calculator view component
+        /// </summary>
+        /// <returns>The UpdateProfile ViewComponent if necessary, otherwise the BMRCalculator ViewComponent</returns>
         public IActionResult CheckProfileComplete()
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -124,6 +150,10 @@ namespace MacroNewt.Controllers
             return ViewComponent("BMRCalculator", bmrc);
         }
 
+        /// <summary>
+        /// Handles user request to resend confirmation email if lost or not received
+        /// </summary>
+        /// <returns>The ResendConfirmationEmail ViewComponent</returns>
         public async Task<IActionResult> ResendConfirmationEmail()
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -147,86 +177,23 @@ namespace MacroNewt.Controllers
 
             await _emailSender.SendEmailAsync(user.Email, "Confirm your email", finalEmail);
 
-            //await _emailSender.SendEmailAsync(user.Email, "Confirm your email",
-            //            $"<h1>{userNm}</h1><div>Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.</div>");
-
             return ViewComponent("ResendConfirmationEmail");
         }
 
-        //public string BuildVerificationEmailHtml(string userName, string userEmail, string callbackUrl)
-        //{
-        //    string emailHtml = System.IO.File.ReadAllText("Views/Shared/VerificationEmail.cshtml");
-
-        //    StringBuilder sb = new StringBuilder(emailHtml);
-
-        //    sb.Replace("{userName}", userName);
-        //    sb.Replace("{userEmail}", userEmail);
-        //    sb.Replace("{callbackUrl}", callbackUrl);
-
-        //    string emailHtmlResult = sb.ToString();
-
-        //    return emailHtmlResult;
-        //}
-
-        //public async Task<IActionResult> SendTestEmail()
-        //{
-        //    string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        //    var user = _context.Users
-        //        .Where(u => u.Id == userID)
-        //        .FirstOrDefault();
-
-        //    //     var userNm = user.Name;
-
-        //    //string path = "Views/Shared/VerificationEmail.cshtml";
-
-
-
-
-
-        //    //            string emailHtml = "<div style ='width:350px;' ><div class='text-center'><span style ='background-color:#ebebeb; padding:10px; display:block; text-align:left; font-weight:lighter;'> Your MacroNewt email verification</span>"
-        //    //                + "<img src = 'cid:LogoImage' alt='siteLogo' title='Logo' style='max-width:150px; width:100%; margin:10px;' /></div><div style = 'padding:10px;' >< p >" + ${user.Name} + ",<br />
-        //    //            Your MacroNewt account email is:<br />
-        //    //            ${user.Email
-        //    //}
-        //    //        </p>
-        //    //        <div style = "margin:10px 0 10px 0;" >
-        //    //            < a class="btn btn-sm btn-myBlueDarker" id="confirmEmailButton" href="${HtmlEncoder.Default.Encode(callbackUrl)}">Confirm email</a>
-        //    //         </div>
-        //    //        <p>
-        //    //            <br />
-
-        //    //             This link will expire in 3 hours.
-        //    //             <br />
-        //    //        </p>
-        //    //        <p>
-
-        //    //             Can't click the button? Copy and past this into your browser:<br />
-        //    //            ${ HtmlEncoder.Default.Encode(callbackUrl)}
-        //    //        </p>
-        //    //    </div>
-        //    //</div>"
-
-        //    EmailBuildHandler ebh = new EmailBuildHandler();
-
-        //    //string emailContent = GetVerificationEmailHtml(user.Name, user.Email, HtmlEncoder.Default.Encode(callbackUrl)).ToString();
-        //    //string emailContent = GetVerificationEmailHtml(user.Name, user.Email, "callbackUrlPlaceholder").ToString();
-
-        //    string finalEmail = ebh.BuildVerificationEmailHtml(user.Name, user.Email, "placeholderCallbackUrl");
-
-        //    await _emailSender.SendEmailAsync(user.Email, "Testing inline image", finalEmail);
-
-        //    //  await _emailSender.SendEmailAsync(user.Email, "Testing inline image",
-        //    //     $"<div><img src='cid:LogoImage' alt='siteLogo' title='Logo' style='max-width:300px; width:100%' /></div><p class='text-center'>{userNm},<p><div>Please confirm your account by <a href='fakeLink'>clicking here</a>.</div>");
-
-        //    return ViewComponent("ResendConfirmationEmail");
-        //}
-
+        /// <summary>
+        /// Refreshes stats for the logged in user after changes are made (i.e. logging new meals)
+        /// </summary>
+        /// <returns>The LoggedInUserInfo ViewComponent</returns>
         public IActionResult RefreshUserInfo()
         {
             return ViewComponent("LoggedInUserInfo");
         }
 
+        /// <summary>
+        /// Updates <see cref="MacroNewtUser"/> account with details necessary for BMR calculation
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns>The BMRCalculator ViewComponent</returns>
         public IActionResult UpdateProfileStats([Bind("Gender,HeightFeet,HeightInches,Weight")] UpdateProfileViewModel form)
         {
 
@@ -264,6 +231,11 @@ namespace MacroNewt.Controllers
             
         }
 
+        /// <summary>
+        /// Updates the <see cref="UserGoals"/> target calorie goal based on chosen criteria
+        /// </summary>
+        /// <param name="calTarget"></param>
+        /// <returns>A Json object representing a successful update of user account</returns>
         public IActionResult UpdateCalorieTarget(int calTarget)
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -331,38 +303,41 @@ namespace MacroNewt.Controllers
             return Json(new { success = true });
         }
 
-        //public IActionResult UpdateCalorieTargetAdjustment(int adjustment)
-        //{
-        //    string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        //    var targetUser = _context.Users
-        //        .Where(u => u.Id == userID)
-        //        .FirstOrDefault();
-
-        //    targetUser.DailyTargetCalories += adjustment;
-
-        //    _context.Users.Update(targetUser);
-
-        //    _context.SaveChanges();
-
-        //    return Json(new { success = true });
-        //}
-
+        /// <summary>
+        /// Returns a view with some limited privacy information
+        /// </summary>
+        /// <returns>The Views/Home/Privacy <see cref="ViewResult"/></returns>
         public IActionResult Privacy()
         {
             return View();
         }
 
+        /// <summary>
+        /// Returns a view with some limited information about <see cref="MacroNewt"/>
+        /// </summary>
+        /// <returns>The Views/Home/About <see cref="ViewResult"/></returns>
         public IActionResult About()
         {
             return View();
         }
 
+        /// <summary>
+        /// Returns a view component enabling the user to contact admin with questions/comments
+        /// </summary>
+        /// <returns>The ContactUs ViewComponent</returns>
         public IActionResult Contact()
         {
             return ViewComponent("ContactUs", new ContactUsViewModel());
         }
-
+        
+        /// <summary>
+        /// Uses the <see cref="EmailBuildHandler"/> and <see cref="EmailSender"/> to submit user's question/comment email
+        /// </summary>
+        /// <remarks>
+        /// User provides a message along with a contact type meant only for organization as the type doesn't change anything about the process
+        /// </remarks>
+        /// <param name="form"></param>
+        /// <returns>The ConfirmContact ViewComponent</returns>
         public async Task<IActionResult> ConfirmContact([Bind("UserEmail,ContactType,Message")] ContactUsViewModel form)
         {
             if (!ModelState.IsValid)
@@ -389,6 +364,10 @@ namespace MacroNewt.Controllers
             }
         }
 
+        /// <summary>
+        /// Returns a customized error view for when something goes wrong
+        /// </summary>
+        /// <returns>The Views/Shared/Error <see cref="ViewResult"/></returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
