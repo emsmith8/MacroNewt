@@ -315,9 +315,7 @@
     function checkDetailsComplete(foodNumber) {
         var completeCount = 0;
         var servingSize = $('#Foods_' + foodNumber + '__NumberOfServings').val();
-        console.log("The serving size is " + servingSize);
         var portion = $('#portionSelectBox_' + foodNumber).children('option:selected').attr('value');
-        console.log("The portion is " + portion);
         var buttonCount = $('#checkDetailsCompleteButton_' + foodNumber).attr('data-totalButtonsNumber');
 
         if (servingSize < 0.25 || portion == null) {
@@ -331,15 +329,11 @@
 
             $('#food_' + foodNumber + '_StatusSymbol').addClass('fa-check-circle').removeClass('fa-times-circle');
 
-            console.log("button count is " + buttonCount);
-
             for (var i = 0; i < buttonCount; i++) {
                 if ($('#finishFoodDetailsButton_' + i).text() == "Edit") {
                     completeCount++;
-                    console.log("The new completeCount is " + completeCount);
                 }
                 else {
-                    console.log("wasn't edit i guess");
                 }
                 if (completeCount == buttonCount) {
                     checkAllDetailsComplete();
@@ -351,7 +345,6 @@
     }
 
     function checkAllDetailsComplete() {
-        console.log("I'm checking everything");
         var buttonCount = $('#finishFoodDetailsButton_0').attr('data-totalFoodsNumber');
 
         for (var i = 0; i < buttonCount; i++) {
@@ -388,7 +381,6 @@
     }
 
     function checkNextButtonStatus() {
-        console.log("Well I'm here");
         if ($('#mealDetailsNext').hasClass("btn-myGreen")) {
             handleMealDetailsNextClick();
         }

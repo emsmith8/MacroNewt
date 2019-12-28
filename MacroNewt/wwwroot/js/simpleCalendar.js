@@ -45,8 +45,6 @@
         } else {
             this.view = $view[0];
         }
-        console.log($currentDate);
-        console.log($currentDate);
 
         if ($currentDate.length > 0) {
             var dayFormat = $currentDate.data('day-format'),
@@ -116,7 +114,6 @@
             for (i = 0; i < 7; i++) {
 
                 var tempDate = datetime.format('MM/DD/YY');
-                console.log("tempDate is " + tempDate);
 
                 td = document.createElement('td');
                 td.style.width = '14.28%';
@@ -135,14 +132,11 @@
                     textDiv.appendChild(document.createTextNode(dateData[tempDate]["total"]));
                     textDiv.setAttribute("data-date", datetime.format('MM/DD/YYYY'));
                     td.appendChild(textDiv);
-                    console.log("warning warning");
                     if (dateData[tempDate]["status"] == "over") {
                         td.classList.add("overCal");
-                        console.log("BWOOP BWOOP");
                     }
                     else if (dateData[tempDate]["status"] == "under") {
                         td.classList.add("underCal");
-                        console.log("BEEP BEEP");
                     }
                 }
 

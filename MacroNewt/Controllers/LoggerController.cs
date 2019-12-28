@@ -88,7 +88,6 @@ namespace MacroNewt.Areas.Identity.Data
         /// <returns>The FoodSearchResult ViewComponent if search returns results - a message otherwise</returns>
         public IActionResult SearchFoods(string foodName, string targetDatabase)
         {
-            Debug.WriteLine("Well, I got here and the foodName is " + foodName);
             SearchHandler handler = new SearchHandler();
 
             var client = HttpClientAccessor.HttpClient;
@@ -103,7 +102,6 @@ namespace MacroNewt.Areas.Identity.Data
 
                 if (responseStatus["errors"] != null)
                 {
-                    Debug.WriteLine("Something went wrong with the request I guess");
                     return new ContentResult
                     {
                         ContentType = "text/html",
@@ -117,7 +115,6 @@ namespace MacroNewt.Areas.Identity.Data
             }
             else
             {
-                Debug.WriteLine("Something went wrong with the request I guess");
                 return new ContentResult
                 {
                     ContentType = "text/html",
@@ -139,8 +136,6 @@ namespace MacroNewt.Areas.Identity.Data
         /// <returns>The MealDetail ViewComponent</returns>
         public IActionResult GetMealDetailViewComponent(string formData, int mId, bool reLogged)
         {
-            Debug.WriteLine("The mId is " + mId);
-
             List<Food> foodItems = JsonConvert.DeserializeObject<List<Food>>(formData);
 
             SearchHandler handler = new SearchHandler();
@@ -233,11 +228,6 @@ namespace MacroNewt.Areas.Identity.Data
         /// <returns>The MealReview ViewComponent</returns>
         public IActionResult GetMealReviewViewComponent(string mealTitle, int mealID, string edited)
         {
-
-            Debug.WriteLine("****************************I'm here *********************************************");
-
-            Debug.WriteLine("WELL AT LEAST I GOT HERE and the mealTitle is " + mealTitle);
-            
 
             if (mealTitle == null)
             {
@@ -407,7 +397,6 @@ namespace MacroNewt.Areas.Identity.Data
 
             foreach (var f in form.Foods)
             {
-                Debug.WriteLine("I'm here and i'm adding ndbno " + f.Ndbno);
                 foodNdbnos.Add(f.Ndbno);
             }
 

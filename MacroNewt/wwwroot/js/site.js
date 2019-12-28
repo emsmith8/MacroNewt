@@ -33,14 +33,12 @@ function handleSearchFoodsClick(e) {
         $('#waitSpinnerModal').modal('toggle');
         
         $.get(baseUrl + 'Logger/SearchFoods', { foodName: food, targetDatabase: database }, function (data) {
-            console.log("Well, i got here");
             container.html(data);
             var addFoodButtons = document.querySelectorAll(".foodAddButton");
             [].forEach.call(addFoodButtons, function (elem) {
                 elem.addEventListener('click', addFoodToMeal, false);
             });
             $("#foodSearchResults").on("draw.dt", function () {
-                console.log("WELL...at least I'm in the length event area");
                 hideFoodsAlreadyInMeal();
                 showFoodsNoLongerInMeal();
             });
@@ -57,7 +55,6 @@ function handleSearchFoodsClick(e) {
                     null
                 ]
             });
-            console.log("Got here and should be hiding it");
             $('#waitSpinnerModal').modal('hide');
             $("html, body").animate({ scrollTop: "500px" }, 1000);
         });
@@ -67,16 +64,11 @@ function handleSearchFoodsClick(e) {
 }
 
 function showFoodsNoLongerInMeal() {
-    console.log("I EVEN GOT HERE-----------------------------");
     var stagingList = document.querySelectorAll(".stagingItems");
     [].forEach.call(stagingList, function (elem) {
-        console.log("Batter number is " + elem.value);
         var x = document.getElementById(elem.value);
-        console.log("x is " + x);
         if (typeof(x) != 'undefined' && x != null) {
-            console.log("THE VALUE ISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS " + elem.value);
             document.getElementById(elem.value).style.display = "table-row";
-            
         }
     });
     
@@ -85,15 +77,9 @@ function showFoodsNoLongerInMeal() {
 function hideFoodsAlreadyInMeal() {
     var currentNdbnos = document.getElementsByClassName("removeFoodButton");
 
-
     var x = document.getElementById("foodSearchResults").rows.length;
 
-    console.log("This time there are " + x + " rows in the table");
-
     for (var i = 0; i < currentNdbnos.length; i++) {
-        
-
-        console.log("The full thing is searchResult-" + currentNdbnos[i].dataset.ndbno);
         if (document.getElementById("searchResult-" + currentNdbnos[i].dataset.ndbno)) {
             document.getElementById("searchResult-" + currentNdbnos[i].dataset.ndbno).style.display = "none";
         }
@@ -118,8 +104,6 @@ function handleSubmitMealClick() {
 
     var mealTitle = document.getElementById("currentFoods");
     var mealDate = document.getElementById("currentFoods");
-    console.log("THE NAME ISSSSSSSSSSSSSSSSS " + mealTitle.dataset.mealtitle);
-    console.log("AND THE TIME ISSS " + mealDate.dataset.mealdate);
     
     var mID = document.getElementById("currentFoods").dataset.mealid;
 
@@ -133,13 +117,9 @@ function handleSubmitMealClick() {
     [].forEach.call(mealFoodButtons, function (elem, i) {
         if (elem.hasAttribute("data-servings")) {
             servings.push(elem.dataset.servings);
-            console.log("THe servings is " + elem.dataset.servings);
             portion.push(elem.dataset.portion);
-            console.log("THE FRICKIN PORTION INDEX IS " + elem.dataset.pindex);
             portionIndex.push(elem.dataset.pindex);
-            console.log("The serving is " + servings + ", the portion is " + portion + ", and the portion index is " + portionIndex + " and i is " + i);
             selectedPortion.push(elem.dataset.chosenPortion);
-            
         }
         var foodItem = {
             "Ndbno": elem.dataset.ndbno,
@@ -153,8 +133,6 @@ function handleSubmitMealClick() {
     var container = $("#componentContainer");
     $.get(baseUrl + 'Logger/GetMealDetailViewComponent', { formData: JSON.stringify(foodItems), mId: mID, reLogged: reLogged }, function (result) {
         container.html(result);
-        console.log("LISTEN UP LISTEN UP HERE YE HERE YE, the mId is " + mID);
-        console.log("The length of servings is " + servings.length);
 
         var md = new Date();
 
@@ -176,24 +154,18 @@ function handleSubmitMealClick() {
         var servingSizeInputs = document.getElementsByClassName('servingSize');
         [].forEach.call(servingSizeInputs, function (elem, i) {
             elem.addEventListener('change', handleServingSizeChange, false);
-            console.log("The length of servings is " + servings.length);
-            console.log("Serving " + i + " is "  + servings[i]);
             if (i >= servings.length) {
-                console.log("yeah it's undefined");
                 servingSizeInputs[i].value = 1;
             }
             else {
-                console.log("apparently it's not undefined");
                 servingSizeInputs[i].value = parseFloat(servings[i]);
             }
         });
         var portionBoxes = document.getElementsByClassName('portionBox');
         [].forEach.call(portionBoxes, function (elem, i) {
             elem.addEventListener('change', handlePortionChange, false);
-            console.log("The portion is " + portion[i]);
             portionBoxes[i].selectedIndex = portionIndex[i];
             
-
             selectedProtein = $('#portionSelectBox_' + i).children('option:selected').attr('data-proteinVal');
             selectedFat = $('#portionSelectBox_' + i).children('option:selected').attr('data-fatVal');
             selectedCarb = $('#portionSelectBox_' + i).children('option:selected').attr('data-carbVal');
@@ -247,7 +219,6 @@ function handleServingSizeChange(e) {
     var foodIndex = e.target.dataset.foodindex;
     var portionValue = $('#portionSelectBox_' + foodIndex).children('option:selected').attr('value');
     var foodCalorieTotalBox = document.getElementById("Total_" + foodIndex);
-    console.log("Serving Size: " + servingSize + ", FoodIndex: " + foodIndex + ", Portion Value: " + portionValue);
 
     var selectedProtein = $('#portionSelectBox_' + foodIndex).children('option:selected').attr('data-proteinVal');
     var selectedFat = $('#portionSelectBox_' + foodIndex).children('option:selected').attr('data-fatVal');
@@ -275,8 +246,6 @@ function handlePortionChange(e) {
     var selectedFat = $('#portionSelectBox_' + foodIndex).children('option:selected').attr('data-fatVal');
     var selectedCarb = $('#portionSelectBox_' + foodIndex).children('option:selected').attr('data-carbVal');
 
-    console.log("blah blah blah mealTotalProtein is " + document.getElementById("mealTotalProtein").value);
-
 
     document.getElementById("selectedPortionProtein" + foodIndex).value = selectedProtein * servingSize;
     document.getElementById("selectedPortionFat" + foodIndex).value = selectedFat * servingSize;
@@ -284,18 +253,15 @@ function handlePortionChange(e) {
 
     $(servingSize).attr('portionIndex', portionIndex);
     var foodCalorieTotalBox = document.getElementById("Total_" + foodIndex);
-    console.log("Serving Size: " + servingSize + ", FoodIndex: " + foodIndex + ", Portion Value: " + portionValue + ", PortionIndex: " + portionIndex);
     foodCalorieTotalBox.value = parseFloat(servingSize * parseFloat(portionValue));
     RecalculateMealTotal();
 }
 
 function RecalculateMealTotal() {
     var foodTotals = document.getElementsByClassName("FoodValue");
-    console.log("THE foodTotals LENGTH IS " + foodTotals.length);
     var mealTotal = 0.0;
     for (var i = 0; i < foodTotals.length; i++) {
         if (!isNaN(foodTotals[i].value)) {
-            console.log("THe foodTotal NUMBER is " + foodTotals[i].value);
             mealTotal += Math.round(foodTotals[i].value);
         }
     }
@@ -305,7 +271,6 @@ function RecalculateMealTotal() {
 function addFoodToMeal(e) {
     var ndbno = e.target.dataset.ndbno;
     var foodName = e.target.dataset.foodname;
-    console.log("Adding: NDBNO: " + ndbno + "/Name: " + foodName);
     var tableRef = document.getElementById('currentFoods').getElementsByTagName('tbody')[0];
 
     var stagingList = document.querySelectorAll(".stagingItems");
@@ -314,7 +279,6 @@ function addFoodToMeal(e) {
         [].forEach.call(stagingList, function (elem) {
 
             var x = document.getElementById(elem.value);
-            console.log("elem is " + elem.value);
             if (elem.value == "searchResult-" + ndbno) {
                 elem.parentNode.removeChild(elem);
             }
@@ -360,7 +324,6 @@ function addFoodToMeal(e) {
 function removeFoodFromMeal(e) {
     var ndbno = e.target.dataset.ndbno;
     var foodName = e.target.dataset.foodname;
-    console.log("Remove: NDBNO: " + ndbno + "/Name: " + foodName);
     var rowToRemove = document.getElementById("mealItem-" + ndbno);
 
     var input = document.createElement("input");
@@ -415,15 +378,10 @@ function handleSubmitMealLogClick() {
     document.getElementById("mealTotalProtein").value = mealTotalProtein;
     document.getElementById("mealTotalFat").value = mealTotalFat;
     document.getElementById("mealTotalCarb").value = mealTotalCarb;
-
-    console.log("AFter doing the query selector and whatnot the total meal protein is " + mealTotalProtein);
-    console.log("AFter doing the query selector and whatnot the total meal fat is " + mealTotalFat);
-    console.log("AFter doing the query selector and whatnot the total meal carb is " + mealTotalCarb);
     
 
     var servings = [];
     var portion = [];
-    console.log("The title is " + title);
     $.ajax({
         url: baseUrl + 'Logger/ConfirmMeal',
         type: 'POST',
@@ -438,7 +396,6 @@ function handleSubmitMealLogClick() {
                 document.getElementById("confirmMealLog").addEventListener('click', confirmAndLogMeal, false);
             }
             else if (xhr.getResponseHeader("vstatus") == "fail") {
-                console.log("IT FAILLLLLLLLLLLLLLLLLLLLLLLLLED");
                 var container = $("#componentContainer").empty();
                 container.html(data);
                 $('#datetimepicker1').datetimepicker({

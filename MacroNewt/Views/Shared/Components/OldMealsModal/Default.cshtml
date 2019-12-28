@@ -95,8 +95,6 @@
     $('#oldMealsModal').on("scroll", function () {
         var oldMealsBacktoTopButton = document.getElementById("oldMealsBackToTopButton");
 
-        console.log("scroll top is " + $('#oldMealsModal').scrollTop());
-
         if ($('#oldMealsModal').scrollTop() > 480) {
             oldMealsBacktoTopButton.style.display = "block";
         }

@@ -89,8 +89,6 @@
     });
 
     function dayClick(e) {
-        console.log("Clicked " + e.target.getAttribute("data-date"));
-
         var dateParts = e.target.getAttribute("data-date").split('/');
 
         $.get("/Meals/GetDayMealInfo", { month: dateParts[0], day: dateParts[1], year: dateParts[2] }, function (response) {

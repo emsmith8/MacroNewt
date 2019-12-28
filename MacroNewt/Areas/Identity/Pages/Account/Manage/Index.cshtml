@@ -83,10 +83,6 @@
                     <label asp-for="Input.Weight"></label>
                     <input asp-for="Input.Weight" type="number" step="1" min="0" class="form-control" />
                 </div>
-                @*<div class="form-group">
-                <label asp-for="Input.DailyCalorieTarget"></label>
-                <input asp-for="Input.DailyCalorieTarget" class="form-control" />
-            </div>*@
             </div>
             <button id="update-profile-button" type="submit" class="btn btn-myBlueDark">Save</button>
             <button id="cancelChangesButton" type="button" class="btn btn-sm btn-mySelectedGray" style="display:none;">Cancel</button>
@@ -108,7 +104,3 @@
     });
 
 </script>
-
-@*@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}*@
