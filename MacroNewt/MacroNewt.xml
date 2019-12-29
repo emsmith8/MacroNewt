@@ -1,0 +1,642 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MacroNewt</name>
+    </assembly>
+    <members>
+        <member name="T:MacroNewt.Areas.Identity.Data.LoggerController">
+            <summary>
+            Controller that handles the food searching and meal logging process.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller"/>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.LoggerController.#ctor(MacroNewt.Areas.Identity.Data.MacroNewtContext,Microsoft.AspNetCore.Identity.UserManager{MacroNewt.Areas.Identity.Data.MacroNewtUser})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MacroNewt.Areas.Identity.Data.LoggerController"/> class.
+            </summary>
+            <param name="context"></param>
+            <param name="userManager"></param>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.LoggerController.Index">
+            <summary>
+            Returns the meal logging view, which starts with food searching. Restricted access for only confirmed accounts
+            </summary>
+            <returns>The Views/Logger/Index <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.LoggerController.NotConfirmed">
+            <summary>
+            Returns a view notifying user he/she has not confirmed his/her account and cannot log meals until confirmed
+            </summary>
+            <returns>The Views/Logger/NotConfirmed <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.LoggerController.SearchFoods(System.String,System.String)">
+            <summary>
+            Sends a request to the USDA food search API for user specified input in either branded or unbranded database.
+                Results are displayed in a view component below search area
+            </summary>
+            <remarks>
+            Makes use of the <see cref="T:MacroNewt.Models.LogicModels.SearchHandler"/> class for organizing API requests
+            </remarks>
+            <param name="foodName"></param>
+            <param name="targetDatabase"></param>
+            <returns>The FoodSearchResult ViewComponent if search returns results - a message otherwise</returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.LoggerController.GetMealDetailViewComponent(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Organizes the details of all selected <see cref="T:MacroNewt.Models.Food"/> items and returns a view component prompting 
+                for details to be completed for <see cref="T:MacroNewt.Models.Meal"/> logging purposes
+            </summary>
+            <remarks>
+            Makes use of the <see cref="T:MacroNewt.Models.LogicModels.SearchHandler"/> class for organizing API request and storing response data
+            </remarks>
+            <param name="formData"></param>
+            <param name="mId"></param>
+            <param name="reLogged"></param>
+            <returns>The MealDetail ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.LoggerController.GetMealReviewViewComponent(System.String,System.Int32,System.String)">
+            <summary>
+            Returns a <see cref="T:MacroNewt.Models.Meal"/> summary view component after meal logging is complete
+            </summary>
+            <param name="mealTitle"></param>
+            <param name="mealID"></param>
+            <param name="edited"></param>
+            <returns>The MealReview ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.LoggerController.AddNutrientData(System.Collections.Generic.List{System.String})">
+            <summary>
+            Handles the retrieval of <see cref="T:MacroNewt.Models.Nutrient"/> data for all selected food items in the meal to be logged
+            </summary>
+            <remarks>
+            Makes use of the <see cref="T:MacroNewt.Models.LogicModels.SearchHandler"/> class for organizing API request and storing nutrient data.
+                Nutrient data isn't stored originally because food search API responses don't include these details
+            </remarks>
+            <param name="ndbnos"></param>
+            <returns>A populated <see cref="T:MacroNewt.Models.ViewModels.FoodViewModel"/></returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.LoggerController.ConfirmMeal(MacroNewt.Models.ViewModels.FoodViewModel)">
+            <summary>
+            Checks ModelState and returns same view if invalid, otherwise provides user with view component for confirming meal to be logged
+            </summary>
+            <param name="form"></param>
+            <returns>The ConfirmMeal ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.LoggerController.LogMeal(MacroNewt.Models.ViewModels.FoodViewModel)">
+            <summary>
+            Creates or edits a meal in the database according to the provided foods and meal details
+            </summary>
+            <remarks>
+            Also updates user's daily stats with use of <see cref="T:MacroNewt.Models.LogicModels.UserStatsHandler"/> class.
+            </remarks>
+            <param name="form"></param>
+            <returns>A Json object representing successful meal logging</returns>
+        </member>
+        <member name="T:MacroNewt.Areas.Identity.Data.MealsController">
+            <summary>
+            Controller that displays a calendar view of previous user meals and allows for editing/review/deletion of logged meals
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller"/>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.#ctor(MacroNewt.Areas.Identity.Data.MacroNewtContext,Microsoft.AspNetCore.Identity.UserManager{MacroNewt.Areas.Identity.Data.MacroNewtUser})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MacroNewt.Areas.Identity.Data.MealsController"/> class.
+            </summary>
+            <param name="context"></param>
+            <param name="userManager"></param>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.Index">
+            <summary>
+            Returns the calendar meal history view
+            </summary>
+            <remarks>
+            Days are shown in either green or red if meals were logged, depending on whether user goals were met.
+                Meals are queried from database when user clicks on a calendar day cell.
+            </remarks>
+            <returns>The Views/Meals/Index <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.Explore">
+            <summary>
+            Returns the food explore view allowing user to browse food details without logging anything
+            </summary>
+            <returns>The Views/Meals/Explore <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.BuildExploreNutritionLabelModal(System.String,System.Int32)">
+            <summary>
+            Handles the proper display of a nutrition label for the selected portion, or <see cref="T:MacroNewt.Models.Measure"/>, of food
+            </summary>
+            <param name="ndbno"></param>
+            <param name="portionIndex"></param>
+            <returns>The ExploreNutritionLabel ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.GetOldMealsModal">
+            <summary>
+            Returns a view component with previously logged meals so that user can easily re-log meals
+            </summary>
+            <returns>The OldMealsModal ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.GetCurrentDayCalStats">
+            <summary>
+            Retrieves and displays user's current daily stats in a view component
+            </summary>
+            <returns>The CurrentDayCalStats ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.GetSpecificDayCalStats(System.String)">
+            <summary>
+            Retrieves and displays daily stats for a specific past date in a view component
+            </summary>
+            <param name="targetDate"></param>
+            <returns>The PastDayCalStats ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Returns the details page for a previously logged meal
+            </summary>
+            <remarks>
+            User can review meal information as well as view nutrition labels for foods and the entire meal
+            </remarks>
+            <param name="id"></param>
+            <returns>The Views/Meals/Details <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.Edit(System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            Returns the edit view for a previously logged meal
+            </summary>
+            <remarks>
+            The edit procedure is the same as the logging procedure but has to be tied to existing data. Some redundancy exists.
+            </remarks>
+            <param name="id"></param>
+            <param name="relog"></param>
+            <returns>The Views/Meals/Edit <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Returns a meal deletion view component
+            </summary>
+            <param name="id"></param>
+            <returns>The DeleteMealModal ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Confirms deletion of a previous meal and updates user stats
+            </summary>
+            <param name="id"></param>
+            <returns>A redirect to last location</returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.GetMonthMealStatus(System.Int32,System.Int32)">
+            <summary>
+            Queries database for all meals in currently shown calendar month and displays red or green if user
+                exceeded or met daily goals
+            </summary>
+            <param name="month"></param>
+            <param name="year"></param>
+            <returns>A Json object containing month's meal statuses</returns>
+        </member>
+        <member name="M:MacroNewt.Areas.Identity.Data.MealsController.GetDayMealInfo(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Queries database for all meals on chosen day in the past and displays view component with that day's stats
+                and the options to edit, review, or delete any shown meal
+            </summary>
+            <param name="month"></param>
+            <param name="day"></param>
+            <param name="year"></param>
+            <returns>The CalendarMealModal ViewComponent</returns>
+        </member>
+        <member name="T:MacroNewt.Controllers.AdminController">
+            <summary>
+            Controller that displays views that support application administration tasks.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller"/>
+        </member>
+        <member name="M:MacroNewt.Controllers.AdminController.#ctor(MacroNewt.Areas.Identity.Data.MacroNewtContext,Microsoft.AspNetCore.Identity.UserManager{MacroNewt.Areas.Identity.Data.MacroNewtUser})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MacroNewt.Controllers.AdminController"/> class.
+            </summary>
+            <param name="context"></param>
+            <param name="userManager"></param>
+        </member>
+        <member name="M:MacroNewt.Controllers.AdminController.Index">
+            <summary>
+            Returns the admin homepage view
+            </summary>
+            <returns>The Views/Admin/Index <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.AdminController.ManageMeals">
+            <summary>
+            Returns a view containing a list of all logged user meals
+            </summary>
+            <returns>The Views/Admin/ManageMeals <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.AdminController.ManageUsers">
+            <summary>
+            Returns a view containing a list of all <see cref="T:MacroNewt.Areas.Identity.Data.MacroNewtUser"/> accounts
+            </summary>
+            <returns>The Admin/ManageUsers <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.AdminController.EditUserDetails(System.String)">
+            <summary>
+            Returns a view with specified <see cref="T:MacroNewt.Areas.Identity.Data.MacroNewtUser"/> details ready for editing
+            </summary>
+            <param name="id"></param>
+            <returns>The Views/Admin/EditUserDetails <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.AdminController.ReviewUserDetails(System.String)">
+            <summary>
+            Returns a view with specified <see cref="T:MacroNewt.Areas.Identity.Data.MacroNewtUser"/> details for review
+            </summary>
+            <param name="id"></param>
+            <returns>The Views/Admin/ReviewUserDetails <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.AdminController.EditUserDetails(MacroNewt.Areas.Identity.Data.MacroNewtUser)">
+            <summary>
+            Edits target <see cref="T:MacroNewt.Areas.Identity.Data.MacroNewtUser"/> account details as provided by admin
+            </summary>
+            <param name="user"></param>
+            <returns>A redirect to previous location if post is valid</returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.AdminController.Delete(System.String)">
+            <summary>
+            Gets the user delete view component
+            </summary>
+            <param name="id"></param>
+            <returns>The DeleteUserModal ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.AdminController.DeleteConfirmed(System.String)">
+            <summary>
+            Deletes target <see cref="T:MacroNewt.Areas.Identity.Data.MacroNewtUser"/> with specified id
+            </summary>
+            <param name="id"></param>
+            <returns>A redirect to previous location</returns>
+        </member>
+        <member name="T:MacroNewt.Controllers.HomeController">
+            <summary>
+            Controller that updates and displays proper user details/stats
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller"/>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.#ctor(Microsoft.AspNetCore.Identity.UserManager{MacroNewt.Areas.Identity.Data.MacroNewtUser},MacroNewt.Areas.Identity.Data.MacroNewtContext,Microsoft.AspNetCore.Identity.SignInManager{MacroNewt.Areas.Identity.Data.MacroNewtUser},Microsoft.AspNetCore.Identity.UI.Services.IEmailSender)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MacroNewt.Controllers.HomeController"/> class.
+            </summary>
+            <param name="userManager"></param>
+            <param name="context"></param>
+            <param name="signInManager"></param>
+            <param name="emailSender"></param>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.Index">
+            <summary>
+            Returns the main homepage view, unless user is admin in which case returns admin homepage view
+            </summary>
+            <returns>The Views/Home/Index <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.GetMealAnalytics">
+            <summary>
+            Retrieves user's analytical stats and returns the graphical view component
+            </summary>
+            <returns>Theh MealAnalytics ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.CheckProfileComplete">
+            <summary>
+            Determines if user account includes required details for finding BMR. Returns view component
+                for providing those details if not present, otherwise returns BMR calculator view component
+            </summary>
+            <returns>The UpdateProfile ViewComponent if necessary, otherwise the BMRCalculator ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.ResendConfirmationEmail">
+            <summary>
+            Handles user request to resend confirmation email if lost or not received
+            </summary>
+            <returns>The ResendConfirmationEmail ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.RefreshUserInfo">
+            <summary>
+            Refreshes stats for the logged in user after changes are made (i.e. logging new meals)
+            </summary>
+            <returns>The LoggedInUserInfo ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.UpdateProfileStats(MacroNewt.Models.ViewModels.UpdateProfileViewModel)">
+            <summary>
+            Updates <see cref="T:MacroNewt.Areas.Identity.Data.MacroNewtUser"/> account with details necessary for BMR calculation
+            </summary>
+            <param name="form"></param>
+            <returns>The BMRCalculator ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.UpdateCalorieTarget(System.Int32)">
+            <summary>
+            Updates the <see cref="T:MacroNewt.Areas.Identity.Data.UserGoals"/> target calorie goal based on chosen criteria
+            </summary>
+            <param name="calTarget"></param>
+            <returns>A Json object representing a successful update of user account</returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.Privacy">
+            <summary>
+            Returns a view with some limited privacy information
+            </summary>
+            <returns>The Views/Home/Privacy <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.About">
+            <summary>
+            Returns a view with some limited information about <see cref="N:MacroNewt"/>
+            </summary>
+            <returns>The Views/Home/About <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.Contact">
+            <summary>
+            Returns a view component enabling the user to contact admin with questions/comments
+            </summary>
+            <returns>The ContactUs ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.ConfirmContact(MacroNewt.Models.ViewModels.ContactUsViewModel)">
+            <summary>
+            Uses the <see cref="T:MacroNewt.Models.LogicModels.EmailBuildHandler"/> and <see cref="T:Microsoft.AspNetCore.Identity.UI.Services.EmailSender"/> to submit user's question/comment email
+            </summary>
+            <remarks>
+            User provides a message along with a contact type meant only for organization as the type doesn't change anything about the process
+            </remarks>
+            <param name="form"></param>
+            <returns>The ConfirmContact ViewComponent</returns>
+        </member>
+        <member name="M:MacroNewt.Controllers.HomeController.Error">
+            <summary>
+            Returns a customized error view for when something goes wrong
+            </summary>
+            <returns>The Views/Shared/Error <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="T:MacroNewt.Models.Food">
+            <summary>
+            A Food object includes all information relevant to a paticular food, including a list of <see cref="T:MacroNewt.Models.Nutrient"/> in that food
+            </summary>
+            <remarks>
+            Relevant information includes identifiers like name and database NDBNO, user selected portion and number of servings, and overall macronutrient contents
+            </remarks>
+        </member>
+        <member name="M:MacroNewt.Models.Food.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MacroNewt.Models.Food"/> class.
+            </summary>
+        </member>
+        <member name="M:MacroNewt.Models.Food.SelectedMeasure">
+            <summary>
+            Used to determine the variable measure label of a selected food and create a meaningful object as a result
+            </summary>
+            <returns>A <see cref="T:MacroNewt.Models.Measure"/> object</returns>
+        </member>
+        <member name="M:MacroNewt.Models.Food.GetCalories(System.String)">
+            <summary>
+            Used to determine and retrieve the calories in a food based on portion type and quantity
+            </summary>
+            <param name="type"></param>
+            <returns>A double value representing total food calories</returns>
+        </member>
+        <member name="M:MacroNewt.Models.Food.GetNutrientValue(System.String,System.String)">
+            <summary>
+            Used to determine and retrieve the specified nutrient content in a food based on target nutrient, portion type, and quantity
+            </summary>
+            <remarks>
+            Unlike <see cref="M:MacroNewt.Models.Food.GetNutrientDisplayValue(System.String,System.String)"/>, this method is used during the meal logging process
+            </remarks>
+            <param name="nutrientId"></param>
+            <param name="type"></param>
+            <returns>A double value representing total content of specified nutrient</returns>
+        </member>
+        <member name="M:MacroNewt.Models.Food.GetNutrientDisplayValue(System.String,System.String)">
+            <summary>
+            Returns a string of nutrient content information for display purposes
+            </summary>
+            <remarks>
+            Simliar to <see cref="M:MacroNewt.Models.Food.GetNutrientValue(System.String,System.String)"/>, but instead of returning a double this method returns a string for display in nutrition labels
+            </remarks>
+            <param name="nutrientId"></param>
+            <param name="type"></param>
+            <returns>A string representinng specified nutrition content</returns>
+        </member>
+        <member name="M:MacroNewt.Models.Food.GetNoMeasureNutrients(MacroNewt.Models.Food)">
+            <summary>
+            Used to retrive <see cref="T:MacroNewt.Models.Nutrient"/> information for a food when a measure isn't available
+            </summary>
+            <remarks>
+            Some foods in the database don't include <see cref="T:MacroNewt.Models.Measure"/>, which breaks other code. This method handles foods without measures.
+            </remarks>
+            <param name="food"></param>
+            <returns>A populated <see cref="T:MacroNewt.Models.NoMeasureFood"/> object</returns>
+        </member>
+        <member name="M:MacroNewt.Models.Food.GetTotalMealNutrients(System.Collections.Generic.List{MacroNewt.Models.Food})">
+            <summary>
+            Used in the creation of nutrition labels for complete meals
+            </summary>
+            <remarks>
+            The method loops through each food included in a meal and combines all calorie and nutrient information in order to 
+                provide a nutrition label for entire meal.
+            </remarks>
+            <param name="foods"></param>
+            <returns>A populated <see cref="T:MacroNewt.Models.MealTotalNutrient"/> object</returns>
+        </member>
+        <member name="T:MacroNewt.Models.Nutrient">
+            <summary>
+            A Nutrient object includes all information relevant to the nutritional data of a particular food, including a list of associated <see cref="T:MacroNewt.Models.Measure"/>
+            </summary>
+            <remarks>
+            Relevant information includes identifiers like name and database NID, value of the particular nutrient, and the <see cref="P:MacroNewt.Models.Nutrient.Food"/> it is associated with
+            </remarks>
+        </member>
+        <member name="M:MacroNewt.Models.Nutrient.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MacroNewt.Models.Nutrient"/> class.
+            </summary>
+        </member>
+        <member name="T:MacroNewt.Models.Measure">
+            <summary>
+            A Measure object includes all information relevant to the portion of a particular <see cref="T:MacroNewt.Models.Food"/>
+            </summary>
+            <remarks>
+            The portion of a Food dictates the values of all nutrients. Relevant information includes identifiers like label and MeasureId, value of
+                a particular measure, and the <see cref="P:MacroNewt.Models.Measure.Nutrient"/> it is associated with
+            </remarks>
+        </member>
+        <member name="T:MacroNewt.Models.MealTotalNutrient">
+            <summary>
+            A MealTotalNutrient object includes total values of all nutrients from all <see cref="T:MacroNewt.Models.Food"/> items in the meal 
+            </summary>
+        </member>
+        <member name="T:MacroNewt.Models.NoMeasureFood">
+            <summary>
+            A NoMeasureFood object includes all nutrient data of a food without having any inherently associated measure
+            </summary>
+        </member>
+        <member name="T:MacroNewt.Models.LogicModels.EmailBuildHandler">
+            <summary>
+            This class consolidates the building of each type of email sent by the app
+            </summary>
+            <remarks>
+            All email templates include keywords in curly brackets in specific locations based on message type. Before the email is sent,
+                keywords and brackets are replaced with the pertinent data (i.e. {contactType} is replaced with 'Question')
+            </remarks>
+            <seealso cref="T:Microsoft.AspNetCore.Identity.UI.Services.IEmailSender"/>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.EmailBuildHandler.BuildVerificationEmailHtml(System.String,System.String,System.String)">
+            <summary>
+            Replaces keywords with a user's name, email address, and a callback url for account verification
+            </summary>
+            <param name="userName"></param>
+            <param name="userEmail"></param>
+            <param name="callbackUrl"></param>
+            <returns>The final string of email html content</returns>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.EmailBuildHandler.BuildForgotPasswordEmailHtml(System.String,System.String)">
+            <summary>
+            Replaces keywords with a user's email address and callback url for account password resetting
+            </summary>
+            <param name="userEmail"></param>
+            <param name="callbackUrl"></param>
+            <returns>The final string of email html content</returns>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.EmailBuildHandler.BuildContactUsEmailHtml(System.String,System.String,System.String,System.String)">
+            <summary>
+            Replaces keywords with a user's contact type, name, email address, and message for contacting admin
+            </summary>
+            <param name="userName"></param>
+            <param name="userEmail"></param>
+            <param name="contactType"></param>
+            <param name="userMessage"></param>
+            <returns>The final string of email html content</returns>
+        </member>
+        <member name="T:MacroNewt.Models.LogicModels.HttpClientAccessor">
+            <summary>
+            This class is used for any USDA API calls
+            </summary>
+            <remarks>
+            Any USDA API request uses this class to establish an <see cref="P:MacroNewt.Models.LogicModels.HttpClientAccessor.HttpClient"/> object with appropriate Uri and headers
+            </remarks>
+        </member>
+        <member name="F:MacroNewt.Models.LogicModels.HttpClientAccessor.UsdaFactory">
+            <summary>
+            Establishes HttpClient with the correct Uri and headers
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.LogicModels.HttpClientAccessor.HttpClient">
+            <summary>
+            Provides the HttpClient's lazy value 
+            </summary>
+        </member>
+        <member name="T:MacroNewt.Models.LogicModels.SearchHandler">
+            <summary>
+            This class is used to organize API calls and store responses
+            </summary>
+            <remarks>
+            Searching for foods and requesting additional information are separate API calls thus require different string parameters.
+            </remarks>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.SearchHandler.OrganizeSearchQ(System.String,System.String)">
+            <summary>
+            Combines the provided food name with the required syntax for an API food search of the specified database type
+            </summary>
+            <param name="foodName"></param>
+            <param name="database"></param>
+            <returns>The final string for API search request</returns>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.SearchHandler.OrganizeReportQ(System.String)">
+            <summary>
+            Combines the provided food ndbno identifier with the required syntax for an API food report
+            </summary>
+            <param name="foodNdbno"></param>
+            <returns>The final string for API report request</returns>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.SearchHandler.StoreSearchReturns(System.String)">
+            <summary>
+            Converts the string response from API food search into a list of <see cref="T:MacroNewt.Models.Food"/> objects
+            </summary>
+            <param name="APIData"></param>
+            <returns>A list of food objects from API response</returns>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.SearchHandler.StoreMealNutrientDetails(MacroNewt.Models.Food,Newtonsoft.Json.Linq.JObject,System.String)">
+            <summary>
+            Parses and stores both the <see cref="T:MacroNewt.Models.Nutrient"/> and <see cref="T:MacroNewt.Models.Measure"/> details of a food from API response
+            </summary>
+            <remarks>
+            Food nutrient and measure details aren't available in food searches, only in specific food report requests from API.
+                To avoid unnecessary overhead, details are only obtained for the foods specifically selected during meal logging.
+            </remarks>
+            <param name="f"></param>
+            <param name="dataObject"></param>
+            <param name="detailType"></param>
+            <returns>A <see cref="T:MacroNewt.Models.Food"/> object with details included</returns>
+        </member>
+        <member name="T:MacroNewt.Models.LogicModels.UserStatsHandler">
+            <summary>
+            This class performs the arithmetic required for displaying calorie and macronutrient progress bars for daily and past user meal stats.
+            </summary>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.UserStatsHandler.#ctor(Microsoft.AspNetCore.Identity.UserManager{MacroNewt.Areas.Identity.Data.MacroNewtUser},MacroNewt.Areas.Identity.Data.MacroNewtContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MacroNewt.Models.LogicModels.UserStatsHandler"/> class.
+            </summary>
+            <param name="userManager"></param>
+            <param name="context"></param>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.UserStatsHandler.OrganizeCalStats(MacroNewt.Areas.Identity.Data.MacroNewtUser,System.Int32,MacroNewt.Areas.Identity.Data.DailyCalTotal)">
+            <summary>
+            Compares user's goals with daily intake to properly display progress bars
+            </summary>
+            <remarks>
+            Much of the arithmetic is conditional and based on whether or not the user has surpassed daily targets.
+            Conditions provide for a different progress bar appearance if user has failed to meet goals.
+            </remarks>
+            <param name="user"></param>
+            <param name="targetTotalCal"></param>
+            <param name="dct"></param>
+            <returns>A populated <see cref="T:MacroNewt.Models.ViewModels.CurrentDayCalStatsViewModel"/> object</returns>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.UserStatsHandler.GetPastMacroTargets(MacroNewt.Areas.Identity.Data.MacroNewtUser,System.String)">
+            <summary>
+            Retrieves user's daily target data for past dates
+            </summary>
+            <param name="user"></param>
+            <param name="targetDate"></param>
+            <returns>A populated <see cref="T:MacroNewt.Models.ViewModels.CurrentDayCalStatsViewModel"/> object</returns>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.UserStatsHandler.GetCurrentMacroTargets(MacroNewt.Areas.Identity.Data.MacroNewtUser)">
+            <summary>
+            Retrieves user's daily target data for the current day
+            </summary>
+            <remarks>
+            This method is very redundant and a good example of 'if it ain't broke don't fix it'. Didn't want to mess with providing DateTime.Today as
+                a parsed string and having something break, so left this and GetPastMacroTargets as separate methods. Additionally, GetCurrentMacroTargets is
+                called indirectly from a block of javascript and wanted to avoid addressing multiple language date/time rules.
+            </remarks>
+            <param name="user"></param>
+            <returns>A populated <see cref="T:MacroNewt.Models.ViewModels.CurrentDayCalStatsViewModel"/> object</returns>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.UserStatsHandler.GetMacroTargets(MacroNewt.Areas.Identity.Data.MacroNewtUser,System.Boolean,System.Int32,System.DateTime,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Performs conditional arithmetic to provide progress bar displays for calories and macronutrients while logging meals.
+            </summary>
+            <remarks>
+            Similar to <see cref="M:MacroNewt.Models.LogicModels.UserStatsHandler.OrganizeCalStats(MacroNewt.Areas.Identity.Data.MacroNewtUser,System.Int32,MacroNewt.Areas.Identity.Data.DailyCalTotal)"/> but has to account for the display of the pending meal about to be logged
+            </remarks>
+            <param name="user"></param>
+            <param name="admin"></param>
+            <param name="mealId"></param>
+            <param name="date"></param>
+            <param name="mealCalories"></param>
+            <param name="mealProtein"></param>
+            <param name="mealFat"></param>
+            <param name="mealCarb"></param>
+            <returns>A populated <see cref="T:MacroNewt.Models.ViewModels.ConfirmMealViewModel"/> object</returns>
+        </member>
+        <member name="M:MacroNewt.Models.LogicModels.UserStatsHandler.UpdateDailyCalories(System.String,System.DateTime)">
+            <summary>
+            Updates user's <see cref="T:MacroNewt.Areas.Identity.Data.DailyCalTotal"/> stats after a meal is logged, edited, or deleted
+            </summary>
+            <param name="userId"></param>
+            <param name="date"></param>
+        </member>
+        <member name="T:MacroNewt.Models.Meal">
+            <summary>
+            A Meal object includes all information relevant to a user created meal, including a list of <see cref="T:MacroNewt.Models.Food"/> items in the meal
+            </summary>
+            <remarks>
+            Other relevant information includes the name and date of the meal, macronutrient totals, the ID and email of the user who logged the meal,
+                and an indicator of whether the meal is being relogged for avoiding unnecessary API calls for information already in database.
+            </remarks>
+        </member>
+    </members>
+</doc>

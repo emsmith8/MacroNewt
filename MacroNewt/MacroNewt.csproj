@@ -6,12 +6,13 @@
     <UserSecretsId>26213229-3ada-44ad-980c-03f184d04291</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\evanm\source\repos\MacroNewt\MacroNewt\MacroNewt.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Compile Remove="api\**" />
-    <Compile Remove="articles\**" />
     <Compile Remove="Data\**" />
     <Compile Remove="EmailTemplates\**" />
-    <Compile Remove="obj\**" />
     <Compile Remove="Views\Shared\Components\AdminConfirmMeal\**" />
     <Compile Remove="Views\Shared\Components\DateRangeHistory\**" />
     <Compile Remove="Views\Shared\Components\EditFoodSearchResult\**" />
@@ -20,12 +21,8 @@
     <Compile Remove="Views\Shared\Components\VerificationEmail\**" />
     <Compile Remove="Views\Shared\MealTotalNutritionLabel\**" />
     <Compile Remove="wwwroot\lib\fullcalendar-4.2.0\**" />
-    <Compile Remove="_site\**" />
-    <Content Remove="api\**" />
-    <Content Remove="articles\**" />
     <Content Remove="Data\**" />
     <Content Remove="EmailTemplates\**" />
-    <Content Remove="obj\**" />
     <Content Remove="Views\Shared\Components\AdminConfirmMeal\**" />
     <Content Remove="Views\Shared\Components\DateRangeHistory\**" />
     <Content Remove="Views\Shared\Components\EditFoodSearchResult\**" />
@@ -34,12 +31,8 @@
     <Content Remove="Views\Shared\Components\VerificationEmail\**" />
     <Content Remove="Views\Shared\MealTotalNutritionLabel\**" />
     <Content Remove="wwwroot\lib\fullcalendar-4.2.0\**" />
-    <Content Remove="_site\**" />
-    <EmbeddedResource Remove="api\**" />
-    <EmbeddedResource Remove="articles\**" />
     <EmbeddedResource Remove="Data\**" />
     <EmbeddedResource Remove="EmailTemplates\**" />
-    <EmbeddedResource Remove="obj\**" />
     <EmbeddedResource Remove="Views\Shared\Components\AdminConfirmMeal\**" />
     <EmbeddedResource Remove="Views\Shared\Components\DateRangeHistory\**" />
     <EmbeddedResource Remove="Views\Shared\Components\EditFoodSearchResult\**" />
@@ -48,12 +41,8 @@
     <EmbeddedResource Remove="Views\Shared\Components\VerificationEmail\**" />
     <EmbeddedResource Remove="Views\Shared\MealTotalNutritionLabel\**" />
     <EmbeddedResource Remove="wwwroot\lib\fullcalendar-4.2.0\**" />
-    <EmbeddedResource Remove="_site\**" />
-    <None Remove="api\**" />
-    <None Remove="articles\**" />
     <None Remove="Data\**" />
     <None Remove="EmailTemplates\**" />
-    <None Remove="obj\**" />
     <None Remove="Views\Shared\Components\AdminConfirmMeal\**" />
     <None Remove="Views\Shared\Components\DateRangeHistory\**" />
     <None Remove="Views\Shared\Components\EditFoodSearchResult\**" />
@@ -62,7 +51,6 @@
     <None Remove="Views\Shared\Components\VerificationEmail\**" />
     <None Remove="Views\Shared\MealTotalNutritionLabel\**" />
     <None Remove="wwwroot\lib\fullcalendar-4.2.0\**" />
-    <None Remove="_site\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,7 +72,6 @@
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
     <Content Remove="compilerconfig.json" />
-    <Content Remove="docfx.json" />
     <Content Remove="Views\Admin\UserDetails.cshtml" />
     <Content Remove="Views\Logger\SearchFoods.cshtml" />
     <Content Remove="Views\Meals\Create.cshtml" />
@@ -100,15 +87,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove=".gitignore" />
     <None Remove="Docfx-netcoreapp2.2.log" />
-    <None Remove="index.md" />
-    <None Remove="log.txt" />
-    <None Remove="toc.yml" />
   </ItemGroup>
 
 
   <ItemGroup>
+    <PackageReference Include="docfx.console" Version="2.48.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.3" />
@@ -120,6 +107,7 @@
 
 
   <ItemGroup>
+    <Folder Include="apidoc\" />
     <Folder Include="wwwroot\lib\datatable\css\DataTables-1.10.18\images\" />
   </ItemGroup>
 
