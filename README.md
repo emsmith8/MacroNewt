@@ -13,8 +13,8 @@ Food and nutrition tracking ASP.NET Core MVC web app built as a learning project
 
 </br>
 **Hosted with Microsoft Azure at MacroNewt.com**
-</br>
 
+</br>
 <p align="center">
   <img src="https://github.com/emsmith8/MacroNewt/blob/master/MacroNewt/wwwroot/images/MacroNewtCapture.PNG">
 </p>
