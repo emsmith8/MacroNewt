@@ -1,8 +1,3 @@
-<p align="center">
-  <img src="https://github.com/emsmith8/MacroNewt/blob/master/MacroNewt/wwwroot/images/MacroNewtCapture.PNG">
-</p>
-</br>
-
 # MacroNewt
 
 Food and nutrition tracking ASP.NET Core MVC web app built as a learning project. MacroNewt includes:
@@ -15,3 +10,9 @@ Food and nutrition tracking ASP.NET Core MVC web app built as a learning project
   <li> Graphical progress bar and graph representations of user's nutrional history  </li>
   <li> Customization for user dietary goals and progress tracking </li>
 </ul>
+
+Hosted with Microsoft Azure at MacroNewt.com
+
+<p align="center">
+  <img src="https://github.com/emsmith8/MacroNewt/blob/master/MacroNewt/wwwroot/images/MacroNewtCapture.PNG">
+</p>
