@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="460" height="300"         src="https://github.com/emsmith8/MacroNewt/blob/master/MacroNewt/wwwroot/images/MacroNewtCapture.png">
+  <img width="460" height="300"         src="https://github.com/emsmith8/MacroNewt/blob/master/MacroNewt/wwwroot/images/MacroNewtCapture.PNG">
 </p>
 </br>
 
