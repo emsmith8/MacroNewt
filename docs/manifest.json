@@ -1,0 +1,1495 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Users/evanm/source/repos/MacroNewt/docfx_project",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Data.DailyCalTotal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Data.DailyCalTotal.html",
+          "hash": "cs45mTSgd4u9HuIMCnNIYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Data.IdentityHostingStartup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Data.IdentityHostingStartup.html",
+          "hash": "UR0zhXUDnq1nefW16UTlRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Data.LoggerController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Data.LoggerController.html",
+          "hash": "Mf/ekEvleZ2x1Db+2ZdpRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Data.MacroNewtContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Data.MacroNewtContext.html",
+          "hash": "/unP94S1EwCYs24xbfpOzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Data.MacroNewtUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Data.MacroNewtUser.html",
+          "hash": "TlZdmXybBWyYxRJ0dRBAsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Data.MealsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Data.MealsController.html",
+          "hash": "159nkyiYd1YJydkUMTlwXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Data.UserGoals.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Data.UserGoals.html",
+          "hash": "71HTyaJnpm08U3VZ+5zeLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Data.html",
+          "hash": "8kRePkvv9T7im559N00Zpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.AccessDeniedModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.AccessDeniedModel.html",
+          "hash": "MQM4Q5NOU+vA2anMIb710w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ConfirmEmailModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ConfirmEmailModel.html",
+          "hash": "ZARVPnRZecZlAGp4znOxFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ExternalLoginModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ExternalLoginModel.InputModel.html",
+          "hash": "tAbzZekKTqit9Y+VGe/liQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ExternalLoginModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ExternalLoginModel.html",
+          "hash": "kgIHFYqlsO62tS43qTPglA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ForgotPasswordConfirmation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ForgotPasswordConfirmation.html",
+          "hash": "E6c+g5zzU0RF8beCL+ngGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ForgotPasswordModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ForgotPasswordModel.InputModel.html",
+          "hash": "3yTTKlh1YxshTOWi7sDfOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ForgotPasswordModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ForgotPasswordModel.html",
+          "hash": "R7nvvVNCGJlJvxppbDD7iQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LockoutModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LockoutModel.html",
+          "hash": "ozcTFGEKBPQoaF4yb23HGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginModel.InputModel.html",
+          "hash": "jjmrKnLr/mJMzyQEajYzRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginModel.html",
+          "hash": "ZQyd6G0W16C/ETqsftvdKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginWith2faModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginWith2faModel.InputModel.html",
+          "hash": "+GeaBhAWn75qHq6cH3w4UQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginWith2faModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginWith2faModel.html",
+          "hash": "1DwXDk7WPfPZ6l35AONjMA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginWithRecoveryCodeModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginWithRecoveryCodeModel.InputModel.html",
+          "hash": "R+nOBUORHR6bYanXsaE6Yw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginWithRecoveryCodeModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginWithRecoveryCodeModel.html",
+          "hash": "tRqfI6n+UZIO9QLAul6I9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LogoutModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LogoutModel.html",
+          "hash": "f3FVu3WAgBH7u/wEkIy9Ug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ChangePasswordModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ChangePasswordModel.InputModel.html",
+          "hash": "lSdrc7/SCQhfxSwuWj4qXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ChangePasswordModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ChangePasswordModel.html",
+          "hash": "Ex8IWq/Jlv9GTl0LpDkrBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.DeletePersonalDataModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.DeletePersonalDataModel.InputModel.html",
+          "hash": "Rz80s7U3Yli4qNDyN02c3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.DeletePersonalDataModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.DeletePersonalDataModel.html",
+          "hash": "97HFtISi3sxWJVIGoawjJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.Disable2faModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.Disable2faModel.html",
+          "hash": "NnxoGtcQoio7V/YFhbt3hA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.DownloadPersonalDataModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.DownloadPersonalDataModel.html",
+          "hash": "baxnmRuEO+qmFi2ZMmmFAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel.InputModel.html",
+          "hash": "pQeH6wrdQ4Kgdm5JjZVIgg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel.html",
+          "hash": "9tFb/Fu11d26YJKbrQeapQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ExternalLoginsModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ExternalLoginsModel.html",
+          "hash": "zDH1KHU7NnHH+P32Oht3QA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.GenerateRecoveryCodesModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.GenerateRecoveryCodesModel.html",
+          "hash": "a2qwX+S9k9NMW+H0wzLosg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.HundredPercentAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.HundredPercentAttribute.html",
+          "hash": "qmM5Uw6BZ3ntP5knS04QOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.IndexModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.IndexModel.InputModel.html",
+          "hash": "ljOZB2yVb90keBZrKHxByA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.IndexModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.IndexModel.html",
+          "hash": "ombsUZ79FuOm6g9YPGQzUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ManageNavPages.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ManageNavPages.html",
+          "hash": "App1+8AwfgpEwq91l3r9Pw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.PersonalDataModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.PersonalDataModel.html",
+          "hash": "liNBgsMdCYb8U2EId3G7CQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ResetAuthenticatorModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ResetAuthenticatorModel.html",
+          "hash": "vaAt13rJgSn9H9RF363whQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.SetPasswordModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.SetPasswordModel.InputModel.html",
+          "hash": "pu1lRgob7xM/Aqo3I1efzg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.SetPasswordModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.SetPasswordModel.html",
+          "hash": "Yiz9/eDBry8vzFjLghg3Kw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ShowRecoveryCodesModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ShowRecoveryCodesModel.html",
+          "hash": "qj4EN++K0NODvMXGdH7x/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel.html",
+          "hash": "j/V55ajLjET+VJSPHQBNSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.UserGoalsModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.UserGoalsModel.InputModel.html",
+          "hash": "yrHaTjAFgQOENzDHaUJlfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.UserGoalsModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.UserGoalsModel.html",
+          "hash": "WKDxmSIjHZbmCOaMg9uGtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.html",
+          "hash": "3lui8vF7s1MXXFzEQr6zIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.RegisterModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.RegisterModel.InputModel.html",
+          "hash": "HlTx5zSXMOS9bfVqMA9Vaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.RegisterModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.RegisterModel.html",
+          "hash": "/fn13Ga7tTpKAIfaM36yew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ResetPasswordConfirmationModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ResetPasswordConfirmationModel.html",
+          "hash": "5hZvsIMHvGlqIi9e/IAW6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ResetPasswordModel.InputModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ResetPasswordModel.InputModel.html",
+          "hash": "/BK8WHSlZtfClAAJSDfMOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ResetPasswordModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ResetPasswordModel.html",
+          "hash": "KcVclY62TmMhgXmrraUOig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.html",
+          "hash": "ltME5wck62pxy9PsGNnS+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.ErrorModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.ErrorModel.html",
+          "hash": "TDEV3T+X8Vnh3QRTQJWJng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Areas.Identity.Pages.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Areas.Identity.Pages.html",
+          "hash": "lI0ZCJVoE7FWw9nfN2sI+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Controllers.AdminController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Controllers.AdminController.html",
+          "hash": "p+0rHFGmKhC+xvh8lS9l6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Controllers.HomeController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Controllers.HomeController.html",
+          "hash": "qX+mZmspysKaLoFC/LdG1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Controllers.html",
+          "hash": "l4MjFKwUgRJGTsJl4iExQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Migrations.Initial.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Migrations.Initial.html",
+          "hash": "FjGVYOJkQUJIAfIrlwZB6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Migrations.dailyTargets.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Migrations.dailyTargets.html",
+          "hash": "ufGbcaCDKWext9yjeVMZxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Migrations.updateDeployDB.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Migrations.updateDeployDB.html",
+          "hash": "4mU9ZNk5YGPMxw0gnyLsGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Migrations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Migrations.html",
+          "hash": "HNtdu/+zAa56uQSmOS+oGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.ErrorViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.ErrorViewModel.html",
+          "hash": "ewS8bVZ5lunmdX1Bdk4w0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.Food.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.Food.html",
+          "hash": "u4NppazW8xqYbUsS9zXISQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.LogicModels.EmailBuildHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.LogicModels.EmailBuildHandler.html",
+          "hash": "xVdnZs2DdMCauBFFxqcspg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.LogicModels.HttpClientAccessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.LogicModels.HttpClientAccessor.html",
+          "hash": "qzAIRkm5L9S+uNPIxiStzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.LogicModels.SearchHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.LogicModels.SearchHandler.html",
+          "hash": "Tp4rnrIcS2h8FyEu7DtMRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.LogicModels.UserStatsHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.LogicModels.UserStatsHandler.html",
+          "hash": "DLu2XOhiOED3IdGpq86Tew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.LogicModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.LogicModels.html",
+          "hash": "hq4eoSBEEdT8i0Hh/8uMXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.Meal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.Meal.html",
+          "hash": "tftdUVT+eg+DVfcg4mxoFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.MealTotalNutrient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.MealTotalNutrient.html",
+          "hash": "30ss7+1LBeMORT/YSoEhqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.Measure.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.Measure.html",
+          "hash": "l6m7mv6zONYWLADhNryxyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.NoMeasureFood.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.NoMeasureFood.html",
+          "hash": "n58Qso7UWMB2a1iOO+818g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.Nutrient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.Nutrient.html",
+          "hash": "H0xm1gt0nAdEMVUZRut/Zg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.ViewModels.BMRCalculatorViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.ViewModels.BMRCalculatorViewModel.html",
+          "hash": "NiM4z7cN5Kzc9K3Okp+thw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.ViewModels.ConfirmMealViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.ViewModels.ConfirmMealViewModel.html",
+          "hash": "uzx4YwSoB+k9YdiTni2ocw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.ViewModels.ContactUsViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.ViewModels.ContactUsViewModel.html",
+          "hash": "Asn27veqbo5Oay8I9Rzkxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.ViewModels.CurrentDayCalStatsViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.ViewModels.CurrentDayCalStatsViewModel.html",
+          "hash": "MPIw8HlKaU4ZTj8eyTfD/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.ViewModels.ExplorePortionChoiceViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.ViewModels.ExplorePortionChoiceViewModel.html",
+          "hash": "mWQ2v7rMEsVAThZuxV6qDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.ViewModels.FoodViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.ViewModels.FoodViewModel.html",
+          "hash": "rlDlQeBBcC9sNjaj9fAeug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.ViewModels.MealAnalyticsViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.ViewModels.MealAnalyticsViewModel.html",
+          "hash": "uGdqQfGPnWnGvpUNgjTBMw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.ViewModels.UpdateProfileViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.ViewModels.UpdateProfileViewModel.html",
+          "hash": "5JJUla7tsAwZfZ3/Hj0R4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.ViewModels.UserConfirmedStatusViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.ViewModels.UserConfirmedStatusViewModel.html",
+          "hash": "VpCM29n0TYT5G6Jg5DqFcg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.ViewModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.ViewModels.html",
+          "hash": "1R/xQR7vbtPRe4f1Wki/xQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Models.html",
+          "hash": "qKIKCU8QgoXRm/xU+z+Cog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Program.html",
+          "hash": "GR0Y9aI3KIpusuy4DyQZuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Services.AuthMessageSenderOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Services.AuthMessageSenderOptions.html",
+          "hash": "AZNkLhkKB9AsCv8RLWxLGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Services.EmailSender.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Services.EmailSender.html",
+          "hash": "mbIXzgSv1F5zwWjUVgRixw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Services.html",
+          "hash": "HE5K43LdKAucRTl3ZpDIYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.Startup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.Startup.html",
+          "hash": "HTMUG0YZAM7nQa8h9QD5iQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.BMRCalculatorViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.BMRCalculatorViewComponent.html",
+          "hash": "OSSNZC9fQZiTK4rRN4v1IQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.CalendarMealModalViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.CalendarMealModalViewComponent.html",
+          "hash": "7u6bN9awCaUhcIHmCcDZyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.ConfirmContact.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.ConfirmContact.html",
+          "hash": "bFah3d1NY9YXHxP8gGo1AQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.ConfirmMealViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.ConfirmMealViewComponent.html",
+          "hash": "5GdK09mw8AMufGx/dvS0Iw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.ContactUsViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.ContactUsViewComponent.html",
+          "hash": "r0ZHwO+ejjRFktEoVRBRZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.CurrentDayCalStatsViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.CurrentDayCalStatsViewComponent.html",
+          "hash": "ipQFFjKbbNU6YXGZwlDb/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.DeleteMealModalViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.DeleteMealModalViewComponent.html",
+          "hash": "i7LB1d7gZFE9swuqqoGzDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.DeleteUserModalViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.DeleteUserModalViewComponent.html",
+          "hash": "/quDNXDS3nPzmS3+AbAUXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.ExploreNutritionLabelViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.ExploreNutritionLabelViewComponent.html",
+          "hash": "a38Z9p0Lo8HER2zIcocpbA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.FoodReportViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.FoodReportViewComponent.html",
+          "hash": "qMKUte8GEUNym4MTByhV3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.FoodSearchResultViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.FoodSearchResultViewComponent.html",
+          "hash": "DzWQKSXERvcsgj3XEFZarA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.LoggedInUserInfoViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.LoggedInUserInfoViewComponent.html",
+          "hash": "g9tKMn692qiVJ/U4P+i8Vw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.MealAnalyticsViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.MealAnalyticsViewComponent.html",
+          "hash": "0SZzkq85vrC2zmUoWEzpgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.MealCalendarHistoryViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.MealCalendarHistoryViewComponent.html",
+          "hash": "w7hxag3HKeeVnkICWTZkkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.MealDetailViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.MealDetailViewComponent.html",
+          "hash": "UX6MUti2B8pSQdEI9heePA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.MealReviewViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.MealReviewViewComponent.html",
+          "hash": "fJjqDlYcTcv8vs3H9SVgGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.MealTotalNutritionLabelViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.MealTotalNutritionLabelViewComponent.html",
+          "hash": "YX1lGdulQ7F6lUzRNHUpuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.NoMeasureFoodNutritionLabelViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.NoMeasureFoodNutritionLabelViewComponent.html",
+          "hash": "/8/V+n8yrsG08tDAN6fFsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.NutritionLabelViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.NutritionLabelViewComponent.html",
+          "hash": "ysK/vj21PHzl99A04rN//w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.OldMealsModalViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.OldMealsModalViewComponent.html",
+          "hash": "OAAd57t8Cvv3BhildJLfWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.PastDayCalStatsViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.PastDayCalStatsViewComponent.html",
+          "hash": "Mcp0W1UEWYgwo5u5eCXxdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.ResendConfirmationEmailViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.ResendConfirmationEmailViewComponent.html",
+          "hash": "9duD8srMAniIgvCdmn7eqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.UpdateProfileViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.UpdateProfileViewComponent.html",
+          "hash": "ebYBqlGEz/Po5JFnKzMfMw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.ViewComponents.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.ViewComponents.html",
+          "hash": "NUSXDLquxSIxPFJp7J0dqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MacroNewt.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MacroNewt.html",
+          "hash": "rGX1IePJmBDvtEzb6ZR0Cw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "n2MDrkMibiNppBtS5zAUeA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "9l991mXj0KhMklTgTxjidA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "s/RzplQi9woAjDxRe8yrqg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "gB8AESyvNru97tzIZofEEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "qSjVY7kcSx+75NzMdhFX4A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "+rHUkRZHZRi5gd1aTU6lJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 3
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ManagedReferenceDocumentProcessor disable incremental build because last build doesn't contain version .",
+          "incrementalPhase": "build",
+          "total_file_count": 114,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
