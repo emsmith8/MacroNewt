@@ -2,6 +2,7 @@
   href: articles/
 - name: Api Documentation
   href: api/
+  homepage: api/index.md
 - name: FAQ
   href: faq/
-  homepage: api/index.md
+  
