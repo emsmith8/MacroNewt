@@ -29,6 +29,12 @@
           "toc.yml",
           "*.md"
         ]
+      },
+      {
+        "files": [
+          "faq/**.md",
+          "faq/toc.yml"
+        ]
       }
     ],
     "resource": [
