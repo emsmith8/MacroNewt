@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MacroNewt.Models.ViewModels
+﻿namespace MacroNewt.Models.ViewModels
 {
     public class CurrentDayCalStatsViewModel
     {
@@ -14,7 +9,7 @@ namespace MacroNewt.Models.ViewModels
         public double CurrentDayCaloriesPercent { get; set; }
         public double CaloriesRemainingPercent { get; set; }
         public double PercentageCaloriesConsumed { get; set; }
-        
+
         public double TotalCaloriesSurplusPercent { get; set; }
         public double TotalCaloriesSurplusDisplayPercent { get; set; }
 

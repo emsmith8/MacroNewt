@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using MacroNewt.Areas.Identity.Data;
+﻿using MacroNewt.Areas.Identity.Data;
 using MacroNewt.Models.LogicModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace MacroNewt.Areas.Identity.Pages.Account.Manage
 {
@@ -57,7 +53,7 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
             [DataType(DataType.Text)]
             [Display(Name = "Username")]
             public string ProfileName { get; set; }
-            
+
             [DataType(DataType.Text)]
             [Display(Name = "Gender")]
             public string Gender { get; set; }
@@ -76,13 +72,13 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
-            
+
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
-            
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -91,7 +87,7 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var email = await _userManager.GetEmailAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            
+
             Input = new InputModel
             {
                 Name = user.Name,
@@ -138,7 +134,7 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
             {
                 user.ProfileName = Input.ProfileName;
             }
-            
+
             if (Input.Name != user.Name)
             {
                 user.Name = Input.Name;
@@ -148,7 +144,7 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
             {
                 user.DOB = Input.DOB;
             }
-            
+
             if (Input.Gender != user.Gender)
             {
                 user.Gender = Input.Gender;

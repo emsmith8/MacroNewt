@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MacroNewt.Areas.Identity.Data;
+﻿using MacroNewt.Areas.Identity.Data;
 using MacroNewt.Models;
-using MacroNewt.Models.LogicModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MacroNewt.Controllers
 {
@@ -94,7 +91,7 @@ namespace MacroNewt.Controllers
                 .FirstOrDefault();
 
             return View(user);
-            
+
         }
 
         /// <summary>
@@ -142,7 +139,7 @@ namespace MacroNewt.Controllers
                         userToUpdate.Gender = user.Gender;
                         userToUpdate.Weight = user.Weight;
                         userToUpdate.DailyTargetCalories = user.DailyTargetCalories;
-                        
+
                         _context.Users.Update(userToUpdate);
 
                         await _context.SaveChangesAsync();
@@ -160,12 +157,12 @@ namespace MacroNewt.Controllers
                     }
                     return RedirectToAction("ManageUsers", "Admin");
                 }
-                
+
             }
 
             return View(user);
         }
-        
+
         /// <summary>
         /// Gets the user delete view component
         /// </summary>
@@ -226,7 +223,7 @@ namespace MacroNewt.Controllers
             {
                 _context.DailyCalTotal.Remove(stat);
             }
-            
+
             await _context.SaveChangesAsync();
 
             var userGoals = _context.UserGoals

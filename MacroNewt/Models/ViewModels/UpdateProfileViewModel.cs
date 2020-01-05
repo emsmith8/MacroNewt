@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MacroNewt.Models.ViewModels
 {
@@ -23,6 +19,6 @@ namespace MacroNewt.Models.ViewModels
         [Range(1, 1000, ErrorMessage = "Weight must be 1-1000 lbs")]
         [Display(Name = "Weight (lbs)")]
         public int Weight { get; set; }
-        
+
     }
 }

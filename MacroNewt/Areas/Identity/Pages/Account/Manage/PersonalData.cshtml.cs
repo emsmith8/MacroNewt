@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using MacroNewt.Areas.Identity.Data;
+﻿using MacroNewt.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace MacroNewt.Areas.Identity.Pages.Account.Manage
 {

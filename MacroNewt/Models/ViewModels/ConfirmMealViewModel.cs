@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MacroNewt.Models.ViewModels
 {
@@ -18,7 +14,7 @@ namespace MacroNewt.Models.ViewModels
         public int MealCalories { get; set; }
         public double MealCaloriesPercent { get; set; }
         public double MealCaloriesRemainingPercent { get; set; }
-        
+
         public double TotalCaloriesSurplusPercent { get; set; }
         public double TotalCaloriesSurplusDisplayPercent { get; set; }
         public double TotalOldCaloriesSurplusDisplayPercent { get; set; }

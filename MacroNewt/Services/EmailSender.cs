@@ -5,7 +5,6 @@ using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MacroNewt.Services
@@ -49,7 +48,7 @@ namespace MacroNewt.Services
 
                 msg.AddTo(new EmailAddress(email));
             }
-            
+
             string _b64 = Convert.ToBase64String(File.ReadAllBytes("wwwroot/images/fullLogoCenteringTest.png"));
 
             Attachment inlineLogo = new Attachment()

@@ -2,11 +2,6 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using MacroNewt.Models.ViewModels;
-using System.Net.Http;
 
 namespace MacroNewt.Models.LogicModels
 {
@@ -42,7 +37,7 @@ namespace MacroNewt.Models.LogicModels
             {
                 urlParameters = "search/?format=json&q=" + foodName + "&ds=Standard+Reference&sort=n&max=1500&offset=0&api_key=5jOuzAkdWfOOH2x5yPgd2oWsyzGVkyrrkElAMSsl";
             }
-            
+
 
             return urlParameters;
         }
@@ -55,10 +50,10 @@ namespace MacroNewt.Models.LogicModels
         public string OrganizeReportQ(string foodNdbno)
         {
             string urlParameters = "reports/?format=json&ndbno=" + foodNdbno + "&type=b&api_key=5jOuzAkdWfOOH2x5yPgd2oWsyzGVkyrrkElAMSsl";
-            
+
             return urlParameters;
         }
-        
+
 
         /// <summary>
         /// Converts the string response from API food search into a list of <see cref="Food"/> objects
@@ -70,9 +65,9 @@ namespace MacroNewt.Models.LogicModels
             JObject joResponse = JObject.Parse(APIData);
             JObject ojObject = (JObject)joResponse["list"];
             JArray array = (JArray)ojObject["item"];
-            
+
             List<Food> availableFoods = JsonConvert.DeserializeObject<List<Food>>(array.ToString());
-            
+
             return availableFoods;
         }
 
@@ -161,7 +156,7 @@ namespace MacroNewt.Models.LogicModels
                     f.Nutrients.Add(n);
                 }
 
-                
+
             }
 
             return f;

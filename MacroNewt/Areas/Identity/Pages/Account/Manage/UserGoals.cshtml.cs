@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using MacroNewt.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MacroNewt.Areas.Identity.Pages.Account.Manage
 {
@@ -54,7 +51,7 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Calories from protein %")]
             public int ProteinPercent { get; set; }
-            
+
             [HundredPercent(ErrorMessage = "The three macro percentages must add up to 100")]
             [Display(Name = "%")]
             public int PercentTotal { get; set; }
@@ -95,7 +92,8 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
             }
             else
             {
-                Input = new InputModel {
+                Input = new InputModel
+                {
                     BaseCalorieTarget = user.DailyTargetCalories
                 };
             }
@@ -125,7 +123,7 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
             var userGoal = await _context.UserGoals
                 .Where(u => u.Id == user.Id)
                 .FirstOrDefaultAsync();
-            
+
             if (userGoal == null)
             {
                 userGoal = new UserGoals
@@ -201,7 +199,7 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             ErrorMessage = ErrorMessageString;
-            
+
 
             if ((int)value != 100)
             {
@@ -210,6 +208,6 @@ namespace MacroNewt.Areas.Identity.Pages.Account.Manage
 
             return ValidationResult.Success;
         }
-        
+
     }
 }

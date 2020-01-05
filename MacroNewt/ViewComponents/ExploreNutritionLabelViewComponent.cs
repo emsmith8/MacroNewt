@@ -4,10 +4,7 @@ using MacroNewt.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace MacroNewt.ViewComponents
 {
@@ -33,7 +30,7 @@ namespace MacroNewt.ViewComponents
                 f.Name = dataObject["report"]["food"]["name"].ToString();
                 f.Unit = dataObject["report"]["food"]["ru"].ToString();
 
-                
+
 
                 var nutrients = dataObject["report"]["food"]["nutrients"];
 
@@ -67,7 +64,7 @@ namespace MacroNewt.ViewComponents
                 }
 
                 f.PortionIndex = targetIndex;
-                f.SelectedPortionLabel = f.Nutrients[targetIndex-1].Measures[targetIndex-1].Label;
+                f.SelectedPortionLabel = f.Nutrients[targetIndex - 1].Measures[targetIndex - 1].Label;
                 f.SelectedPortionQty = f.Nutrients[targetIndex - 1].Measures[targetIndex - 1].Qty;
                 f.NumberOfServings = 1;
 

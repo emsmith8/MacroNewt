@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using MacroNewt.Areas.Identity.Data;
+﻿using MacroNewt.Areas.Identity.Data;
 using MacroNewt.Models.LogicModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace MacroNewt.Areas.Identity.Pages.Account
 {
@@ -101,7 +97,8 @@ namespace MacroNewt.Areas.Identity.Pages.Account
                     age--;
                 }
 
-                var user = new MacroNewtUser {
+                var user = new MacroNewtUser
+                {
                     Name = Input.Name,
                     DOB = Input.DOB,
                     Age = age,
@@ -111,7 +108,7 @@ namespace MacroNewt.Areas.Identity.Pages.Account
                     DailyTargetCalories = 2000,
                     UserName = Input.Email,
                     ProfileName = Input.ProfileName,
-                    Email = Input.Email 
+                    Email = Input.Email
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -147,7 +144,7 @@ namespace MacroNewt.Areas.Identity.Pages.Account
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
-                    
+
                 }
             }
 

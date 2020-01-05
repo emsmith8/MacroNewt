@@ -1,27 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MacroNewt.Areas.Identity.Data;
+using MacroNewt.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using MacroNewt.Models;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using MacroNewt.Services;
-using MacroNewt.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
-using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading.Tasks;
 
 namespace MacroNewt
 {
@@ -66,7 +56,7 @@ namespace MacroNewt
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdministrator", policy => policy.RequireRole("Admin"));
-               //options.AddPolicy("AllUsers", policy => policy.RequireRole("User"));
+                //options.AddPolicy("AllUsers", policy => policy.RequireRole("User"));
             });
 
             services.AddTransient<IEmailSender, EmailSender>();
@@ -85,23 +75,24 @@ namespace MacroNewt
                 });
 
 
-            services.ConfigureApplicationCookie(options => {
+            services.ConfigureApplicationCookie(options =>
+            {
                 options.LoginPath = $"/Identity/Account/Login";
                 options.LogoutPath = $"/Identity/Account/Logout";
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
 
-            
+
 
             services.AddSingleton<IEmailSender, EmailSender>();
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UsePathBase("/macronewt");
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -131,7 +122,7 @@ namespace MacroNewt
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            
+
         }
 
 

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
+using System.Linq;
 
 namespace MacroNewt.Models
 {
@@ -21,27 +18,69 @@ namespace MacroNewt.Models
     /// </remarks>
     public class Food
     {
+        /// <summary>
+        /// Main identifier for a Food in the database
+        /// </summary>
         [Key]
         public int FoodId { get; set; }
+        /// <summary>
+        /// The food's name as supplied by the USDA database.
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// The identifier used by the USDA database. Necessary for API food detail calls.
+        /// </summary>
         [Required]
         public string Ndbno { get; set; }
+        /// <summary>
+        /// A list of all <see cref="Nutrient"/> items contained in the Food. Used for tracking macro progress.
+        /// </summary>
         public List<Nutrient> Nutrients { get; set; }
+        /// <summary>
+        /// The unit used for calculating nutrient content without serving sizes or portions.
+        /// </summary>
         public string Unit { get; set; }
-        [Required(ErrorMessage = "You must select a portion size")]        
+        /// <summary>
+        /// The calorie value of the food given selected portion size and number of servings.
+        /// </summary>
+        [Required(ErrorMessage = "You must select a portion size")]
         public int? Value { get; set; }
+        /// <summary>
+        /// The user-chosen number of servings of a selected portion of food.
+        /// </summary>
         [Range(0.25, 100.0, ErrorMessage = "Must be between 0.25 and 100")]
-        public decimal NumberOfServings {get;set;}
-        public int PortionIndex { get; set; }       
-
+        public decimal NumberOfServings { get; set; }
+        /// <summary>
+        /// An index value used to store which of the available portion choices was selected.
+        /// </summary>
+        public int PortionIndex { get; set; }
+        /// <summary>
+        /// The label assigned to the selected food portion (i.e. 'serving', 'tbsp').
+        /// </summary>
         public string SelectedPortionLabel { get; set; }
+        /// <summary>
+        /// The user-selected number of servings of a given portion of food.
+        /// </summary>
         public string SelectedPortionQty { get; set; }
-
+        /// <summary>
+        /// Stores the total protein content of selected food based on portion and number of servings.
+        /// </summary>
         public string FoodTotalProtein { get; set; }
+        /// <summary>
+        /// Stores the total fat content of selected food based on portion and number of servings.
+        /// </summary>
         public string FoodTotalFat { get; set; }
+        /// <summary>
+        /// Stores the total carb content of selected food based on portion and number of servings.
+        /// </summary>
         public string FoodTotalCarb { get; set; }
-
-        public int MealId {get; set;}
+        /// <summary>
+        /// Identifier for the associated meal of this food in its given portion and quantity.
+        /// </summary>
+        public int MealId { get; set; }
+        /// <summary>
+        /// Virtual property to allow for EF lazy loading of associated Meal record.
+        /// </summary>
         public virtual Meal Meal { get; set; }
 
         /// <summary>
@@ -60,7 +99,7 @@ namespace MacroNewt.Models
         {
             if ((Nutrients != null && Nutrients.Count > 0) && PortionIndex != 0)
             {
-                int measureIndex = PortionIndex -1;
+                int measureIndex = PortionIndex - 1;
 
                 Measure whatever;
 
@@ -115,11 +154,11 @@ namespace MacroNewt.Models
                     {
                         return 0;
                     }
-                
+
                 }
             }
         }
-        
+
         /// <summary>
         /// Used to determine and retrieve the specified nutrient content in a food based on target nutrient, portion type, and quantity
         /// </summary>
@@ -156,11 +195,11 @@ namespace MacroNewt.Models
                     {
                         return 0;
                     }
-                   
+
                 }
             }
         }
-        
+
         /// <summary>
         /// Returns a string of nutrient content information for display purposes
         /// </summary>
@@ -197,7 +236,7 @@ namespace MacroNewt.Models
                     {
                         return "";
                     }
-                    
+
                 }
             }
         }
@@ -360,7 +399,7 @@ namespace MacroNewt.Models
 
         public int NutrientId { get; set; }
         public virtual Nutrient Nutrient { get; set; }
-           
+
     }
     /*
      *  The MealTotalNutrient class

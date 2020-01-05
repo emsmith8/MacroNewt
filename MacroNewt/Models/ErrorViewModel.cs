@@ -1,5 +1,3 @@
-using System;
-
 namespace MacroNewt.Models
 {
     public class ErrorViewModel

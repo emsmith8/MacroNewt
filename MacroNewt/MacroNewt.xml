@@ -369,6 +369,81 @@
             Relevant information includes identifiers like name and database NDBNO, user selected portion and number of servings, and overall macronutrient contents
             </remarks>
         </member>
+        <member name="P:MacroNewt.Models.Food.FoodId">
+            <summary>
+            Main identifier for a Food in the database
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.Name">
+            <summary>
+            The food's name as supplied by the USDA database.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.Ndbno">
+            <summary>
+            The identifier used by the USDA database. Necessary for API food detail calls.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.Nutrients">
+            <summary>
+            A list of all <see cref="T:MacroNewt.Models.Nutrient"/> items contained in the Food. Used for tracking macro progress.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.Unit">
+            <summary>
+            The unit used for calculating nutrient content without serving sizes or portions.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.Value">
+            <summary>
+            The calorie value of the food given selected portion size and number of servings.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.NumberOfServings">
+            <summary>
+            The user-chosen number of servings of a selected portion of food.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.PortionIndex">
+            <summary>
+            An index value used to store which of the available portion choices was selected.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.SelectedPortionLabel">
+            <summary>
+            The label assigned to the selected food portion (i.e. 'serving', 'tbsp').
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.SelectedPortionQty">
+            <summary>
+            The user-selected number of servings of a given portion of food.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.FoodTotalProtein">
+            <summary>
+            Stores the total protein content of selected food based on portion and number of servings.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.FoodTotalFat">
+            <summary>
+            Stores the total fat content of selected food based on portion and number of servings.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.FoodTotalCarb">
+            <summary>
+            Stores the total carb content of selected food based on portion and number of servings.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.MealId">
+            <summary>
+            Identifier for the associated meal of this food in its given portion and quantity.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Food.Meal">
+            <summary>
+            Virtual property to allow for EF lazy loading of associated Meal record.
+            </summary>
+        </member>
         <member name="M:MacroNewt.Models.Food.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:MacroNewt.Models.Food"/> class.
@@ -637,6 +712,66 @@
             Other relevant information includes the name and date of the meal, macronutrient totals, the ID and email of the user who logged the meal,
                 and an indicator of whether the meal is being relogged for avoiding unnecessary API calls for information already in database.
             </remarks>
+        </member>
+        <member name="P:MacroNewt.Models.Meal.Id">
+            <summary>
+            Main identifier for a Meal in the database.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Meal.Title">
+            <summary>
+            The name given to the meal by the user.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Meal.MealType">
+            <summary>
+            The type of meal as selected by user (i.e. 'snack', 'dinner').
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Meal.MealDate">
+            <summary>
+            The date and time at which the meal was logged. Represents the time the meal was eaten.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Meal.FoodComponents">
+            <summary>
+            A list of all <see cref="T:MacroNewt.Models.Food"/> items contained in the Meal.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Meal.Calories">
+            <summary>
+            The total calorie value of the meal based on all component Foods.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Meal.ProteinCalories">
+            <summary>
+            The gram total protein content of the meal.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Meal.FatCalories">
+            <summary>
+            The gram total fat content of the meal.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Meal.CarbCalories">
+            <summary>
+            The gram total carb content of the meal.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Meal.UserId">
+            <summary>
+            The database ID of the user who logged the meal.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Meal.UserEmail">
+            <summary>
+            The associated email adddress of the user who logged the meal.
+            </summary>
+        </member>
+        <member name="P:MacroNewt.Models.Meal.ReLogged">
+            <summary>
+            An indicator of whether the meal is being re-logged. Provides user with previous portion/serving values if so.
+            </summary>
         </member>
     </members>
 </doc>

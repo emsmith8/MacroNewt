@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using MacroNewt.Models;
+﻿using MacroNewt.Models;
 using MacroNewt.Models.LogicModels;
 using MacroNewt.Models.ViewModels;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Security.Claims;
 
 namespace MacroNewt.Areas.Identity.Data
 {
@@ -75,7 +72,7 @@ namespace MacroNewt.Areas.Identity.Data
         {
             return View();
         }
-        
+
         /// <summary>
         /// Sends a request to the USDA food search API for user specified input in either branded or unbranded database.
         ///     Results are displayed in a view component below search area
@@ -111,7 +108,7 @@ namespace MacroNewt.Areas.Identity.Data
                 /* Thread sleep used for mimicking slow response time in deployed environment, mainly for testing wait spinner modals */
                 //System.Threading.Thread.Sleep(3000);
                 return ViewComponent("FoodSearchResult", handler.StoreSearchReturns(dataObjects));
-                
+
             }
             else
             {
@@ -152,23 +149,23 @@ namespace MacroNewt.Areas.Identity.Data
                     JObject dataObject = JObject.Parse(response.Content.ReadAsStringAsync().Result);
 
                     foodItems[i] = handler.StoreMealNutrientDetails(foodItems[i], dataObject, "simple");
-                    
+
                 }
                 else
                 {
                     // handle failure
                 }
             }
-            
+
             FoodViewModel vm = new FoodViewModel()
             {
                 Foods = foodItems,
                 MealDate = DateTime.Now,
                 MealId = mId
             };
-            
+
             if (mId != 0)
-            { 
+            {
 
                 vm.UserId = _context.Meal
                     .Where(m => m.Id == mId)
@@ -191,7 +188,7 @@ namespace MacroNewt.Areas.Identity.Data
                     .Where(m => m.Id == mId)
                     .Select(m => m.MealType)
                     .FirstOrDefault();
-                
+
 
                 if (vm.UserId == _userManager.GetUserId(User))
                 {
@@ -204,7 +201,7 @@ namespace MacroNewt.Areas.Identity.Data
                     .Select(u => u.Email)
                     .FirstOrDefault();
                 }
-                
+
             }
 
             if (reLogged)
@@ -215,7 +212,7 @@ namespace MacroNewt.Areas.Identity.Data
                 vm.MealDate = DateTime.Now;
                 vm.MealType = null;
             }
-            
+
             return ViewComponent("MealDetail", vm);
         }
 
@@ -233,9 +230,9 @@ namespace MacroNewt.Areas.Identity.Data
             {
                 return NotFound();
             }
-            
+
             var meal = new Meal();
-            
+
             meal = _context.Meal
             .Include(x => x.FoodComponents)
                 .ThenInclude(x => x.Nutrients)
@@ -295,11 +292,11 @@ namespace MacroNewt.Areas.Identity.Data
                 if (response.IsSuccessStatusCode)
                 {
                     JObject dataObject = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-                                       
+
                     Food f = new Food();
 
                     foodItems.Add(handler.StoreMealNutrientDetails(f, dataObject, "full"));
-                    
+
                 }
                 else
                 {
@@ -335,7 +332,7 @@ namespace MacroNewt.Areas.Identity.Data
                 UserStatsHandler ush = new UserStatsHandler(_userManager, _context);
 
                 MacroNewtUser user;
-                
+
                 if (form.UserId == null)
                 {
                     user = _userManager.GetUserAsync(HttpContext.User).Result;
@@ -344,7 +341,7 @@ namespace MacroNewt.Areas.Identity.Data
                 {
                     user = _context.Users.FirstOrDefault(u => u.Id == form.UserId);
                 }
-                
+
 
                 Response.Headers.Add("vstatus", "pass");
 
@@ -359,7 +356,7 @@ namespace MacroNewt.Areas.Identity.Data
             }
 
         }
-        
+
         /// <summary>
         /// Creates or edits a meal in the database according to the provided foods and meal details
         /// </summary>
@@ -417,7 +414,7 @@ namespace MacroNewt.Areas.Identity.Data
                     fvm.Foods[i].SelectedPortionLabel = form.Foods[i].Nutrients[0].Measures[form.Foods[i].PortionIndex - 1].Label;
                     fvm.Foods[i].SelectedPortionQty = form.Foods[i].Nutrients[0].Measures[form.Foods[i].PortionIndex - 1].Qty;
                 }
-                    
+
             }
 
 
@@ -459,7 +456,7 @@ namespace MacroNewt.Areas.Identity.Data
                     FatCalories = (form.FatTotal * 9),
                     CarbCalories = (form.CarbTotal * 4)
                 };
-                
+
                 var mealToRemove = _context.Meal
                     .Where(x => x.Id == form.MealId)
                     .FirstOrDefault();
@@ -474,7 +471,7 @@ namespace MacroNewt.Areas.Identity.Data
 
                 ush.UpdateDailyCalories(UserId, m.MealDate);
 
-                
+
                 return Json(new { success = true, mealID = m.Id });
             }
         }

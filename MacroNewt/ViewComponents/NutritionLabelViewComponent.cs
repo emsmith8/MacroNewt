@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using MacroNewt.Areas.Identity.Data;
 using MacroNewt.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MacroNewt.Areas.Identity.Data;
+using System.Linq;
 
 namespace MacroNewt.ViewComponents
 {
@@ -23,7 +20,7 @@ namespace MacroNewt.ViewComponents
             Food food = Context.Food
                 .Include(x => x.Nutrients)
                     .ThenInclude(x => x.Measures)
-                .FirstOrDefault(x => x.FoodId == foodId);            
+                .FirstOrDefault(x => x.FoodId == foodId);
             return View(food);
         }
     }

@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MacroNewt.Areas.Identity.Data
 {
@@ -40,7 +37,7 @@ namespace MacroNewt.Areas.Identity.Data
 
         public virtual UserGoals Goals { get; set; }
         public virtual List<DailyCalTotal> DailyCalTotals { get; set; }
-        
+
     }
 
     public class UserGoals
@@ -75,6 +72,6 @@ namespace MacroNewt.Areas.Identity.Data
 
         public virtual MacroNewtUser MacroNewtUser { get; set; }
         public string Id { get; set; }
-        
+
     }
 }

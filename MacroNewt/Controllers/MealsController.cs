@@ -1,20 +1,15 @@
-﻿using System;
+﻿using MacroNewt.Models;
+using MacroNewt.Models.LogicModels;
+using MacroNewt.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MacroNewt.Models;
-using System.Diagnostics;
-using Newtonsoft.Json;
-using System.Net.Http;
-using MacroNewt.Models.ViewModels;
-using Newtonsoft.Json.Linq;
-using MacroNewt.Models.LogicModels;
-using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace MacroNewt.Areas.Identity.Data
 {
@@ -42,7 +37,7 @@ namespace MacroNewt.Areas.Identity.Data
             _context = context;
             _userManager = userManager;
         }
-        
+
         /// <summary>
         /// Returns the calendar meal history view
         /// </summary>
@@ -253,7 +248,7 @@ namespace MacroNewt.Areas.Identity.Data
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             UserStatsHandler ush = new UserStatsHandler(_userManager, _context);
-            
+
             var meal = await _context.Meal
                 .FirstOrDefaultAsync(m => m.Id == id);
 
@@ -266,7 +261,7 @@ namespace MacroNewt.Areas.Identity.Data
 
             _context.Meal.Remove(meal);
             await _context.SaveChangesAsync();
-            
+
             ush.UpdateDailyCalories(userId, date);
 
             if (User.IsInRole("Admin"))
@@ -288,12 +283,12 @@ namespace MacroNewt.Areas.Identity.Data
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            Dictionary<string,object> results = new Dictionary<string, object>();
+            Dictionary<string, object> results = new Dictionary<string, object>();
 
             var subResults = new List<object>();
 
             var dt = await _context.DailyCalTotal
-                    .Where(d => (d.Id == userID) && (d.CalorieDay.Month == (month+1)) && (d.CalorieDay.Year == year) && (d.TotalDailyCalories != 0))
+                    .Where(d => (d.Id == userID) && (d.CalorieDay.Month == (month + 1)) && (d.CalorieDay.Year == year) && (d.TotalDailyCalories != 0))
                     .ToListAsync();
 
             string overUnder = "";

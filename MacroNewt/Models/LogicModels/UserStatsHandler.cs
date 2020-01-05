@@ -1,12 +1,8 @@
 ﻿using MacroNewt.Areas.Identity.Data;
 using MacroNewt.Models.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace MacroNewt.Models.LogicModels
 {
@@ -174,7 +170,7 @@ namespace MacroNewt.Models.LogicModels
                 .Select(u => u.DailyTargetCalories)
                 .FirstOrDefault();
 
-            
+
             DailyCalTotal dct = _context.DailyCalTotal
                 .Where(d => (d.Id == user.Id) && (d.CalorieDay.Date == Convert.ToDateTime(targetDate)))
                 .FirstOrDefault();
@@ -503,6 +499,6 @@ namespace MacroNewt.Models.LogicModels
             }
         }
 
-        
+
     }
 }
