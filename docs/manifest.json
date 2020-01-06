@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Data.DailyCalTotal.html",
-          "hash": "cs45mTSgd4u9HuIMCnNIYA=="
+          "hash": "K3viL3kVeSp/kuBYYu6nDQ=="
         }
       },
       "is_incremental": true,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Data.IdentityHostingStartup.html",
-          "hash": "UR0zhXUDnq1nefW16UTlRw=="
+          "hash": "h/q7YGD5q0uIhoVDup+P4A=="
         }
       },
       "is_incremental": true,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Data.LoggerController.html",
-          "hash": "Mf/ekEvleZ2x1Db+2ZdpRQ=="
+          "hash": "76f+FaTdzDOeLOdtLIS03Q=="
         }
       },
       "is_incremental": true,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Data.MacroNewtContext.html",
-          "hash": "/unP94S1EwCYs24xbfpOzQ=="
+          "hash": "qfBf+uicEjXFFePh/M2rUQ=="
         }
       },
       "is_incremental": true,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Data.MacroNewtUser.html",
-          "hash": "TlZdmXybBWyYxRJ0dRBAsw=="
+          "hash": "CsziTq7AJFmMTeqFieJKmw=="
         }
       },
       "is_incremental": true,
@@ -69,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Data.MealsController.html",
-          "hash": "159nkyiYd1YJydkUMTlwXw=="
+          "hash": "TyZIY+y9ythzmrfaX+I+mQ=="
         }
       },
       "is_incremental": true,
@@ -81,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Data.UserGoals.html",
-          "hash": "71HTyaJnpm08U3VZ+5zeLg=="
+          "hash": "FETyADfqH8J3YeghpUlylQ=="
         }
       },
       "is_incremental": true,
@@ -105,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.AccessDeniedModel.html",
-          "hash": "MQM4Q5NOU+vA2anMIb710w=="
+          "hash": "r75b/f8Qng+qSxsT9Twy/A=="
         }
       },
       "is_incremental": true,
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ConfirmEmailModel.html",
-          "hash": "ZARVPnRZecZlAGp4znOxFg=="
+          "hash": "JQ3/LrzL8WBSJW0DrsHfYw=="
         }
       },
       "is_incremental": true,
@@ -129,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ExternalLoginModel.InputModel.html",
-          "hash": "tAbzZekKTqit9Y+VGe/liQ=="
+          "hash": "3J+nB6PB2pIseIRSLIf+pg=="
         }
       },
       "is_incremental": true,
@@ -141,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ExternalLoginModel.html",
-          "hash": "kgIHFYqlsO62tS43qTPglA=="
+          "hash": "522m4dYnyRcJbzdNJqAjNg=="
         }
       },
       "is_incremental": true,
@@ -153,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ForgotPasswordConfirmation.html",
-          "hash": "E6c+g5zzU0RF8beCL+ngGQ=="
+          "hash": "91DSOBTXEyannA3N+RJEYA=="
         }
       },
       "is_incremental": true,
@@ -165,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ForgotPasswordModel.InputModel.html",
-          "hash": "3yTTKlh1YxshTOWi7sDfOQ=="
+          "hash": "QHDCnU+AjwLb3oTVFmZSZg=="
         }
       },
       "is_incremental": true,
@@ -177,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ForgotPasswordModel.html",
-          "hash": "R7nvvVNCGJlJvxppbDD7iQ=="
+          "hash": "RrOdDrmcV/RsrJHU7YTIxQ=="
         }
       },
       "is_incremental": true,
@@ -189,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LockoutModel.html",
-          "hash": "ozcTFGEKBPQoaF4yb23HGg=="
+          "hash": "proT9nJhoGkF6APy50TwvA=="
         }
       },
       "is_incremental": true,
@@ -201,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginModel.InputModel.html",
-          "hash": "jjmrKnLr/mJMzyQEajYzRQ=="
+          "hash": "puwsz9z+Hb3ItgSew/Kv6A=="
         }
       },
       "is_incremental": true,
@@ -213,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginModel.html",
-          "hash": "ZQyd6G0W16C/ETqsftvdKg=="
+          "hash": "1aDCLUBhq5N5ecg3eiI11g=="
         }
       },
       "is_incremental": true,
@@ -225,7 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginWith2faModel.InputModel.html",
-          "hash": "+GeaBhAWn75qHq6cH3w4UQ=="
+          "hash": "lPY0/aOmmUAqxNxmGTIxNA=="
         }
       },
       "is_incremental": true,
@@ -237,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginWith2faModel.html",
-          "hash": "1DwXDk7WPfPZ6l35AONjMA=="
+          "hash": "ZqrRoGVHs+lB0VkOv80hCA=="
         }
       },
       "is_incremental": true,
@@ -249,7 +249,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginWithRecoveryCodeModel.InputModel.html",
-          "hash": "R+nOBUORHR6bYanXsaE6Yw=="
+          "hash": "8WC9oO12QoiV73EgAuUX5w=="
         }
       },
       "is_incremental": true,
@@ -261,7 +261,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LoginWithRecoveryCodeModel.html",
-          "hash": "tRqfI6n+UZIO9QLAul6I9g=="
+          "hash": "zF2NJ3GznAbjFtoYERP5Jw=="
         }
       },
       "is_incremental": true,
@@ -273,7 +273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.LogoutModel.html",
-          "hash": "f3FVu3WAgBH7u/wEkIy9Ug=="
+          "hash": "E/LHgeT+NgfSfF47EBh8EQ=="
         }
       },
       "is_incremental": true,
@@ -285,7 +285,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ChangePasswordModel.InputModel.html",
-          "hash": "lSdrc7/SCQhfxSwuWj4qXA=="
+          "hash": "msVsCKNHoeAIQIqoGrZh9A=="
         }
       },
       "is_incremental": true,
@@ -297,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ChangePasswordModel.html",
-          "hash": "Ex8IWq/Jlv9GTl0LpDkrBg=="
+          "hash": "6GqHmScomxW7/EwQdA0Q9Q=="
         }
       },
       "is_incremental": true,
@@ -333,7 +333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.Disable2faModel.html",
-          "hash": "NnxoGtcQoio7V/YFhbt3hA=="
+          "hash": "/iI8Osmc8MYWJhLrsAtXWw=="
         }
       },
       "is_incremental": true,
@@ -357,7 +357,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel.InputModel.html",
-          "hash": "pQeH6wrdQ4Kgdm5JjZVIgg=="
+          "hash": "kCj4C86IISaeoUFy7PhZcQ=="
         }
       },
       "is_incremental": true,
@@ -369,7 +369,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel.html",
-          "hash": "9tFb/Fu11d26YJKbrQeapQ=="
+          "hash": "JGzzNqdXJUfNKV+Aa+KyOw=="
         }
       },
       "is_incremental": true,
@@ -393,7 +393,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.GenerateRecoveryCodesModel.html",
-          "hash": "a2qwX+S9k9NMW+H0wzLosg=="
+          "hash": "Twh8oJYHPX54zuifulLaxA=="
         }
       },
       "is_incremental": true,
@@ -405,7 +405,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.HundredPercentAttribute.html",
-          "hash": "qmM5Uw6BZ3ntP5knS04QOw=="
+          "hash": "ebvQyu5RYjVYUQTr/t/Z5w=="
         }
       },
       "is_incremental": true,
@@ -417,7 +417,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.IndexModel.InputModel.html",
-          "hash": "ljOZB2yVb90keBZrKHxByA=="
+          "hash": "+bWAdg0TrRXb68LGQyS2bA=="
         }
       },
       "is_incremental": true,
@@ -429,7 +429,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.IndexModel.html",
-          "hash": "ombsUZ79FuOm6g9YPGQzUA=="
+          "hash": "U2EzbioBtfCZ7MJLh82maA=="
         }
       },
       "is_incremental": true,
@@ -465,7 +465,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ResetAuthenticatorModel.html",
-          "hash": "vaAt13rJgSn9H9RF363whQ=="
+          "hash": "ViNSMuqIvro2VIG10H7eQQ=="
         }
       },
       "is_incremental": true,
@@ -477,7 +477,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.SetPasswordModel.InputModel.html",
-          "hash": "pu1lRgob7xM/Aqo3I1efzg=="
+          "hash": "oiEk9OwCNT+ccZ2SidjnMw=="
         }
       },
       "is_incremental": true,
@@ -489,7 +489,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.SetPasswordModel.html",
-          "hash": "Yiz9/eDBry8vzFjLghg3Kw=="
+          "hash": "hfE8CMYAaq9cKvo+odrntg=="
         }
       },
       "is_incremental": true,
@@ -501,7 +501,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.ShowRecoveryCodesModel.html",
-          "hash": "qj4EN++K0NODvMXGdH7x/g=="
+          "hash": "VBbo1ycEoTcPxbnuM3KOhA=="
         }
       },
       "is_incremental": true,
@@ -513,7 +513,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel.html",
-          "hash": "j/V55ajLjET+VJSPHQBNSQ=="
+          "hash": "E0I2Ofo4rblPrXwDLexAug=="
         }
       },
       "is_incremental": true,
@@ -525,7 +525,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.UserGoalsModel.InputModel.html",
-          "hash": "yrHaTjAFgQOENzDHaUJlfQ=="
+          "hash": "r47E8MJ4SIni320mHAZd1Q=="
         }
       },
       "is_incremental": true,
@@ -537,7 +537,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.Manage.UserGoalsModel.html",
-          "hash": "WKDxmSIjHZbmCOaMg9uGtQ=="
+          "hash": "QpMYgdNPpJfA0Oh1YNK4qA=="
         }
       },
       "is_incremental": true,
@@ -561,7 +561,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.RegisterModel.InputModel.html",
-          "hash": "HlTx5zSXMOS9bfVqMA9Vaw=="
+          "hash": "qyX5Q+1dkm47+SMPZE9Yog=="
         }
       },
       "is_incremental": true,
@@ -573,7 +573,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.RegisterModel.html",
-          "hash": "/fn13Ga7tTpKAIfaM36yew=="
+          "hash": "R9h1r4vowi597bZSdOrB9A=="
         }
       },
       "is_incremental": true,
@@ -585,7 +585,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ResetPasswordConfirmationModel.html",
-          "hash": "5hZvsIMHvGlqIi9e/IAW6w=="
+          "hash": "Gl/VkXLnYjSAohS8v4lcMg=="
         }
       },
       "is_incremental": true,
@@ -597,7 +597,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ResetPasswordModel.InputModel.html",
-          "hash": "/BK8WHSlZtfClAAJSDfMOg=="
+          "hash": "DrTvtyXGQCvMf8Ty1VFW0w=="
         }
       },
       "is_incremental": true,
@@ -609,7 +609,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Pages.Account.ResetPasswordModel.html",
-          "hash": "KcVclY62TmMhgXmrraUOig=="
+          "hash": "pX5i9DE/XmQjnYIl723GnA=="
         }
       },
       "is_incremental": true,
@@ -657,7 +657,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Controllers.AdminController.html",
-          "hash": "p+0rHFGmKhC+xvh8lS9l6Q=="
+          "hash": "WgVyScVMZtZIJqBO6ud2Mw=="
         }
       },
       "is_incremental": true,
@@ -669,7 +669,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Controllers.HomeController.html",
-          "hash": "qX+mZmspysKaLoFC/LdG1w=="
+          "hash": "wqOGFdf/QU3kAYOniYBwtg=="
         }
       },
       "is_incremental": true,
@@ -741,7 +741,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.ErrorViewModel.html",
-          "hash": "ewS8bVZ5lunmdX1Bdk4w0A=="
+          "hash": "OjR1dmzqpMjcGHdqXLVvFA=="
         }
       },
       "is_incremental": true,
@@ -753,7 +753,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.Food.html",
-          "hash": "u4NppazW8xqYbUsS9zXISQ=="
+          "hash": "UWMO4au55YgZPfnGCSAQ5w=="
         }
       },
       "is_incremental": true,
@@ -765,7 +765,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.LogicModels.EmailBuildHandler.html",
-          "hash": "xVdnZs2DdMCauBFFxqcspg=="
+          "hash": "o94rKTrMdMLiT2Sps7ugGQ=="
         }
       },
       "is_incremental": true,
@@ -777,7 +777,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.LogicModels.HttpClientAccessor.html",
-          "hash": "qzAIRkm5L9S+uNPIxiStzQ=="
+          "hash": "FH0KyLR3Dd74d+EcC/tpqg=="
         }
       },
       "is_incremental": true,
@@ -789,7 +789,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.LogicModels.SearchHandler.html",
-          "hash": "Tp4rnrIcS2h8FyEu7DtMRQ=="
+          "hash": "9rpPZJTd3KhA3bbYI/wbkA=="
         }
       },
       "is_incremental": true,
@@ -801,7 +801,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.LogicModels.UserStatsHandler.html",
-          "hash": "DLu2XOhiOED3IdGpq86Tew=="
+          "hash": "GroSCWoPvCxb0JH9ly7B6Q=="
         }
       },
       "is_incremental": true,
@@ -825,7 +825,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.Meal.html",
-          "hash": "tftdUVT+eg+DVfcg4mxoFw=="
+          "hash": "6JmpdPfo/mvY2xlZv4ovZQ=="
         }
       },
       "is_incremental": true,
@@ -837,7 +837,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.MealTotalNutrient.html",
-          "hash": "30ss7+1LBeMORT/YSoEhqg=="
+          "hash": "W4n5Wln4MRPyjHDqzcJntA=="
         }
       },
       "is_incremental": true,
@@ -849,7 +849,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.Measure.html",
-          "hash": "l6m7mv6zONYWLADhNryxyQ=="
+          "hash": "DXzv1rDOInbvCQxBc4himw=="
         }
       },
       "is_incremental": true,
@@ -861,7 +861,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.NoMeasureFood.html",
-          "hash": "n58Qso7UWMB2a1iOO+818g=="
+          "hash": "4UpXOQl1CffPwr1Fuf4Jhw=="
         }
       },
       "is_incremental": true,
@@ -873,7 +873,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.Nutrient.html",
-          "hash": "H0xm1gt0nAdEMVUZRut/Zg=="
+          "hash": "k7ym4jo3WJeFDVRWbnfCLg=="
         }
       },
       "is_incremental": true,
@@ -885,7 +885,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.ViewModels.BMRCalculatorViewModel.html",
-          "hash": "NiM4z7cN5Kzc9K3Okp+thw=="
+          "hash": "O/8/YMoJAlZf7kUksXQtZg=="
         }
       },
       "is_incremental": true,
@@ -897,7 +897,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.ViewModels.ConfirmMealViewModel.html",
-          "hash": "uzx4YwSoB+k9YdiTni2ocw=="
+          "hash": "iAVV42jOE6WmPA5BJS3mxw=="
         }
       },
       "is_incremental": true,
@@ -909,7 +909,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.ViewModels.ContactUsViewModel.html",
-          "hash": "Asn27veqbo5Oay8I9Rzkxw=="
+          "hash": "CboCJjn8buhRU/cGO7mDJQ=="
         }
       },
       "is_incremental": true,
@@ -921,7 +921,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.ViewModels.CurrentDayCalStatsViewModel.html",
-          "hash": "MPIw8HlKaU4ZTj8eyTfD/A=="
+          "hash": "rRJExILiSwz2jrNjb5Es6w=="
         }
       },
       "is_incremental": true,
@@ -933,7 +933,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.ViewModels.ExplorePortionChoiceViewModel.html",
-          "hash": "mWQ2v7rMEsVAThZuxV6qDg=="
+          "hash": "T1Uy0TEnEYbDf6UxnVloGg=="
         }
       },
       "is_incremental": true,
@@ -945,7 +945,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.ViewModels.FoodViewModel.html",
-          "hash": "rlDlQeBBcC9sNjaj9fAeug=="
+          "hash": "qObMGuFte1kn1LHPOe35pA=="
         }
       },
       "is_incremental": true,
@@ -957,7 +957,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.ViewModels.MealAnalyticsViewModel.html",
-          "hash": "uGdqQfGPnWnGvpUNgjTBMw=="
+          "hash": "P8zn0mmPi/5L+Tg7nB5PcQ=="
         }
       },
       "is_incremental": true,
@@ -969,7 +969,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.ViewModels.UpdateProfileViewModel.html",
-          "hash": "5JJUla7tsAwZfZ3/Hj0R4A=="
+          "hash": "/vhBf33t7OBlgQxgGDgzXA=="
         }
       },
       "is_incremental": true,
@@ -981,7 +981,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.ViewModels.UserConfirmedStatusViewModel.html",
-          "hash": "VpCM29n0TYT5G6Jg5DqFcg=="
+          "hash": "I68pzDDbSuuhvUe/j2EH9A=="
         }
       },
       "is_incremental": true,
@@ -1017,7 +1017,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Program.html",
-          "hash": "GR0Y9aI3KIpusuy4DyQZuQ=="
+          "hash": "d/jGcOKwXHsJERir5rpHQQ=="
         }
       },
       "is_incremental": true,
@@ -1029,7 +1029,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Services.AuthMessageSenderOptions.html",
-          "hash": "AZNkLhkKB9AsCv8RLWxLGg=="
+          "hash": "NonKT+EallUswvVWvfOjxg=="
         }
       },
       "is_incremental": true,
@@ -1041,7 +1041,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Services.EmailSender.html",
-          "hash": "mbIXzgSv1F5zwWjUVgRixw=="
+          "hash": "2rVwSwwvx8Rz4kIwfNOZMA=="
         }
       },
       "is_incremental": true,
@@ -1065,7 +1065,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Startup.html",
-          "hash": "HTMUG0YZAM7nQa8h9QD5iQ=="
+          "hash": "FUKPOhzCXZ2vPXAVF23YFQ=="
         }
       },
       "is_incremental": true,
@@ -1077,7 +1077,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.BMRCalculatorViewComponent.html",
-          "hash": "OSSNZC9fQZiTK4rRN4v1IQ=="
+          "hash": "ECaGgcLpPHcay9TIQb0OLQ=="
         }
       },
       "is_incremental": true,
@@ -1089,7 +1089,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.CalendarMealModalViewComponent.html",
-          "hash": "7u6bN9awCaUhcIHmCcDZyg=="
+          "hash": "YhJ9hGPFODckuImKtrNRhw=="
         }
       },
       "is_incremental": true,
@@ -1101,7 +1101,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.ConfirmContact.html",
-          "hash": "bFah3d1NY9YXHxP8gGo1AQ=="
+          "hash": "0M81wH7gGYIs3KgZo00/4w=="
         }
       },
       "is_incremental": true,
@@ -1113,7 +1113,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.ConfirmMealViewComponent.html",
-          "hash": "5GdK09mw8AMufGx/dvS0Iw=="
+          "hash": "DOVjb89SzHpJbsFBnm8N+Q=="
         }
       },
       "is_incremental": true,
@@ -1125,7 +1125,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.ContactUsViewComponent.html",
-          "hash": "r0ZHwO+ejjRFktEoVRBRZw=="
+          "hash": "XPvlSLmhQuov3XrfVIIncA=="
         }
       },
       "is_incremental": true,
@@ -1137,7 +1137,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.CurrentDayCalStatsViewComponent.html",
-          "hash": "ipQFFjKbbNU6YXGZwlDb/w=="
+          "hash": "nHiMH7daEiRDH6nGfUHtbg=="
         }
       },
       "is_incremental": true,
@@ -1149,7 +1149,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.DeleteMealModalViewComponent.html",
-          "hash": "i7LB1d7gZFE9swuqqoGzDQ=="
+          "hash": "Ddpn4Ec79eqUSd+riv18bQ=="
         }
       },
       "is_incremental": true,
@@ -1161,7 +1161,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.DeleteUserModalViewComponent.html",
-          "hash": "/quDNXDS3nPzmS3+AbAUXA=="
+          "hash": "IPELeSV9GkXYJnHr2A111A=="
         }
       },
       "is_incremental": true,
@@ -1173,7 +1173,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.ExploreNutritionLabelViewComponent.html",
-          "hash": "a38Z9p0Lo8HER2zIcocpbA=="
+          "hash": "I68mw2J8BqpYbuCB/k1Mvg=="
         }
       },
       "is_incremental": true,
@@ -1185,7 +1185,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.FoodReportViewComponent.html",
-          "hash": "qMKUte8GEUNym4MTByhV3Q=="
+          "hash": "If8Ck4uSAI8IFYTBcthKkg=="
         }
       },
       "is_incremental": true,
@@ -1209,7 +1209,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.LoggedInUserInfoViewComponent.html",
-          "hash": "g9tKMn692qiVJ/U4P+i8Vw=="
+          "hash": "mDhwUJLd+Vim5V9tQdExlw=="
         }
       },
       "is_incremental": true,
@@ -1221,7 +1221,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.MealAnalyticsViewComponent.html",
-          "hash": "0SZzkq85vrC2zmUoWEzpgA=="
+          "hash": "Y9s2S1AcBb+YsWlcAk8Qvw=="
         }
       },
       "is_incremental": true,
@@ -1233,7 +1233,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.MealCalendarHistoryViewComponent.html",
-          "hash": "w7hxag3HKeeVnkICWTZkkA=="
+          "hash": "HYwqs1FB2iPWEQaZl2tvSw=="
         }
       },
       "is_incremental": true,
@@ -1257,7 +1257,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.MealReviewViewComponent.html",
-          "hash": "fJjqDlYcTcv8vs3H9SVgGA=="
+          "hash": "wKqNaSXTKCFCpxhTOQ9Xdg=="
         }
       },
       "is_incremental": true,
@@ -1269,7 +1269,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.MealTotalNutritionLabelViewComponent.html",
-          "hash": "YX1lGdulQ7F6lUzRNHUpuA=="
+          "hash": "B6Mwkb9Koc6Ukr2vU22f4Q=="
         }
       },
       "is_incremental": true,
@@ -1281,7 +1281,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.NoMeasureFoodNutritionLabelViewComponent.html",
-          "hash": "/8/V+n8yrsG08tDAN6fFsQ=="
+          "hash": "GI9D3nyefNo9/AvWnyF7BA=="
         }
       },
       "is_incremental": true,
@@ -1293,7 +1293,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.NutritionLabelViewComponent.html",
-          "hash": "ysK/vj21PHzl99A04rN//w=="
+          "hash": "9YQn2BH9s0y8DgtStlwAVw=="
         }
       },
       "is_incremental": true,
@@ -1305,7 +1305,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.OldMealsModalViewComponent.html",
-          "hash": "OAAd57t8Cvv3BhildJLfWw=="
+          "hash": "0DDzD+rZX/WxpsO2yK9Sgg=="
         }
       },
       "is_incremental": true,
@@ -1317,7 +1317,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.PastDayCalStatsViewComponent.html",
-          "hash": "Mcp0W1UEWYgwo5u5eCXxdQ=="
+          "hash": "xOS6gRrYHacEwiuw2xWoTg=="
         }
       },
       "is_incremental": true,
@@ -1329,7 +1329,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.ResendConfirmationEmailViewComponent.html",
-          "hash": "9duD8srMAniIgvCdmn7eqQ=="
+          "hash": "gKARmQUjAUmYpxRIECTk/Q=="
         }
       },
       "is_incremental": true,
@@ -1341,7 +1341,7 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.ViewComponents.UpdateProfileViewComponent.html",
-          "hash": "ebYBqlGEz/Po5JFnKzMfMw=="
+          "hash": "3/C5gm2lQKYX8J2UoZCg0g=="
         }
       },
       "is_incremental": true,
@@ -1368,7 +1368,7 @@
           "hash": "rGX1IePJmBDvtEzb6ZR0Cw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -1401,7 +1401,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "s/RzplQi9woAjDxRe8yrqg=="
+          "hash": "0PUVrxHCPUWq0p8P40WlRg=="
         }
       },
       "is_incremental": true,
@@ -1425,10 +1425,10 @@
       "output": {
         ".html": {
           "relative_path": "faq/frequently_asked_questions.html",
-          "hash": "XGP0xOuNNZBtsvAOfuR8rw=="
+          "hash": "tmo4jRqWLcj6U2EVtX1DlQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1449,7 +1449,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "NXPB6Pqhmi+l7p9cWgoiwQ=="
+          "hash": "nsCQSgKa5j4UNdlp9uuMYg=="
         }
       },
       "is_incremental": false,
@@ -1484,17 +1484,17 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 4,
+          "skipped_file_count": 3
+        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 114,
           "skipped_file_count": 114
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 4,
-          "skipped_file_count": 4
         }
       }
     },
