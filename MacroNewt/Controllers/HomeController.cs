@@ -33,10 +33,10 @@ namespace MacroNewt.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="HomeController"/> class.
         /// </summary>
-        /// <param name="userManager"></param>
-        /// <param name="context"></param>
-        /// <param name="signInManager"></param>
-        /// <param name="emailSender"></param>
+        /// <param name="userManager">The dependency-injected <see cref="UserManager{TUser}"/></param>
+        /// <param name="context">The dependency-injected <see cref="MacroNewtContext"/> obtained from the <see cref="Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"/></param>
+        /// <param name="signInManager">The dependency-injected <see cref="SignInManager{TUser}"/></param>
+        /// <param name="emailSender">The dependency-injected <see cref="IEmailSender"/> obtained from the <see cref="Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"/></param>
         public HomeController(UserManager<MacroNewtUser> userManager, MacroNewtContext context,
                                 SignInManager<MacroNewtUser> signInManager, IEmailSender emailSender)
         {
@@ -187,7 +187,7 @@ namespace MacroNewt.Controllers
         /// <summary>
         /// Updates <see cref="MacroNewtUser"/> account with details necessary for BMR calculation
         /// </summary>
-        /// <param name="form"></param>
+        /// <param name="form">An <see cref="UpdateProfileViewModel"/> object populated with required user details</param>
         /// <returns>The BMRCalculator ViewComponent</returns>
         public IActionResult UpdateProfileStats([Bind("Gender,HeightFeet,HeightInches,Weight")] UpdateProfileViewModel form)
         {
@@ -229,7 +229,7 @@ namespace MacroNewt.Controllers
         /// <summary>
         /// Updates the <see cref="UserGoals"/> target calorie goal based on chosen criteria
         /// </summary>
-        /// <param name="calTarget"></param>
+        /// <param name="calTarget">The int value representing the user's new daily calorie target</param>
         /// <returns>A Json object representing a successful update of user account</returns>
         public IActionResult UpdateCalorieTarget(int calTarget)
         {
@@ -331,7 +331,7 @@ namespace MacroNewt.Controllers
         /// <remarks>
         /// User provides a message along with a contact type meant only for organization as the type doesn't change anything about the process
         /// </remarks>
-        /// <param name="form"></param>
+        /// <param name="form">A <see cref="ContactUsViewModel"/> object populated with relevant user contact information</param>
         /// <returns>The ConfirmContact ViewComponent</returns>
         public async Task<IActionResult> ConfirmContact([Bind("UserEmail,ContactType,Message")] ContactUsViewModel form)
         {

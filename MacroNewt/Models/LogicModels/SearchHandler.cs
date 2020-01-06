@@ -22,8 +22,8 @@ namespace MacroNewt.Models.LogicModels
         /// <summary>
         /// Combines the provided food name with the required syntax for an API food search of the specified database type
         /// </summary>
-        /// <param name="foodName"></param>
-        /// <param name="database"></param>
+        /// <param name="foodName">The string name of the food to be searched for in the USDA database</param>
+        /// <param name="database">The string identifier of the target database, either branded or unbranded</param>
         /// <returns>The final string for API search request</returns>
         public string OrganizeSearchQ(string foodName, string database)
         {
@@ -45,7 +45,7 @@ namespace MacroNewt.Models.LogicModels
         /// <summary>
         /// Combines the provided food ndbno identifier with the required syntax for an API food report
         /// </summary>
-        /// <param name="foodNdbno"></param>
+        /// <param name="foodNdbno">The string identifier of the food to be queried for nutritional data</param>
         /// <returns>The final string for API report request</returns>
         public string OrganizeReportQ(string foodNdbno)
         {
@@ -58,7 +58,7 @@ namespace MacroNewt.Models.LogicModels
         /// <summary>
         /// Converts the string response from API food search into a list of <see cref="Food"/> objects
         /// </summary>
-        /// <param name="APIData"></param>
+        /// <param name="APIData">The string returned from API queries</param>
         /// <returns>A list of food objects from API response</returns>
         public List<Food> StoreSearchReturns(string APIData)
         {
@@ -78,9 +78,9 @@ namespace MacroNewt.Models.LogicModels
         /// Food nutrient and measure details aren't available in food searches, only in specific food report requests from API.
         ///     To avoid unnecessary overhead, details are only obtained for the foods specifically selected during meal logging.
         /// </remarks>
-        /// <param name="f"></param>
-        /// <param name="dataObject"></param>
-        /// <param name="detailType"></param>
+        /// <param name="f">The Food object to which nutritional information is being assigned</param>
+        /// <param name="dataObject">The JObject containing data from the API query</param>
+        /// <param name="detailType">The string indicator of level of report detail</param>
         /// <returns>A <see cref="Food"/> object with details included</returns>
         public Food StoreMealNutrientDetails(Food f, JObject dataObject, string detailType)
         {

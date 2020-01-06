@@ -26,8 +26,8 @@ namespace MacroNewt.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="AdminController"/> class.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="userManager"></param>
+        /// <param name="context">The dependency-injected <see cref="MacroNewtContext"/> obtained from the <see cref="Startup.ConfigureServices"/></param>
+        /// <param name="userManager">The dependency-injected <see cref="UserManager{TUser}"/></param>
         public AdminController(MacroNewtContext context, UserManager<MacroNewtUser> userManager)
         {
             _context = context;
@@ -76,7 +76,7 @@ namespace MacroNewt.Controllers
         /// <summary>
         /// Returns a view with specified <see cref="MacroNewtUser"/> details ready for editing
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The string identifier of the user account to be edited</param>
         /// <returns>The Views/Admin/EditUserDetails <see cref="ViewResult"/></returns>
         // GET
         public IActionResult EditUserDetails(string id)
@@ -97,7 +97,7 @@ namespace MacroNewt.Controllers
         /// <summary>
         /// Returns a view with specified <see cref="MacroNewtUser"/> details for review
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The string identifier of the user account to be reviewed</param>
         /// <returns>The Views/Admin/ReviewUserDetails <see cref="ViewResult"/></returns>
         // GET
         public IActionResult ReviewUserDetails(string id)
@@ -117,7 +117,7 @@ namespace MacroNewt.Controllers
         /// <summary>
         /// Edits target <see cref="MacroNewtUser"/> account details as provided by admin
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="user">The target user account to be edited</param>
         /// <returns>A redirect to previous location if post is valid</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -166,7 +166,7 @@ namespace MacroNewt.Controllers
         /// <summary>
         /// Gets the user delete view component
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The string identifier of the user account to be deleted</param>
         /// <returns>The DeleteUserModal ViewComponent</returns>
         // GET
         [Authorize]
@@ -192,7 +192,7 @@ namespace MacroNewt.Controllers
         /// <summary>
         /// Deletes target <see cref="MacroNewtUser"/> with specified id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The string identifier of the user account to be deleted</param>
         /// <returns>A redirect to previous location</returns>
         // POST
         [HttpPost, ActionName("Delete")]

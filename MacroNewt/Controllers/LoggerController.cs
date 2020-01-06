@@ -33,8 +33,8 @@ namespace MacroNewt.Areas.Identity.Data
         /// <summary>
         /// Initializes a new instance of the <see cref="LoggerController"/> class.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="userManager"></param>
+        /// <param name="context">The dependency-injected <see cref="MacroNewtContext"/> obtained from the <see cref="Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"/></param>
+        /// <param name="userManager">The dependency-injected <see cref="UserManager{TUser}"/></param>
         public LoggerController(MacroNewtContext context, UserManager<MacroNewtUser> userManager)
         {
             _context = context;
@@ -80,8 +80,8 @@ namespace MacroNewt.Areas.Identity.Data
         /// <remarks>
         /// Makes use of the <see cref="SearchHandler"/> class for organizing API requests
         /// </remarks>
-        /// <param name="foodName"></param>
-        /// <param name="targetDatabase"></param>
+        /// <param name="foodName">The string input name used during the food search</param>
+        /// <param name="targetDatabase">The user-chosen database to be searched, either branded or unbranded</param>
         /// <returns>The FoodSearchResult ViewComponent if search returns results - a message otherwise</returns>
         public IActionResult SearchFoods(string foodName, string targetDatabase)
         {
@@ -127,9 +127,9 @@ namespace MacroNewt.Areas.Identity.Data
         /// <remarks>
         /// Makes use of the <see cref="SearchHandler"/> class for organizing API request and storing response data
         /// </remarks>
-        /// <param name="formData"></param>
-        /// <param name="mId"></param>
-        /// <param name="reLogged"></param>
+        /// <param name="formData">A string containing nutritional information of all foods included in meal</param>
+        /// <param name="mId">An int identifier of the current meal</param>
+        /// <param name="reLogged">An indicator of whether the meal is being re-logged, providing an easier user-process if so</param>
         /// <returns>The MealDetail ViewComponent</returns>
         public IActionResult GetMealDetailViewComponent(string formData, int mId, bool reLogged)
         {
@@ -219,9 +219,9 @@ namespace MacroNewt.Areas.Identity.Data
         /// <summary>
         /// Returns a <see cref="Meal"/> summary view component after meal logging is complete
         /// </summary>
-        /// <param name="mealTitle"></param>
-        /// <param name="mealID"></param>
-        /// <param name="edited"></param>
+        /// <param name="mealTitle">The string name of the meal logged by user</param>
+        /// <param name="mealID">The int identifier of the meal logged by user</param>
+        /// <param name="edited">A string indicator of whether the meal has been edited rather than newly created</param>
         /// <returns>The MealReview ViewComponent</returns>
         public IActionResult GetMealReviewViewComponent(string mealTitle, int mealID, string edited)
         {
@@ -275,7 +275,7 @@ namespace MacroNewt.Areas.Identity.Data
         /// Makes use of the <see cref="SearchHandler"/> class for organizing API request and storing nutrient data.
         ///     Nutrient data isn't stored originally because food search API responses don't include these details
         /// </remarks>
-        /// <param name="ndbnos"></param>
+        /// <param name="ndbnos">A list of all food identifiers to be included in nutritional data API queries</param>
         /// <returns>A populated <see cref="FoodViewModel"/></returns>
         public FoodViewModel AddNutrientData(List<string> ndbnos)
         {
@@ -317,7 +317,7 @@ namespace MacroNewt.Areas.Identity.Data
         /// <summary>
         /// Checks ModelState and returns same view if invalid, otherwise provides user with view component for confirming meal to be logged
         /// </summary>
-        /// <param name="form"></param>
+        /// <param name="form">A <see cref="FoodViewModel"/> object populated with meal data to be shown before confirming the meal</param>
         /// <returns>The ConfirmMeal ViewComponent</returns>
         public IActionResult ConfirmMeal([Bind("CalorieTotal,ProteinTotal,FatTotal,CarbTotal,Title,MealDate,MealType,Foods,MealId,UserId,UserEmail,ReLogged")] FoodViewModel form)
         {
@@ -363,7 +363,7 @@ namespace MacroNewt.Areas.Identity.Data
         /// <remarks>
         /// Also updates user's daily stats with use of <see cref="UserStatsHandler"/> class.
         /// </remarks>
-        /// <param name="form"></param>
+        /// <param name="form">A <see cref="FoodViewModel"/> object populated with meal data to be logged</param>
         /// <returns>A Json object representing successful meal logging</returns>
         public IActionResult LogMeal([Bind("CalorieTotal,ProteinTotal,FatTotal,CarbTotal,Title,MealDate,MealType,Foods,MealId,UserId")] FoodViewModel form)
         {

@@ -79,7 +79,7 @@ namespace MacroNewt.Models
         /// </summary>
         public int MealId { get; set; }
         /// <summary>
-        /// Virtual property to allow for EF lazy loading of associated Meal record.
+        /// Virtual property to allow for EF lazy loading of associated <see cref="Meal"/> record.
         /// </summary>
         public virtual Meal Meal { get; set; }
 
@@ -125,7 +125,7 @@ namespace MacroNewt.Models
         /// <summary>
         /// Used to determine and retrieve the calories in a food based on portion type and quantity
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="type">A string representation of the detail expected in <see cref="Nutrient"/> record</param>
         /// <returns>A double value representing total food calories</returns>
         public double GetCalories(string type)
         {
@@ -165,8 +165,8 @@ namespace MacroNewt.Models
         /// <remarks>
         /// Unlike <see cref="GetNutrientDisplayValue(string, string)"/>, this method is used during the meal logging process
         /// </remarks>
-        /// <param name="nutrientId"></param>
-        /// <param name="type"></param>
+        /// <param name="nutrientId">The string identifier of the target <see cref="Nutrient"/> record</param>
+        /// <param name="type">A string representation of the detail expected in <see cref="Nutrient"/> record</param>
         /// <returns>A double value representing total content of specified nutrient</returns>
         public double GetNutrientValue(string nutrientId, string type)
         {
@@ -206,8 +206,8 @@ namespace MacroNewt.Models
         /// <remarks>
         /// Simliar to <see cref="GetNutrientValue(string, string)"/>, but instead of returning a double this method returns a string for display in nutrition labels
         /// </remarks>
-        /// <param name="nutrientId"></param>
-        /// <param name="type"></param>
+        /// <param name="nutrientId">The string identifier of the target <see cref="Nutrient"/> record</param>
+        /// <param name="type">A string representation of the detail expected in <see cref="Nutrient"/> record</param>
         /// <returns>A string representinng specified nutrition content</returns>
         public string GetNutrientDisplayValue(string nutrientId, string type)
         {
@@ -247,7 +247,7 @@ namespace MacroNewt.Models
         /// <remarks>
         /// Some foods in the database don't include <see cref="Measure"/>, which breaks other code. This method handles foods without measures.
         /// </remarks>
-        /// <param name="food"></param>
+        /// <param name="food">The <see cref="Food"/> object for which nutritional data is being displayed, but without any associated <see cref="Measure"/></param>
         /// <returns>A populated <see cref="NoMeasureFood"/> object</returns>
         public static NoMeasureFood GetNoMeasureNutrients(Food food)
         {
@@ -283,7 +283,7 @@ namespace MacroNewt.Models
         /// The method loops through each food included in a meal and combines all calorie and nutrient information in order to 
         ///     provide a nutrition label for entire meal.
         /// </remarks>
-        /// <param name="foods"></param>
+        /// <param name="foods">A list of <see cref="Food"/> objects for which nutritional data is being displayed</param>
         /// <returns>A populated <see cref="MealTotalNutrient"/> object</returns>
         public static MealTotalNutrient GetTotalMealNutrients(List<Food> foods)
         {
@@ -353,16 +353,42 @@ namespace MacroNewt.Models
     /// </remarks>
     public class Nutrient
     {
+        /// <summary>
+        /// The int identifier of the Nutrient
+        /// </summary>
         [Key]
         public int NutrientId { get; set; }
+        /// <summary>
+        /// The USDA database ID for the Nutrient
+        /// </summary>
         public string NId { get; set; }
+        /// <summary>
+        /// The name of the Nutrient
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// The Nutrient's food type group as established by USDA (e.g. Vitamins, Minerals, Proximates)
+        /// </summary>
         public string Group { get; set; }
+        /// <summary>
+        /// The base unit of measure (e.g. g, mg, kcal)
+        /// </summary>
         public string Unit { get; set; }
+        /// <summary>
+        /// The value associated with the unit for the selected Nutrient in the given portion/servings of parent Food
+        /// </summary>
         public decimal Value { get; set; }
+        /// <summary>
+        /// A list of <see cref="Measure"/> options associated with the Nutrient, for which each have an equivalency multiplier
+        /// </summary>
         public List<Measure> Measures { get; set; }
-
+        /// <summary>
+        /// The int identifier of the parent <see cref="Food"/> object
+        /// </summary>
         public int FoodId { get; set; }
+        /// <summary>
+        /// Virtual property to allow for EF lazy loading of associated <see cref="Food"/> record
+        /// </summary>
         public virtual Food Food { get; set; }
 
         /// <summary>
@@ -388,16 +414,42 @@ namespace MacroNewt.Models
     /// </remarks>
     public class Measure
     {
+        /// <summary>
+        /// The int identifier of the Measure
+        /// </summary>
         [Key]
         public int MeasureId { get; set; }
+        /// <summary>
+        /// The quantifying string label of the Measure (e.g. serving, jar, oz)
+        /// </summary>
         public string Label { get; set; }
+        /// <summary>
+        /// The string gram equivalency of the Measure
+        /// </summary>
         public string Eqv { get; set; }
+        /// <summary>
+        /// The string base conversion unit for Measure equivalencies (gram)
+        /// </summary>
         public string Eunit { get; set; }
+        /// <summary>
+        /// The string selected number of servings of parent Food
+        /// </summary>
         public string Qty { get; set; }
+        /// <summary>
+        /// The decimal value of Nutrient in given Measure
+        /// </summary>
         public decimal Value { get; set; }
+        /// <summary>
+        /// A string combination of the quantity and label (e.g. '2 oz')
+        /// </summary>
         public string DisplayName { get; set; }
-
+        /// <summary>
+        /// The int identifier of the parent <see cref="Nutrient"/> object
+        /// </summary>
         public int NutrientId { get; set; }
+        /// <summary>
+        /// Virtual property to allow for EF lazy loading of associated <see cref="Nutrient"/> record
+        /// </summary>
         public virtual Nutrient Nutrient { get; set; }
 
     }
@@ -411,22 +463,73 @@ namespace MacroNewt.Models
     /// </summary>
     public class MealTotalNutrient
     {
+        /// <summary>
+        /// Double value of the Meal's total mass
+        /// </summary>
         public double Mass { get; set; }
+        /// <summary>
+        /// Double value of the total calories in the Meal
+        /// </summary>
         public double Calories { get; set; }
+        /// <summary>
+        /// Double value of the total fat in the Meal
+        /// </summary>
         public double Fat { get; set; }
+        /// <summary>
+        /// Double value of the trans fat, if any, in the Meal
+        /// </summary>
         public double TransFat { get; set; }
+        /// <summary>
+        /// Double value of the saturated fat, if any, in the Meal
+        /// </summary>
         public double SatFat { get; set; }
+        /// <summary>
+        /// Double value of the polyunsaturated fat, if any, in the Meal
+        /// </summary>
         public double PolyFat { get; set; }
+        /// <summary>
+        /// Double value of the monounsaturated fat, if any, in the Meal
+        /// </summary>
         public double MonoFat { get; set; }
+        /// <summary>
+        /// Double value of the cholesterol in the Meal
+        /// </summary>
         public double Cholesterol { get; set; }
+        /// <summary>
+        /// Double value of the sodium in the Meal
+        /// </summary>
         public double Sodium { get; set; }
+        /// <summary>
+        /// Double value of the carbohydrates in the Meal
+        /// </summary>
         public double Carbs { get; set; }
+        /// <summary>
+        /// Double value of the fiber in the Meal
+        /// </summary>
         public double Fiber { get; set; }
+        /// <summary>
+        /// Double value of the sugar in the Meal
+        /// </summary>
         public double Sugar { get; set; }
+        /// <summary>
+        /// Double value of the protein in the Meal
+        /// </summary>
         public double Protein { get; set; }
+        /// <summary>
+        /// Double value of the vitramin A in the Meal
+        /// </summary>
         public double VitA { get; set; }
+        /// <summary>
+        /// Double value of the vitamin C in the Meal
+        /// </summary>
         public double VitC { get; set; }
+        /// <summary>
+        /// Double value of the calcium in the Meal
+        /// </summary>
         public double Calcium { get; set; }
+        /// <summary>
+        /// Double value of the iron in the Meal
+        /// </summary>
         public double Iron { get; set; }
     }
 
@@ -440,23 +543,77 @@ namespace MacroNewt.Models
     /// </summary>
     public class NoMeasureFood
     {
+        /// <summary>
+        /// Int identifier of the <see cref="Food"/> object without measures
+        /// </summary>
         public int FoodId { get; set; }
+        /// <summary>
+        /// Double value of the Foods's total mass
+        /// </summary>
         public double Mass { get; set; }
+        /// <summary>
+        /// Double value of the total calories in the Food
+        /// </summary>
         public double Calories { get; set; }
+        /// <summary>
+        /// Double value of the total fat in the Food
+        /// </summary>
         public double Fat { get; set; }
+        /// <summary>
+        /// Double value of the trans fat, if any, in the Food
+        /// </summary>
         public double TransFat { get; set; }
+        /// <summary>
+        /// Double value of the saturated fat, if any, in the Food
+        /// </summary>
         public double SatFat { get; set; }
+        /// <summary>
+        /// Double value of the polyunsaturated fat, if any, in the Food
+        /// </summary>
         public double PolyFat { get; set; }
+        /// <summary>
+        /// Double value of the monounsaturated fat, if any, in the Food
+        /// </summary>
         public double MonoFat { get; set; }
+        /// <summary>
+        /// Double value of the total cholesterol in the Food
+        /// </summary>
         public double Cholesterol { get; set; }
+        /// <summary>
+        /// Double value of the total sodium in the Food
+        /// </summary>
         public double Sodium { get; set; }
+        /// <summary>
+        /// Double value of the total carbohydrates in the Food
+        /// </summary>
         public double Carbs { get; set; }
+        /// <summary>
+        /// Double value of the total fiber in the Food
+        /// </summary>
         public double Fiber { get; set; }
+        /// <summary>
+        /// Double value of the total sugar in the Food
+        /// </summary>
         public double Sugar { get; set; }
+        /// <summary>
+        /// Double value of the total protein in the Food
+        /// </summary>
         public double Protein { get; set; }
+        /// <summary>
+        /// Double value of the total vitamin A in the Food
+        /// </summary>
         public double VitA { get; set; }
+        /// <summary>
+        /// Double value of the total vitamin C in the Food
+        /// </summary>
         public double VitC { get; set; }
+        /// <summary>
+        /// Double value of the total calcium in the Food
+        /// </summary>
         public double Calcium { get; set; }
+        /// <summary>
+        /// Double value of the total iron in the Food
+        /// </summary>
         public double Iron { get; set; }
     }
 

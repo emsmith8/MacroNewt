@@ -23,8 +23,8 @@ namespace MacroNewt.Models.LogicModels
         /// <summary>
         /// Initializes a new instance of the <see cref="UserStatsHandler"/> class.
         /// </summary>
-        /// <param name="userManager"></param>
-        /// <param name="context"></param>
+        /// <param name="userManager">The dependency-injected <see cref="UserManager{TUser}"/></param>
+        /// <param name="context">The dependency-injected <see cref="MacroNewtContext"/> obtained from the <see cref="Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"/></param>
         public UserStatsHandler(UserManager<MacroNewtUser> userManager, MacroNewtContext context)
         {
             _userManager = userManager;
@@ -38,9 +38,9 @@ namespace MacroNewt.Models.LogicModels
         /// Much of the arithmetic is conditional and based on whether or not the user has surpassed daily targets.
         /// Conditions provide for a different progress bar appearance if user has failed to meet goals.
         /// </remarks>
-        /// <param name="user"></param>
-        /// <param name="targetTotalCal"></param>
-        /// <param name="dct"></param>
+        /// <param name="user">The <see cref="MacroNewtUser"/> for which daily stats are being organized</param>
+        /// <param name="targetTotalCal">The int daily target calories for the user</param>
+        /// <param name="dct">The <see cref="DailyCalTotal"/> stats for the user on target day</param>
         /// <returns>A populated <see cref="CurrentDayCalStatsViewModel"/> object</returns>
         public CurrentDayCalStatsViewModel OrganizeCalStats(MacroNewtUser user, int targetTotalCal, DailyCalTotal dct)
         {
@@ -159,8 +159,8 @@ namespace MacroNewt.Models.LogicModels
         /// <summary>
         /// Retrieves user's daily target data for past dates
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="targetDate"></param>
+        /// <param name="user">The <see cref="MacroNewtUser"/> for which daily stats are being organized</param>
+        /// <param name="targetDate">The string date target for querying daily user stats</param>
         /// <returns>A populated <see cref="CurrentDayCalStatsViewModel"/> object</returns>
         public CurrentDayCalStatsViewModel GetPastMacroTargets(MacroNewtUser user, string targetDate)
         {
@@ -186,7 +186,7 @@ namespace MacroNewt.Models.LogicModels
         ///     a parsed string and having something break, so left this and GetPastMacroTargets as separate methods. Additionally, GetCurrentMacroTargets is
         ///     called indirectly from a block of javascript and wanted to avoid addressing multiple language date/time rules.
         /// </remarks>
-        /// <param name="user"></param>
+        /// <param name="user">The <see cref="MacroNewtUser"/> for which daily macro stats are being queried</param>
         /// <returns>A populated <see cref="CurrentDayCalStatsViewModel"/> object</returns>
         public CurrentDayCalStatsViewModel GetCurrentMacroTargets(MacroNewtUser user)
         {
@@ -209,14 +209,14 @@ namespace MacroNewt.Models.LogicModels
         /// <remarks>
         /// Similar to <see cref="OrganizeCalStats(MacroNewtUser, int, DailyCalTotal)"/> but has to account for the display of the pending meal about to be logged
         /// </remarks>
-        /// <param name="user"></param>
-        /// <param name="admin"></param>
-        /// <param name="mealId"></param>
-        /// <param name="date"></param>
-        /// <param name="mealCalories"></param>
-        /// <param name="mealProtein"></param>
-        /// <param name="mealFat"></param>
-        /// <param name="mealCarb"></param>
+        /// <param name="user">The <see cref="MacroNewtUser"/> for which macro targets are being organized</param>
+        /// <param name="admin">A boolean indicator of whether current user has administrative access</param>
+        /// <param name="mealId">An int identifier of the <see cref="Meal"/> being confirmed</param>
+        /// <param name="date">The date and time the meal is being logged</param>
+        /// <param name="mealCalories">The int total calorie content of the meal</param>
+        /// <param name="mealProtein">The int total calories present in the meal from protein sources</param>
+        /// <param name="mealFat">The int total calories present in the meal from fat sources</param>
+        /// <param name="mealCarb">The int total calories present in the meal from carb sources</param>
         /// <returns>A populated <see cref="ConfirmMealViewModel"/> object</returns>
         public ConfirmMealViewModel GetMacroTargets(MacroNewtUser user, Boolean admin, int mealId, DateTime date, int mealCalories, int mealProtein, int mealFat, int mealCarb)
         {
@@ -438,8 +438,8 @@ namespace MacroNewt.Models.LogicModels
         /// <summary>
         /// Updates user's <see cref="DailyCalTotal"/> stats after a meal is logged, edited, or deleted
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="date"></param>
+        /// <param name="userId">The string identifier of the user account to be updated with daily stat information</param>
+        /// <param name="date">The date for which target user's account needs a stat update</param>
         public void UpdateDailyCalories(string userId, DateTime date)
         {
 

@@ -21,9 +21,9 @@ namespace MacroNewt.Models.LogicModels
         /// <summary>
         /// Replaces keywords with a user's name, email address, and a callback url for account verification
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="userEmail"></param>
-        /// <param name="callbackUrl"></param>
+        /// <param name="userName">The string name of the user to which the email will be sent</param>
+        /// <param name="userEmail">The string email address of target user</param>
+        /// <param name="callbackUrl">The string callback URL to be linked in the email triggering account verification</param>
         /// <returns>The final string of email html content</returns>
         public string BuildVerificationEmailHtml(string userName, string userEmail, string callbackUrl)
         {
@@ -43,8 +43,8 @@ namespace MacroNewt.Models.LogicModels
         /// <summary>
         /// Replaces keywords with a user's email address and callback url for account password resetting
         /// </summary>
-        /// <param name="userEmail"></param>
-        /// <param name="callbackUrl"></param>
+        /// <param name="userEmail">The string email address of target user</param>
+        /// <param name="callbackUrl">The string callback URL to be linked in the email providing access to password reset</param>
         /// <returns>The final string of email html content</returns>
         public string BuildForgotPasswordEmailHtml(string userEmail, string callbackUrl)
         {
@@ -63,10 +63,10 @@ namespace MacroNewt.Models.LogicModels
         /// <summary>
         /// Replaces keywords with a user's contact type, name, email address, and message for contacting admin
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="userEmail"></param>
-        /// <param name="contactType"></param>
-        /// <param name="userMessage"></param>
+        /// <param name="userName">The string name of the user contacting admin</param>
+        /// <param name="userEmail">The string email address of the user contacting admin</param>
+        /// <param name="contactType">The string reason for contact</param>
+        /// <param name="userMessage">The user's string contact message</param>
         /// <returns>The final string of email html content</returns>
         public string BuildContactUsEmailHtml(string userName, string userEmail, string contactType, string userMessage)
         {
