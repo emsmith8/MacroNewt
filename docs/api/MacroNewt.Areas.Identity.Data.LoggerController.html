@@ -709,12 +709,14 @@
       <tr>
         <td><a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtContext.html">MacroNewtContext</a></td>
         <td><span class="parametername">context</span></td>
-        <td></td>
+        <td><p>The dependency-injected <a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtContext.html">MacroNewtContext</a> obtained from the <a class="xref" href="MacroNewt.Startup.html#MacroNewt_Startup_ConfigureServices_Microsoft_Extensions_DependencyInjection_IServiceCollection_">ConfigureServices(IServiceCollection)</a></p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Identity.UserManager</span>&lt;<a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtUser.html">MacroNewtUser</a>&gt;</td>
         <td><span class="parametername">userManager</span></td>
-        <td></td>
+        <td><p>The dependency-injected <span class="xref">Microsoft.AspNetCore.Identity.UserManager&lt;TUser&gt;</span></p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -749,7 +751,8 @@
       <tr>
         <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">ndbnos</span></td>
-        <td></td>
+        <td><p>A list of all food identifiers to be included in nutritional data API queries</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -802,7 +805,8 @@ Nutrient data isn't stored originally because food search API responses don't in
       <tr>
         <td><a class="xref" href="MacroNewt.Models.ViewModels.FoodViewModel.html">FoodViewModel</a></td>
         <td><span class="parametername">form</span></td>
-        <td></td>
+        <td><p>A <a class="xref" href="MacroNewt.Models.ViewModels.FoodViewModel.html">FoodViewModel</a> object populated with meal data to be shown before confirming the meal</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -852,17 +856,20 @@ for details to be completed for <a class="xref" href="MacroNewt.Models.Meal.html
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">formData</span></td>
-        <td></td>
+        <td><p>A string containing nutritional information of all foods included in meal</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">mId</span></td>
-        <td></td>
+        <td><p>An int identifier of the current meal</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">reLogged</span></td>
-        <td></td>
+        <td><p>An indicator of whether the meal is being re-logged, providing an easier user-process if so</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -914,17 +921,20 @@ for details to be completed for <a class="xref" href="MacroNewt.Models.Meal.html
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">mealTitle</span></td>
-        <td></td>
+        <td><p>The string name of the meal logged by user</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">mealID</span></td>
-        <td></td>
+        <td><p>The int identifier of the meal logged by user</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">edited</span></td>
-        <td></td>
+        <td><p>A string indicator of whether the meal has been edited rather than newly created</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1006,7 +1016,8 @@ public IActionResult Index()</code></pre>
       <tr>
         <td><a class="xref" href="MacroNewt.Models.ViewModels.FoodViewModel.html">FoodViewModel</a></td>
         <td><span class="parametername">form</span></td>
-        <td></td>
+        <td><p>A <a class="xref" href="MacroNewt.Models.ViewModels.FoodViewModel.html">FoodViewModel</a> object populated with meal data to be logged</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1091,12 +1102,14 @@ Results are displayed in a view component below search area</p>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">foodName</span></td>
-        <td></td>
+        <td><p>The string input name used during the food search</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">targetDatabase</span></td>
-        <td></td>
+        <td><p>The user-chosen database to be searched, either branded or unbranded</p>
+</td>
       </tr>
     </tbody>
   </table>

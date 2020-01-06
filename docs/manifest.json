@@ -9,10 +9,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Data.DailyCalTotal.html",
-          "hash": "K3viL3kVeSp/kuBYYu6nDQ=="
+          "hash": "BA2GwMNRigjdscR+htKc+A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -33,10 +33,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Data.LoggerController.html",
-          "hash": "76f+FaTdzDOeLOdtLIS03Q=="
+          "hash": "MrB+tSgqZE5C9o1kZbKtdA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -57,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Data.MacroNewtUser.html",
-          "hash": "CsziTq7AJFmMTeqFieJKmw=="
+          "hash": "OjMqEyQqEx6V6VWfK46G+w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -72,7 +72,7 @@
           "hash": "TyZIY+y9ythzmrfaX+I+mQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -81,10 +81,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Data.UserGoals.html",
-          "hash": "FETyADfqH8J3YeghpUlylQ=="
+          "hash": "WzBCY/AUE+FwOicy7Xkd4Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -93,10 +93,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Areas.Identity.Data.html",
-          "hash": "8kRePkvv9T7im559N00Zpw=="
+          "hash": "rwkDHYQizTjE0z6fBK/ByA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -657,10 +657,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Controllers.AdminController.html",
-          "hash": "WgVyScVMZtZIJqBO6ud2Mw=="
+          "hash": "fWu8pa+fpk+EpfvSqjOOcQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -669,10 +669,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Controllers.HomeController.html",
-          "hash": "wqOGFdf/QU3kAYOniYBwtg=="
+          "hash": "PhAJSxz/8BEv8iEC+fPIRQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -684,7 +684,7 @@
           "hash": "l4MjFKwUgRJGTsJl4iExQQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -753,10 +753,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.Food.html",
-          "hash": "UWMO4au55YgZPfnGCSAQ5w=="
+          "hash": "rDr993megTVmkcRHJ/2SBg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -765,10 +765,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.LogicModels.EmailBuildHandler.html",
-          "hash": "o94rKTrMdMLiT2Sps7ugGQ=="
+          "hash": "P0bpVhXvRGaWR5ZnPMu3eQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -789,10 +789,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.LogicModels.SearchHandler.html",
-          "hash": "9rpPZJTd3KhA3bbYI/wbkA=="
+          "hash": "qyTfRLoyySKgG1lkP6s5xA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -801,10 +801,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.LogicModels.UserStatsHandler.html",
-          "hash": "GroSCWoPvCxb0JH9ly7B6Q=="
+          "hash": "eD6qynkC75njccCl9FBb6w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -816,7 +816,7 @@
           "hash": "hq4eoSBEEdT8i0Hh/8uMXQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -828,7 +828,7 @@
           "hash": "6JmpdPfo/mvY2xlZv4ovZQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -837,10 +837,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.MealTotalNutrient.html",
-          "hash": "W4n5Wln4MRPyjHDqzcJntA=="
+          "hash": "sZr6W9l9jUjATGcd57jVlA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -849,10 +849,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.Measure.html",
-          "hash": "DXzv1rDOInbvCQxBc4himw=="
+          "hash": "rt3dmKp7vBzhd7f51CtWtA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -861,10 +861,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.NoMeasureFood.html",
-          "hash": "4UpXOQl1CffPwr1Fuf4Jhw=="
+          "hash": "718IUELEyccjKvlpHmzgNQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -873,10 +873,10 @@
       "output": {
         ".html": {
           "relative_path": "api/MacroNewt.Models.Nutrient.html",
-          "hash": "k7ym4jo3WJeFDVRWbnfCLg=="
+          "hash": "QZyUJ/m0bqjzSK0Xo7wh7A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1008,7 +1008,7 @@
           "hash": "qKIKCU8QgoXRm/xU+z+Cog=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1164,7 +1164,7 @@
           "hash": "IPELeSV9GkXYJnHr2A111A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1188,7 +1188,7 @@
           "hash": "If8Ck4uSAI8IFYTBcthKkg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1272,7 +1272,7 @@
           "hash": "B6Mwkb9Koc6Ukr2vU22f4Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1284,7 +1284,7 @@
           "hash": "GI9D3nyefNo9/AvWnyF7BA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1356,7 +1356,7 @@
           "hash": "NUSXDLquxSIxPFJp7J0dqA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1377,10 +1377,10 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "n2MDrkMibiNppBtS5zAUeA=="
+          "hash": "gLszb74xf/Bh7wbHad/KpQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1428,7 +1428,7 @@
           "hash": "tmo4jRqWLcj6U2EVtX1DlQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -1452,7 +1452,7 @@
           "hash": "nsCQSgKa5j4UNdlp9uuMYg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -1494,7 +1494,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 114,
-          "skipped_file_count": 114
+          "skipped_file_count": 100
         }
       }
     },

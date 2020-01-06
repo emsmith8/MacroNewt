@@ -142,12 +142,14 @@
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Identity.UserManager</span>&lt;<a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtUser.html">MacroNewtUser</a>&gt;</td>
         <td><span class="parametername">userManager</span></td>
-        <td></td>
+        <td><p>The dependency-injected <span class="xref">Microsoft.AspNetCore.Identity.UserManager&lt;TUser&gt;</span></p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtContext.html">MacroNewtContext</a></td>
         <td><span class="parametername">context</span></td>
-        <td></td>
+        <td><p>The dependency-injected <a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtContext.html">MacroNewtContext</a> obtained from the <a class="xref" href="MacroNewt.Startup.html#MacroNewt_Startup_ConfigureServices_Microsoft_Extensions_DependencyInjection_IServiceCollection_">ConfigureServices(IServiceCollection)</a></p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -182,7 +184,8 @@
       <tr>
         <td><a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtUser.html">MacroNewtUser</a></td>
         <td><span class="parametername">user</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtUser.html">MacroNewtUser</a> for which daily macro stats are being queried</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -236,42 +239,50 @@ called indirectly from a block of javascript and wanted to avoid addressing mult
       <tr>
         <td><a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtUser.html">MacroNewtUser</a></td>
         <td><span class="parametername">user</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtUser.html">MacroNewtUser</a> for which macro targets are being organized</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">admin</span></td>
-        <td></td>
+        <td><p>A boolean indicator of whether current user has administrative access</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">mealId</span></td>
-        <td></td>
+        <td><p>An int identifier of the <a class="xref" href="MacroNewt.Models.Meal.html">Meal</a> being confirmed</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">date</span></td>
-        <td></td>
+        <td><p>The date and time the meal is being logged</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">mealCalories</span></td>
-        <td></td>
+        <td><p>The int total calorie content of the meal</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">mealProtein</span></td>
-        <td></td>
+        <td><p>The int total calories present in the meal from protein sources</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">mealFat</span></td>
-        <td></td>
+        <td><p>The int total calories present in the meal from fat sources</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">mealCarb</span></td>
-        <td></td>
+        <td><p>The int total calories present in the meal from carb sources</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -323,12 +334,14 @@ called indirectly from a block of javascript and wanted to avoid addressing mult
       <tr>
         <td><a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtUser.html">MacroNewtUser</a></td>
         <td><span class="parametername">user</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtUser.html">MacroNewtUser</a> for which daily stats are being organized</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">targetDate</span></td>
-        <td></td>
+        <td><p>The string date target for querying daily user stats</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -377,17 +390,20 @@ called indirectly from a block of javascript and wanted to avoid addressing mult
       <tr>
         <td><a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtUser.html">MacroNewtUser</a></td>
         <td><span class="parametername">user</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="MacroNewt.Areas.Identity.Data.MacroNewtUser.html">MacroNewtUser</a> for which daily stats are being organized</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">targetTotalCal</span></td>
-        <td></td>
+        <td><p>The int daily target calories for the user</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="MacroNewt.Areas.Identity.Data.DailyCalTotal.html">DailyCalTotal</a></td>
         <td><span class="parametername">dct</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="MacroNewt.Areas.Identity.Data.DailyCalTotal.html">DailyCalTotal</a> stats for the user on target day</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -440,12 +456,14 @@ Conditions provide for a different progress bar appearance if user has failed to
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">userId</span></td>
-        <td></td>
+        <td><p>The string identifier of the user account to be updated with daily stat information</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">date</span></td>
-        <td></td>
+        <td><p>The date for which target user's account needs a stat update</p>
+</td>
       </tr>
     </tbody>
   </table>
