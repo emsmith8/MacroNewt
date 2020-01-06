@@ -11,6 +11,7 @@ Food and nutrition tracking ASP.NET Core MVC web app built as a learning project
   <li> Customization for user dietary goals and progress tracking </li>
 </ul>
 
+API documentation available at https://emsmith8.github.io/MacroNewt/
 
 **Hosted with Microsoft Azure at MacroNewt.com**
 
