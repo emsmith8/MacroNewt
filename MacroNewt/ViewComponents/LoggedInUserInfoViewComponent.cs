@@ -32,7 +32,7 @@ namespace MacroNewt.ViewComponents
             }
             else
             {
-                var existingDayCal = await _context.DailyCalTotal
+                var existingDayCal = await _context.DailyCalTotals
                 .Where(x => (x.CalorieDay == DateTime.Today) && (x.Id == user.Id))
                 .FirstOrDefaultAsync();
 

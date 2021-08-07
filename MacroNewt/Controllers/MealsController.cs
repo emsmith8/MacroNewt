@@ -15,15 +15,16 @@ using MacroNewt.Models.LogicModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using MacroNewt.Application.Common.Interfaces;
 
 namespace MacroNewt.Areas.Identity.Data
 {
     public class MealsController : Controller
     {
-        private readonly MacroNewtContext _context;
+        private readonly IMacroNewtDbContext _context;
         private readonly UserManager<MacroNewtUser> _userManager;
 
-        public MealsController(MacroNewtContext context, UserManager<MacroNewtUser> userManager)
+        public MealsController(IMacroNewtDbContext context, UserManager<MacroNewtUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -40,10 +41,10 @@ namespace MacroNewt.Areas.Identity.Data
             /* CAN GET RID OF */
             HistoryDataViewModel hdv = new HistoryDataViewModel
             {
-                Meals = await _context.Meal
+                Meals = await _context.Meals
                     .Where(m => m.UserId == userID)
                     .ToListAsync(),
-                DailyTotals = await _context.DailyCalTotal
+                DailyTotals = await _context.DailyCalTotals
                     .Where(d => d.Id == userID)
                     .ToListAsync()
             };
@@ -83,7 +84,7 @@ namespace MacroNewt.Areas.Identity.Data
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var mealList = _context.Meal
+            var mealList = _context.Meals
                     .Where(m => m.UserId == userID)
                     .ToList();
 
@@ -105,7 +106,7 @@ namespace MacroNewt.Areas.Identity.Data
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var meals = _context.Meal
+            var meals = _context.Meals
                 .Where(m => m.UserId == userID)
                 .ToList();
 
@@ -139,13 +140,13 @@ namespace MacroNewt.Areas.Identity.Data
 
             if (startDate.Date == endDate.Date)
             {
-                meals = _context.Meal
+                meals = _context.Meals
                     .Where(m => (m.UserId == userID) && (m.MealDate.Date == startDate.Date))
                     .ToList();
             }
             else
             {
-                meals = _context.Meal
+                meals = _context.Meals
                     .Where(m => (m.UserId == userID) && ((m.MealDate.Date >= startDate.Date) && (m.MealDate.Date <= endDate.Date)))
                     .ToList();
             }
@@ -164,7 +165,7 @@ namespace MacroNewt.Areas.Identity.Data
 
         public IActionResult GetNutritionLabelViewComponent(string ndbno)
         {
-            var food = _context.Food
+            var food = _context.Foods
                 .Include(x => x.Nutrients)
                     .ThenInclude(x => x.Measures)
                     .FirstOrDefault(f => f.Ndbno == ndbno);
@@ -186,7 +187,7 @@ namespace MacroNewt.Areas.Identity.Data
                 return NotFound();
             }
 
-            var meal = await _context.Meal
+            var meal = await _context.Meals
                 .Include(x => x.FoodComponents)
                     .ThenInclude(x => x.Nutrients)
                     .ThenInclude(x => x.Measures)
@@ -197,7 +198,7 @@ namespace MacroNewt.Areas.Identity.Data
                 return NotFound();
             }
 
-            var mealCount = _context.Meal
+            var mealCount = _context.Meals
                 .Where(x => (x.MealDate.Date == meal.MealDate.Date) && (x.UserId == meal.UserId)).Count();
 
             var userEmail = _context.Users
@@ -228,7 +229,7 @@ namespace MacroNewt.Areas.Identity.Data
                 return NotFound();
             }
 
-            var meal = await _context.Meal
+            var meal = await _context.Meals
                 .Include(m => m.FoodComponents)
                     .ThenInclude(m => m.Nutrients)
                     .ThenInclude(m => m.Measures)
@@ -258,7 +259,7 @@ namespace MacroNewt.Areas.Identity.Data
                 return NotFound();
             }
 
-            var meal = await _context.Meal
+            var meal = await _context.Meals
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (meal == null)
             {
@@ -275,7 +276,7 @@ namespace MacroNewt.Areas.Identity.Data
         {
             UserStatsHandler ush = new UserStatsHandler(_userManager, _context);
             
-            var meal = await _context.Meal
+            var meal = await _context.Meals
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             var date = meal.MealDate;
@@ -285,8 +286,8 @@ namespace MacroNewt.Areas.Identity.Data
                 .Select(u => u.Id)
                 .FirstOrDefaultAsync();
 
-            _context.Meal.Remove(meal);
-            await _context.SaveChangesAsync();
+            _context.Meals.Remove(meal);
+            await _context.SaveChangesAsync(new System.Threading.CancellationToken());
             
             ush.UpdateDailyCalories(userId, date);
 
@@ -300,7 +301,7 @@ namespace MacroNewt.Areas.Identity.Data
 
         private bool MealExists(int id)
         {
-            return _context.Meal.Any(e => e.Id == id);
+            return _context.Meals.Any(e => e.Id == id);
         }
 
         public async Task<JsonResult> GetMonthMealStatus(int month, int year)
@@ -311,7 +312,7 @@ namespace MacroNewt.Areas.Identity.Data
 
             var subResults = new List<object>();
 
-            var dt = await _context.DailyCalTotal
+            var dt = await _context.DailyCalTotals
                     .Where(d => (d.Id == userID) && (d.CalorieDay.Month == (month+1)) && (d.CalorieDay.Year == year) && (d.TotalDailyCalories != 0))
                     .ToListAsync();
 
@@ -340,7 +341,7 @@ namespace MacroNewt.Areas.Identity.Data
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var dayInfo = await _context.Meal
+            var dayInfo = await _context.Meals
                 .Where(m => (m.UserId == userID) && (m.MealDate.Month == month) && (m.MealDate.Day == day) && (m.MealDate.Year == year))
                 .ToListAsync();
 

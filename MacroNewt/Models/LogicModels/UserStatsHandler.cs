@@ -1,21 +1,18 @@
-﻿using MacroNewt.Areas.Identity.Data;
+﻿using MacroNewt.Application.Common.Interfaces;
+using MacroNewt.Areas.Identity.Data;
 using MacroNewt.Models.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace MacroNewt.Models.LogicModels
 {
     public class UserStatsHandler
     {
         private readonly UserManager<MacroNewtUser> _userManager;
-        private readonly MacroNewtContext _context;
+        private readonly IMacroNewtDbContext _context;
 
-        public UserStatsHandler(UserManager<MacroNewtUser> userManager, MacroNewtContext context)
+        public UserStatsHandler(UserManager<MacroNewtUser> userManager, IMacroNewtDbContext context)
         {
             _userManager = userManager;
             _context = context;
@@ -151,7 +148,7 @@ namespace MacroNewt.Models.LogicModels
                 .Select(u => u.DailyTargetCalories)
                 .FirstOrDefault();
 
-            DailyCalTotal dct = _context.DailyCalTotal
+            DailyCalTotal dct = _context.DailyCalTotals
                 .Where(d => (d.Id == user.Id) && (d.CalorieDay.Date == Convert.ToDateTime(targetDate)))
                 .FirstOrDefault();
 
@@ -165,7 +162,7 @@ namespace MacroNewt.Models.LogicModels
                 .Select(u => u.DailyTargetCalories)
                 .FirstOrDefault();
 
-            DailyCalTotal dct = _context.DailyCalTotal
+            DailyCalTotal dct = _context.DailyCalTotals
                 .Where(d => (d.Id == user.Id) && (d.CalorieDay == DateTime.Today))
                 .FirstOrDefault();
 
@@ -182,7 +179,7 @@ namespace MacroNewt.Models.LogicModels
                     .Select(u => u.DailyTargetCalories)
                     .FirstOrDefault();
 
-            DailyCalTotal dct = _context.DailyCalTotal
+            DailyCalTotal dct = _context.DailyCalTotals
                 .Where(d => (d.Id == UserId) && (d.CalorieDay.Date == date.Date))
                 .FirstOrDefault();
 
@@ -224,14 +221,14 @@ namespace MacroNewt.Models.LogicModels
 
             if (mealId != 0)
             {
-                var oldMeal = _context.Meal
+                var oldMeal = _context.Meals
                     .Where(m => m.Id == mealId)
                     .FirstOrDefault();
 
-                dct.TotalDailyCalories = (dct.TotalDailyCalories - oldMeal.Calories);
-                dct.TotalDailyProteinCalories = (dct.TotalDailyProteinCalories - oldMeal.ProteinCalories);
-                dct.TotalDailyFatCalories = (dct.TotalDailyFatCalories - oldMeal.FatCalories);
-                dct.TotalDailyCarbCalories = (dct.TotalDailyCarbCalories - oldMeal.CarbCalories);
+                dct.TotalDailyCalories -= oldMeal.Calories;
+                dct.TotalDailyProteinCalories -= oldMeal.ProteinCalories;
+                dct.TotalDailyFatCalories -= oldMeal.FatCalories;
+                dct.TotalDailyCarbCalories -= oldMeal.CarbCalories;
             }
 
             ConfirmMealViewModel cmvm = new ConfirmMealViewModel()
@@ -411,19 +408,19 @@ namespace MacroNewt.Models.LogicModels
         public void UpdateDailyCalories(string userId, DateTime date)
         {
 
-            int dailyCals = _context.Meal
+            int dailyCals = _context.Meals
                 .Where(x => (x.UserId == userId) && (x.MealDate.Date == date.Date))
                 .Sum(x => x.Calories);
 
-            int dailyProteinCals = _context.Meal
+            int dailyProteinCals = _context.Meals
                 .Where(x => (x.UserId == userId) && (x.MealDate.Date == date.Date))
                 .Sum(x => x.ProteinCalories);
 
-            int dailyFatCals = _context.Meal
+            int dailyFatCals = _context.Meals
                 .Where(x => (x.UserId == userId) && (x.MealDate.Date == date.Date))
                 .Sum(x => x.FatCalories);
 
-            int dailyCarbCals = _context.Meal
+            int dailyCarbCals = _context.Meals
                 .Where(x => (x.UserId == userId) && (x.MealDate.Date == date.Date))
                 .Sum(x => x.CarbCalories);
 
@@ -432,7 +429,7 @@ namespace MacroNewt.Models.LogicModels
                 .Select(u => u.DailyTargetCalories)
                 .FirstOrDefault();
 
-            var existingDayCal = _context.DailyCalTotal
+            var existingDayCal = _context.DailyCalTotals
                 .Where(x => (x.CalorieDay == date.Date) && (x.Id == userId))
                 .FirstOrDefault();
 
@@ -443,7 +440,7 @@ namespace MacroNewt.Models.LogicModels
                 existingDayCal.TotalDailyFatCalories = dailyFatCals;
                 existingDayCal.TotalDailyCarbCalories = dailyCarbCals;
 
-                _context.DailyCalTotal.Update(existingDayCal);
+                _context.DailyCalTotals.Update(existingDayCal);
 
                 _context.SaveChanges();
             }
@@ -461,7 +458,7 @@ namespace MacroNewt.Models.LogicModels
                 };
 
 
-                _context.DailyCalTotal.Add(dct);
+                _context.DailyCalTotals.Add(dct);
 
                 _context.SaveChanges();
             }

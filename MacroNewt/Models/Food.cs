@@ -167,26 +167,27 @@ namespace MacroNewt.Models
 
         public static NoMeasureFood GetNoMeasureNutrients(Food food)
         {
-            NoMeasureFood nmf = new NoMeasureFood();
-
-            nmf.FoodId = food.FoodId;
-            nmf.Mass = 100 * (double)food.NumberOfServings;
-            nmf.Calories = food.GetCalories("noMeasure") * (double)food.NumberOfServings;
-            nmf.Fat = food.GetNutrientValue("204", "noMeasure") * (double)food.NumberOfServings;
-            nmf.TransFat = food.GetNutrientValue("605", "noMeasure") * (double)food.NumberOfServings;
-            nmf.SatFat = food.GetNutrientValue("606", "noMeasure") * (double)food.NumberOfServings;
-            nmf.PolyFat = food.GetNutrientValue("646", "noMeasure") * (double)food.NumberOfServings;
-            nmf.MonoFat = food.GetNutrientValue("645", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Cholesterol = food.GetNutrientValue("601", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Sodium = food.GetNutrientValue("307", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Carbs = food.GetNutrientValue("205", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Fiber = food.GetNutrientValue("291", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Sugar = food.GetNutrientValue("269", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Protein = food.GetNutrientValue("203", "noMeasure") * (double)food.NumberOfServings;
-            nmf.VitA = food.GetNutrientValue("320", "noMeasure") * (double)food.NumberOfServings;
-            nmf.VitC = food.GetNutrientValue("401", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Calcium = food.GetNutrientValue("301", "noMeasure") * (double)food.NumberOfServings;
-            nmf.Iron = food.GetNutrientValue("303", "noMeasure") * (double)food.NumberOfServings;
+            NoMeasureFood nmf = new NoMeasureFood
+            {
+                FoodId = food.FoodId,
+                Mass = 100 * (double)food.NumberOfServings,
+                Calories = food.GetCalories("noMeasure") * (double)food.NumberOfServings,
+                Fat = food.GetNutrientValue("204", "noMeasure") * (double)food.NumberOfServings,
+                TransFat = food.GetNutrientValue("605", "noMeasure") * (double)food.NumberOfServings,
+                SatFat = food.GetNutrientValue("606", "noMeasure") * (double)food.NumberOfServings,
+                PolyFat = food.GetNutrientValue("646", "noMeasure") * (double)food.NumberOfServings,
+                MonoFat = food.GetNutrientValue("645", "noMeasure") * (double)food.NumberOfServings,
+                Cholesterol = food.GetNutrientValue("601", "noMeasure") * (double)food.NumberOfServings,
+                Sodium = food.GetNutrientValue("307", "noMeasure") * (double)food.NumberOfServings,
+                Carbs = food.GetNutrientValue("205", "noMeasure") * (double)food.NumberOfServings,
+                Fiber = food.GetNutrientValue("291", "noMeasure") * (double)food.NumberOfServings,
+                Sugar = food.GetNutrientValue("269", "noMeasure") * (double)food.NumberOfServings,
+                Protein = food.GetNutrientValue("203", "noMeasure") * (double)food.NumberOfServings,
+                VitA = food.GetNutrientValue("320", "noMeasure") * (double)food.NumberOfServings,
+                VitC = food.GetNutrientValue("401", "noMeasure") * (double)food.NumberOfServings,
+                Calcium = food.GetNutrientValue("301", "noMeasure") * (double)food.NumberOfServings,
+                Iron = food.GetNutrientValue("303", "noMeasure") * (double)food.NumberOfServings
+            };
 
             return nmf;
         }

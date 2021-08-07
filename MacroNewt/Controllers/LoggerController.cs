@@ -1,29 +1,28 @@
-﻿using System;
+﻿using MacroNewt.Application.Common.Interfaces;
+using MacroNewt.Models;
+using MacroNewt.Models.LogicModels;
+using MacroNewt.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using MacroNewt.Models;
-using MacroNewt.Models.LogicModels;
-using MacroNewt.Models.ViewModels;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
 
 namespace MacroNewt.Areas.Identity.Data
 {
     public class LoggerController : Controller
     {
-        private MacroNewtContext _context;
+        private readonly IMacroNewtDbContext _context;
         private readonly UserManager<MacroNewtUser> _userManager;
 
-        public LoggerController(MacroNewtContext context, UserManager<MacroNewtUser> userManager)
+        public LoggerController(IMacroNewtDbContext context, UserManager<MacroNewtUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -127,14 +126,14 @@ namespace MacroNewt.Areas.Identity.Data
             if (mId != 0)
             { 
 
-                vm.UserId = _context.Meal
+                vm.UserId = _context.Meals
                     .Where(m => m.Id == mId)
                     .Select(m => m.UserId)
                     .FirstOrDefault();
 
                 vm.Edited = "edited";
 
-                vm.MealType = _context.Meal
+                vm.MealType = _context.Meals
                     .Where(m => m.Id == mId)
                     .Select(m => m.MealType)
                     .FirstOrDefault();
@@ -182,7 +181,7 @@ namespace MacroNewt.Areas.Identity.Data
             
             var meal = new Meal();
             
-            meal = _context.Meal
+            meal = _context.Meals
             .Include(x => x.FoodComponents)
                 .ThenInclude(x => x.Nutrients)
                 .ThenInclude(x => x.Measures)
@@ -193,7 +192,7 @@ namespace MacroNewt.Areas.Identity.Data
                 return NotFound();
             }
 
-            var mealCount = _context.Meal
+            var mealCount = _context.Meals
                 .Where(x => (x.MealDate.Date == meal.MealDate.Date) && (x.UserId == meal.UserId)).Count();
 
             var userEmail = _context.Users
@@ -313,7 +312,7 @@ namespace MacroNewt.Areas.Identity.Data
 
             if (form.Title == "Auto")
             {
-                var currentMealCount = _context.Meal
+                var currentMealCount = _context.Meals
                     .Where(x => (x.MealDate.Date == form.MealDate.Date) && (x.UserId == UserId)).Count() + 1;
 
                 form.Title = form.MealDate.ToString("MM/dd/yyyy") + " - Meal #" + currentMealCount.ToString();
@@ -367,7 +366,7 @@ namespace MacroNewt.Areas.Identity.Data
                     FatCalories = (form.FatTotal * 9),
                     CarbCalories = (form.CarbTotal * 4)
                 };
-                _context.Meal.Add(m);
+                _context.Meals.Add(m);
 
                 _context.SaveChanges();
 
@@ -391,15 +390,15 @@ namespace MacroNewt.Areas.Identity.Data
                     CarbCalories = (form.CarbTotal * 4)
                 };
                 
-                var mealToRemove = _context.Meal
+                var mealToRemove = _context.Meals
                     .Where(x => x.Id == form.MealId)
                     .FirstOrDefault();
 
-                _context.Meal.Remove(mealToRemove);
+                _context.Meals.Remove(mealToRemove);
 
                 _context.SaveChanges();
 
-                _context.Meal.Add(m);
+                _context.Meals.Add(m);
 
                 _context.SaveChanges();
 

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MacroNewt.Application.Common.Interfaces;
 using MacroNewt.Areas.Identity.Data;
 using MacroNewt.Models;
-using MacroNewt.Models.LogicModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MacroNewt.Controllers
 {
@@ -17,10 +16,10 @@ namespace MacroNewt.Controllers
     /// </summary>
     public class AdminController : Controller
     {
-        private readonly MacroNewtContext _context;
+        private readonly IMacroNewtDbContext _context;
         private readonly UserManager<MacroNewtUser> _userManager;
 
-        public AdminController(MacroNewtContext context, UserManager<MacroNewtUser> userManager)
+        public AdminController(IMacroNewtDbContext context, UserManager<MacroNewtUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -36,7 +35,7 @@ namespace MacroNewt.Controllers
         public async Task<IActionResult> ManageMeals()
         {
             ViewBag.Title = "Manage Meals";
-            return View(await _context.Meal.ToListAsync());
+            return View(await _context.Meals.ToListAsync());
         }
 
         [Authorize(Policy = "RequireAdministrator")]
@@ -100,7 +99,7 @@ namespace MacroNewt.Controllers
                         
                         _context.Users.Update(userToUpdate);
 
-                        await _context.SaveChangesAsync();
+                        await _context.SaveChangesAsync(new CancellationToken());
                     }
                     catch (DbUpdateConcurrencyException)
                     {
@@ -151,28 +150,28 @@ namespace MacroNewt.Controllers
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(new CancellationToken());
 
-            var userMeals = _context.Meal
+            var userMeals = _context.Meals
                 .Where(m => m.UserId == id);
 
             foreach (Meal m in userMeals)
             {
-                _context.Meal.Remove(m);
+                _context.Meals.Remove(m);
             }
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(new CancellationToken());
 
 
-            var userStats = _context.DailyCalTotal
+            var userStats = _context.DailyCalTotals
                 .Where(s => s.Id == id);
 
             foreach (DailyCalTotal stat in userStats)
             {
-                _context.DailyCalTotal.Remove(stat);
+                _context.DailyCalTotals.Remove(stat);
             }
             
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(new CancellationToken());
 
             return RedirectToAction("ManageUsers", "Admin");
         }

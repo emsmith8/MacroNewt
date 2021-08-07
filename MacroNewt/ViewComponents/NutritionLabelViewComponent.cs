@@ -20,7 +20,7 @@ namespace MacroNewt.ViewComponents
 
         public IViewComponentResult Invoke(int foodId)
         {
-            Food food = Context.Food
+            Food food = Context.Foods
                 .Include(x => x.Nutrients)
                     .ThenInclude(x => x.Measures)
                 .FirstOrDefault(x => x.FoodId == foodId);            

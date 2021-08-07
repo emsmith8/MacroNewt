@@ -1,29 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MacroNewt.Application.Common.Interfaces;
+using MacroNewt.Areas.Identity.Data;
+using MacroNewt.Models;
+using MacroNewt.Models.LogicModels;
+using MacroNewt.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using MacroNewt.Models;
-using Microsoft.AspNetCore.Authorization;
-using MacroNewt.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
-using MacroNewt.Models.LogicModels;
 using System.Security.Claims;
-using MacroNewt.Models.ViewModels;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace MacroNewt.Controllers
 {
     public class HomeController : Controller
     {
         private readonly UserManager<MacroNewtUser> _userManager;
-        private readonly MacroNewtContext _context;
+        private readonly IMacroNewtDbContext _context;
         private readonly SignInManager<MacroNewtUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
-        public HomeController(UserManager<MacroNewtUser> userManager, MacroNewtContext context, SignInManager<MacroNewtUser> signInManager, IEmailSender emailSender)
+        public HomeController(UserManager<MacroNewtUser> userManager, IMacroNewtDbContext context, SignInManager<MacroNewtUser> signInManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _context = context;
@@ -66,7 +66,7 @@ namespace MacroNewt.Controllers
         {
             string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var dailyTotals = _context.DailyCalTotal
+            var dailyTotals = _context.DailyCalTotals
                 .Where(d => (d.Id == userID) && (DateTime.Now - d.CalorieDay).TotalDays <= 31)
                 .ToList();
 
@@ -248,24 +248,6 @@ namespace MacroNewt.Controllers
 
             return Json(new { success = true });
         }
-
-        //public IActionResult UpdateCalorieTargetAdjustment(int adjustment)
-        //{
-        //    string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        //    var targetUser = _context.Users
-        //        .Where(u => u.Id == userID)
-        //        .FirstOrDefault();
-
-        //    targetUser.DailyTargetCalories += adjustment;
-
-        //    _context.Users.Update(targetUser);
-
-        //    _context.SaveChanges();
-
-        //    return Json(new { success = true });
-        //}
-
         public IActionResult Privacy()
         {
             return View();

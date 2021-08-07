@@ -4,14 +4,16 @@ using MacroNewt.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MacroNewt.Migrations
 {
     [DbContext(typeof(MacroNewtContext))]
-    partial class MacroNewtContextModelSnapshot : ModelSnapshot
+    [Migration("20210807210752_pluralize_Table_names")]
+    partial class pluralize_Table_names
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
